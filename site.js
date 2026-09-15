@@ -70,11 +70,13 @@ style.textContent = `
 .land .hero-txt p{font-size:15px;max-width:52ch}
 .land .alt{font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
 .land .alt a{color:var(--gold);text-decoration:none;font-weight:700}
-.hero-demo{position:relative;max-height:560px;overflow:hidden;align-self:start}
+.hero-demo{position:relative;align-self:start;padding-bottom:22px}
+.sheets.demo .blk:not(.b-head):not(.b-portrait):not(.b-attrs):not(.b-big){display:none}
+.sheets.demo .b-big h2{margin-top:14px}
 .demo-cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2px 0 8px}
-.sheets.demo{display:block;overflow:visible;padding:0;transform:scale(.86);transform-origin:top left;width:116%}
+.sheets.demo{display:block;overflow:visible;padding:0;transform:scale(.9);transform-origin:top left;width:111%}
 .sheets.demo .sheet{display:block}
-.demo-fade{position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(transparent,var(--panel-3));pointer-events:none}
+.demo-fade{display:none}
 .feats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
 .feat{background:var(--panel);border:1px solid var(--line);padding:14px 14px 12px;display:grid;grid-template-columns:44px 1fr;gap:4px 12px;align-items:start}
 .feat .fi{grid-row:1/3;width:44px;height:44px;background:var(--bar);border:1px solid var(--bar-line);display:grid;place-items:center}
@@ -100,7 +102,7 @@ style.textContent = `
 .appbox .sitebtn small{font-weight:400;opacity:.8}
 @media (max-width:560px){.appbox{grid-template-columns:1fr}}
 .foot2{font-size:11.5px;color:var(--muted);margin-top:18px;text-align:center}
-@media (max-width:900px){.hero2{grid-template-columns:1fr;padding:22px 20px 0}.hero-demo{max-height:420px}.feats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:900px){.hero2{grid-template-columns:1fr;padding:22px 20px 0}.feats{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.feats{grid-template-columns:1fr}}
 
 .help{margin-top:16px;border:1px solid var(--line);background:var(--panel);padding:14px 18px 8px}
@@ -167,6 +169,26 @@ style.textContent = `
 .flash{animation:flash 1.6s ease-out}
 @keyframes flash{0%{box-shadow:0 0 0 3px var(--gold)}100%{box-shadow:0 0 0 0 transparent}}
 @media (max-width:640px){.two-sec{grid-template-columns:1fr}.cta4{grid-template-columns:1fr 1fr}}
+
+.vwmodal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1200;display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px;overflow:auto}
+.vwmodal .mbox{position:relative;width:min(620px,100%);background:linear-gradient(180deg,var(--panel-2),var(--panel));border:2px solid var(--line);box-shadow:inset 0 0 0 1px var(--panel-3),inset 0 0 0 3px var(--line-2),0 12px 40px rgba(0,0,0,.7);padding:22px 26px 20px;color:var(--ink)}
+.vwmodal.wide .mbox{width:min(720px,100%)}
+.vwmodal .mx{position:absolute;right:10px;top:8px;background:transparent;border:0;color:var(--muted);font-size:24px;line-height:1;cursor:pointer;padding:2px 8px}
+.vwmodal .mx:hover{color:var(--rust)}
+.vwmodal h4{font-family:"Metamorphous",serif;font-weight:400;font-size:20px;color:var(--gold);margin:0 0 10px;padding-right:28px}
+.vwmodal .lead{font-size:14px;color:var(--ink-2);line-height:1.45;margin:0 0 10px}
+.vwmodal .guide{margin:0 0 12px;padding-left:22px;font-size:14px;color:var(--ink);line-height:1.5}
+.vwmodal .guide li{margin:0 0 8px}
+.vwmodal .guide small{color:var(--muted);font-size:12px}
+.vwmodal code{font-size:12px;color:var(--ink-2);word-break:break-all}
+.vwmodal .mform{display:flex;gap:8px;margin:8px 0 0}
+.vwmodal .mform input{flex:1;min-width:0;font:inherit;font-size:14px;padding:9px 11px;background:var(--bar);border:1px solid var(--line);color:var(--ink)}
+.vwmodal .mrow{display:flex;gap:12px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.vwmodal .note{font-size:12.5px;color:var(--muted)}
+.vwmodal .err{color:var(--rust);font-size:13px;min-height:18px;margin-top:4px}
+.vwmodal .sheets.demo.full{transform:none;width:100%}
+.vwmodal .help.inmodal{margin:0;border:0;padding:0;background:transparent}
+.vwmodal .sheets.demo.full .blk{display:block!important}
 `;
 document.head.appendChild(style);
 
@@ -194,10 +216,10 @@ async function landing(){
         <h2>${en ? 'See your whole crew side by side. Straight from the save file.' : 'Celá parta vedle sebe. Přímo ze save souboru.'}</h2>
         <p>${en ? 'Everyone drops in their character file once, the page turns it into a sheet and your whole party sits side by side. The Sync app keeps it fresh after every game save.' : 'Každý jednou nahraje soubor své postavy, stránka z něj udělá list a celá parta je vedle sebe. Sync appka to pak drží aktuální po každém uložení hry.'}</p>
         <div class="cta4">
-          <a class="cta" href="#demo" data-scroll="demo"><b>${en ? 'Example' : 'Ukázka'}</b><span>${en ? 'what a sheet looks like' : 'jak vypadá list postavy'}</span></a>
-          <a class="cta" href="#preview" data-scroll="preview"><b>${en ? 'Try your own' : 'Nahrát vlastní'}</b><span>${en ? 'just for you, nothing is sent' : 'jen pro tebe, nic se neposílá'}</span></a>
-          <a class="cta main" href="#create" data-scroll="create"><b>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</b><span>${en ? 'for your party, one link' : 'pro partu, jeden odkaz'}</span></a>
-          <a class="cta" href="#join" data-scroll="join"><b>${en ? 'Join' : 'Připojit se'}</b><span>${en ? 'your party already has one' : 'parta už Valhalu má'}</span></a>
+          <a class="cta" href="#" data-modal="demo"><b>${en ? 'Example' : 'Ukázka'}</b><span>${en ? 'a full character sheet' : 'celý list jedné postavy'}</span></a>
+          <a class="cta" href="#" data-modal="own"><b>${en ? 'Try your own' : 'Nahrát vlastní'}</b><span>${en ? 'just for you, nothing is sent' : 'jen pro tebe, nic se neposílá'}</span></a>
+          <a class="cta main" href="#" data-modal="create"><b>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</b><span>${en ? 'a shared page for your party' : 'společná stránka pro partu'}</span></a>
+          <a class="cta" href="#" data-modal="join"><b>${en ? 'Join' : 'Připojit se'}</b><span>${en ? 'your party already has one' : 'parta už Valhalu má'}</span></a>
         </div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
@@ -219,17 +241,39 @@ async function landing(){
       </div>
     </div>
 
-    <div class="two-sec">
-      <div class="sec" id="create"><h3>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</h3>
-        <p>${en ? 'One per party is enough. Name it, you get two links: one for the crew, one admin link for you (it lets you remove characters; keep it private). Ten seconds, no account.' : 'Stačí jedna na partu. Pojmenuj ji a dostaneš dva odkazy: jeden pro partu, druhý admin odkaz pro tebe (můžeš mazat postavy; nech si ho pro sebe). Deset sekund, bez účtu.'}</p>
-        <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Party name' : 'Název party'}" autocomplete="off"><button type="submit">${en ? 'Create Valhalla' : 'Založit Valhalu'}</button></form><div class="err" id="srverr"></div></div>
-      <div class="sec" id="join"><h3>${en ? 'Join your party' : 'Připojit se k partě'}</h3>
-        <p>${en ? 'Somebody in your party already created a Valhalla? Just click the link they sent you (valheimwarriors.com/s/…) and drop your character file there. Nothing to fill in here.' : 'Někdo z party už Valhalu založil? Stačí kliknout na odkaz, který ti poslal (valheimwarriors.com/s/…), a přetáhnout tam soubor své postavy. Tady nic vyplňovat nemusíš.'}</p>
-        <form id="gosrv" class="idform"><label for="golink">${en ? 'Got only the ID?' : 'Máš jen ID?'}</label><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div>
-        <p class="small">${en ? 'Where is the character file? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. The game writes it on logout and every ~20 minutes.' : 'Kde je soubor postavy? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. Hra ho zapisuje při odhlášení a každých ~20 minut.'}</p></div>
-    </div>
-    <div class="help" id="help">
-      <h3>${en ? 'Help' : 'Nápověda'}</h3>
+    <div class="help" id="help">${helpHTML(en)}</div>
+    ${my.length ? `<div class="mine"><h3>${en ? 'My Valhallas' : 'Moje Valhaly'}</h3><ul>${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
+    <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
+    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
+  </section>`;
+  land.querySelectorAll('[data-modal]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); openModal(a.dataset.modal); }));
+  const bindForms = root => {
+  const go = root.querySelector('#gosrv'); if(go) go.addEventListener('submit', ev => {
+    ev.preventDefault(); const v = root.querySelector('#golink').value.trim(); const m = v.match(/\/s\/([a-z0-9-]+)/) || v.match(/[?&]s=([a-z0-9-]+)/) || (/^[a-z0-9-]{3,40}$/.test(v) ? [null, v] : null);
+    if(!m){ root.querySelector('#goerr').textContent = en ? 'That does not look like a Valhalla link or ID.' : 'To nevypadá jako odkaz ani ID Valhaly.'; return; }
+    location.href = LINK(m[1]) + (v.match(/#admin=[A-Za-z0-9]+/) || [''])[0];
+  });
+  const nw = root.querySelector('#newsrv'); if(nw) nw.addEventListener('submit', async ev => {
+    ev.preventDefault(); const err = root.querySelector('#srverr'); err.textContent = '';
+    const name = root.querySelector('#srvname').value.trim(); if(name.length < 2) return;
+    try{
+      const [res] = await rpc('vw_create_server', {p_name: name});
+      LS.set('vw-admin-' + res.slug, res.admin_token); rememberServer(res.slug, name, true);
+      location.href = LINK(res.slug) + '#new';
+    }catch(e){ err.textContent = (en ? 'Could not create the Valhalla: ' : 'Valhalu se nepodařilo založit: ') + e.message; }
+  });
+  };
+  window.__bindForms = bindForms;
+  await window.ASSETS_READY;
+  document.querySelectorAll('.feat .fi').forEach(el => { const ic = ASSETS.icons[el.dataset.ic]; if(ic) el.innerHTML = `<img src="${ic}" alt="">`; });
+  try{
+    if(!window.DEMO) window.DEMO = await (await fetch('/assets/demo.json', {cache: 'force-cache'})).json();
+    const d = window.DEMO; CHARS_BY_NAME[d.name] = d;
+    const el = document.getElementById('demo'); if(el) el.innerHTML = sheet(d);
+  }catch(e){ console.error('demo', e); const hd = document.querySelector('.hero-demo'); if(hd) hd.remove(); const ex = land.querySelector('[data-scroll="demo"]'); if(ex){ ex.removeAttribute('data-scroll'); ex.href = LINK('valheim-2026'); } }
+}
+// prepnuti jazyka na uvodni strance: render() z sablony zavola SITE_RENDER, ten prekresli landing
+const helpHTML = en => `<h3>${en ? 'Help' : 'Nápověda'}</h3>
       <details><summary>${en ? 'Where is my character file (.fch)?' : 'Kde najdu soubor své postavy (.fch)?'}</summary><p>${en ? 'Steam: <code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;your Steam id&gt;\\892970\\remote\\characters\\&lt;name&gt;.fch</code>. Without Steam Cloud, or on Game Pass: <code>%USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local</code>. Ignore files with <code>_backup_</code> or <code>.old</code>. The game writes the file when you log out and every ~20 minutes while playing.' : 'Steam: <code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;tvoje Steam id&gt;\\892970\\remote\\characters\\&lt;jméno&gt;.fch</code>. Bez Steam Cloudu nebo na Game Passu: <code>%USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local</code>. Soubory s <code>_backup_</code> nebo <code>.old</code> ignoruj. Hra soubor zapisuje při odhlášení a zhruba každých 20 minut hraní.'}</p></details>
       <details><summary>${en ? 'Who can overwrite or remove a character? What is the character key?' : 'Kdo může postavu přepsat nebo odebrat? Co je klíč postavy?'}</summary><p>${en ? 'The first upload of a character creates a secret <b>character key</b>, stored in the browser (or the Sync app) that uploaded it. Only that browser/app, or the Valhalla admin, may overwrite or remove the character, so nobody can push a fake sheet of you. If you switch device or browser, or start using the Sync app, move the key: in the browser that owns the character click <b>⚿ Character key</b> under its sheet (copies it); in the app open Settings, click the character row and the key is in the <b>Character key</b> field. Paste it where the upload gets refused. Or simply remove the character (×) from the owning device and upload it fresh from the new one.' : 'První nahrání postavy vytvoří tajný <b>klíč postavy</b>, který se uloží do prohlížeče (nebo Sync appky), odkud se nahrávalo. Přepsat nebo odebrat postavu může jen tento prohlížeč/appka, nebo admin Valhaly, takže ti nikdo nemůže podstrčit falešný list. Když změníš zařízení nebo prohlížeč, nebo začneš používat Sync appku, klíč si přenes: v prohlížeči, který postavu vlastní, klikni pod jejím listem na <b>⚿ Klíč postavy</b> (zkopíruje se); v appce otevři Nastavení, klikni na řádek postavy a klíč je v poli <b>Klíč postavy</b>. Vlož ho tam, kde nahrání hlásí odmítnutí. Nebo postavu na původním zařízení odeber (×) a z nového nahraj znovu.'}</p></details>
       <details><summary>${en ? 'What is the admin link?' : 'Co je admin odkaz?'}</summary><p>${en ? 'Whoever creates a Valhalla gets a second link ending with <code>#admin=…</code>. Opening it on any device makes that browser the Valhalla admin: it can remove any character and overwrite any upload. Keep it to yourself; the normal link is what you share with the party. You can copy both again via the <b>Invite</b> button on the Valhalla page (admin link shows only for the admin).' : 'Kdo Valhalu zakládá, dostane i druhý odkaz končící <code>#admin=…</code>. Otevřením na libovolném zařízení se ten prohlížeč stane adminem Valhaly: může odebrat jakoukoli postavu a přepsat jakékoli nahrání. Nech si ho pro sebe, partě posílej běžný odkaz. Oba odkazy znovu zkopíruješ tlačítkem <b>Pozvat</b> na stránce Valhaly (admin odkaz vidí jen admin).'}</p></details>
@@ -238,40 +282,54 @@ async function landing(){
       <details><summary>${en ? 'What is sent to the server? Spoilers?' : 'Co se posílá na server? Spoilery?'}</summary><p>${en ? 'The file is parsed in your browser or in the app. Only statistics leave your PC: no map pins, no coordinates, no spawn, death or logout positions, no boss altars, no world data. Locked achievements are never shown. Sheets show only things the character already owns or killed, so nothing from biomes the party has not reached.' : 'Soubor se zpracuje v prohlížeči nebo v appce. Z počítače odejdou jen statistiky: žádné pins, souřadnice, pozice spawnu, smrti nebo odhlášení, žádné oltáře bossů, žádná data světa. Neodemčené achievementy se nikdy neukazují. Listy ukazují jen věci, které postava už má nebo zabila, tedy nic z biomů, kam parta ještě nedošla.'}</p></details>
       <details><summary>${en ? 'Windows blocks the Sync app' : 'Windows blokuje Sync appku'}</summary><p>${en ? 'The app is an unsigned beta. SmartScreen: choose <i>More info</i>, then <i>Run anyway</i>. PCs with <i>Smart App Control</i> enabled refuse unsigned apps entirely; there, upload through the web page instead (one drag and drop after each session). The app runs in the system tray; launching it again just opens its window.' : 'Appka je nepodepsaná beta. SmartScreen: zvol <i>Další informace</i>, pak <i>Přesto spustit</i>. Počítače se zapnutým <i>Smart App Control</i> nepodepsané appky odmítají úplně; tam nahrávej přes web (jedno přetažení po každém hraní). Appka běží v liště u hodin; další spuštění jen otevře její okno.'}</p></details>
       <details><summary>${en ? 'Something is wrong or missing' : 'Něco nefunguje nebo chybí'}</summary><p>${en ? 'Use <a href="#" data-report="1">Report a bug or idea</a> (no account needed). Say which Valhalla, which character and what you expected. If you have GitHub, <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">Issues</a> work too.' : 'Použij <a href="#" data-report="1">Nahlásit chybu nebo nápad</a> (bez účtu). Uveď Valhalu, postavu a co jsi čekal. Kdo má GitHub, může i do <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">Issues</a>.'}</p></details>
-    </div>
-    ${my.length ? `<div class="mine"><h3>${en ? 'My Valhallas' : 'Moje Valhaly'}</h3><ul>${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
-    <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
-    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
-  </section>`;
-  land.querySelectorAll('[data-scroll]').forEach(a => a.addEventListener('click', ev => {
-    ev.preventDefault(); const id = a.dataset.scroll; const el = document.getElementById(id) || (id === 'preview' ? document.getElementById('drop') : null); if(!el) return;
-    el.scrollIntoView({behavior: 'smooth', block: id === 'demo' ? 'start' : 'center'}); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600);
-    const inp = el.querySelector && el.querySelector('input'); if(inp) setTimeout(() => inp.focus({preventScroll: true}), 600);
-  }));
-  document.getElementById('gosrv').addEventListener('submit', ev => {
-    ev.preventDefault(); const v = document.getElementById('golink').value.trim(); const m = v.match(/\/s\/([a-z0-9-]+)/) || v.match(/[?&]s=([a-z0-9-]+)/) || (/^[a-z0-9-]{3,40}$/.test(v) ? [null, v] : null);
-    if(!m){ document.getElementById('goerr').textContent = en ? 'That does not look like a Valhalla link or ID.' : 'To nevypadá jako odkaz ani ID Valhaly.'; return; }
-    location.href = LINK(m[1]) + (v.match(/#admin=[A-Za-z0-9]+/) || [''])[0];
-  });
-  document.getElementById('newsrv').addEventListener('submit', async ev => {
-    ev.preventDefault(); const err = document.getElementById('srverr'); err.textContent = '';
-    const name = document.getElementById('srvname').value.trim(); if(name.length < 2) return;
-    try{
-      const [res] = await rpc('vw_create_server', {p_name: name});
-      LS.set('vw-admin-' + res.slug, res.admin_token); rememberServer(res.slug, name, true);
-      location.href = LINK(res.slug) + '#new';
-    }catch(e){ err.textContent = (en ? 'Could not create the Valhalla: ' : 'Valhalu se nepodařilo založit: ') + e.message; }
-  });
-  await window.ASSETS_READY;
-  document.querySelectorAll('.feat .fi').forEach(el => { const ic = ASSETS.icons[el.dataset.ic]; if(ic) el.innerHTML = `<img src="${ic}" alt="">`; });
-  try{
-    if(!window.DEMO) window.DEMO = await (await fetch('/assets/demo.json', {cache: 'force-cache'})).json();
-    const d = window.DEMO; CHARS_BY_NAME[d.name] = d;
-    const el = document.getElementById('demo'); if(el) el.innerHTML = sheet(d);
-  }catch(e){ const hd = document.querySelector('.hero-demo'); if(hd) hd.remove(); const ex = land.querySelector('[data-scroll="demo"]'); if(ex){ ex.removeAttribute('data-scroll'); ex.href = LINK('valheim-2026'); } }
-}
-// prepnuti jazyka na uvodni strance: render() z sablony zavola SITE_RENDER, ten prekresli landing
+    `;
 let landingLang = null;
+function closeModal(){ const m = document.getElementById('vwmodal'); if(m) m.remove(); document.body.style.overflow = ''; }
+function openModal(kind){
+  closeModal(); const en = EN();
+  const FILE = `<code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;${en ? 'your Steam id' : 'tvoje Steam id'}&gt;\\892970\\remote\\characters\\&lt;${en ? 'name' : 'jméno'}&gt;.fch</code>`;
+  let title = '', body = '';
+  if(kind === 'demo'){
+    title = en ? 'Example: one character sheet' : 'Ukázka: list jedné postavy';
+    body = `<p class="lead">${en ? 'This is a real character from a live Valhalla. Hover items, trophies and creatures for details. In a Valhalla your whole party sits like this side by side.' : 'Skutečná postava ze živé Valhaly. Najeď myší na předměty, trofeje a potvory, ukážou detail. Ve Valhale je takhle vedle sebe celá parta.'}</p><div class="sheets demo full" id="demo-full"></div>`;
+  } else if(kind === 'own'){
+    title = en ? 'Try it with your own character' : 'Vyzkoušej to na vlastní postavě';
+    body = `<ol class="guide">
+      <li>${en ? 'Find your character file. Steam:' : 'Najdi soubor své postavy. Steam:'} ${FILE}<br><small>${en ? 'Ignore files with _backup_ or .old. Not on Steam Cloud / Game Pass: %USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local' : 'Soubory s _backup_ nebo .old ignoruj. Bez Steam Cloudu / Game Pass: %USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local'}</small></li>
+      <li>${en ? 'Pick it below (or drag it anywhere onto this page).' : 'Vyber ho níže (nebo ho přetáhni kamkoli na tuhle stránku).'}</li>
+      <li>${en ? 'The sheet appears under the header. Nothing leaves your browser.' : 'List se objeví pod hlavičkou stránky. Nic neodejde z tvého prohlížeče.'}</li></ol>
+      <div class="mrow"><button class="sitebtn" id="own-pick">${en ? 'Choose file' : 'Vybrat soubor'}</button><span class="note" id="own-msg"></span></div>`;
+  } else if(kind === 'create'){
+    title = en ? 'Create a Valhalla' : 'Založit Valhalu';
+    body = `<p class="lead">${en ? 'A Valhalla is a shared page for one party. Everyone uploads their own character to it and you all see each other there.' : 'Valhala je společná stránka jedné party. Každý do ní nahraje svoji postavu a vidíte se tam všichni.'}</p>
+      <ol class="guide">
+      <li>${en ? 'Type your party name and press Create. No account needed.' : 'Napiš název party a dej Založit. Účet není potřeba.'}</li>
+      <li>${en ? 'You get two links. Send the <b>normal link</b> to your party. Keep the <b>admin link</b> for yourself: it lets you remove characters and manage the Valhalla from another device.' : 'Dostaneš dva odkazy. <b>Běžný odkaz</b> pošli partě. <b>Admin odkaz</b> si nech: umožní ti mazat postavy a spravovat Valhalu z jiného zařízení.'}</li>
+      <li>${en ? 'Upload your own character on the Valhalla page (drag the .fch file there), others do the same.' : 'Na stránce Valhaly nahraj svoji postavu (přetáhni tam soubor .fch), ostatní udělají to samé.'}</li></ol>
+      <form id="newsrv" class="mform"><input id="srvname" maxlength="60" required placeholder="${en ? 'Party name' : 'Název party'}" autocomplete="off"><button type="submit">${en ? 'Create' : 'Založit'}</button></form><div class="err" id="srverr"></div>`;
+  } else if(kind === 'help'){
+    title = en ? 'Help' : 'Nápověda';
+    body = `<div class="help inmodal">${helpHTML(en).replace(/<h3>[^]*?<\/h3>/, '')}</div>`;
+  } else if(kind === 'join'){
+    title = en ? 'Join your party' : 'Připojit se k partě';
+    body = `<ol class="guide">
+      <li>${en ? 'Somebody in your party created a Valhalla and sent you a link like <code>valheimwarriors.com/s/…</code>. Open it. That is the whole trick, nothing to fill in here.' : 'Někdo z party založil Valhalu a poslal ti odkaz typu <code>valheimwarriors.com/s/…</code>. Otevři ho. To je celé, tady nic vyplňovat nemusíš.'}</li>
+      <li>${en ? 'On that page drag your character file onto the dashed box. Steam:' : 'Na té stránce přetáhni soubor své postavy do čárkovaného rámečku. Steam:'} ${FILE}</li>
+      <li>${en ? 'After a session drop the file again, or run the Sync app once and it uploads by itself.' : 'Po hraní soubor přetáhni znovu, nebo si jednou pusť Sync appku a nahrává se sám.'}</li></ol>
+      <div class="mrow"><label for="golink" class="note">${en ? 'Got only the ID instead of a link?' : 'Dostal jsi jen ID místo odkazu?'}</label></div>
+      <form id="gosrv" class="mform"><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div>`;
+  }
+  const m = document.createElement('div'); m.id = 'vwmodal'; m.className = 'vwmodal' + (kind === 'demo' ? ' wide' : '');
+  m.innerHTML = `<div class="mbox"><button class="mx" aria-label="Zavřít">×</button><h4>${title}</h4>${body}</div>`;
+  document.body.appendChild(m); document.body.style.overflow = 'hidden';
+  m.addEventListener('click', ev => { if(ev.target === m || ev.target.closest('.mx')) closeModal(); });
+  document.addEventListener('keydown', function esc(ev){ if(ev.key === 'Escape'){ closeModal(); document.removeEventListener('keydown', esc); } });
+  if(window.__bindForms) window.__bindForms(m);
+  const inp = m.querySelector('input'); if(inp) setTimeout(() => inp.focus(), 50);
+  if(kind === 'demo'){ const d = window.DEMO; const el = m.querySelector('#demo-full'); if(d && el){ CHARS_BY_NAME[d.name] = d; el.innerHTML = sheet(d); } else if(el) el.innerHTML = `<p class="note">${en ? 'Example not available, open a live Valhalla:' : 'Ukázka není k dispozici, otevři živou Valhalu:'} <a href="${LINK('valheim-2026')}">Valheim 2026</a></p>`; }
+  if(kind === 'own'){ m.querySelector('#own-pick').addEventListener('click', () => { const fi = document.getElementById('file'); if(fi){ fi.click(); } }); }
+}
+window.addEventListener('vw-loaded', () => { closeModal(); const sh = document.querySelector('#sheets .sheet'); if(sh) sh.scrollIntoView({behavior: 'smooth', block: 'start'}); });
 window.SITE_RENDER_LANDING = () => {
   const l = document.getElementById('landing'); if(slug || isAdminPage || !l || l.hidden) return;
   if(landingLang !== LANG) landing();   // prepnuti jazyka: prekreslit celou uvodni stranku
@@ -339,12 +397,12 @@ function reportBox(){
     catch(e){ m.textContent = (en ? 'Could not send: ' : 'Nepodařilo se odeslat: ') + e.message; ev.target.disabled = false; }
   });
 }
-document.addEventListener('click', ev => { const r = ev.target.closest('[data-report]'); if(r){ ev.preventDefault(); reportBox(); } });
+document.addEventListener('click', ev => { const r = ev.target.closest('[data-report]'); if(r){ ev.preventDefault(); reportBox(); } const md = ev.target.closest('[data-modal]'); if(md && !md.closest('.land')){ ev.preventDefault(); openModal(md.dataset.modal); } });
 document.addEventListener('click', async ev => { const k = ev.target.closest('[data-key]'); if(k){ await copy(k.dataset.key); toast(EN() ? 'Key copied' : 'Klíč zkopírován'); } });
 window.SITE_UPLOAD = async d => {
   if(!SERVER){   // uvodni stranka: jen lokalni nahled, nic se neposila
     d.meta.uploaded = true; const i = chars.findIndex(c => c.name === d.name); if(i >= 0) chars.splice(i, 1, d); else chars.push(d);
-    visible.add(d.name); render(); return;
+    visible.add(d.name); render(); window.dispatchEvent(new Event('vw-loaded')); return;
   }
   let tok = ADMIN || LS.get(tokKey(d.player_id)); let t;
   try{ t = await rpc('vw_upsert_character', {p_slug: slug, p_data: d, p_saved_at: d.meta.saved || null, p_token: tok}); }
@@ -376,7 +434,7 @@ window.SITE_RENDER = () => {
   document.getElementById('invite').onclick = () => showInvite(true);
   let crumb = document.getElementById('crumb');
   if(!crumb){ crumb = document.createElement('div'); crumb.id = 'crumb'; crumb.className = 'crumb'; document.querySelector('.top').after(crumb); }
-  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')} <a class="bug" href="#" data-report="1">${en ? 'report a bug' : 'nahlásit chybu'}</a><a class="bug" href="${HOME}#help">${en ? 'help' : 'nápověda'}</a>`;
+  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')} <a class="bug" href="#" data-report="1">${en ? 'report a bug' : 'nahlásit chybu'}</a><a class="bug" href="#" data-modal="help">${en ? 'help' : 'nápověda'}</a>`;
   const dt = document.getElementById('dropT'), ds = document.getElementById('dropS');
   if(dt) dt.textContent = en ? 'Drop your character file (.fch) here, it shows up for the whole party' : 'Přetáhni sem svou postavu (.fch), objeví se celé partě';
   if(ds) ds.innerHTML = en ? 'Parsed in your browser, only statistics are stored. Upload again after playing to refresh. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zpracuje se u tebe v prohlížeči, ukládají se jen statistiky. Po hraní nahraj znovu a list se obnoví. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';

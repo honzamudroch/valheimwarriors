@@ -1073,7 +1073,7 @@ const TIER = n => /Flametal|Ask|Embla/.test(n)?9:/Carapace|Mistwalker|Himmin|Kro
 const bestOf = arr => arr.filter(i=>!/^(Hammer|Hoe|Cultivator|Pickaxe|Torch)/.test(i.name)).sort((a,b)=>(TIER(b.name)-TIER(a.name))||(b.q-a.q))[0];
 const MELEE_RE = /^(Knife|Axe|Sword|Mace|Club|Spear|Atgeir|Sledge|Battleaxe|Fistweapon|Pickaxe|Torch|Staff)/;
 const SLOTS = [[MELEE_RE,'Zbraň',true],[/^Shield/,'Štít',true],[/^(Bow|Crossbow)/,'Luk',true],[/^Helmet/,'Hlava'],[/Chest$/,'Hruď'],[/Legs$/,'Nohy'],[/^Cape/,'Plášť'],[/^Belt|^Megingjord/,'Opasek'],[/^Trinket|^Wishbone/,'Amulet']];
-const BIG_RE = /troll|bjorn|abomination|stonegolem|golem|lox|brute|elite|wraith|serpent|fenring|ulv|gjall|tick|dvergr|eikthyr|gdking|bonemass|dragon|goblinking|queen|fader|boss/i;
+const BIG_RE = /troll|bjorn|abomination|stonegolem|golem|lox|(?<!greydwarf)brute|elite|wraith|serpent|fenring|ulv|gjall|tick|dvergr|eikthyr|gdking|bonemass|dragon|goblinking|queen|fader|boss/i;
 const MAXDUR = {CapeTrollHide:600,CapeDeerHide:400,ArmorBerserkerChest:1400,ArmorBerserkerLegs:1400,HelmetBerserkerHood:1400,ShieldIronBuckler:250,KnifeChitin:250,ArmorTrollLeatherChest:1000,ArmorTrollLeatherLegs:1000,HelmetTrollLeather:1000,ArmorLeatherChest:400,ArmorLeatherLegs:400,HelmetLeather:400,ArmorBronzeChest:1000,ArmorBronzeLegs:1000,HelmetBronze:1000,ArmorIronChest:1000,ArmorIronLegs:1000,HelmetIron:1000};
 const topN = (o,n) => Object.entries(o||{}).sort((a,b)=>b[1]-a[1]).slice(0,n);
 const kvRows = rows => rows.map(([k,v,sub])=>`<tr${sub?' class="sub"':''}><td>${k}</td><td>${typeof v==='number'?fmt(v):v}</td></tr>`).join('');
@@ -1149,7 +1149,7 @@ function sheet(D){
     ${big.length?`<h2>${T('Velké kusy')}<span class="sum">${fmt(big.reduce((a,[,v])=>a+v,0))}</span></h2><div class="kills">${killBars(big,bmax,'big')}</div>`:''}
     </section>
     <section class="blk b-skills">
-    <h2>${T('Dovednosti')} <span class="n">${sk.length}</span></h2>
+    <h2>${T('Dovednosti')} <span class="n">${sk.length}</span><span class="sum" title="${LANG==='en'?'Sum of all skill levels':'Součet úrovní všech dovedností'}">${fmt(sk.reduce((a,[,v])=>a+v.level,0))}</span></h2>
     <div class="skills" style="grid-template-rows:repeat(${Math.ceil(sk.length/2)},auto)">${skills}</div>
     </section>
     <section class="blk b-combat">
