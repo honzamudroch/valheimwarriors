@@ -139,6 +139,10 @@ style.textContent = `
 .path form{margin:8px 0 0;display:flex;gap:6px}
 .path input{min-width:0;font-size:13px;padding:7px 9px}
 .path button{padding:7px 12px;font-size:12px;white-space:nowrap}
+.path form.idform{align-items:center;flex-wrap:wrap}
+.path form.idform label{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.path form.idform input{flex:1;font-size:12px;padding:5px 8px}
+.path form.idform button{padding:5px 10px;font-size:11px;background:transparent;color:var(--gold);border:1px solid var(--line)}
 @media (max-width:640px){.paths{grid-template-columns:1fr}}
 `;
 document.head.appendChild(style);
@@ -167,8 +171,8 @@ async function landing(){
         <h2>${en ? 'See your whole crew side by side. Straight from the save file.' : 'Celá parta vedle sebe. Přímo ze save souboru.'}</h2>
         <p>${en ? 'Create a server, send one link. Everyone drops in their character file once and the page turns it into a sheet: gear, skills, kills, deaths, travel, work, explored map. Then run the small Sync app and your sheet updates itself after every game save, nothing else to do. No app? Just drop the file again after a session.' : 'Založ server, pošli jeden odkaz. Každý jednou přetáhne soubor své postavy a stránka z něj udělá list: výbava, dovednosti, zabití, smrti, cesta, práce, prozkoumaná mapa. Pak si pustí malou Sync appku a list se obnovuje sám po každém uložení hry, nic dalšího dělat nemusíš. Bez appky stačí po hraní soubor přetáhnout znovu.'}</p>
         <div class="paths">
-          <div class="path"><b>${en ? 'Your party already has a server?' : 'Parta už server má?'}</b><span>${en ? 'Open the link they sent you (looks like valheimwarriors.com/s/…) and drop your character file there.' : 'Otevři odkaz, který ti poslali (vypadá jako valheimwarriors.com/s/…), a přetáhni tam svoji postavu.'}</span>
-            <form id="gosrv"><input id="golink" placeholder="${en ? 'Paste the link here' : 'Sem vlož odkaz'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div></div>
+          <div class="path"><b>${en ? 'Your party already has a server?' : 'Parta už server má?'}</b><span>${en ? 'Just click the link they sent you (valheimwarriors.com/s/…) and drop your character file there. Nothing to fill in here.' : 'Stačí kliknout na odkaz, který ti poslali (valheimwarriors.com/s/…), a přetáhnout tam svoji postavu. Tady nic vyplňovat nemusíš.'}</span>
+            <form id="gosrv" class="idform"><label for="golink">${en ? 'Got only the server ID?' : 'Máš jen ID serveru?'}</label><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div></div>
           <div class="path"><b>${en ? 'Starting a server for your party?' : 'Zakládáš server pro partu?'}</b><span>${en ? 'Name it, you get a link to share. One per party is enough.' : 'Pojmenuj ho, dostaneš odkaz pro ostatní. Stačí jeden na partu.'}</span>
             <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Server or party name' : 'Název serveru nebo party'}" autocomplete="off"><button type="submit">${en ? 'Create server' : 'Založit server'}</button></form><div class="err" id="srverr"></div></div>
         </div>
