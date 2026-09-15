@@ -203,15 +203,6 @@ async function landing(){
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
     </div>
     <div class="feats">${FEAT.map(([ic, cz, e, dcz, de]) => `<div class="feat"><div class="fi" data-ic="${ic}"></div><b>${en ? e : cz}</b><span>${en ? de : dcz}</span></div>`).join('')}</div>
-    <div class="two-sec">
-      <div class="sec" id="create"><h3>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</h3>
-        <p>${en ? 'One per party is enough. Name it, you get two links: one for the crew, one admin link for you (it lets you remove characters; keep it private). Ten seconds, no account.' : 'Stačí jedna na partu. Pojmenuj ji a dostaneš dva odkazy: jeden pro partu, druhý admin odkaz pro tebe (můžeš mazat postavy; nech si ho pro sebe). Deset sekund, bez účtu.'}</p>
-        <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Party name' : 'Název party'}" autocomplete="off"><button type="submit">${en ? 'Create Valhalla' : 'Založit Valhalu'}</button></form><div class="err" id="srverr"></div></div>
-      <div class="sec" id="join"><h3>${en ? 'Join your party' : 'Připojit se k partě'}</h3>
-        <p>${en ? 'Somebody in your party already created a Valhalla? Just click the link they sent you (valheimwarriors.com/s/…) and drop your character file there. Nothing to fill in here.' : 'Někdo z party už Valhalu založil? Stačí kliknout na odkaz, který ti poslal (valheimwarriors.com/s/…), a přetáhnout tam soubor své postavy. Tady nic vyplňovat nemusíš.'}</p>
-        <form id="gosrv" class="idform"><label for="golink">${en ? 'Got only the ID?' : 'Máš jen ID?'}</label><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div>
-        <p class="small">${en ? 'Where is the character file? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. The game writes it on logout and every ~20 minutes.' : 'Kde je soubor postavy? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. Hra ho zapisuje při odhlášení a každých ~20 minut.'}</p></div>
-    </div>
     <div class="steps">
       <div class="step"><b>1 · ${en ? 'One of you creates a Valhalla' : 'Jeden z party založí Valhalu'}</b>${en ? 'Takes ten seconds, no account. They get a link and send it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
       <div class="step"><b>2 · ${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
@@ -228,6 +219,15 @@ async function landing(){
       </div>
     </div>
 
+    <div class="two-sec">
+      <div class="sec" id="create"><h3>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</h3>
+        <p>${en ? 'One per party is enough. Name it, you get two links: one for the crew, one admin link for you (it lets you remove characters; keep it private). Ten seconds, no account.' : 'Stačí jedna na partu. Pojmenuj ji a dostaneš dva odkazy: jeden pro partu, druhý admin odkaz pro tebe (můžeš mazat postavy; nech si ho pro sebe). Deset sekund, bez účtu.'}</p>
+        <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Party name' : 'Název party'}" autocomplete="off"><button type="submit">${en ? 'Create Valhalla' : 'Založit Valhalu'}</button></form><div class="err" id="srverr"></div></div>
+      <div class="sec" id="join"><h3>${en ? 'Join your party' : 'Připojit se k partě'}</h3>
+        <p>${en ? 'Somebody in your party already created a Valhalla? Just click the link they sent you (valheimwarriors.com/s/…) and drop your character file there. Nothing to fill in here.' : 'Někdo z party už Valhalu založil? Stačí kliknout na odkaz, který ti poslal (valheimwarriors.com/s/…), a přetáhnout tam soubor své postavy. Tady nic vyplňovat nemusíš.'}</p>
+        <form id="gosrv" class="idform"><label for="golink">${en ? 'Got only the ID?' : 'Máš jen ID?'}</label><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div>
+        <p class="small">${en ? 'Where is the character file? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. The game writes it on logout and every ~20 minutes.' : 'Kde je soubor postavy? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. Hra ho zapisuje při odhlášení a každých ~20 minut.'}</p></div>
+    </div>
     <div class="help" id="help">
       <h3>${en ? 'Help' : 'Nápověda'}</h3>
       <details><summary>${en ? 'Where is my character file (.fch)?' : 'Kde najdu soubor své postavy (.fch)?'}</summary><p>${en ? 'Steam: <code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;your Steam id&gt;\\892970\\remote\\characters\\&lt;name&gt;.fch</code>. Without Steam Cloud, or on Game Pass: <code>%USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local</code>. Ignore files with <code>_backup_</code> or <code>.old</code>. The game writes the file when you log out and every ~20 minutes while playing.' : 'Steam: <code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;tvoje Steam id&gt;\\892970\\remote\\characters\\&lt;jméno&gt;.fch</code>. Bez Steam Cloudu nebo na Game Passu: <code>%USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local</code>. Soubory s <code>_backup_</code> nebo <code>.old</code> ignoruj. Hra soubor zapisuje při odhlášení a zhruba každých 20 minut hraní.'}</p></details>
