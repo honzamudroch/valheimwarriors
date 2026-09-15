@@ -135,6 +135,9 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .portrait .fig.icons .stack img{width:56px;height:56px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.7))}
 .portrait .fig.icons .stack img:first-child{width:48px;height:48px}
 .portrait .fig.icons .stack span{width:56px;height:56px;border:1px dashed var(--line-2);opacity:.5}
+.portrait .fig.paper img.body.dim{opacity:.55;filter:grayscale(.4) drop-shadow(0 4px 6px rgba(0,0,0,.6))}
+.portrait .fig.paper img.part{position:absolute;width:46px;height:46px;left:50%;transform:translateX(-50%);filter:drop-shadow(0 3px 4px rgba(0,0,0,.8));pointer-events:auto}
+.portrait .fig.paper img.part.head{top:6px}.portrait .fig.paper img.part.chest{top:64px}.portrait .fig.paper img.part.legs{top:122px}
 .portrait .fig img.body{max-width:142px;max-height:200px;display:block;filter:drop-shadow(0 4px 6px rgba(0,0,0,.6))}
 .portrait .fig img.hand{position:absolute;width:44px;height:44px;pointer-events:auto;filter:drop-shadow(0 2px 3px rgba(0,0,0,.8))}
 .portrait .fig img.hand.l{left:2px;bottom:78px}.portrait .fig img.hand.r{right:2px;bottom:78px}.portrait .fig img.hand.b{right:2px;top:4px;width:36px;height:36px}
@@ -1003,6 +1006,9 @@ function portrait(P){
     if(!ASSETS.icons[chest&&chest.name] && !ASSETS.icons[legs&&legs.name]) return sprite(P);
     const wpn = eq.find(i=>MELEE_RE.test(i.name)) || bestOf(P.inventory.filter(i=>MELEE_RE.test(i.name))), shd = eq.find(i=>/^Shield/.test(i.name)) || bestOf(P.inventory.filter(i=>/^Shield/.test(i.name))), bow = eq.find(i=>/^(Bow|Crossbow)/.test(i.name)) || bestOf(P.inventory.filter(i=>/^(Bow|Crossbow)/.test(i.name)));
     const hand = (it,cls) => it && ASSETS.icons[it.name] ? `<img class="hand ${cls}" src="${ASSETS.icons[it.name]}" alt="" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(P.name||'')}">` : '';
+    const body = ASSETS.sets['Rags'];
+    const part = (it,cls) => it && ASSETS.icons[it.name] ? `<img class="part ${cls}" src="${ASSETS.icons[it.name]}" alt="" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(P.name||'')}">` : '';
+    if(body) return `<div class="fig paper"><img class="body dim" src="${body}" alt="">${part(helmet,'head')}${part(chest,'chest')}${part(legs,'legs')}${hand(shd,'l')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
     return `<div class="fig icons"><div class="stack">${ic(helmet)}${ic(chest)}${ic(legs)}</div>${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
   }
   const full = [chest,legs,helmet].filter(Boolean).every(i=>setFamily(i.name)===fam) && chest && legs;
