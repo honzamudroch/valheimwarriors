@@ -16,6 +16,7 @@ const get = async (path) => { const r = await fetch(API + path, {headers: H}); i
 // routing: /s/<slug> na hostingu, ?s=<slug> lokalne
 const pm = location.pathname.match(/^\/s\/([a-z0-9-]+)/);
 const slug = pm ? pm[1] : new URLSearchParams(location.search).get('s');
+const isAdminPage = /^\/admin\/?$/.test(location.pathname) || new URLSearchParams(location.search).has('admin');
 const queryMode = location.pathname.endsWith('.html');
 const LINK = s => queryMode ? location.pathname + '?s=' + s : '/s/' + s;
 const HOME = queryMode ? location.pathname : '/';
@@ -112,6 +113,24 @@ style.textContent = `
 .help code{font-size:11.5px;color:var(--ink);word-break:break-all}
 .help a{color:var(--gold)}
 .crumb a.bug + a.bug{margin-right:6px}
+
+.admin .tot{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:14px}
+.admin .tot div{background:var(--bar);border:1px solid var(--bar-line);padding:10px 12px}
+.admin .tot b{display:block;font-size:22px;color:var(--gold-2);font-variant-numeric:tabular-nums}
+.admin .tot span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.admin h3{font-family:"Metamorphous",serif;font-weight:400;font-size:16px;color:var(--gold);margin:16px 0 6px}
+.admin h3 small{font-family:"Averia Serif Libre",serif;color:var(--muted);font-size:12px}
+.admin .tw{overflow-x:auto}
+.admin table.adm{width:100%;border-collapse:collapse;font-size:13px;background:var(--panel);border:1px solid var(--line)}
+.admin table.adm th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--line)}
+.admin table.adm td{padding:6px 8px;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink-2)}
+.admin table.adm td a{color:var(--gold);text-decoration:none}
+.admin table.adm small{color:var(--muted);font-size:11px;word-break:break-all}
+.admin table.adm small.ua{opacity:.7}
+.admin table.adm tr.done td{opacity:.45}
+.admin table.adm code{font-size:12px;color:var(--ink)}
+.admin table.adm .sitebtn{padding:2px 8px;font-size:11px}
+@media (max-width:700px){.admin .tot{grid-template-columns:repeat(3,1fr)}}
 `;
 document.head.appendChild(style);
 
@@ -297,5 +316,44 @@ window.SITE_RENDER = () => {
   if(dz && !document.getElementById('appnote')){ dz.insertAdjacentHTML('afterend', `<div class="appnote" id="appnote">${en ? 'Tired of dragging? <a href="' + HOME + '#app">Sync app for Windows</a> uploads your character after every save.' : 'Nechceš přetahovat ručně? <a href="' + HOME + '#app">Sync appka pro Windows</a> nahraje postavu po každém uložení sama.'}</div>`); }
 };
 
-if(slug) server(); else landing();
+
+/* ---------- automaticke hlaseni JS chyb (max 1 na nacteni) ---------- */
+let errSent = false;
+window.addEventListener('error', ev => {
+  if(errSent) return; errSent = true;
+  const msg = `${ev.message || 'error'} @ ${(ev.filename || '').split('/').pop()}:${ev.lineno || 0}`;
+  try{ rpc('vw_report', {p_text: msg.slice(0, 500), p_kind: 'error', p_page: location.pathname + location.search, p_slug: slug || null, p_ua: navigator.userAgent.slice(0, 200)}).catch(() => {}); }catch(e){}
+});
+
+/* ---------- admin: prehled pro spravce webu ---------- */
+async function adminPage(){
+  const land = document.getElementById('landing'); land.hidden = false;
+  document.getElementById('drop').hidden = true; document.getElementById('sheets').hidden = true; document.getElementById('who').style.display = 'none';
+  document.getElementById('h1').textContent = 'Valheim Warriors · admin'; document.title = 'Admin · Valheim Warriors';
+  const hm = location.hash.match(/key=([A-Za-z0-9]+)/); if(hm){ LS.set('vw-site-admin', hm[1]); history.replaceState(null, '', location.pathname + location.search); }
+  const key = LS.get('vw-site-admin');
+  const en = EN();
+  if(!key){ land.innerHTML = `<section class="land"><div class="hero"><h2>Admin</h2><p>${en ? 'Open this page through your admin link (with #key=…).' : 'Otevři tuhle stránku přes svůj admin odkaz (s #key=…).'}</p></div></section>`; return; }
+  let d;
+  try{ d = await rpc('vw_admin_overview', {p_key: key}); }
+  catch(e){ LS.del('vw-site-admin'); land.innerHTML = `<section class="land"><div class="hero"><h2>Admin</h2><p>${esc(e.message)}</p></div></section>`; return; }
+  const fmtT = t => { const x = new Date(t); return isNaN(x) ? '' : `${x.getDate()}. ${x.getMonth() + 1}. ${String(x.getHours()).padStart(2, '0')}:${String(x.getMinutes()).padStart(2, '0')}`; };
+  const reps = d.reports || []; const bugs = reps.filter(r => r.kind === 'bug'), errs = reps.filter(r => r.kind === 'error');
+  const repRow = r => `<tr class="${r.done ? 'done' : ''}"><td>${fmtT(r.created_at)}</td><td>${esc(r.slug || '')}<br><small>${esc(r.page || '')}</small></td><td>${esc(r.text)}${r.contact ? `<br><small>${esc(r.contact)}</small>` : ''}${r.ua ? `<br><small class="ua">${esc(r.ua)}</small>` : ''}</td><td><label><input type="checkbox" data-done="${r.id}" ${r.done ? 'checked' : ''}> ${en ? 'done' : 'vyřešeno'}</label></td></tr>`;
+  land.innerHTML = `<section class="land wide admin">
+    <div class="tot"><div><b>${d.totals.servers}</b><span>${en ? 'servers' : 'serverů'}</span></div><div><b>${d.totals.characters}</b><span>${en ? 'characters' : 'postav'}</span></div><div><b>${d.totals.uploads_24h}</b><span>${en ? 'uploads 24 h' : 'nahrání za 24 h'}</span></div><div><b>${d.totals.db_kb >= 1024 ? (d.totals.db_kb / 1024).toFixed(1) + ' MB' : d.totals.db_kb + ' kB'}</b><span>${en ? 'database' : 'databáze'}</span></div><div><b>${bugs.filter(r => !r.done).length}</b><span>${en ? 'open bugs' : 'otevřené bugy'}</span></div><div><b>${errs.filter(r => !r.done).length}</b><span>${en ? 'open errors' : 'otevřené chyby'}</span></div></div>
+    <h3>${en ? 'Servers' : 'Servery'} <small>${d.servers.length}</small></h3>
+    <div class="tw"><table class="adm"><tr><th>${en ? 'Name' : 'Název'}</th><th>slug</th><th>${en ? 'Characters' : 'Postavy'}</th><th>${en ? 'Created' : 'Založen'}</th><th>${en ? 'Last activity' : 'Poslední aktivita'}</th><th></th></tr>
+    ${d.servers.map(sv => `<tr><td><a href="${LINK(sv.slug)}">${esc(sv.name)}</a></td><td><code>${esc(sv.slug)}</code></td><td>${sv.chars}<br><small>${esc(sv.names)}</small></td><td>${fmtT(sv.created_at)}</td><td>${fmtT(sv.last_activity)}</td><td><button class="sitebtn ghost" data-del="${esc(sv.slug)}">${en ? 'delete' : 'smazat'}</button></td></tr>`).join('')}</table></div>
+    <h3>${en ? 'Bug reports' : 'Nahlášené bugy a nápady'} <small>${bugs.length}</small></h3>
+    <div class="tw"><table class="adm"><tr><th>${en ? 'When' : 'Kdy'}</th><th>${en ? 'Where' : 'Kde'}</th><th>${en ? 'Text' : 'Text'}</th><th></th></tr>${bugs.map(repRow).join('') || `<tr><td colspan="4"><i>${en ? 'nothing yet' : 'zatím nic'}</i></td></tr>`}</table></div>
+    <h3>${en ? 'Errors caught on the site' : 'Chyby zachycené na webu'} <small>${errs.length}</small></h3>
+    <div class="tw"><table class="adm"><tr><th>${en ? 'When' : 'Kdy'}</th><th>${en ? 'Where' : 'Kde'}</th><th>${en ? 'Error' : 'Chyba'}</th><th></th></tr>${errs.map(repRow).join('') || `<tr><td colspan="4"><i>${en ? 'nothing yet' : 'zatím nic'}</i></td></tr>`}</table></div>
+    <div class="priv">${en ? 'Only you see this page (site admin key in this browser). Sync app logs stay on each PC in %APPDATA%\\ValheimWarriors\\sync.log.' : 'Tuhle stránku vidíš jen ty (admin klíč webu v tomto prohlížeči). Logy Sync appky zůstávají u každého v %APPDATA%\\ValheimWarriors\\sync.log.'}</div>
+  </section>`;
+  land.addEventListener('change', async ev => { const c = ev.target.closest('[data-done]'); if(!c) return; try{ await rpc('vw_admin_report_done', {p_key: key, p_id: +c.dataset.done, p_done: c.checked}); c.closest('tr').classList.toggle('done', c.checked); }catch(e){ toast(e.message); } });
+  land.addEventListener('click', async ev => { const b = ev.target.closest('[data-del]'); if(!b) return; const sl = b.dataset.del; if(!confirm((en ? 'Delete server ' : 'Smazat server ') + sl + (en ? ' with all its characters?' : ' se všemi postavami?'))) return; try{ await rpc('vw_admin_delete_server', {p_key: key, p_slug: sl}); b.closest('tr').remove(); toast(en ? 'Deleted' : 'Smazáno'); }catch(e){ toast(e.message); } });
+}
+
+if(isAdminPage) adminPage(); else if(slug) server(); else landing();
 })();
