@@ -133,10 +133,10 @@ async function landing(){
       <div class="hero-txt">
         <div class="kicker">${en ? 'Viking sheets for your Valheim party' : 'Listy vikingů pro vaši valheimskou partu'}</div>
         <h2>${en ? 'See your whole crew side by side. Straight from the save file.' : 'Celá parta vedle sebe. Přímo ze save souboru.'}</h2>
-        <p>${en ? 'Create a server, send one link. Everyone drops in their character file and the page turns it into a sheet: gear, skills, kills, deaths, travel, work, explored map. Upload again after a session and it updates.' : 'Založ server, pošli jeden odkaz. Každý přetáhne soubor své postavy a stránka z něj udělá list: výbava, dovednosti, zabití, smrti, cesta, práce, prozkoumaná mapa. Po hraní nahraješ znovu a je to aktuální.'}</p>
+        <p>${en ? 'Create a server, send one link. Everyone drops in their character file once and the page turns it into a sheet: gear, skills, kills, deaths, travel, work, explored map. Then run the small Sync app and your sheet updates itself after every game save, nothing else to do. No app? Just drop the file again after a session.' : 'Založ server, pošli jeden odkaz. Každý jednou přetáhne soubor své postavy a stránka z něj udělá list: výbava, dovednosti, zabití, smrti, cesta, práce, prozkoumaná mapa. Pak si pustí malou Sync appku a list se obnovuje sám po každém uložení hry, nic dalšího dělat nemusíš. Bez appky stačí po hraní soubor přetáhnout znovu.'}</p>
         <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Server or party name' : 'Název serveru nebo party'}" autocomplete="off"><button type="submit">${en ? 'Create server' : 'Založit server'}</button></form>
         <div class="err" id="srverr"></div>
-        <div class="alt"><a href="${LINK('valheim-2026')}">${en ? 'Peek at a live server' : 'Kouknout na živý server'} ›</a> <span>${en ? 'free · no account · nothing to install' : 'zdarma · bez účtu · nic se neinstaluje'}</span></div>
+        <div class="alt"><a href="${LINK('valheim-2026')}">${en ? 'Peek at a live server' : 'Kouknout na živý server'} ›</a> <span>${en ? 'free · no account · web only, the app is optional' : 'zdarma · bez účtu · stačí web, appka je volitelná'}</span></div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
     </div>
@@ -166,11 +166,11 @@ async function landing(){
       <details><summary>${en ? 'How current are the numbers?' : 'Jak aktuální jsou čísla?'}</summary><p>${en ? 'Each sheet shows <b>Data as of</b> the time the .fch file was saved by the game. Upload again after a session (or let the Sync app do it) and the sheet updates. Deaths, kills and similar counters are lifetime totals of the character across all worlds it visited.' : 'Každý list ukazuje <b>Stav k</b> času, kdy hra soubor uložila. Po hraní nahraj znovu (nebo to nech na Sync appce) a list se přepíše. Smrti, zabití a podobné počty jsou celoživotní součty postavy ze všech světů, kde byla.'}</p></details>
       <details><summary>${en ? 'What is sent to the server? Spoilers?' : 'Co se posílá na server? Spoilery?'}</summary><p>${en ? 'The file is parsed in your browser or in the app. Only statistics leave your PC: no map pins, no coordinates, no spawn, death or logout positions, no boss altars, no world data. Locked achievements are never shown. Sheets show only things the character already owns or killed, so nothing from biomes the party has not reached.' : 'Soubor se zpracuje v prohlížeči nebo v appce. Z počítače odejdou jen statistiky: žádné pins, souřadnice, pozice spawnu, smrti nebo odhlášení, žádné oltáře bossů, žádná data světa. Neodemčené achievementy se nikdy neukazují. Listy ukazují jen věci, které postava už má nebo zabila, tedy nic z biomů, kam parta ještě nedošla.'}</p></details>
       <details><summary>${en ? 'Windows blocks the Sync app' : 'Windows blokuje Sync appku'}</summary><p>${en ? 'The app is an unsigned beta. SmartScreen: choose <i>More info</i>, then <i>Run anyway</i>. PCs with <i>Smart App Control</i> enabled refuse unsigned apps entirely; there, upload through the web page instead (one drag and drop after each session). The app runs in the system tray; launching it again just opens its window.' : 'Appka je nepodepsaná beta. SmartScreen: zvol <i>Další informace</i>, pak <i>Přesto spustit</i>. Počítače se zapnutým <i>Smart App Control</i> nepodepsané appky odmítají úplně; tam nahrávej přes web (jedno přetažení po každém hraní). Appka běží v liště u hodin; další spuštění jen otevře její okno.'}</p></details>
-      <details><summary>${en ? 'Something is wrong or missing' : 'Něco nefunguje nebo chybí'}</summary><p>${en ? 'Write it up at <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">GitHub Issues</a> (needs a free GitHub account). Say which server, which character and what you expected.' : 'Napiš to do <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">GitHub Issues</a> (potřeba bezplatný účet GitHub). Uveď server, postavu a co jsi čekal.'}</p></details>
+      <details><summary>${en ? 'Something is wrong or missing' : 'Něco nefunguje nebo chybí'}</summary><p>${en ? 'Use <a href="#" data-report="1">Report a bug or idea</a> (no account needed). Say which server, which character and what you expected. If you have GitHub, <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">Issues</a> work too.' : 'Použij <a href="#" data-report="1">Nahlásit chybu nebo nápad</a> (bez účtu). Uveď server, postavu a co jsi čekal. Kdo má GitHub, může i do <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">Issues</a>.'}</p></details>
     </div>
     ${my.length ? `<div class="mine"><h3>${en ? 'My servers' : 'Moje servery'}</h3><ul>${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
-    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
+    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
   </section>`;
   document.getElementById('newsrv').addEventListener('submit', async ev => {
     ev.preventDefault(); const err = document.getElementById('srverr'); err.textContent = '';
@@ -227,6 +227,26 @@ function showInvite(withAdmin){
   box.addEventListener('click', async ev => { const c = ev.target.closest('[data-copy]'); if(c){ await copy(c.dataset.copy); toast(en ? 'Copied' : 'Zkopírováno'); } if(ev.target.closest('[data-close]')) box.remove(); });
 }
 
+function reportBox(){
+  const en = EN(); if(document.getElementById('reportbox')) return;
+  const box = document.createElement('div'); box.className = 'achpop on'; box.id = 'reportbox'; box.style.cssText = 'top:70px;right:16px;left:auto;width:min(440px,92vw)';
+  box.innerHTML = `<h4>${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}<span>${slug ? esc(slug) : 'web'}</span></h4>
+    <textarea id="rep-text" rows="6" maxlength="2000" placeholder="${en ? 'What happened, what did you expect? Which character?' : 'Co se stalo, co jsi čekal? Která postava?'}" style="width:100%;font:inherit;font-size:13px;background:var(--bar);color:var(--ink);border:1px solid var(--line);padding:8px;resize:vertical"></textarea>
+    <input id="rep-contact" maxlength="120" placeholder="${en ? 'Contact (optional: Discord, e-mail)' : 'Kontakt (nepovinné: Discord, e-mail)'}" style="width:100%;margin-top:6px;font:inherit;font-size:13px;background:var(--bar);color:var(--ink);border:1px solid var(--line);padding:7px 8px">
+    <div class="note" id="rep-msg" style="min-height:16px"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px"><button class="sitebtn ghost" data-close="1">${en ? 'Close' : 'Zavřít'}</button><button class="sitebtn" id="rep-send">${en ? 'Send' : 'Odeslat'}</button></div>`;
+  document.body.appendChild(box);
+  box.addEventListener('click', async ev => {
+    if(ev.target.closest('[data-close]')){ box.remove(); return; }
+    if(ev.target.id !== 'rep-send') return;
+    const t = document.getElementById('rep-text').value.trim(); const c = document.getElementById('rep-contact').value.trim(); const m = document.getElementById('rep-msg');
+    if(t.length < 5){ m.textContent = en ? 'Write a few words at least.' : 'Napiš aspoň pár slov.'; return; }
+    ev.target.disabled = true;
+    try{ await rpc('vw_report', {p_text: t, p_contact: c || null, p_page: location.pathname + location.search, p_slug: slug || null, p_ua: navigator.userAgent.slice(0, 200)}); box.remove(); toast(en ? 'Thanks, sent.' : 'Díky, odesláno.'); }
+    catch(e){ m.textContent = (en ? 'Could not send: ' : 'Nepodařilo se odeslat: ') + e.message; ev.target.disabled = false; }
+  });
+}
+document.addEventListener('click', ev => { const r = ev.target.closest('[data-report]'); if(r){ ev.preventDefault(); reportBox(); } });
 document.addEventListener('click', async ev => { const k = ev.target.closest('[data-key]'); if(k){ await copy(k.dataset.key); toast(EN() ? 'Key copied' : 'Klíč zkopírován'); } });
 window.SITE_UPLOAD = async d => {
   if(!SERVER) throw new Error(EN() ? 'no server' : 'není server');
@@ -260,7 +280,7 @@ window.SITE_RENDER = () => {
   document.getElementById('invite').onclick = () => showInvite(true);
   let crumb = document.getElementById('crumb');
   if(!crumb){ crumb = document.createElement('div'); crumb.id = 'crumb'; crumb.className = 'crumb'; document.querySelector('.top').after(crumb); }
-  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')} <a class="bug" href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener" title="${en ? 'Report a bug or idea (GitHub)' : 'Nahlásit chybu nebo nápad (GitHub)'}">${en ? 'report a bug' : 'nahlásit chybu'}</a><a class="bug" href="${HOME}#help">${en ? 'help' : 'nápověda'}</a>`;
+  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')} <a class="bug" href="#" data-report="1">${en ? 'report a bug' : 'nahlásit chybu'}</a><a class="bug" href="${HOME}#help">${en ? 'help' : 'nápověda'}</a>`;
   const dt = document.getElementById('dropT'), ds = document.getElementById('dropS');
   if(dt) dt.textContent = en ? 'Drop your character file (.fch) here, it shows up for the whole server' : 'Přetáhni sem svou postavu (.fch), objeví se všem na serveru';
   if(ds) ds.innerHTML = en ? 'Parsed in your browser, only statistics are stored. Upload again after playing to refresh. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zpracuje se u tebe v prohlížeči, ukládají se jen statistiky. Po hraní nahraj znovu a list se obnoví. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
