@@ -71,7 +71,10 @@ style.textContent = `
 .land .alt{font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
 .land .alt a{color:var(--gold);text-decoration:none;font-weight:700}
 .hero-demo{position:relative;align-self:start;padding-bottom:22px}
-.sheets.demo .blk:not(.b-head):not(.b-portrait):not(.b-attrs){display:none}
+.sheets.demo .blk:not(.b-head):not(.b-portrait){display:none}
+.sheets.demo .gs{display:none}
+.sheets.demo .gear .row:nth-child(n+8){display:none}
+.sheets.demo .b-portrait{padding-bottom:6px}
 .demo-cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2px 0 8px}
 .sheets.demo{display:block;overflow:visible;padding:0;transform:scale(.9);transform-origin:top left;width:111%}
 .sheets.demo .sheet{display:block}
