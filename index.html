@@ -242,6 +242,10 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .who button.on{opacity:1}
 .who button.on::before{content:"✓ ";font-weight:700}
 .who button:not(.on)::before{content:"○ ";color:var(--muted)}
+.who button[draggable]{cursor:grab}
+.who button.dragging{opacity:.35}
+.who button.over-l{box-shadow:inset 3px 0 0 var(--gold)}
+.who button.over-r{box-shadow:inset -3px 0 0 var(--gold)}
 .who button .x{margin-left:6px;color:var(--muted);font-weight:400}
 .who button.on .x{color:#5a4630}
 .who button .x:hover{color:var(--rust)}
@@ -1309,10 +1313,27 @@ async function removeChar(n){ if(window.SITE_REMOVE){ if(await window.SITE_REMOV
 let visible = new Set(chars.map(c=>c.name));
 try{ const v=JSON.parse(localStorage.getItem('viking-who')||'null'); if(Array.isArray(v)&&v.some(n=>chars.some(c=>c.name===n))) visible=new Set(v.filter(n=>chars.some(c=>c.name===n))); }catch(e){}
 const who=document.getElementById('who');
+/* ---------- poradi sloupcu: tazeni tlacitek se jmeny ---------- */
+let ORDER = []; try{ ORDER = JSON.parse(localStorage.getItem('viking-order')||'[]'); }catch(e){}
+function applyOrder(){ if(!ORDER.length) return; chars.sort((a,b)=>{ const ia=ORDER.indexOf(a.name), ib=ORDER.indexOf(b.name); return (ia<0?1e9:ia)-(ib<0?1e9:ib); }); }
+function saveOrder(){ ORDER = chars.map(c=>c.name); try{ localStorage.setItem('viking-order', JSON.stringify(ORDER)); }catch(e){} }
+let dragName=null;
+function bindDrag(){
+  who.querySelectorAll('button[draggable]').forEach(b=>{
+    b.addEventListener('dragstart', ev=>{ dragName=b.dataset.who; b.classList.add('dragging'); ev.dataTransfer.effectAllowed='move'; try{ ev.dataTransfer.setData('text/plain', dragName); }catch(e){} });
+    b.addEventListener('dragend', ()=>{ dragName=null; who.querySelectorAll('button').forEach(x=>x.classList.remove('dragging','over-l','over-r')); });
+    b.addEventListener('dragover', ev=>{ if(!dragName||dragName===b.dataset.who) return; ev.preventDefault(); ev.dataTransfer.dropEffect='move'; const r=b.getBoundingClientRect(); const left = ev.clientX < r.left + r.width/2; b.classList.toggle('over-l', left); b.classList.toggle('over-r', !left); });
+    b.addEventListener('dragleave', ()=>b.classList.remove('over-l','over-r'));
+    b.addEventListener('drop', ev=>{ ev.preventDefault(); const target=b.dataset.who; if(!dragName||dragName===target) return; const r=b.getBoundingClientRect(); const before = ev.clientX < r.left + r.width/2;
+      const from=chars.findIndex(c=>c.name===dragName); const [item]=chars.splice(from,1); let to=chars.findIndex(c=>c.name===target); if(!before) to++; chars.splice(to,0,item); saveOrder(); dragName=null; render(); });
+  });
+}
 function renderWho(){
   if(chars.length<=1 && !chars.some(c=>c.meta&&c.meta.uploaded)){ who.innerHTML=''; who.style.display='none'; return; }
   who.style.display='';
-  who.innerHTML = chars.map(c=>`<button type="button" data-who="${esc(c.name)}">${esc(c.name)}${c.meta&&c.meta.uploaded?`<span class="x" data-rm="${esc(c.name)}" title="${LANG==='en'?'remove':'odebrat'}">×</span>`:''}</button>`).join('');
+  applyOrder();
+  who.innerHTML = chars.map(c=>`<button type="button" draggable="true" data-who="${esc(c.name)}" title="${LANG==='en'?'Click: show/hide · drag: reorder columns':'Klik: zobrazit/skrýt · tažením přeskládáš sloupce'}">${esc(c.name)}${c.meta&&c.meta.uploaded?`<span class="x" data-rm="${esc(c.name)}" title="${LANG==='en'?'remove':'odebrat'}">×</span>`:''}</button>`).join('');
+  bindDrag();
   who.querySelectorAll('button').forEach(b=>b.addEventListener('click',ev=>{ const rm=ev.target.closest('[data-rm]'); if(rm){ removeChar(rm.dataset.rm); return; } const n=b.dataset.who; if(visible.has(n)){ if(visible.size>1) visible.delete(n); } else visible.add(n); try{ localStorage.setItem('viking-who',JSON.stringify([...visible])); }catch(e){} render(); }));
 }
 /* ---------- porovnani: poradi u kazde hodnoty podle stejneho popisku ---------- */
