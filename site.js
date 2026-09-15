@@ -53,6 +53,33 @@ style.textContent = `
 .crumb{font-size:12.5px;color:var(--muted);margin:-8px 0 10px}
 .crumb a{color:var(--gold);text-decoration:none}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--gold);color:var(--ink);padding:8px 14px;font-size:13px;z-index:1000;box-shadow:0 6px 18px var(--shadow)}
+
+.land.wide{max-width:1180px}
+.hero2{display:grid;grid-template-columns:minmax(300px,1.05fr) minmax(320px,1fr);gap:28px;align-items:center;border:2px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel) 40%,var(--panel-3));box-shadow:inset 0 0 0 1px var(--panel-3),inset 0 0 0 3px var(--line-2),0 10px 30px var(--shadow);padding:30px 32px 0 32px;position:relative;overflow:hidden}
+.hero2::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(224,138,46,.16),transparent 55%),repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 2px,transparent 2px 9px);pointer-events:none}
+.hero-txt{position:relative;padding-bottom:30px}
+.kicker{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);margin-bottom:10px}
+.land .hero-txt h2{font-size:clamp(24px,3vw,34px);line-height:1.12;margin:0 0 12px}
+.land .hero-txt p{font-size:15px;max-width:52ch}
+.land .alt{font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
+.land .alt a{color:var(--gold);text-decoration:none;font-weight:700}
+.hero-demo{position:relative;max-height:560px;overflow:hidden;align-self:start}
+.demo-cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2px 0 8px}
+.sheets.demo{display:block;overflow:visible;padding:0;transform:scale(.86);transform-origin:top left;width:116%}
+.sheets.demo .sheet{display:block}
+.demo-fade{position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(transparent,var(--panel-3));pointer-events:none}
+.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.feat{background:var(--panel);border:1px solid var(--line);padding:14px 14px 12px;display:grid;grid-template-columns:44px 1fr;gap:4px 12px;align-items:start}
+.feat .fi{grid-row:1/3;width:44px;height:44px;background:var(--bar);border:1px solid var(--bar-line);display:grid;place-items:center}
+.feat .fi img{width:38px;height:38px}
+.feat b{font-family:"Metamorphous",serif;font-weight:400;color:var(--gold);font-size:14px}
+.feat span{font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.land .steps{margin-top:10px}
+.land .step code{font-size:11px;color:var(--ink)}
+.land .mine ul{margin:0;padding-left:18px}
+.foot2{font-size:11.5px;color:var(--muted);margin-top:18px;text-align:center}
+@media (max-width:900px){.hero2{grid-template-columns:1fr;padding:22px 20px 0}.hero-demo{max-height:420px}.feats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.feats{grid-template-columns:1fr}}
 `;
 document.head.appendChild(style);
 
@@ -61,24 +88,39 @@ function mine(){ try { return JSON.parse(LS.get('vw-servers') || '[]'); } catch(
 function rememberServer(s, name, admin){ const l = mine().filter(x => x.slug !== s); l.unshift({slug: s, name, admin: !!admin}); LS.set('vw-servers', JSON.stringify(l.slice(0, 20))); }
 
 /* ---------- uvodni stranka ---------- */
-function landing(){
+const FEAT = [
+  ['SwordIron', 'Výbava a poškození', 'Gear and damage', 'Co má na sobě, celková zbroj, útok zbraně přepočtený na skill: za hit i DPS.', 'What they wear, total armor, weapon damage adjusted for skill: per hit and DPS.'],
+  ['TrophyTheElder', 'Trofeje a velké kusy', 'Trophies and big game', 'Trolly, medvědi, zrůdy, bossové. Kdo kolik zabil a co z toho padá.', 'Trolls, bears, abominations, bosses. Who killed how many and what they drop.'],
+  ['ArrowFire', 'Boj a smrti', 'Combat and deaths', 'Rozdané a přijaté hity, šípy, smrti podle příčiny, hroby a jak se do nich vešel.', 'Hits dealt and taken, arrows, deaths by cause, tombstones and whether it all fit.'],
+  ['Hammer', 'Cesta a práce', 'Travel and work', 'Kilometry pěšky, během, lodí. Postaveno, vytěženo, sebráno, snědeno, prozkoumaná mapa.', 'Kilometres walked, run and sailed. Built, mined, picked, eaten, explored map.']
+];
+async function landing(){
   const land = document.getElementById('landing'); land.hidden = false;
   document.getElementById('drop').hidden = true; document.getElementById('sheets').hidden = true; document.getElementById('who').style.display = 'none';
   document.getElementById('h1').textContent = 'Valheim Warriors'; document.title = 'Valheim Warriors';
   const en = EN(); const my = mine();
-  land.innerHTML = `<section class="land"><div class="hero">
-    <h2>${en ? 'One page for your whole Valheim party' : 'Jedna stránka pro celou vaši valheimskou partu'}</h2>
-    <p>${en ? 'Create a server, send the link to your crew. Everyone drops in their character file and you all see each other side by side: gear, skills, kills, deaths, travel, work. Straight from the save file, updated whenever someone uploads again.' : 'Založ server, pošli partě odkaz. Každý přetáhne soubor své postavy a vidíte se všichni vedle sebe: výbava, dovednosti, zabití, smrti, cesta, práce. Přímo ze save souboru, aktuální vždy, když někdo nahraje znovu.'}</p>
-    <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Server or party name' : 'Název serveru nebo party'}" autocomplete="off"><button type="submit">${en ? 'Create server' : 'Založit server'}</button></form>
-    <div class="err" id="srverr"></div>
+  land.innerHTML = `<section class="land wide">
+    <div class="hero2">
+      <div class="hero-txt">
+        <div class="kicker">${en ? 'Viking sheets for your Valheim party' : 'Listy vikingů pro vaši valheimskou partu'}</div>
+        <h2>${en ? 'See your whole crew side by side. Straight from the save file.' : 'Celá parta vedle sebe. Přímo ze save souboru.'}</h2>
+        <p>${en ? 'Create a server, send one link. Everyone drops in their character file and the page turns it into a sheet: gear, skills, kills, deaths, travel, work, explored map. Upload again after a session and it updates.' : 'Založ server, pošli jeden odkaz. Každý přetáhne soubor své postavy a stránka z něj udělá list: výbava, dovednosti, zabití, smrti, cesta, práce, prozkoumaná mapa. Po hraní nahraješ znovu a je to aktuální.'}</p>
+        <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Server or party name' : 'Název serveru nebo party'}" autocomplete="off"><button type="submit">${en ? 'Create server' : 'Založit server'}</button></form>
+        <div class="err" id="srverr"></div>
+        <div class="alt"><a href="${LINK('valheim-2026')}">${en ? 'Peek at a live server' : 'Kouknout na živý server'} ›</a> <span>${en ? 'free · no account · nothing to install' : 'zdarma · bez účtu · nic se neinstaluje'}</span></div>
+      </div>
+      <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
+    </div>
+    <div class="feats">${FEAT.map(([ic, cz, e, dcz, de]) => `<div class="feat"><div class="fi" data-ic="${ic}"></div><b>${en ? e : cz}</b><span>${en ? de : dcz}</span></div>`).join('')}</div>
     <div class="steps">
-      <div class="step"><b>1 · ${en ? 'Create' : 'Založ'}</b>${en ? 'You get a link and an admin link. Keep the admin one to yourself.' : 'Dostaneš odkaz pro partu a admin odkaz. Ten si nech pro sebe.'}</div>
-      <div class="step"><b>2 · ${en ? 'Share' : 'Pošli'}</b>${en ? 'Everyone opens the link and drops their .fch file from' : 'Každý otevře odkaz a přetáhne svůj .fch soubor z'} <code style="font-size:11px">Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
+      <div class="step"><b>1 · ${en ? 'Create' : 'Založ'}</b>${en ? 'You get a link for the crew and an admin link. Keep the admin one to yourself.' : 'Dostaneš odkaz pro partu a admin odkaz. Ten si nech pro sebe.'}</div>
+      <div class="step"><b>2 · ${en ? 'Share' : 'Pošli'}</b>${en ? 'Everyone opens the link and drops their .fch file from' : 'Každý otevře odkaz a přetáhne svůj .fch soubor z'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
       <div class="step"><b>3 · ${en ? 'Compare' : 'Porovnej'}</b>${en ? 'Upload again after a session and the sheet updates. Only you (or the admin) can replace your character.' : 'Po hraní nahraj znovu a list se přepíše. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
     </div>
-    ${my.length ? `<div class="mine"><h3>${en ? 'My servers' : 'Moje servery'}</h3><ul style="margin:0;padding-left:18px">${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
-    <div class="priv">${en ? 'The file is parsed in your browser. Only statistics go to the server: no map pins, no positions, no boss altars. Nothing you have not reached yet is shown.' : 'Soubor se zpracuje u tebe v prohlížeči. Na server jdou jen statistiky: žádné pins, žádné pozice, žádné oltáře bossů. Nic, kam jste ještě nedošli.'}</div>
-  </div></section>`;
+    ${my.length ? `<div class="mine"><h3>${en ? 'My servers' : 'Moje servery'}</h3><ul>${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
+    <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
+    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'}</div>
+  </section>`;
   document.getElementById('newsrv').addEventListener('submit', async ev => {
     ev.preventDefault(); const err = document.getElementById('srverr'); err.textContent = '';
     const name = document.getElementById('srvname').value.trim(); if(name.length < 2) return;
@@ -88,7 +130,16 @@ function landing(){
       location.href = LINK(res.slug) + '#new';
     }catch(e){ err.textContent = (en ? 'Could not create server: ' : 'Server se nepodařilo založit: ') + e.message; }
   });
+  await window.ASSETS_READY;
+  document.querySelectorAll('.feat .fi').forEach(el => { const ic = ASSETS.icons[el.dataset.ic]; if(ic) el.innerHTML = `<img src="${ic}" alt="">`; });
+  try{
+    if(!window.DEMO) window.DEMO = await (await fetch('assets/demo.json', {cache: 'force-cache'})).json();
+    const d = window.DEMO; CHARS_BY_NAME[d.name] = d;
+    const el = document.getElementById('demo'); if(el) el.innerHTML = sheet(d);
+  }catch(e){ const hd = document.querySelector('.hero-demo'); if(hd) hd.remove(); }
 }
+// prepnuti jazyka na uvodni strance: render() z sablony zavola SITE_RENDER, ten prekresli landing
+window.SITE_RENDER_LANDING = () => { const l = document.getElementById('landing'); if(!slug && l && !l.hidden) landing(); };
 
 /* ---------- stranka serveru ---------- */
 async function server(){
@@ -142,7 +193,7 @@ window.SITE_REMOVE = async name => {
   catch(e){ toast((EN() ? 'Cannot remove: ' : 'Nejde odebrat: ') + e.message); return false; }
 };
 window.SITE_RENDER = () => {
-  if(!SERVER) return;
+  if(!SERVER){ if(window.SITE_RENDER_LANDING) window.SITE_RENDER_LANDING(); return; }
   const en = EN();
   document.getElementById('h1').textContent = SERVER.name; document.title = SERVER.name + ' · Valheim Warriors';
   let bar = document.getElementById('sitebar');
