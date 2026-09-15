@@ -56,6 +56,7 @@ style.textContent = `
 .crumb a.bug{float:right;color:var(--muted);border:1px solid var(--line-2);padding:0 6px;font-size:11.5px}
 .crumb a.bug:hover{color:var(--gold);border-color:var(--gold)}
 .foot2 a{color:var(--gold)}
+.prevhead{font-family:"Metamorphous",serif;font-size:16px;color:var(--gold);max-width:1180px;margin:22px auto 8px}
 .appnote{font-size:12.5px;color:var(--muted);margin:8px 0 0;text-align:center}
 .appnote a{color:var(--gold)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--gold);color:var(--ink);padding:8px 14px;font-size:13px;z-index:1000;box-shadow:0 6px 18px var(--shadow)}
@@ -163,7 +164,7 @@ async function landing(){
   document.getElementById('drop').hidden = false; document.getElementById('sheets').hidden = chars.length === 0;
   document.getElementById('h1').textContent = 'Valheim Warriors'; document.title = 'Valheim Warriors';
   const en = EN(); const my = mine(); landingLang = LANG;
-  const dropEl = document.getElementById('drop'); if(dropEl && chars.length === 0) setTimeout(() => { const hero = land.querySelector('.hero2'); if(hero && chars.length === 0) hero.after(dropEl); }, 0);
+  const dropEl = document.getElementById('drop'); if(dropEl && chars.length === 0) setTimeout(() => { const anchor = land.querySelector('.foot2'); if(anchor && chars.length === 0) anchor.before(dropEl); }, 0);
   land.innerHTML = `<section class="land wide">
     <div class="hero2">
       <div class="hero-txt">
@@ -176,7 +177,7 @@ async function landing(){
           <div class="path"><b>${en ? 'Starting a server for your party?' : 'Zakládáš server pro partu?'}</b><span>${en ? 'Name it, you get a link to share. One per party is enough.' : 'Pojmenuj ho, dostaneš odkaz pro ostatní. Stačí jeden na partu.'}</span>
             <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Server or party name' : 'Název serveru nebo party'}" autocomplete="off"><button type="submit">${en ? 'Create server' : 'Založit server'}</button></form><div class="err" id="srverr"></div></div>
         </div>
-        <div class="alt"><span>${en ? 'Just curious about your own character? Drop the .fch file below, it stays in your browser.' : 'Chceš jen vidět svoji postavu? Přetáhni soubor .fch níže, zůstane u tebe v prohlížeči.'}</span> <a href="${LINK('valheim-2026')}">${en ? 'Peek at a live server' : 'Kouknout na živý server'} ›</a></div>
+        <div class="alt"><a href="${LINK('valheim-2026')}">${en ? 'Peek at a live server' : 'Kouknout na živý server'} ›</a> <a href="#preview">${en ? 'Preview your own character without a server' : 'Náhled vlastní postavy bez serveru'} ›</a></div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
     </div>
@@ -191,8 +192,8 @@ async function landing(){
       <div class="apptxt"><b>${en ? 'Sync app for Windows' : 'Sync appka pro Windows'} <span class="beta">beta</span></b>
         <p>${en ? 'Runs in the tray, watches your Steam character folder and uploads the character to your server after every save. Nothing to drag, everyone always sees fresh data. No install, single file.' : 'Běží v liště u hodin, hlídá složku s postavami ve Steamu a po každém uložení hry postavu sama nahraje na tvůj server. Nic se nepřetahuje, parta má vždy čerstvá data. Bez instalace, jeden soubor.'}</p>
         <ol><li>${en ? 'Download and run' : 'Stáhni a spusť'} <code>ValheimWarriorsSync.exe</code>${en ? ' (unsigned beta: Windows warns about an unknown publisher, choose More info, Run anyway; on PCs with Smart App Control turned on it will not run, upload via the web instead)' : ' (nepodepsaná beta: Windows varuje před neznámým vydavatelem, zvol Další informace, Přesto spustit; na PC se zapnutým Smart App Control se nespustí, tam nahrávej přes web)'}</li><li>${en ? 'Paste your server link, tick your character, optionally "Start with Windows"' : 'Vlož odkaz svého serveru, zaškrtni svoji postavu, případně „Spouštět při startu Windows“'}</li><li>${en ? 'Save. Done, it uploads after every game save.' : 'Ulož. Hotovo, nahrává po každém uložení hry.'}</li></ol>
-        <a class="sitebtn" href="/download/ValheimWarriorsSync.exe" download>${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· v0.1.2 · 30 MB</small></a>
-        <details class="sha"><summary>${en ? 'Verify the download' : 'Ověření staženého souboru'}</summary>${en ? 'Unsigned apps cannot prove who made them, so here is the fingerprint of the file I published. In PowerShell run <code>Get-FileHash ValheimWarriorsSync.exe</code>; the result must be' : 'Nepodepsaná appka nemůže prokázat, kdo ji vydal, proto je tady otisk zveřejněného souboru. V PowerShellu spusť <code>Get-FileHash ValheimWarriorsSync.exe</code>; výsledek musí být'} <code>55615f68265f090b110f6e33529a35112070594101da11c6276342455d217bcd</code>. ${en ? 'If it differs, do not run the file.' : 'Když se liší, soubor nespouštěj.'}</details>
+        <a class="sitebtn" href="/download/ValheimWarriorsSync.exe" download>${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· v0.1.3 · 30 MB</small></a>
+        <details class="sha"><summary>${en ? 'Verify the download' : 'Ověření staženého souboru'}</summary>${en ? 'Unsigned apps cannot prove who made them, so here is the fingerprint of the file I published. In PowerShell run <code>Get-FileHash ValheimWarriorsSync.exe</code>; the result must be' : 'Nepodepsaná appka nemůže prokázat, kdo ji vydal, proto je tady otisk zveřejněného souboru. V PowerShellu spusť <code>Get-FileHash ValheimWarriorsSync.exe</code>; výsledek musí být'} <code>fc68cb5e1c506bd7c99bf8bab4000fb70cef6149750ca9c68736f8b4e3ac7fcc</code>. ${en ? 'If it differs, do not run the file.' : 'Když se liší, soubor nespouštěj.'}</details>
         <div class="priv" style="margin-top:8px">${en ? 'Open source Python (PyInstaller). Reads only .fch files in the folders you choose and sends the same statistics as the web page. Config lives in %APPDATA%\ValheimWarriors.' : 'Otevřený Python (PyInstaller). Čte jen soubory .fch ve zvolených složkách a posílá ty samé statistiky jako web. Nastavení je v %APPDATA%\ValheimWarriors.'}</div>
       </div>
     </div>
@@ -241,9 +242,11 @@ window.SITE_RENDER_LANDING = () => {
   if(landingLang !== LANG) landing();   // prepnuti jazyka: prekreslit celou uvodni stranku
   const en = EN();
   const sheetsEl = document.getElementById('sheets'); sheetsEl.hidden = chars.length === 0;
-  const hero = l.querySelector('.hero2'); if(hero && chars.length){ hero.after(sheetsEl); const dz = document.getElementById('drop'); if(dz) sheetsEl.after(dz); }
+  const anchor = l.querySelector('.foot2'); if(anchor && chars.length){ anchor.before(sheetsEl); const dz = document.getElementById('drop'); if(dz) sheetsEl.after(dz); anchor.before(dz); }
   const dt = document.getElementById('dropT'), ds = document.getElementById('dropS');
-  if(dt) dt.textContent = en ? 'Preview your own character here (.fch)' : 'Náhled vlastní postavy: přetáhni sem soubor .fch';
+  const dz0 = document.getElementById('drop'); if(dz0) dz0.id = 'drop', dz0.setAttribute('data-anchor', 'preview');
+  if(!document.getElementById('preview')){ const a = document.createElement('div'); a.id = 'preview'; a.className = 'prevhead'; a.textContent = en ? 'Preview your own character (no server, stays in your browser)' : 'Náhled vlastní postavy (bez serveru, zůstane u tebe v prohlížeči)'; document.getElementById('drop').before(a); }
+  if(dt) dt.textContent = en ? 'Drop your .fch file here' : 'Přetáhni sem soubor .fch';
   if(ds) ds.innerHTML = en ? 'Stays in your browser, nothing is sent anywhere. To share with your party, use your server link instead. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zůstane u tebe v prohlížeči, nikam se neposílá. Pro sdílení s partou použij odkaz svého serveru. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
 };
 
