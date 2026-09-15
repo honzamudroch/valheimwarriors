@@ -131,6 +131,15 @@ style.textContent = `
 .admin table.adm code{font-size:12px;color:var(--ink)}
 .admin table.adm .sitebtn{padding:2px 8px;font-size:11px}
 @media (max-width:700px){.admin .tot{grid-template-columns:repeat(3,1fr)}}
+
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 10px}
+.path{background:var(--bar);border:1px solid var(--bar-line);padding:12px 14px 10px;display:flex;flex-direction:column;gap:4px}
+.path b{font-family:"Metamorphous",serif;font-weight:400;color:var(--gold);font-size:14px}
+.path span{font-size:12.5px;color:var(--ink-2);line-height:1.4;flex:1}
+.path form{margin:8px 0 0;display:flex;gap:6px}
+.path input{min-width:0;font-size:13px;padding:7px 9px}
+.path button{padding:7px 12px;font-size:12px;white-space:nowrap}
+@media (max-width:640px){.paths{grid-template-columns:1fr}}
 `;
 document.head.appendChild(style);
 
@@ -147,26 +156,31 @@ const FEAT = [
 ];
 async function landing(){
   const land = document.getElementById('landing'); land.hidden = false;
-  document.getElementById('drop').hidden = true; document.getElementById('sheets').hidden = true; document.getElementById('who').style.display = 'none';
+  document.getElementById('drop').hidden = false; document.getElementById('sheets').hidden = chars.length === 0;
   document.getElementById('h1').textContent = 'Valheim Warriors'; document.title = 'Valheim Warriors';
-  const en = EN(); const my = mine();
+  const en = EN(); const my = mine(); landingLang = LANG;
+  const dropEl = document.getElementById('drop'); if(dropEl && chars.length === 0) setTimeout(() => { const hero = land.querySelector('.hero2'); if(hero && chars.length === 0) hero.after(dropEl); }, 0);
   land.innerHTML = `<section class="land wide">
     <div class="hero2">
       <div class="hero-txt">
         <div class="kicker">${en ? 'Viking sheets for your Valheim party' : 'Listy vikingů pro vaši valheimskou partu'}</div>
         <h2>${en ? 'See your whole crew side by side. Straight from the save file.' : 'Celá parta vedle sebe. Přímo ze save souboru.'}</h2>
         <p>${en ? 'Create a server, send one link. Everyone drops in their character file once and the page turns it into a sheet: gear, skills, kills, deaths, travel, work, explored map. Then run the small Sync app and your sheet updates itself after every game save, nothing else to do. No app? Just drop the file again after a session.' : 'Založ server, pošli jeden odkaz. Každý jednou přetáhne soubor své postavy a stránka z něj udělá list: výbava, dovednosti, zabití, smrti, cesta, práce, prozkoumaná mapa. Pak si pustí malou Sync appku a list se obnovuje sám po každém uložení hry, nic dalšího dělat nemusíš. Bez appky stačí po hraní soubor přetáhnout znovu.'}</p>
-        <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Server or party name' : 'Název serveru nebo party'}" autocomplete="off"><button type="submit">${en ? 'Create server' : 'Založit server'}</button></form>
-        <div class="err" id="srverr"></div>
-        <div class="alt"><a href="${LINK('valheim-2026')}">${en ? 'Peek at a live server' : 'Kouknout na živý server'} ›</a> <span>${en ? 'free · no account · web only, the app is optional' : 'zdarma · bez účtu · stačí web, appka je volitelná'}</span></div>
+        <div class="paths">
+          <div class="path"><b>${en ? 'Your party already has a server?' : 'Parta už server má?'}</b><span>${en ? 'Open the link they sent you (looks like valheimwarriors.com/s/…) and drop your character file there.' : 'Otevři odkaz, který ti poslali (vypadá jako valheimwarriors.com/s/…), a přetáhni tam svoji postavu.'}</span>
+            <form id="gosrv"><input id="golink" placeholder="${en ? 'Paste the link here' : 'Sem vlož odkaz'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div></div>
+          <div class="path"><b>${en ? 'Starting a server for your party?' : 'Zakládáš server pro partu?'}</b><span>${en ? 'Name it, you get a link to share. One per party is enough.' : 'Pojmenuj ho, dostaneš odkaz pro ostatní. Stačí jeden na partu.'}</span>
+            <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Server or party name' : 'Název serveru nebo party'}" autocomplete="off"><button type="submit">${en ? 'Create server' : 'Založit server'}</button></form><div class="err" id="srverr"></div></div>
+        </div>
+        <div class="alt"><span>${en ? 'Just curious about your own character? Drop the .fch file below, it stays in your browser.' : 'Chceš jen vidět svoji postavu? Přetáhni soubor .fch níže, zůstane u tebe v prohlížeči.'}</span> <a href="${LINK('valheim-2026')}">${en ? 'Peek at a live server' : 'Kouknout na živý server'} ›</a></div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
     </div>
     <div class="feats">${FEAT.map(([ic, cz, e, dcz, de]) => `<div class="feat"><div class="fi" data-ic="${ic}"></div><b>${en ? e : cz}</b><span>${en ? de : dcz}</span></div>`).join('')}</div>
     <div class="steps">
-      <div class="step"><b>1 · ${en ? 'Create' : 'Založ'}</b>${en ? 'You get a link for the crew and an admin link. Keep the admin one to yourself.' : 'Dostaneš odkaz pro partu a admin odkaz. Ten si nech pro sebe.'}</div>
-      <div class="step"><b>2 · ${en ? 'Share' : 'Pošli'}</b>${en ? 'Everyone opens the link and drops their .fch file from' : 'Každý otevře odkaz a přetáhne svůj .fch soubor z'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
-      <div class="step"><b>3 · ${en ? 'Compare' : 'Porovnej'}</b>${en ? 'Upload again after a session and the sheet updates. Only you (or the admin) can replace your character.' : 'Po hraní nahraj znovu a list se přepíše. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
+      <div class="step"><b>1 · ${en ? 'One of you creates a server' : 'Jeden z party založí server'}</b>${en ? 'Takes ten seconds, no account. He gets a link and sends it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
+      <div class="step"><b>2 · ${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
+      <div class="step"><b>3 · ${en ? 'Keep it fresh' : 'Udržuj aktuální'}</b>${en ? 'Drop the file again after a session, or run the Sync app once and forget about it. Only you (or the admin) can replace your character.' : 'Po hraní soubor přetáhni znovu, nebo si jednou pusť Sync appku a už na to nemysli. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
     </div>
     <div class="appbox" id="app">
       <div class="appicon"><svg viewBox="0 0 64 64" width="44" height="44"><polygon points="32,4 58,14 54,40 32,60 10,40 6,14" fill="#1f1912" stroke="#d9a441" stroke-width="3"/><polygon points="32,14 48,22 45,38 32,50 19,38 16,22" fill="#d9a441"/></svg></div>
@@ -194,6 +208,11 @@ async function landing(){
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
     <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
   </section>`;
+  document.getElementById('gosrv').addEventListener('submit', ev => {
+    ev.preventDefault(); const v = document.getElementById('golink').value.trim(); const m = v.match(/\/s\/([a-z0-9-]+)/) || v.match(/[?&]s=([a-z0-9-]+)/) || (/^[a-z0-9-]{3,40}$/.test(v) ? [null, v] : null);
+    if(!m){ document.getElementById('goerr').textContent = en ? 'That does not look like a server link.' : 'To nevypadá jako odkaz na server.'; return; }
+    location.href = LINK(m[1]) + (v.match(/#admin=[A-Za-z0-9]+/) || [''])[0];
+  });
   document.getElementById('newsrv').addEventListener('submit', async ev => {
     ev.preventDefault(); const err = document.getElementById('srverr'); err.textContent = '';
     const name = document.getElementById('srvname').value.trim(); if(name.length < 2) return;
@@ -212,7 +231,17 @@ async function landing(){
   }catch(e){ const hd = document.querySelector('.hero-demo'); if(hd) hd.remove(); }
 }
 // prepnuti jazyka na uvodni strance: render() z sablony zavola SITE_RENDER, ten prekresli landing
-window.SITE_RENDER_LANDING = () => { const l = document.getElementById('landing'); if(!slug && l && !l.hidden) landing(); };
+let landingLang = null;
+window.SITE_RENDER_LANDING = () => {
+  const l = document.getElementById('landing'); if(slug || isAdminPage || !l || l.hidden) return;
+  if(landingLang !== LANG) landing();   // prepnuti jazyka: prekreslit celou uvodni stranku
+  const en = EN();
+  const sheetsEl = document.getElementById('sheets'); sheetsEl.hidden = chars.length === 0;
+  const hero = l.querySelector('.hero2'); if(hero && chars.length){ hero.after(sheetsEl); const dz = document.getElementById('drop'); if(dz) sheetsEl.after(dz); }
+  const dt = document.getElementById('dropT'), ds = document.getElementById('dropS');
+  if(dt) dt.textContent = en ? 'Preview your own character here (.fch)' : 'Náhled vlastní postavy: přetáhni sem soubor .fch';
+  if(ds) ds.innerHTML = en ? 'Stays in your browser, nothing is sent anywhere. To share with your party, use your server link instead. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zůstane u tebe v prohlížeči, nikam se neposílá. Pro sdílení s partou použij odkaz svého serveru. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
+};
 
 /* ---------- stranka serveru ---------- */
 async function server(){
@@ -271,7 +300,10 @@ function reportBox(){
 document.addEventListener('click', ev => { const r = ev.target.closest('[data-report]'); if(r){ ev.preventDefault(); reportBox(); } });
 document.addEventListener('click', async ev => { const k = ev.target.closest('[data-key]'); if(k){ await copy(k.dataset.key); toast(EN() ? 'Key copied' : 'Klíč zkopírován'); } });
 window.SITE_UPLOAD = async d => {
-  if(!SERVER) throw new Error(EN() ? 'no server' : 'není server');
+  if(!SERVER){   // uvodni stranka: jen lokalni nahled, nic se neposila
+    d.meta.uploaded = true; const i = chars.findIndex(c => c.name === d.name); if(i >= 0) chars.splice(i, 1, d); else chars.push(d);
+    visible.add(d.name); render(); return;
+  }
   let tok = ADMIN || LS.get(tokKey(d.player_id)); let t;
   try{ t = await rpc('vw_upsert_character', {p_slug: slug, p_data: d, p_saved_at: d.meta.saved || null, p_token: tok}); }
   catch(e){
