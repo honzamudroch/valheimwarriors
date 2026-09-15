@@ -296,7 +296,7 @@ function openModal(kind){
   } else if(kind === 'own'){
     title = en ? 'Try it with your own character' : 'Vyzkoušej to na vlastní postavě';
     body = `<ol class="guide">
-      <li>${en ? 'Find your character file. Steam:' : 'Najdi soubor své postavy. Steam:'} ${FILE}<br><small>${en ? 'Ignore files with _backup_ or .old. Not on Steam Cloud / Game Pass: %USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local' : 'Soubory s _backup_ nebo .old ignoruj. Bez Steam Cloudu / Game Pass: %USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local'}</small></li>
+      <li>${en ? 'Find your character file. Steam:' : 'Najdi soubor své postavy. Steam:'} ${FILE}</li>
       <li>${en ? 'Pick it below (or drag it anywhere onto this page).' : 'Vyber ho níže (nebo ho přetáhni kamkoli na tuhle stránku).'}</li>
       <li>${en ? 'The sheet appears under the header. Nothing leaves your browser.' : 'List se objeví pod hlavičkou stránky. Nic neodejde z tvého prohlížeče.'}</li></ol>
       <div class="mrow"><button class="sitebtn" id="own-pick">${en ? 'Choose file' : 'Vybrat soubor'}</button><span class="note" id="own-msg"></span></div>`;
