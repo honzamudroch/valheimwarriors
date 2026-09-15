@@ -175,8 +175,9 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .attr{position:relative}
 .cmp-best{color:var(--gold-2)!important}
 .cmp-worst{color:#e08070!important}
-.sk .v .rk,.kb .v .rk{display:none}
-.sk.cmp-best .t i,.kb.cmp-best .t i{box-shadow:0 0 0 1px var(--gold)}
+.kb .v .rk{display:none}
+.kb.cmp-best .t i{box-shadow:0 0 0 1px var(--gold)}
+.kb .v.cmp-mid{color:var(--muted)}
 /* tooltip */
 [data-item]{cursor:help}
 .tip{position:fixed;z-index:9999;max-width:290px;background:linear-gradient(180deg,#2a2218,#1a150f);border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.6),inset 0 0 0 1px var(--line-2);padding:10px 12px;font-size:12.5px;color:var(--ink);pointer-events:none;display:none}
@@ -1328,7 +1329,6 @@ function applyCompare(){
       const tables=[...blk.querySelectorAll('table.kv')];
       tables.forEach((tb,ti)=>tb.querySelectorAll('tr').forEach(tr=>{ const tds=tr.children; if(tds.length<2) return; const lab=tds[0].textContent.trim(); if(!lab) return; add(sec+'|kv'+ti+'|'+lab, i, tds[1], lab, 'td'); }));
       blk.querySelectorAll('.attr').forEach(a=>{ const lab=a.querySelector('span')?.textContent.trim(); const b=a.querySelector('b'); if(lab&&b) add(sec+'|attr|'+lab, i, b, lab, 'attr'); });
-      blk.querySelectorAll('.sk').forEach(s=>{ const lab=s.querySelector('.n')?.textContent.trim(); const v=s.querySelector('.v'); if(lab&&v) add(sec+'|sk|'+lab, i, v, lab, 'row'); });
       blk.querySelectorAll('.kb').forEach(s=>{ const lab=s.querySelector('.n')?.textContent.trim(); const v=s.querySelector('.v'); if(lab&&v) add(sec+'|kb|'+lab, i, v, lab, 'row'); });
       blk.querySelectorAll('.gsb .h').forEach(hh=>{ const lab=hh.querySelector('span')?.textContent.trim(); const b=hh.querySelector('b'); if(lab&&b) add(sec+'|gsb|'+lab, i, b, lab, 'gsb'); });
       blk.querySelectorAll('.gsb .real > div').forEach(d=>{ const lab=d.querySelector('span')?.textContent.trim(); const b=d.querySelector('b'); if(lab&&b) add(sec+'|real|'+lab, i, b, lab, 'gsb'); });
@@ -1341,10 +1341,10 @@ function applyCompare(){
     const vals=items.map(x=>x.v); if(Math.max(...vals)===Math.min(...vals)) return;
     items.forEach(x=>{
       const better = items.filter(y=> lower ? y.v<x.v : y.v>x.v).length; const rank=better+1;
-      const isBest=rank===1, isWorst=!isBest && items.every(y=> lower ? y.v<=x.v : y.v>=x.v);
-      const cls = isBest?'rk-best':isWorst?'rk-worst':'';
+      const isBest=rank===1, isWorst=false;
+      const cls = isBest?'rk-best':'';
       const badge=`<span class="rk ${cls}" title="${EN?`${rank}. of ${items.length}`:`${rank}. z ${items.length}`}">${rank}.</span>`;
-      if(x.cls==='row'){ const row=x.el.closest('.sk,.kb'); if(isBest) row.classList.add('cmp-best'); if(isWorst) row.classList.add('cmp-worst'); x.el.classList.add(isBest?'cmp-best':isWorst?'cmp-worst':'cmp-mid'); x.el.title=EN?`${rank}. of ${items.length}`:`${rank}. z ${items.length}`; }
+      if(x.cls==='row'){ const row=x.el.closest('.sk,.kb'); if(isBest) row.classList.add('cmp-best'); x.el.classList.add(isBest?'cmp-best':'cmp-mid'); x.el.title=EN?`${rank}. of ${items.length}`:`${rank}. z ${items.length}`; }
       else if(x.cls==='attr'){ x.el.closest('.attr').insertAdjacentHTML('beforeend', badge); }
       else { x.el.insertAdjacentHTML('beforeend', badge); }
     });
