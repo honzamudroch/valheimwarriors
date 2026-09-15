@@ -205,6 +205,9 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .ach b{color:var(--gold-2);font-weight:700}
 .achpop{position:fixed;z-index:9998;width:min(340px,92vw);max-height:70vh;overflow:auto;background:linear-gradient(180deg,#2a2218,#1a150f);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.65),inset 0 0 0 1px var(--line-2);padding:12px 14px;display:none;color:var(--ink)}
 .achpop.on{display:block}
+.achpop .achx{position:absolute;right:8px;top:6px;background:transparent;border:0;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:2px 6px}
+.achpop .achx:hover{color:var(--rust)}
+.achpop h4{padding-right:22px}
 .achpop h4{font-family:"Metamorphous",serif;font-weight:400;font-size:15px;color:var(--gold);margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline}
 .achpop h4 span{font-family:"Averia Serif Libre",serif;font-size:12px;color:var(--muted)}
 .achpop .a{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line-2)}
@@ -1253,7 +1256,7 @@ function showTip(el, ev){
   tipEl.classList.add('on'); moveTip(ev);
 }
 /* ---------- achievementy ---------- */
-const achPop = document.createElement('div'); achPop.className='achpop'; document.body.appendChild(achPop);
+const achPops = {};   // otevrene popovery podle jmena postavy, muze jich byt vic najednou
 function achBadge(name){
   const A = ASSETS.achievements && ASSETS.achievements.players && ASSETS.achievements.players[name];
   const EN=LANG==='en';
@@ -1271,8 +1274,12 @@ document.addEventListener('click', ev=>{
   const rm = ev.target.closest('.rmlink[data-rm]');
   if(rm){ removeChar(rm.dataset.rm); return; }
   const b = ev.target.closest('[data-ach]');
-  if(b){ ev.stopPropagation(); if(achPop.classList.contains('on') && achPop.dataset.for===b.dataset.ach){ achPop.classList.remove('on'); return; } achPop.innerHTML = achPopHTML(b.dataset.ach); achPop.dataset.for=b.dataset.ach; achPop.classList.add('on'); const r=b.getBoundingClientRect(); let x=Math.min(r.right, window.innerWidth-8) ; achPop.style.top=(r.bottom+6)+'px'; achPop.style.right=Math.max(8, window.innerWidth-r.right)+'px'; achPop.style.left='auto'; return; }
-  if(!ev.target.closest('.achpop')) achPop.classList.remove('on');
+  if(b){ ev.stopPropagation(); const n=b.dataset.ach; if(achPops[n]){ achPops[n].remove(); delete achPops[n]; return; }
+    const pop=document.createElement('div'); pop.className='achpop on'; pop.dataset.for=n; pop.innerHTML = `<button type="button" class="achx" data-achclose="${esc(n)}" aria-label="Zavřít">×</button>` + achPopHTML(n);
+    const r=b.getBoundingClientRect(); pop.style.top=(r.bottom+6)+'px'; pop.style.right=Math.max(8, window.innerWidth-r.right)+'px'; pop.style.left='auto';
+    document.body.appendChild(pop); achPops[n]=pop; return; }
+  const cx = ev.target.closest('[data-achclose]'); if(cx){ const n=cx.dataset.achclose; if(achPops[n]){ achPops[n].remove(); delete achPops[n]; } return; }
+  if(!ev.target.closest('.achpop')){ Object.keys(achPops).forEach(n=>{ achPops[n].remove(); delete achPops[n]; }); }
 });
 
 let tipTimer=null;
@@ -1352,6 +1359,7 @@ function applyCompare(){
 const cmpWrap=document.getElementById('cmpwrap'), cmpBtn=document.getElementById('cmpbtn');
 if(cmpBtn) cmpBtn.addEventListener('click',()=>{ COMPARE=!COMPARE; try{ localStorage.setItem('viking-cmp',COMPARE?'1':'0'); }catch(e){} render(); });
 function render(){
+  if(typeof achPops!=='undefined') Object.keys(achPops).forEach(n=>{ achPops[n].remove(); delete achPops[n]; });
   Object.keys(CHARS_BY_NAME).forEach(k=>delete CHARS_BY_NAME[k]); chars.forEach(c=>CHARS_BY_NAME[c.name]=c);
   renderWho();
   const shown = chars.filter(c=>visible.has(c.name));
