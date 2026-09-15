@@ -62,9 +62,9 @@ style.textContent = `
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--gold);color:var(--ink);padding:8px 14px;font-size:13px;z-index:1000;box-shadow:0 6px 18px var(--shadow)}
 
 .land.wide{max-width:1180px}
-.hero2{display:grid;grid-template-columns:minmax(300px,1.05fr) minmax(320px,1fr);gap:28px;align-items:center;border:2px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel) 40%,var(--panel-3));box-shadow:inset 0 0 0 1px var(--panel-3),inset 0 0 0 3px var(--line-2),0 10px 30px var(--shadow);padding:30px 32px 0 32px;position:relative;overflow:hidden}
+.hero2{display:grid;grid-template-columns:minmax(300px,1.05fr) minmax(320px,1fr);gap:28px;align-items:start;border:2px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel) 40%,var(--panel-3));box-shadow:inset 0 0 0 1px var(--panel-3),inset 0 0 0 3px var(--line-2),0 10px 30px var(--shadow);padding:30px 32px 0 32px;position:relative;overflow:hidden}
 .hero2::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(224,138,46,.16),transparent 55%),repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 2px,transparent 2px 9px);pointer-events:none}
-.hero-txt{position:relative;padding-bottom:30px}
+.hero-txt{position:relative;padding:14px 0 20px}
 .kicker{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);margin-bottom:10px}
 .land .hero-txt h2{font-size:clamp(24px,3vw,34px);line-height:1.12;margin:0 0 12px}
 .land .hero-txt p{font-size:15px;max-width:52ch}
@@ -77,13 +77,14 @@ style.textContent = `
 .sheets.demo{display:block;overflow:visible;padding:0;transform:scale(.9);transform-origin:top left;width:111%}
 .sheets.demo .sheet{display:block}
 .demo-fade{display:none}
-.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
-.feat{background:var(--panel);border:1px solid var(--line);padding:14px 14px 12px;display:grid;grid-template-columns:44px 1fr;gap:4px 12px;align-items:start}
-.feat .fi{grid-row:1/3;width:44px;height:44px;background:var(--bar);border:1px solid var(--bar-line);display:grid;place-items:center}
-.feat .fi img{width:38px;height:38px}
+.hero2 .feats{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 24px;padding-top:18px;border-top:1px solid var(--line-2);position:relative}
+.feat{background:rgba(0,0,0,.18);border:1px solid var(--line-2);padding:12px 12px 10px;display:grid;grid-template-columns:40px 1fr;gap:3px 10px;align-items:start}
+.feat .fi{grid-row:1/3;width:40px;height:40px;background:var(--bar);border:1px solid var(--bar-line);display:grid;place-items:center}
+.feat .fi img{width:34px;height:34px}
 .feat b{font-family:"Metamorphous",serif;font-weight:400;color:var(--gold);font-size:14px}
 .feat span{font-size:12.5px;color:var(--ink-2);line-height:1.4}
-.land .steps{margin-top:10px}
+.land .steps{margin-top:6px}
+.secttl{font-family:"Metamorphous",serif;font-weight:400;font-size:16px;color:var(--gold);margin:18px 0 0}
 .land .step code{font-size:11px;color:var(--ink)}
 .land .mine ul{margin:0;padding-left:18px}
 .appbox{display:grid;grid-template-columns:64px 1fr;gap:14px;margin-top:14px;border:1px solid var(--line);background:var(--panel);padding:16px 18px}
@@ -102,8 +103,8 @@ style.textContent = `
 .appbox .sitebtn small{font-weight:400;opacity:.8}
 @media (max-width:560px){.appbox{grid-template-columns:1fr}}
 .foot2{font-size:11.5px;color:var(--muted);margin-top:18px;text-align:center}
-@media (max-width:900px){.hero2{grid-template-columns:1fr;padding:22px 20px 0}.feats{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){.feats{grid-template-columns:1fr}}
+@media (max-width:900px){.hero2{grid-template-columns:1fr;padding:22px 20px 0}.hero2 .feats{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.hero2 .feats{grid-template-columns:1fr}}
 
 .help{margin-top:16px;border:1px solid var(--line);background:var(--panel);padding:14px 18px 8px}
 .help h3{font-family:"Metamorphous",serif;font-weight:400;font-size:16px;color:var(--gold);margin:0 0 6px}
@@ -223,8 +224,9 @@ async function landing(){
         </div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
-    </div>
     <div class="feats">${FEAT.map(([ic, cz, e, dcz, de]) => `<div class="feat"><div class="fi" data-ic="${ic}"></div><b>${en ? e : cz}</b><span>${en ? de : dcz}</span></div>`).join('')}</div>
+    </div>
+    <h3 class="secttl">${en ? 'How it works' : 'Jak na to'}</h3>
     <div class="steps">
       <div class="step"><b>1 · ${en ? 'One of you creates a Valhalla' : 'Jeden z party založí Valhalu'}</b>${en ? 'Takes ten seconds, no account. They get a link and send it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
       <div class="step"><b>2 · ${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
