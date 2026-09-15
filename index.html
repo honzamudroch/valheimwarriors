@@ -287,7 +287,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609152033"></script>
+<script src="/fch.js?v=202609152035"></script>
 <script>
 const DATA = {"chars": [], "lang": "en", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1012,7 +1012,7 @@ function portrait(P){
     const body = ASSETS.sets['Rags'];
     const part = (it,cls) => it && ASSETS.icons[it.name] ? `<img class="part ${cls}" src="${ASSETS.icons[it.name]}" alt="" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(P.name||'')}">` : '';
     // sada bez renderu: postava "v hadrech" bez pripnutych ikon (co nevime, jak vypada, na postave neukazujeme), zbrane v rukou zustavaji
-    if(body) return `<div class="fig paper"><img class="body" src="${body}" alt="">${part(helmet,'head')}${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
+    if(body) return `<div class="fig paper"><img class="body" src="${body}" alt="">${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
     return `<div class="fig icons"><div class="stack">${ic(helmet)}${ic(chest)}${ic(legs)}</div>${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
   }
   const full = [chest,legs,helmet].filter(Boolean).every(i=>setFamily(i.name)===fam) && chest && legs;
@@ -1480,4 +1480,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609152033"></script>
+<script src="/site.js?v=202609152035"></script>
