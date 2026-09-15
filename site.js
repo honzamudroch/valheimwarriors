@@ -52,6 +52,8 @@ style.textContent = `
 .sitebar .adm{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .crumb{font-size:12.5px;color:var(--muted);margin:-8px 0 10px}
 .crumb a{color:var(--gold);text-decoration:none}
+.appnote{font-size:12.5px;color:var(--muted);margin:8px 0 0;text-align:center}
+.appnote a{color:var(--gold)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--gold);color:var(--ink);padding:8px 14px;font-size:13px;z-index:1000;box-shadow:0 6px 18px var(--shadow)}
 
 .land.wide{max-width:1180px}
@@ -77,6 +79,16 @@ style.textContent = `
 .land .steps{margin-top:10px}
 .land .step code{font-size:11px;color:var(--ink)}
 .land .mine ul{margin:0;padding-left:18px}
+.appbox{display:grid;grid-template-columns:64px 1fr;gap:14px;margin-top:14px;border:1px solid var(--line);background:var(--panel);padding:16px 18px}
+.appbox .appicon{width:64px;height:64px;background:var(--bar);border:1px solid var(--bar-line);display:grid;place-items:center}
+.appbox .beta{font-family:"Averia Serif Libre",serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ember);border:1px solid var(--ember);padding:1px 5px;vertical-align:middle;margin-left:6px}
+.appbox b{font-family:"Metamorphous",serif;font-weight:400;color:var(--gold);font-size:16px}
+.appbox p{margin:4px 0 8px;font-size:13.5px}
+.appbox ol{margin:0 0 12px;padding-left:20px;font-size:13px;color:var(--ink-2);line-height:1.5}
+.appbox code{font-size:12px;color:var(--ink)}
+.appbox .sitebtn{text-decoration:none;display:inline-block}
+.appbox .sitebtn small{font-weight:400;opacity:.8}
+@media (max-width:560px){.appbox{grid-template-columns:1fr}}
 .foot2{font-size:11.5px;color:var(--muted);margin-top:18px;text-align:center}
 @media (max-width:900px){.hero2{grid-template-columns:1fr;padding:22px 20px 0}.hero-demo{max-height:420px}.feats{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.feats{grid-template-columns:1fr}}
@@ -116,6 +128,15 @@ async function landing(){
       <div class="step"><b>1 · ${en ? 'Create' : 'Založ'}</b>${en ? 'You get a link for the crew and an admin link. Keep the admin one to yourself.' : 'Dostaneš odkaz pro partu a admin odkaz. Ten si nech pro sebe.'}</div>
       <div class="step"><b>2 · ${en ? 'Share' : 'Pošli'}</b>${en ? 'Everyone opens the link and drops their .fch file from' : 'Každý otevře odkaz a přetáhne svůj .fch soubor z'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
       <div class="step"><b>3 · ${en ? 'Compare' : 'Porovnej'}</b>${en ? 'Upload again after a session and the sheet updates. Only you (or the admin) can replace your character.' : 'Po hraní nahraj znovu a list se přepíše. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
+    </div>
+    <div class="appbox" id="app">
+      <div class="appicon"><svg viewBox="0 0 64 64" width="44" height="44"><polygon points="32,4 58,14 54,40 32,60 10,40 6,14" fill="#1f1912" stroke="#d9a441" stroke-width="3"/><polygon points="32,14 48,22 45,38 32,50 19,38 16,22" fill="#d9a441"/></svg></div>
+      <div class="apptxt"><b>${en ? 'Sync app for Windows' : 'Sync appka pro Windows'} <span class="beta">beta</span></b>
+        <p>${en ? 'Runs in the tray, watches your Steam character folder and uploads the character to your server after every save. Nothing to drag, everyone always sees fresh data. No install, single file.' : 'Běží v liště u hodin, hlídá složku s postavami ve Steamu a po každém uložení hry postavu sama nahraje na tvůj server. Nic se nepřetahuje, parta má vždy čerstvá data. Bez instalace, jeden soubor.'}</p>
+        <ol><li>${en ? 'Download and run' : 'Stáhni a spusť'} <code>ValheimWarriorsSync.exe</code>${en ? ' (unsigned beta: Windows warns about an unknown publisher, choose More info, Run anyway; on PCs with Smart App Control turned on it will not run, upload via the web instead)' : ' (nepodepsaná beta: Windows varuje před neznámým vydavatelem, zvol Další informace, Přesto spustit; na PC se zapnutým Smart App Control se nespustí, tam nahrávej přes web)'}</li><li>${en ? 'Paste your server link, tick your character, optionally "Start with Windows"' : 'Vlož odkaz svého serveru, zaškrtni svoji postavu, případně „Spouštět při startu Windows“'}</li><li>${en ? 'Save. Done, it uploads after every game save.' : 'Ulož. Hotovo, nahrává po každém uložení hry.'}</li></ol>
+        <a class="sitebtn" href="download/ValheimWarriorsSync.exe" download>${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· ${en ? 'v0.1 · 30 MB' : 'v0.1 · 30 MB'}</small></a>
+        <div class="priv" style="margin-top:8px">${en ? 'Open source Python (PyInstaller). Reads only .fch files in the folders you choose and sends the same statistics as the web page. Config lives in %APPDATA%\ValheimWarriors.' : 'Otevřený Python (PyInstaller). Čte jen soubory .fch ve zvolených složkách a posílá ty samé statistiky jako web. Nastavení je v %APPDATA%\ValheimWarriors.'}</div>
+      </div>
     </div>
     ${my.length ? `<div class="mine"><h3>${en ? 'My servers' : 'Moje servery'}</h3><ul>${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
@@ -176,10 +197,17 @@ function showInvite(withAdmin){
   box.addEventListener('click', async ev => { const c = ev.target.closest('[data-copy]'); if(c){ await copy(c.dataset.copy); toast(en ? 'Copied' : 'Zkopírováno'); } if(ev.target.closest('[data-close]')) box.remove(); });
 }
 
+document.addEventListener('click', async ev => { const k = ev.target.closest('[data-key]'); if(k){ await copy(k.dataset.key); toast(EN() ? 'Key copied' : 'Klíč zkopírován'); } });
 window.SITE_UPLOAD = async d => {
   if(!SERVER) throw new Error(EN() ? 'no server' : 'není server');
-  const tok = ADMIN || LS.get(tokKey(d.player_id));
-  const t = await rpc('vw_upsert_character', {p_slug: slug, p_data: d, p_saved_at: d.meta.saved || null, p_token: tok});
+  let tok = ADMIN || LS.get(tokKey(d.player_id)); let t;
+  try{ t = await rpc('vw_upsert_character', {p_slug: slug, p_data: d, p_saved_at: d.meta.saved || null, p_token: tok}); }
+  catch(e){
+    if(!/not allowed/.test(e.message)) throw e;
+    const k = prompt(EN() ? `${d.name} was uploaded from another browser or by the Sync app. Paste the character key (from the other browser: "Character key" under the sheet; from the app: Settings, Character key):` : `${d.name} byl nahrán z jiného prohlížeče nebo Sync appkou. Vlož klíč postavy (v druhém prohlížeči: „Klíč postavy“ pod listem; v appce: Nastavení, Klíč postavy):`);
+    if(!k) throw new Error(EN() ? 'upload cancelled, character belongs to another device' : 'nahrání zrušeno, postava patří jinému zařízení');
+    tok = k.trim(); t = await rpc('vw_upsert_character', {p_slug: slug, p_data: d, p_saved_at: d.meta.saved || null, p_token: tok});
+  }
   if(!ADMIN) LS.set(tokKey(d.player_id), t);
   d.meta.uploaded = true; d.meta.player_id = d.player_id; d.meta.uploaded_at = new Date().toISOString();
   const i = chars.findIndex(c => c.player_id === d.player_id || c.name === d.name); if(i >= 0) chars.splice(i, 1, d); else chars.push(d);
@@ -207,6 +235,13 @@ window.SITE_RENDER = () => {
   if(dt) dt.textContent = en ? 'Drop your character file (.fch) here, it shows up for the whole server' : 'Přetáhni sem svou postavu (.fch), objeví se všem na serveru';
   if(ds) ds.innerHTML = en ? 'Parsed in your browser, only statistics are stored. Upload again after playing to refresh. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zpracuje se u tebe v prohlížeči, ukládají se jen statistiky. Po hraní nahraj znovu a list se obnoví. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
   const empty = document.querySelector('#sheets .empty'); if(empty) empty.textContent = en ? 'No character on this server yet. Drop a .fch file below.' : 'Na serveru ještě nikdo není. Přetáhni níže soubor .fch.';
+  document.querySelectorAll('#sheets .sheet').forEach(sh => {
+    const name = sh.querySelector('.name')?.textContent; const c = CHARS_BY_NAME[name]; if(!c) return;
+    const pid = c.meta.player_id || c.player_id; const tok = LS.get(tokKey(pid)); const foot = sh.querySelector('.foot');
+    if(tok && foot && !foot.querySelector('[data-key]')) foot.insertAdjacentHTML('beforeend', `<span class="rmlink" data-key="${esc(tok)}" style="color:var(--gold)" title="${en ? 'Copy the key for the Sync app or another browser' : 'Zkopírovat klíč pro Sync appku nebo jiný prohlížeč'}">⚿ ${en ? 'Character key' : 'Klíč postavy'}</span>`);
+  });
+  const dz = document.getElementById('drop');
+  if(dz && !document.getElementById('appnote')){ dz.insertAdjacentHTML('afterend', `<div class="appnote" id="appnote">${en ? 'Tired of dragging? <a href="' + HOME + '#app">Sync app for Windows</a> uploads your character after every save.' : 'Nechceš přetahovat ručně? <a href="' + HOME + '#app">Sync appka pro Windows</a> nahraje postavu po každém uložení sama.'}</div>`); }
 };
 
 if(slug) server(); else landing();
