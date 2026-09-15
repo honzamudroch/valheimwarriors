@@ -189,11 +189,24 @@ style.textContent = `
 .vwmodal .sheets.demo.full{transform:none;width:100%}
 .vwmodal .help.inmodal{margin:0;border:0;padding:0;background:transparent}
 .vwmodal .sheets.demo.full .blk{display:block!important}
+
+.mine.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.mine h3 small{font-family:"Averia Serif Libre",serif;color:var(--muted);font-size:11px;margin-left:6px}
+.mine li{display:flex;align-items:center;gap:8px}
+.mine li a{flex:0 1 auto}
+.mine .mini{margin-left:auto;background:transparent;border:1px solid var(--line-2);color:var(--muted);font-size:13px;line-height:1;padding:1px 7px;cursor:pointer}
+.mine .mini:hover{color:var(--rust);border-color:var(--rust)}
+.mine .note{font-size:12.5px;color:var(--muted);margin:0}
+@media (max-width:640px){.mine.two{grid-template-columns:1fr}}
 `;
 document.head.appendChild(style);
 
 function toast(msg){ const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2600); }
 function mine(){ try { return JSON.parse(LS.get('vw-servers') || '[]'); } catch(e) { return []; } }
+function forgetServer(sl){ LS.set('vw-servers', JSON.stringify(mine().filter(x => x.slug !== sl))); }
+function localChars(){ try { return JSON.parse(LS.get('vw-local-chars') || '[]'); } catch(e) { return []; } }
+function saveLocalChar(d){ const l = localChars().filter(x => x.player_id !== d.player_id && x.name !== d.name); l.unshift(d); try{ LS.set('vw-local-chars', JSON.stringify(l.slice(0, 6))); }catch(e){ toast(EN() ? 'Browser storage is full, the character is shown but not remembered.' : 'Úložiště prohlížeče je plné, postava se ukáže, ale nezapamatuje.'); } }
+function forgetLocalChar(pid){ LS.set('vw-local-chars', JSON.stringify(localChars().filter(x => String(x.player_id) !== String(pid)))); }
 function rememberServer(s, name, admin){ const l = mine().filter(x => x.slug !== s); l.unshift({slug: s, name, admin: !!admin}); LS.set('vw-servers', JSON.stringify(l.slice(0, 20))); }
 
 /* ---------- uvodni stranka ---------- */
@@ -205,10 +218,10 @@ const FEAT = [
 ];
 async function landing(){
   const land = document.getElementById('landing'); land.hidden = false;
-  document.getElementById('drop').hidden = false; document.getElementById('sheets').hidden = chars.length === 0;
+  document.getElementById('drop').hidden = false; document.getElementById('sheets').hidden = true;
   document.getElementById('h1').textContent = 'Valheim Warriors'; document.title = 'Valheim Warriors';
-  const en = EN(); const my = mine(); landingLang = LANG;
-  const dropEl = document.getElementById('drop'); if(dropEl && chars.length === 0) setTimeout(() => { const anchor = land.querySelector('.foot2'); if(anchor && chars.length === 0) anchor.before(dropEl); }, 0);
+  const en = EN(); const my = mine(); const lc = localChars(); landingLang = LANG;
+  const dropEl = document.getElementById('drop'); if(dropEl) setTimeout(() => { const anchor = land.querySelector('.foot2'); if(anchor) anchor.before(dropEl); }, 0);
   land.innerHTML = `<section class="land wide">
     <div class="hero2">
       <div class="hero-txt">
@@ -243,11 +256,17 @@ async function landing(){
     </div>
 
     <div class="help" id="help">${helpHTML(en)}</div>
-    ${my.length ? `<div class="mine"><h3>${en ? 'My Valhallas' : 'Moje Valhaly'}</h3><ul>${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
+    ${(my.length || lc.length) ? `<div class="mine two"><div><h3>${en ? 'My Valhallas' : 'Moje Valhaly'}</h3>${my.length ? `<ul>${my.map(sv => `<li><a href="${LINK(sv.slug)}">${esc(sv.name)}</a>${sv.admin ? `<small>admin</small>` : ''}<button class="mini" data-forget="${esc(sv.slug)}" title="${en ? 'Remove from this list (the Valhalla itself stays)' : 'Odebrat ze seznamu (Valhala sama zůstane)'}">×</button></li>`).join('')}</ul>` : `<p class="note">${en ? 'None yet.' : 'Zatím žádná.'}</p>`}</div>
+      <div><h3>${en ? 'My characters' : 'Moje postavy'} <small>${en ? 'previews saved in this browser' : 'náhledy uložené v tomto prohlížeči'}</small></h3>${lc.length ? `<ul>${lc.map(c => `<li><a href="#" data-showchar="${esc(String(c.player_id))}">${esc(c.name)}</a><small>${c.meta && c.meta.saved ? new Date(c.meta.saved).toLocaleDateString(en ? 'en-GB' : 'cs-CZ') : ''}</small><button class="mini" data-delchar="${esc(String(c.player_id))}" title="${en ? 'Delete this preview' : 'Smazat náhled'}">×</button></li>`).join('')}</ul>` : `<p class="note">${en ? 'None yet. Use Try your own above.' : 'Zatím žádná. Použij Nahrát vlastní nahoře.'}</p>`}</div></div>` : ''}
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
     <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
   </section>`;
   land.querySelectorAll('[data-modal]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); openModal(a.dataset.modal); }));
+  land.addEventListener('click', ev => {
+    const sh = ev.target.closest('[data-showchar]'); if(sh){ ev.preventDefault(); const c = localChars().find(x => String(x.player_id) === sh.dataset.showchar); if(c) openModal('char', c); return; }
+    const dl = ev.target.closest('[data-delchar]'); if(dl){ forgetLocalChar(dl.dataset.delchar); landing(); return; }
+    const fg = ev.target.closest('[data-forget]'); if(fg){ forgetServer(fg.dataset.forget); landing(); return; }
+  });
   const bindForms = root => {
   const go = root.querySelector('#gosrv'); if(go) go.addEventListener('submit', ev => {
     ev.preventDefault(); const v = root.querySelector('#golink').value.trim(); const m = v.match(/\/s\/([a-z0-9-]+)/) || v.match(/[?&]s=([a-z0-9-]+)/) || (/^[a-z0-9-]{3,40}$/.test(v) ? [null, v] : null);
@@ -286,11 +305,14 @@ const helpHTML = en => `<h3>${en ? 'Help' : 'Nápověda'}</h3>
     `;
 let landingLang = null;
 function closeModal(){ const m = document.getElementById('vwmodal'); if(m) m.remove(); document.body.style.overflow = ''; }
-function openModal(kind){
+function openModal(kind, data){
   closeModal(); const en = EN();
   const FILE = `<code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;${en ? 'your Steam id' : 'tvoje Steam id'}&gt;\\892970\\remote\\characters\\&lt;${en ? 'name' : 'jméno'}&gt;.fch</code>`;
   let title = '', body = '';
-  if(kind === 'demo'){
+  if(kind === 'char' && data){
+    title = esc(data.name);
+    body = `<p class="lead">${en ? 'Your character, parsed in this browser only. To share it with your party, drop the same file into your Valhalla.' : 'Tvoje postava, zpracovaná jen v tomto prohlížeči. Pro sdílení s partou přetáhni ten samý soubor do své Valhaly.'}</p><div class="sheets demo full" id="demo-full"></div>`;
+  } else if(kind === 'demo'){
     title = en ? 'Example: one character sheet' : 'Ukázka: list jedné postavy';
     body = `<p class="lead">${en ? 'This is a real character from a live Valhalla. Hover items, trophies and creatures for details. In a Valhalla your whole party sits like this side by side.' : 'Skutečná postava ze živé Valhaly. Najeď myší na předměty, trofeje a potvory, ukážou detail. Ve Valhale je takhle vedle sebe celá parta.'}</p><div class="sheets demo full" id="demo-full"></div>`;
   } else if(kind === 'own'){
@@ -298,7 +320,7 @@ function openModal(kind){
     body = `<ol class="guide">
       <li>${en ? 'Find your character file. Steam:' : 'Najdi soubor své postavy. Steam:'} ${FILE}</li>
       <li>${en ? 'Pick it below (or drag it anywhere onto this page).' : 'Vyber ho níže (nebo ho přetáhni kamkoli na tuhle stránku).'}</li>
-      <li>${en ? 'The sheet appears under the header. Nothing leaves your browser.' : 'List se objeví pod hlavičkou stránky. Nic neodejde z tvého prohlížeče.'}</li></ol>
+      <li>${en ? 'The sheet opens in a window and is remembered under My characters below. Nothing leaves your browser.' : 'List se otevře v okně a zůstane uložený dole v Moje postavy. Nic neodejde z tvého prohlížeče.'}</li></ol>
       <div class="mrow"><button class="sitebtn" id="own-pick">${en ? 'Choose file' : 'Vybrat soubor'}</button><span class="note" id="own-msg"></span></div>`;
   } else if(kind === 'create'){
     title = en ? 'Create a Valhalla' : 'Založit Valhalu';
@@ -311,6 +333,13 @@ function openModal(kind){
   } else if(kind === 'help'){
     title = en ? 'Help' : 'Nápověda';
     body = `<div class="help inmodal">${helpHTML(en).replace(/<h3>[^]*?<\/h3>/, '')}</div>`;
+  } else if(kind === 'add'){
+    title = en ? 'Add your character to this Valhalla' : 'Přidat svou postavu do této Valhaly';
+    body = `<ol class="guide">
+      <li>${en ? 'Find your character file. Steam:' : 'Najdi soubor své postavy. Steam:'} ${FILE}</li>
+      <li>${en ? 'Pick it below, or drag it anywhere onto this page.' : 'Vyber ho níže, nebo ho přetáhni kamkoli na tuhle stránku.'}</li>
+      <li>${en ? 'Your sheet appears next to the others. Only this browser (and the admin) can replace it later. After a session upload again, or use the Sync app.' : 'Tvůj list se objeví vedle ostatních. Přepsat ho pak může jen tento prohlížeč (a admin). Po hraní nahraj znovu, nebo použij Sync appku.'}</li></ol>
+      <div class="mrow"><button class="sitebtn" id="own-pick">${en ? 'Choose file' : 'Vybrat soubor'}</button><span class="note">${en ? 'Parsed in your browser, only statistics are stored.' : 'Zpracuje se v prohlížeči, ukládají se jen statistiky.'}</span></div>`;
   } else if(kind === 'join'){
     title = en ? 'Join your party' : 'Připojit se k partě';
     body = `<ol class="guide">
@@ -320,23 +349,24 @@ function openModal(kind){
       <div class="mrow"><label for="golink" class="note">${en ? 'Got only the ID instead of a link?' : 'Dostal jsi jen ID místo odkazu?'}</label></div>
       <form id="gosrv" class="mform"><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div>`;
   }
-  const m = document.createElement('div'); m.id = 'vwmodal'; m.className = 'vwmodal' + (kind === 'demo' ? ' wide' : '');
+  const m = document.createElement('div'); m.id = 'vwmodal'; m.className = 'vwmodal' + (kind === 'demo' || kind === 'char' ? ' wide' : '');
   m.innerHTML = `<div class="mbox"><button class="mx" aria-label="Zavřít">×</button><h4>${title}</h4>${body}</div>`;
   document.body.appendChild(m); document.body.style.overflow = 'hidden';
   m.addEventListener('click', ev => { if(ev.target === m || ev.target.closest('.mx')) closeModal(); });
   document.addEventListener('keydown', function esc(ev){ if(ev.key === 'Escape'){ closeModal(); document.removeEventListener('keydown', esc); } });
   if(window.__bindForms) window.__bindForms(m);
   const inp = m.querySelector('input'); if(inp) setTimeout(() => inp.focus(), 50);
+  if(kind === 'char' && data){ const el = m.querySelector('#demo-full'); CHARS_BY_NAME[data.name] = data; el.innerHTML = sheet(data); }
   if(kind === 'demo'){ const d = window.DEMO; const el = m.querySelector('#demo-full'); if(d && el){ CHARS_BY_NAME[d.name] = d; el.innerHTML = sheet(d); } else if(el) el.innerHTML = `<p class="note">${en ? 'Example not available, open a live Valhalla:' : 'Ukázka není k dispozici, otevři živou Valhalu:'} <a href="${LINK('valheim-2026')}">Valheim 2026</a></p>`; }
-  if(kind === 'own'){ m.querySelector('#own-pick').addEventListener('click', () => { const fi = document.getElementById('file'); if(fi){ fi.click(); } }); }
+  if(kind === 'own' || kind === 'add'){ m.querySelector('#own-pick').addEventListener('click', () => { const fi = document.getElementById('file'); if(fi){ fi.click(); } }); }
 }
-window.addEventListener('vw-loaded', () => { closeModal(); const sh = document.querySelector('#sheets .sheet'); if(sh) sh.scrollIntoView({behavior: 'smooth', block: 'start'}); });
+window.addEventListener('vw-loaded', () => { closeModal(); const st = document.getElementById('dropStatus'); const nm = st && (st.textContent.match(/[:]\s*(.+)$/) || [])[1]; const sh = [...document.querySelectorAll('#sheets .sheet')].find(x => nm && x.querySelector('.name') && x.querySelector('.name').textContent === nm.trim()) || document.querySelector('#sheets .sheet'); if(sh) sh.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'}); });
 window.SITE_RENDER_LANDING = () => {
   const l = document.getElementById('landing'); if(slug || isAdminPage || !l || l.hidden) return;
   if(landingLang !== LANG) landing();   // prepnuti jazyka: prekreslit celou uvodni stranku
   const en = EN();
-  const sheetsEl = document.getElementById('sheets'); sheetsEl.hidden = chars.length === 0;
-  const anchor = l.querySelector('.foot2'); if(anchor && chars.length){ anchor.before(sheetsEl); const dz = document.getElementById('drop'); if(dz) sheetsEl.after(dz); anchor.before(dz); }
+  document.getElementById('sheets').hidden = true;
+  const anchor = l.querySelector('.foot2'); const dz = document.getElementById('drop'); if(anchor && dz && dz.nextElementSibling !== anchor) anchor.before(dz);
   const dt = document.getElementById('dropT'), ds = document.getElementById('dropS');
   const dz0 = document.getElementById('drop'); if(dz0) dz0.id = 'drop', dz0.setAttribute('data-anchor', 'preview');
   if(!document.getElementById('preview')){ const a = document.createElement('div'); a.id = 'preview'; a.className = 'prevhead'; a.textContent = en ? 'Preview your own character (just for you, stays in your browser)' : 'Náhled vlastní postavy (jen pro tebe, zůstane u tebe v prohlížeči)'; document.getElementById('drop').before(a); }
@@ -401,9 +431,8 @@ function reportBox(){
 document.addEventListener('click', ev => { const r = ev.target.closest('[data-report]'); if(r){ ev.preventDefault(); reportBox(); } const md = ev.target.closest('[data-modal]'); if(md && !md.closest('.land')){ ev.preventDefault(); openModal(md.dataset.modal); } });
 document.addEventListener('click', async ev => { const k = ev.target.closest('[data-key]'); if(k){ await copy(k.dataset.key); toast(EN() ? 'Key copied' : 'Klíč zkopírován'); } });
 window.SITE_UPLOAD = async d => {
-  if(!SERVER){   // uvodni stranka: jen lokalni nahled, nic se neposila
-    d.meta.uploaded = true; const i = chars.findIndex(c => c.name === d.name); if(i >= 0) chars.splice(i, 1, d); else chars.push(d);
-    visible.add(d.name); render(); window.dispatchEvent(new Event('vw-loaded')); return;
+  if(!SERVER){   // uvodni stranka: jen lokalni nahled v okne, nic se neposila
+    saveLocalChar(d); await landing(); openModal('char', d); return;
   }
   let tok = ADMIN || LS.get(tokKey(d.player_id)); let t;
   try{ t = await rpc('vw_upsert_character', {p_slug: slug, p_data: d, p_saved_at: d.meta.saved || null, p_token: tok}); }
@@ -416,7 +445,7 @@ window.SITE_UPLOAD = async d => {
   if(!ADMIN) LS.set(tokKey(d.player_id), t);
   d.meta.uploaded = true; d.meta.player_id = d.player_id; d.meta.uploaded_at = new Date().toISOString();
   const i = chars.findIndex(c => c.player_id === d.player_id || c.name === d.name); if(i >= 0) chars.splice(i, 1, d); else chars.push(d);
-  visible.add(d.name); render();
+  visible.add(d.name); render(); window.dispatchEvent(new Event('vw-loaded'));
 };
 window.SITE_REMOVE = async name => {
   const c = chars.find(x => x.name === name); if(!c) return false;
@@ -431,7 +460,8 @@ window.SITE_RENDER = () => {
   document.getElementById('h1').textContent = SERVER.name; document.title = SERVER.name + ' · Valheim Warriors';
   let bar = document.getElementById('sitebar');
   if(!bar){ bar = document.createElement('div'); bar.id = 'sitebar'; bar.className = 'sitebar'; document.querySelector('.top > div').prepend(bar); }
-  bar.innerHTML = `<button type="button" class="sitebtn" id="invite">${en ? 'Invite' : 'Pozvat'}</button>${ADMIN ? `<span class="adm">admin</span>` : ''}`;
+  bar.innerHTML = `<button type="button" class="sitebtn" id="addchar">${en ? '+ Add my character' : '+ Přidat svou postavu'}</button><button type="button" class="sitebtn ghost" id="invite">${en ? 'Invite' : 'Pozvat'}</button>${ADMIN ? `<span class="adm">admin</span>` : ''}`;
+  document.getElementById('addchar').onclick = () => openModal('add');
   document.getElementById('invite').onclick = () => showInvite(true);
   let crumb = document.getElementById('crumb');
   if(!crumb){ crumb = document.createElement('div'); crumb.id = 'crumb'; crumb.className = 'crumb'; document.querySelector('.top').after(crumb); }
