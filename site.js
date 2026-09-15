@@ -26,6 +26,15 @@ let SERVER = null, ADMIN = null;
 
 const style = document.createElement('style');
 style.textContent = `
+body{position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.14;
+  background:url(/bg_troll.webp) no-repeat left -70px bottom -30px / min(46vw,640px) auto, url(/bg_wolf.webp) no-repeat right -90px top 16vh / min(34vw,470px) auto}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 110%,rgba(224,138,46,.10),transparent 55%),linear-gradient(180deg,transparent 60%,rgba(0,0,0,.35))}
+.wrap{position:relative;z-index:1}
+.brand{display:inline-flex;align-items:center;gap:12px}
+.brand img{width:46px;height:46px;filter:drop-shadow(0 0 10px rgba(217,164,65,.45)) drop-shadow(0 2px 2px rgba(0,0,0,.8))}
+@media (max-width:700px){body::before{opacity:.09;background-size:70vw auto, 50vw auto}}
+
 .land{max-width:720px;margin:10px auto 30px}
 .land .hero{border:2px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel));box-shadow:inset 0 0 0 1px var(--panel-3),inset 0 0 0 3px var(--line-2),0 6px 18px var(--shadow);padding:26px 28px 24px;position:relative}
 .land h2{font-family:"Metamorphous",serif;font-weight:400;font-size:24px;color:var(--gold);margin:0 0 8px;text-wrap:balance}
@@ -239,7 +248,7 @@ const FEAT = [
 async function landing(){
   const land = document.getElementById('landing'); land.hidden = false;
   document.getElementById('drop').hidden = false; document.getElementById('sheets').hidden = true;
-  document.getElementById('h1').textContent = 'Valheim Warriors'; document.title = 'Valheim Warriors';
+  document.getElementById('h1').innerHTML = '<span class="brand"><img src="/brand_trophy.png" alt="">Valheim Warriors</span>'; document.title = 'Valheim Warriors';
   const en = EN(); const my = mine(); const lc = localChars(); landingLang = LANG;
   const dropEl = document.getElementById('drop'); if(dropEl) setTimeout(() => { const anchor = land.querySelector('.foot2'); if(anchor) anchor.before(dropEl); }, 0);
   land.innerHTML = `<section class="land wide">
