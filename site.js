@@ -52,6 +52,9 @@ style.textContent = `
 .sitebar .adm{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .crumb{font-size:12.5px;color:var(--muted);margin:-8px 0 10px}
 .crumb a{color:var(--gold);text-decoration:none}
+.crumb a.bug{float:right;color:var(--muted);border:1px solid var(--line-2);padding:0 6px;font-size:11.5px}
+.crumb a.bug:hover{color:var(--gold);border-color:var(--gold)}
+.foot2 a{color:var(--gold)}
 .appnote{font-size:12.5px;color:var(--muted);margin:8px 0 0;text-align:center}
 .appnote a{color:var(--gold)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--panel);border:1px solid var(--gold);color:var(--ink);padding:8px 14px;font-size:13px;z-index:1000;box-shadow:0 6px 18px var(--shadow)}
@@ -140,7 +143,7 @@ async function landing(){
     </div>
     ${my.length ? `<div class="mine"><h3>${en ? 'My servers' : 'Moje servery'}</h3><ul>${my.map(s => `<li><a href="${LINK(s.slug)}">${esc(s.name)}</a>${s.admin ? `<small>admin</small>` : ''}</li>`).join('')}</ul></div>` : ''}
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
-    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'}</div>
+    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
   </section>`;
   document.getElementById('newsrv').addEventListener('submit', async ev => {
     ev.preventDefault(); const err = document.getElementById('srverr'); err.textContent = '';
@@ -230,7 +233,7 @@ window.SITE_RENDER = () => {
   document.getElementById('invite').onclick = () => showInvite(true);
   let crumb = document.getElementById('crumb');
   if(!crumb){ crumb = document.createElement('div'); crumb.id = 'crumb'; crumb.className = 'crumb'; document.querySelector('.top').after(crumb); }
-  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')}`;
+  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')} <a class="bug" href="https://github.com/honzamudroch/valheimwarriors/issues/new" target="_blank" rel="noopener" title="${en ? 'Report a bug or idea (GitHub)' : 'Nahlásit chybu nebo nápad (GitHub)'}">${en ? 'report a bug' : 'nahlásit chybu'}</a>`;
   const dt = document.getElementById('dropT'), ds = document.getElementById('dropS');
   if(dt) dt.textContent = en ? 'Drop your character file (.fch) here, it shows up for the whole server' : 'Přetáhni sem svou postavu (.fch), objeví se všem na serveru';
   if(ds) ds.innerHTML = en ? 'Parsed in your browser, only statistics are stored. Upload again after playing to refresh. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zpracuje se u tebe v prohlížeči, ukládají se jen statistiky. Po hraní nahraj znovu a list se obnoví. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
