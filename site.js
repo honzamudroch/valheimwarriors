@@ -37,8 +37,9 @@ style.textContent = `
 .land button:hover,.sitebtn:hover{background:var(--gold-2)}
 .land .err{color:var(--rust);font-size:13px;min-height:18px}
 .land .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
-.land .step{background:var(--bar);border:1px solid var(--bar-line);padding:10px 12px;font-size:13px;color:var(--ink-2);line-height:1.4}
-.land .step b{display:block;font-family:"Metamorphous",serif;font-weight:400;color:var(--gold);font-size:14px;margin-bottom:4px}
+.land .step{position:relative;background:linear-gradient(180deg,rgba(217,164,65,.14),rgba(217,164,65,.04)),var(--panel-2);border:1px solid var(--gold);box-shadow:inset 0 0 0 1px rgba(217,164,65,.15),0 6px 18px var(--shadow);padding:16px 18px 14px 74px;font-size:14px;color:var(--ink);line-height:1.5}
+.land .step i{position:absolute;left:16px;top:12px;font-style:normal;font-family:"Metamorphous",serif;font-size:40px;line-height:1;color:var(--gold);opacity:.9;text-shadow:0 2px 0 var(--shadow)}
+.land .step b{display:block;font-family:"Metamorphous",serif;font-weight:400;color:var(--gold-2);font-size:17px;margin-bottom:6px}
 @media (max-width:560px){.land .steps{grid-template-columns:1fr}}
 .land .mine{margin-top:18px;border-top:1px solid var(--line-2);padding-top:12px}
 .land .mine h3{font-family:"Metamorphous",serif;font-weight:400;font-size:14px;color:var(--gold);margin:0 0 6px}
@@ -83,8 +84,8 @@ style.textContent = `
 .feat .fi img{width:34px;height:34px}
 .feat b{font-family:"Metamorphous",serif;font-weight:400;color:var(--gold);font-size:14px}
 .feat span{font-size:12.5px;color:var(--ink-2);line-height:1.4}
-.land .steps{margin-top:6px}
-.secttl{font-family:"Metamorphous",serif;font-weight:400;font-size:16px;color:var(--gold);margin:18px 0 0}
+.land .steps{margin-top:8px;gap:12px}
+.secttl{font-family:"Metamorphous",serif;font-weight:400;font-size:22px;color:var(--gold);margin:26px 0 2px;text-shadow:0 2px 0 var(--shadow)}
 .land .step code{font-size:11px;color:var(--ink)}
 .land .step a{color:var(--gold)}
 .land .mine ul{margin:0;padding-left:18px}
@@ -260,9 +261,9 @@ async function landing(){
     </div>
     <h3 class="secttl">${en ? 'How it works' : 'Jak na to'}</h3>
     <div class="steps">
-      <div class="step"><b>1 · ${en ? 'One of you creates a Valhalla' : 'Jeden z party založí Valhalu'}</b>${en ? 'Takes ten seconds, no account. They get a link and send it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
-      <div class="step"><b>2 · ${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
-      <div class="step"><b>3 · ${en ? 'Keep it fresh' : 'Udržuj aktuální'}</b>${en ? 'Run the <a href="#" data-modal="app">Sync app</a> once: it uploads your character by itself after every game save. No app? Then drop the file again after each session. Only you (or the admin) can replace your character.' : 'Pusť si jednou <a href="#" data-modal="app">Sync appku</a>: po každém uložení hry nahraje postavu sama. Bez appky musíš po každém hraní soubor přetáhnout znovu. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
+      <div class="step"><i>1</i><b>${en ? 'One of you creates a Valhalla' : 'Jeden z party založí Valhalu'}</b>${en ? 'Takes ten seconds, no account. They get a link and send it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
+      <div class="step"><i>2</i><b>${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
+      <div class="step"><i>3</i><b>${en ? 'Keep it fresh' : 'Udržuj aktuální'}</b>${en ? 'Run the <a href="#" data-modal="app">Sync app</a> once: it uploads your character by itself after every game save. No app? Then drop the file again after each session. Only you (or the admin) can replace your character.' : 'Pusť si jednou <a href="#" data-modal="app">Sync appku</a>: po každém uložení hry nahraje postavu sama. Bez appky musíš po každém hraní soubor přetáhnout znovu. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
     </div>
     </div>
 
