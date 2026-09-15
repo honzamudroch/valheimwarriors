@@ -145,6 +145,28 @@ style.textContent = `
 .path form.idform input{flex:1;font-size:12px;padding:5px 8px}
 .path form.idform button{padding:5px 10px;font-size:11px;background:transparent;color:var(--gold);border:1px solid var(--line)}
 @media (max-width:640px){.paths{grid-template-columns:1fr}}
+
+.cta4{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0 4px}
+.cta{display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:var(--bar);border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:border-color .15s,background .15s}
+.cta:hover{border-color:var(--gold);background:var(--panel-2)}
+.cta b{font-family:"Metamorphous",serif;font-weight:400;color:var(--gold);font-size:14px}
+.cta span{font-size:11.5px;color:var(--muted)}
+.cta.main{background:linear-gradient(180deg,rgba(217,164,65,.18),rgba(217,164,65,.06));border-color:var(--gold)}
+.two-sec{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.sec{background:var(--panel);border:1px solid var(--line);padding:14px 18px 12px}
+.sec h3{font-family:"Metamorphous",serif;font-weight:400;font-size:16px;color:var(--gold);margin:0 0 6px}
+.sec p{font-size:13.5px;color:var(--ink-2);line-height:1.45;margin:0 0 8px}
+.sec p.small{font-size:12px;color:var(--muted);margin:8px 0 0}
+.sec p.small code{font-size:11px;color:var(--ink-2)}
+.sec form{display:flex;gap:6px;margin:0}
+.sec form input{flex:1;min-width:0;font:inherit;font-size:14px;padding:8px 10px;background:var(--bar);border:1px solid var(--line);color:var(--ink)}
+.sec form.idform{align-items:center;flex-wrap:wrap}
+.sec form.idform label{font-size:12px;color:var(--muted);white-space:nowrap}
+.sec form.idform input{font-size:12.5px;padding:6px 8px}
+.sec form.idform button{padding:6px 10px;font-size:11.5px;background:transparent;color:var(--gold);border:1px solid var(--line)}
+.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 3px var(--gold)}100%{box-shadow:0 0 0 0 transparent}}
+@media (max-width:640px){.two-sec{grid-template-columns:1fr}.cta4{grid-template-columns:1fr 1fr}}
 `;
 document.head.appendChild(style);
 
@@ -170,18 +192,26 @@ async function landing(){
       <div class="hero-txt">
         <div class="kicker">${en ? 'Viking sheets for your Valheim party' : 'Listy vikingů pro vaši valheimskou partu'}</div>
         <h2>${en ? 'See your whole crew side by side. Straight from the save file.' : 'Celá parta vedle sebe. Přímo ze save souboru.'}</h2>
-        <p>${en ? 'Create a Valhalla for your party, send one link. Everyone drops in their character file once and the page turns it into a sheet: gear, skills, kills, deaths, travel, work, explored map. Then run the small Sync app and your sheet updates itself after every game save, nothing else to do. No app? Just drop the file again after a session.' : 'Založ partě Valhalu, pošli jeden odkaz. Každý jednou přetáhne soubor své postavy a stránka z něj udělá list: výbava, dovednosti, zabití, smrti, cesta, práce, prozkoumaná mapa. Pak si pustí malou Sync appku a list se obnovuje sám po každém uložení hry, nic dalšího dělat nemusíš. Bez appky stačí po hraní soubor přetáhnout znovu.'}</p>
-        <div class="paths">
-          <div class="path"><b>${en ? 'Your party already has a Valhalla?' : 'Parta už Valhalu má?'}</b><span>${en ? 'Just click the link they sent you (valheimwarriors.com/s/…) and drop your character file there. Nothing to fill in here.' : 'Stačí kliknout na odkaz, který ti poslali (valheimwarriors.com/s/…), a přetáhnout tam svoji postavu. Tady nic vyplňovat nemusíš.'}</span>
-            <form id="gosrv" class="idform"><label for="golink">${en ? 'Got only its ID?' : 'Máš jen její ID?'}</label><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div></div>
-          <div class="path"><b>${en ? 'Starting a Valhalla for your party?' : 'Zakládáš Valhalu pro partu?'}</b><span>${en ? 'Name your party, you get a link to share. One Valhalla per party is enough.' : 'Pojmenuj partu, dostaneš odkaz pro ostatní. Stačí jedna na partu.'}</span>
-            <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Party name' : 'Název party'}" autocomplete="off"><button type="submit">${en ? 'Create Valhalla' : 'Založit Valhalu'}</button></form><div class="err" id="srverr"></div></div>
+        <p>${en ? 'Everyone drops in their character file once, the page turns it into a sheet and your whole party sits side by side. The Sync app keeps it fresh after every game save.' : 'Každý jednou nahraje soubor své postavy, stránka z něj udělá list a celá parta je vedle sebe. Sync appka to pak drží aktuální po každém uložení hry.'}</p>
+        <div class="cta4">
+          <a class="cta" href="#demo" data-scroll="demo"><b>${en ? 'Example' : 'Ukázka'}</b><span>${en ? 'what a sheet looks like' : 'jak vypadá list postavy'}</span></a>
+          <a class="cta" href="#preview" data-scroll="preview"><b>${en ? 'Try your own' : 'Nahrát vlastní'}</b><span>${en ? 'just for you, nothing is sent' : 'jen pro tebe, nic se neposílá'}</span></a>
+          <a class="cta main" href="#create" data-scroll="create"><b>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</b><span>${en ? 'for your party, one link' : 'pro partu, jeden odkaz'}</span></a>
+          <a class="cta" href="#join" data-scroll="join"><b>${en ? 'Join' : 'Připojit se'}</b><span>${en ? 'your party already has one' : 'parta už Valhalu má'}</span></a>
         </div>
-        <div class="alt"><a href="${LINK('valheim-2026')}">${en ? 'Peek at a live Valhalla' : 'Kouknout do živé Valhaly'} ›</a> <a href="#preview">${en ? 'Preview your own character on its own' : 'Náhled vlastní postavy jen pro sebe'} ›</a></div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
     </div>
     <div class="feats">${FEAT.map(([ic, cz, e, dcz, de]) => `<div class="feat"><div class="fi" data-ic="${ic}"></div><b>${en ? e : cz}</b><span>${en ? de : dcz}</span></div>`).join('')}</div>
+    <div class="two-sec">
+      <div class="sec" id="create"><h3>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</h3>
+        <p>${en ? 'One per party is enough. Name it, you get two links: one for the crew, one admin link for you (it lets you remove characters; keep it private). Ten seconds, no account.' : 'Stačí jedna na partu. Pojmenuj ji a dostaneš dva odkazy: jeden pro partu, druhý admin odkaz pro tebe (můžeš mazat postavy; nech si ho pro sebe). Deset sekund, bez účtu.'}</p>
+        <form id="newsrv"><input id="srvname" maxlength="60" required placeholder="${en ? 'Party name' : 'Název party'}" autocomplete="off"><button type="submit">${en ? 'Create Valhalla' : 'Založit Valhalu'}</button></form><div class="err" id="srverr"></div></div>
+      <div class="sec" id="join"><h3>${en ? 'Join your party' : 'Připojit se k partě'}</h3>
+        <p>${en ? 'Somebody in your party already created a Valhalla? Just click the link they sent you (valheimwarriors.com/s/…) and drop your character file there. Nothing to fill in here.' : 'Někdo z party už Valhalu založil? Stačí kliknout na odkaz, který ti poslal (valheimwarriors.com/s/…), a přetáhnout tam soubor své postavy. Tady nic vyplňovat nemusíš.'}</p>
+        <form id="gosrv" class="idform"><label for="golink">${en ? 'Got only the ID?' : 'Máš jen ID?'}</label><input id="golink" placeholder="${en ? 'e.g. valheim-2026' : 'např. valheim-2026'}" autocomplete="off"><button type="submit">${en ? 'Open' : 'Otevřít'}</button></form><div class="err" id="goerr"></div>
+        <p class="small">${en ? 'Where is the character file? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. The game writes it on logout and every ~20 minutes.' : 'Kde je soubor postavy? Steam: <code>Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code>. Hra ho zapisuje při odhlášení a každých ~20 minut.'}</p></div>
+    </div>
     <div class="steps">
       <div class="step"><b>1 · ${en ? 'One of you creates a Valhalla' : 'Jeden z party založí Valhalu'}</b>${en ? 'Takes ten seconds, no account. They get a link and send it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
       <div class="step"><b>2 · ${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
@@ -213,6 +243,11 @@ async function landing(){
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
     <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
   </section>`;
+  land.querySelectorAll('[data-scroll]').forEach(a => a.addEventListener('click', ev => {
+    ev.preventDefault(); const id = a.dataset.scroll; const el = document.getElementById(id) || (id === 'preview' ? document.getElementById('drop') : null); if(!el) return;
+    el.scrollIntoView({behavior: 'smooth', block: id === 'demo' ? 'start' : 'center'}); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600);
+    const inp = el.querySelector && el.querySelector('input'); if(inp) setTimeout(() => inp.focus({preventScroll: true}), 600);
+  }));
   document.getElementById('gosrv').addEventListener('submit', ev => {
     ev.preventDefault(); const v = document.getElementById('golink').value.trim(); const m = v.match(/\/s\/([a-z0-9-]+)/) || v.match(/[?&]s=([a-z0-9-]+)/) || (/^[a-z0-9-]{3,40}$/.test(v) ? [null, v] : null);
     if(!m){ document.getElementById('goerr').textContent = en ? 'That does not look like a Valhalla link or ID.' : 'To nevypadá jako odkaz ani ID Valhaly.'; return; }
@@ -233,7 +268,7 @@ async function landing(){
     if(!window.DEMO) window.DEMO = await (await fetch('/assets/demo.json', {cache: 'force-cache'})).json();
     const d = window.DEMO; CHARS_BY_NAME[d.name] = d;
     const el = document.getElementById('demo'); if(el) el.innerHTML = sheet(d);
-  }catch(e){ const hd = document.querySelector('.hero-demo'); if(hd) hd.remove(); }
+  }catch(e){ const hd = document.querySelector('.hero-demo'); if(hd) hd.remove(); const ex = land.querySelector('[data-scroll="demo"]'); if(ex){ ex.removeAttribute('data-scroll'); ex.href = LINK('valheim-2026'); } }
 }
 // prepnuti jazyka na uvodni strance: render() z sablony zavola SITE_RENDER, ten prekresli landing
 let landingLang = null;
