@@ -188,7 +188,11 @@ style.textContent = `
 .vwmodal .mrow{display:flex;gap:12px;align-items:center;margin-top:6px;flex-wrap:wrap}
 .vwmodal .note{font-size:12.5px;color:var(--muted)}
 .vwmodal .err{color:var(--rust);font-size:13px;min-height:18px;margin-top:4px}
-.vwmodal .sheets.demo.full{transform:none;width:100%}
+.vwmodal .sheets.demo.full{transform:none;width:100%;zoom:1}
+.vwmodal .sha{font-size:11.5px;color:var(--muted);line-height:1.45;word-break:break-all}
+.vwmodal .sha summary{cursor:pointer;color:var(--ink-2);list-style:none}
+.vwmodal .sha summary::before{content:"▸ ";color:var(--gold)}
+.vwmodal .sha[open] summary::before{content:"▾ "}
 .vwmodal .help.inmodal{margin:0;border:0;padding:0;background:transparent}
 .vwmodal .sheets.demo.full .blk{display:block!important}
 
@@ -258,17 +262,8 @@ async function landing(){
     <div class="steps">
       <div class="step"><b>1 · ${en ? 'One of you creates a Valhalla' : 'Jeden z party založí Valhalu'}</b>${en ? 'Takes ten seconds, no account. They get a link and send it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
       <div class="step"><b>2 · ${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
-      <div class="step"><b>3 · ${en ? 'Keep it fresh' : 'Udržuj aktuální'}</b>${en ? 'Run the <a href="#app">Sync app</a> once: it uploads your character by itself after every game save. No app? Then drop the file again after each session. Only you (or the admin) can replace your character.' : 'Pusť si jednou <a href="#app">Sync appku</a>: po každém uložení hry nahraje postavu sama. Bez appky musíš po každém hraní soubor přetáhnout znovu. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
+      <div class="step"><b>3 · ${en ? 'Keep it fresh' : 'Udržuj aktuální'}</b>${en ? 'Run the <a href="#" data-modal="app">Sync app</a> once: it uploads your character by itself after every game save. No app? Then drop the file again after each session. Only you (or the admin) can replace your character.' : 'Pusť si jednou <a href="#" data-modal="app">Sync appku</a>: po každém uložení hry nahraje postavu sama. Bez appky musíš po každém hraní soubor přetáhnout znovu. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
     </div>
-    <div class="appbox" id="app">
-      <div class="appicon"><svg viewBox="0 0 64 64" width="44" height="44"><polygon points="32,4 58,14 54,40 32,60 10,40 6,14" fill="#1f1912" stroke="#d9a441" stroke-width="3"/><polygon points="32,14 48,22 45,38 32,50 19,38 16,22" fill="#d9a441"/></svg></div>
-      <div class="apptxt"><b>${en ? 'Sync app for Windows' : 'Sync appka pro Windows'} <span class="beta">beta</span></b>
-        <p>${en ? '<b>Your sheet updates itself.</b> The app runs in the tray, watches your Steam character folder and after every game save (on logout and every ~20 minutes while playing) uploads your character to your Valhalla. Nothing to drag, nothing to remember, your party always sees fresh numbers. Single file, no installer.' : '<b>List se aktualizuje sám.</b> Appka běží v liště u hodin, hlídá složku s postavami ve Steamu a po každém uložení hry (při odhlášení a každých ~20 minut hraní) nahraje tvoji postavu do Valhaly. Nic nepřetahuješ, na nic nemyslíš, parta vidí vždy čerstvá čísla. Jeden soubor, bez instalace.'}</p>
-        <ol><li>${en ? 'Download and run' : 'Stáhni a spusť'} <code>ValheimWarriorsSync.exe</code>${en ? ' (unsigned beta: Windows warns about an unknown publisher, choose More info, Run anyway; on PCs with Smart App Control turned on it will not run, upload via the web instead)' : ' (nepodepsaná beta: Windows varuje před neznámým vydavatelem, zvol Další informace, Přesto spustit; na PC se zapnutým Smart App Control se nespustí, tam nahrávej přes web)'}</li><li>${en ? 'Paste your Valhalla link, tick your character, optionally "Start with Windows"' : 'Vlož odkaz své Valhaly, zaškrtni svoji postavu, případně „Spouštět při startu Windows“'}</li><li>${en ? 'Save. Done, it uploads after every game save.' : 'Ulož. Hotovo, nahrává po každém uložení hry.'}</li></ol>
-        <a class="sitebtn" href="#" data-modal="app">${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· v0.1.4 · 30 MB</small></a>
-        <details class="sha"><summary>${en ? 'Verify the download' : 'Ověření staženého souboru'}</summary>${en ? 'Unsigned apps cannot prove who made them, so here is the fingerprint of the file I published. In PowerShell run <code>Get-FileHash ValheimWarriorsSync.exe</code>; the result must be' : 'Nepodepsaná appka nemůže prokázat, kdo ji vydal, proto je tady otisk zveřejněného souboru. V PowerShellu spusť <code>Get-FileHash ValheimWarriorsSync.exe</code>; výsledek musí být'} <code>384f87cef77b1c749b9a59f8faa11b4bd6cc053d132114a8285af4e2003a455c</code>. ${en ? 'If it differs, do not run the file.' : 'Když se liší, soubor nespouštěj.'}</details>
-        <div class="priv" style="margin-top:8px">${en ? 'Open source Python (PyInstaller). Reads only .fch files in the folders you choose and sends the same statistics as the web page. Config lives in %APPDATA%\ValheimWarriors.' : 'Otevřený Python (PyInstaller). Čte jen soubory .fch ve zvolených složkách a posílá ty samé statistiky jako web. Nastavení je v %APPDATA%\ValheimWarriors.'}</div>
-      </div>
     </div>
 
     ${(my.length || lc.length) ? `<div class="mine two"><div><h3><svg viewBox="0 0 64 64" width="20" height="20"><polygon points="32,4 58,14 54,40 32,60 10,40 6,14" fill="#1f1912" stroke="#d9a441" stroke-width="4"/><polygon points="32,14 48,22 45,38 32,50 19,38 16,22" fill="#d9a441"/></svg> ${en ? 'My Valhallas' : 'Moje Valhaly'}</h3>${my.length ? `<ul>${my.map(sv => `<li><span class="av">⚔</span><a href="${LINK(sv.slug)}">${esc(sv.name)}</a>${sv.admin ? `<small>admin</small>` : ''}<button class="mini" data-forget="${esc(sv.slug)}" title="${en ? 'Remove from this list (the Valhalla itself stays)' : 'Odebrat ze seznamu (Valhala sama zůstane)'}">×</button></li>`).join('')}</ul>` : `<p class="note">${en ? 'None yet.' : 'Zatím žádná.'}</p>`}</div>
@@ -300,6 +295,7 @@ async function landing(){
   });
   };
   window.__bindForms = bindForms;
+  if(location.hash === '#app'){ history.replaceState(null, '', location.pathname + location.search); setTimeout(() => openModal('app'), 50); }
   await window.ASSETS_READY;
   document.querySelectorAll('.feat .fi').forEach(el => { const ic = ASSETS.icons[el.dataset.ic]; if(ic) el.innerHTML = `<img src="${ic}" alt="">`; });
   try{
@@ -356,7 +352,9 @@ function openModal(kind, data){
       <li>${en ? 'Download and run' : 'Stáhni a spusť'} <code>ValheimWarriorsSync.exe</code>. ${en ? 'Unsigned beta: Windows warns about an unknown publisher, choose More info, Run anyway. On PCs with Smart App Control turned on it will not run, use the web there.' : 'Nepodepsaná beta: Windows varuje před neznámým vydavatelem, zvol Další informace, Přesto spustit. Na PC se zapnutým Smart App Control se nespustí, tam používej web.'}</li>
       <li>${en ? 'Paste your Valhalla link (or press Find my Valhallas), tick your character, optionally Start with Windows.' : 'Vlož odkaz své Valhaly (nebo dej Najít moje Valhaly), zaškrtni svoji postavu, případně Spouštět při startu Windows.'}</li>
       <li>${en ? 'Save. From now on it uploads by itself; the sheet shows a green "Sync app" badge.' : 'Ulož. Od teď nahrává sama; na listu je zelený štítek "Sync appka".'}</li></ol>
-      <div class="mrow"><a class="sitebtn" href="/download/ValheimWarriorsSync.exe" download style="text-decoration:none">${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· v0.1.4 · 30 MB</small></a><a href="#app" class="note" data-close="1">${en ? 'more details below' : 'víc podrobností níže'}</a></div>`;
+      <div class="mrow"><a class="sitebtn" href="/download/ValheimWarriorsSync.exe" download style="text-decoration:none">${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· v0.1.4 · 30 MB</small></a></div>
+      <div class="mrow small"><details class="sha"><summary>${en ? 'Verify the download' : 'Ověření staženého souboru'}</summary>${en ? 'Unsigned apps cannot prove who made them, so here is the fingerprint of the file I published. In PowerShell run <code>Get-FileHash ValheimWarriorsSync.exe</code>; the result must be' : 'Nepodepsaná appka nemůže prokázat, kdo ji vydal, proto je tady otisk zveřejněného souboru. V PowerShellu spusť <code>Get-FileHash ValheimWarriorsSync.exe</code>; výsledek musí být'} <code>384f87cef77b1c749b9a59f8faa11b4bd6cc053d132114a8285af4e2003a455c</code>. ${en ? 'If it differs, do not run the file.' : 'Když se liší, soubor nespouštěj.'}</details></div>
+      <div class="note" style="margin-top:8px">${en ? 'Open source Python (PyInstaller). Reads only .fch files in the folders you choose and sends the same statistics as the web page. Config lives in %APPDATA%\ValheimWarriors.' : 'Otevřený Python (PyInstaller). Čte jen soubory .fch ve zvolených složkách a posílá ty samé statistiky jako web. Nastavení je v %APPDATA%\ValheimWarriors.'}</div>`;
   } else if(kind === 'add'){
     title = en ? 'Add your character to this Valhalla' : 'Přidat svou postavu do této Valhaly';
     body = `<ol class="guide">
@@ -500,7 +498,7 @@ window.SITE_RENDER = () => {
     if(tok && foot && !foot.querySelector('[data-key]')) foot.insertAdjacentHTML('beforeend', `<span class="rmlink" data-key="${esc(tok)}" style="color:var(--gold)" title="${en ? 'Copy the key for the Sync app or another browser' : 'Zkopírovat klíč pro Sync appku nebo jiný prohlížeč'}">⚿ ${en ? 'Character key' : 'Klíč postavy'}</span>`);
   });
   const dz = document.getElementById('drop');
-  if(dz && !document.getElementById('appnote')){ dz.insertAdjacentHTML('afterend', `<div class="appnote" id="appnote">${en ? 'Tired of dragging? <a href="' + HOME + '#app">Sync app for Windows</a> uploads your character after every save.' : 'Nechceš přetahovat ručně? <a href="' + HOME + '#app">Sync appka pro Windows</a> nahraje postavu po každém uložení sama.'}</div>`); }
+  if(dz && !document.getElementById('appnote')){ dz.insertAdjacentHTML('afterend', `<div class="appnote" id="appnote">${en ? 'Tired of dragging? <a href="#" data-modal="app">Sync app for Windows</a> uploads your character after every save.' : 'Nechceš přetahovat ručně? <a href="#" data-modal="app">Sync appka pro Windows</a> nahraje postavu po každém uložení sama.'}</div>`); }
 };
 
 
