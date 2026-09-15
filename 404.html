@@ -168,6 +168,15 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .stamp.old{color:var(--rust)}
 .tip .desc{font-size:12px;color:var(--ink-2);line-height:1.35;margin:2px 0 6px}
 .tip .desc i{color:var(--ink);display:block;margin-bottom:2px}
+.rk{display:inline-block;font-size:9.5px;line-height:1;padding:2px 4px;margin-left:5px;vertical-align:middle;border:1px solid var(--line-2);color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.02em;background:var(--bar)}
+.rk.rk-best{border-color:var(--gold);color:var(--gold-2);background:rgba(217,164,65,.12)}
+.rk.rk-worst{border-color:var(--rust);color:#f0a090}
+.attr .rk{position:absolute;right:5px;top:5px;margin:0}
+.attr{position:relative}
+.cmp-best{color:var(--gold-2)!important}
+.cmp-worst{color:#e08070!important}
+.sk .v .rk,.kb .v .rk{display:none}
+.sk.cmp-best .t i,.kb.cmp-best .t i{box-shadow:0 0 0 1px var(--gold)}
 /* tooltip */
 [data-item]{cursor:help}
 .tip{position:fixed;z-index:9999;max-width:290px;background:linear-gradient(180deg,#2a2218,#1a150f);border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.6),inset 0 0 0 1px var(--line-2);padding:10px 12px;font-size:12.5px;color:var(--ink);pointer-events:none;display:none}
@@ -248,6 +257,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
   <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
   <div class="lang" role="group" aria-label="Jazyk"><button type="button" data-lang="cz" id="lang-cz">CZ</button><button type="button" data-lang="en" id="lang-en">EN</button></div>
   <div class="lang who" role="group" aria-label="Postavy" id="who"></div>
+  <div class="lang" id="cmpwrap" hidden><button type="button" id="cmpbtn" title="Pořadí u každé hodnoty napříč zobrazenými postavami">Porovnat</button></div>
   <div class="lang nav" id="nav" hidden><button type="button" id="navL" aria-label="Posunout doleva">‹</button><button type="button" id="navR" aria-label="Posunout doprava">›</button></div></div>
 </div>
 <div class="drop" id="drop">
@@ -1298,6 +1308,50 @@ function renderWho(){
   who.innerHTML = chars.map(c=>`<button type="button" data-who="${esc(c.name)}">${esc(c.name)}${c.meta&&c.meta.uploaded?`<span class="x" data-rm="${esc(c.name)}" title="${LANG==='en'?'remove':'odebrat'}">×</span>`:''}</button>`).join('');
   who.querySelectorAll('button').forEach(b=>b.addEventListener('click',ev=>{ const rm=ev.target.closest('[data-rm]'); if(rm){ removeChar(rm.dataset.rm); return; } const n=b.dataset.who; if(visible.has(n)){ if(visible.size>1) visible.delete(n); } else visible.add(n); try{ localStorage.setItem('viking-who',JSON.stringify([...visible])); }catch(e){} render(); }));
 }
+/* ---------- porovnani: poradi u kazde hodnoty podle stejneho popisku ---------- */
+let COMPARE = false; try{ COMPARE = localStorage.getItem('viking-cmp')==='1'; }catch(e){}
+const LOWER_BETTER = new Set(['smrtí','Smrtí','Pád','Utopení','Spoluhráč','Dostal hitů','Hrobů vybráno','Zavřel dveří','Havran','Načtení']);
+function parseNum(txt){
+  let t = String(txt).replace(/[  \s]/g,'').replace(/(km²|km|h|%|×|dní|days)$/,'');
+  if(LANG==='en'){ t = t.replace(/,/g,''); } else { t = t.replace(/\./g,'').replace(',', '.'); }
+  if(!/^-?\d+(\.\d+)?$/.test(t)) return null; return parseFloat(t);
+}
+function applyCompare(){
+  const sheets=[...document.querySelectorAll('#sheets .sheet')]; if(!COMPARE || sheets.length<2) return;
+  const EN=LANG==='en'; const n=sheets.length;
+  const lowerSet = new Set([...LOWER_BETTER].map(k=>T(k)));
+  const groups = {};
+  const add = (key, sheetIdx, valEl, label, cls) => { const v=parseNum(valEl.textContent); if(v==null) return; (groups[key]=groups[key]||[]).push({i:sheetIdx, v, el:valEl, label, cls}); };
+  sheets.forEach((sh,i)=>{
+    sh.querySelectorAll('.blk').forEach(blk=>{
+      const sec = [...blk.classList].find(c=>c.startsWith('b-'))||'';
+      const tables=[...blk.querySelectorAll('table.kv')];
+      tables.forEach((tb,ti)=>tb.querySelectorAll('tr').forEach(tr=>{ const tds=tr.children; if(tds.length<2) return; const lab=tds[0].textContent.trim(); if(!lab) return; add(sec+'|kv'+ti+'|'+lab, i, tds[1], lab, 'td'); }));
+      blk.querySelectorAll('.attr').forEach(a=>{ const lab=a.querySelector('span')?.textContent.trim(); const b=a.querySelector('b'); if(lab&&b) add(sec+'|attr|'+lab, i, b, lab, 'attr'); });
+      blk.querySelectorAll('.sk').forEach(s=>{ const lab=s.querySelector('.n')?.textContent.trim(); const v=s.querySelector('.v'); if(lab&&v) add(sec+'|sk|'+lab, i, v, lab, 'row'); });
+      blk.querySelectorAll('.kb').forEach(s=>{ const lab=s.querySelector('.n')?.textContent.trim(); const v=s.querySelector('.v'); if(lab&&v) add(sec+'|kb|'+lab, i, v, lab, 'row'); });
+      blk.querySelectorAll('.gsb .h').forEach(hh=>{ const lab=hh.querySelector('span')?.textContent.trim(); const b=hh.querySelector('b'); if(lab&&b) add(sec+'|gsb|'+lab, i, b, lab, 'gsb'); });
+      blk.querySelectorAll('.gsb .real > div').forEach(d=>{ const lab=d.querySelector('span')?.textContent.trim(); const b=d.querySelector('b'); if(lab&&b) add(sec+'|real|'+lab, i, b, lab, 'gsb'); });
+      blk.querySelectorAll('h2').forEach(h2=>{ const lab=h2.firstChild?.textContent.trim(); const s=h2.querySelector('.sum'); if(lab&&s) add(sec+'|sum|'+lab, i, s, lab, 'gsb'); });
+    });
+  });
+  Object.values(groups).forEach(items=>{
+    if(items.length<2) return; const seen=new Set(); if(items.some(x=>{ if(seen.has(x.i)) return true; seen.add(x.i); return false; })) return;
+    const lower = lowerSet.has(items[0].label) || /^(Deaths|Killed by enemy|Fall|Drowning|Teammate|Hits taken|Tombstones looted|World loads|Raven visits)$/.test(items[0].label);
+    const vals=items.map(x=>x.v); if(Math.max(...vals)===Math.min(...vals)) return;
+    items.forEach(x=>{
+      const better = items.filter(y=> lower ? y.v<x.v : y.v>x.v).length; const rank=better+1;
+      const isBest=rank===1, isWorst=!isBest && items.every(y=> lower ? y.v<=x.v : y.v>=x.v);
+      const cls = isBest?'rk-best':isWorst?'rk-worst':'';
+      const badge=`<span class="rk ${cls}" title="${EN?`${rank}. of ${items.length}`:`${rank}. z ${items.length}`}">${rank}.</span>`;
+      if(x.cls==='row'){ const row=x.el.closest('.sk,.kb'); if(isBest) row.classList.add('cmp-best'); if(isWorst) row.classList.add('cmp-worst'); x.el.classList.add(isBest?'cmp-best':isWorst?'cmp-worst':'cmp-mid'); x.el.title=EN?`${rank}. of ${items.length}`:`${rank}. z ${items.length}`; }
+      else if(x.cls==='attr'){ x.el.closest('.attr').insertAdjacentHTML('beforeend', badge); }
+      else { x.el.insertAdjacentHTML('beforeend', badge); }
+    });
+  });
+}
+const cmpWrap=document.getElementById('cmpwrap'), cmpBtn=document.getElementById('cmpbtn');
+if(cmpBtn) cmpBtn.addEventListener('click',()=>{ COMPARE=!COMPARE; try{ localStorage.setItem('viking-cmp',COMPARE?'1':'0'); }catch(e){} render(); });
 function render(){
   Object.keys(CHARS_BY_NAME).forEach(k=>delete CHARS_BY_NAME[k]); chars.forEach(c=>CHARS_BY_NAME[c.name]=c);
   renderWho();
@@ -1309,6 +1363,8 @@ function render(){
   if(document.getElementById('dropS')) document.getElementById('dropS').innerHTML = LANG==='en' ? 'Processed only in your browser, nothing is uploaded. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zpracuje se jen u tebe v prohlížeči, nikam se neposílá. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
   document.querySelectorAll('#who button').forEach(b=>b.classList.toggle('on', visible.has(b.dataset.who)));
   if(!DATA.site) document.querySelector('.top h1').textContent = document.querySelector('.top h1').textContent.replace(/^Listy vikingů|^Viking sheets/, T('Listy vikingů'));
+  if(cmpWrap){ cmpWrap.hidden = shown.length<2; cmpBtn.textContent = LANG==='en'?'Compare':'Porovnat'; cmpBtn.classList.toggle('on', COMPARE && shown.length>=2); cmpBtn.title = LANG==='en'?'Rank of every value across the shown characters':'Pořadí u každé hodnoty napříč zobrazenými postavami'; }
+  applyCompare();
   if(window.SITE_RENDER) window.SITE_RENDER();
   document.querySelectorAll('.lang button[data-lang]').forEach(b=>b.classList.toggle('on', b.dataset.lang===LANG));
   updateNav(); updateFloat();
