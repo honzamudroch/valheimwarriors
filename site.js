@@ -90,6 +90,8 @@ style.textContent = `
 .appbox ol{margin:0 0 12px;padding-left:20px;font-size:13px;color:var(--ink-2);line-height:1.5}
 .appbox code{font-size:12px;color:var(--ink)}
 .appbox .sitebtn{text-decoration:none;display:inline-block}
+.appbox .sha{font-size:11px;color:var(--muted);margin-top:8px;word-break:break-all}
+.appbox .sha code{color:var(--ink-2);font-size:11px}
 .appbox .sitebtn small{font-weight:400;opacity:.8}
 @media (max-width:560px){.appbox{grid-template-columns:1fr}}
 .foot2{font-size:11.5px;color:var(--muted);margin-top:18px;text-align:center}
@@ -149,7 +151,8 @@ async function landing(){
       <div class="apptxt"><b>${en ? 'Sync app for Windows' : 'Sync appka pro Windows'} <span class="beta">beta</span></b>
         <p>${en ? 'Runs in the tray, watches your Steam character folder and uploads the character to your server after every save. Nothing to drag, everyone always sees fresh data. No install, single file.' : 'Běží v liště u hodin, hlídá složku s postavami ve Steamu a po každém uložení hry postavu sama nahraje na tvůj server. Nic se nepřetahuje, parta má vždy čerstvá data. Bez instalace, jeden soubor.'}</p>
         <ol><li>${en ? 'Download and run' : 'Stáhni a spusť'} <code>ValheimWarriorsSync.exe</code>${en ? ' (unsigned beta: Windows warns about an unknown publisher, choose More info, Run anyway; on PCs with Smart App Control turned on it will not run, upload via the web instead)' : ' (nepodepsaná beta: Windows varuje před neznámým vydavatelem, zvol Další informace, Přesto spustit; na PC se zapnutým Smart App Control se nespustí, tam nahrávej přes web)'}</li><li>${en ? 'Paste your server link, tick your character, optionally "Start with Windows"' : 'Vlož odkaz svého serveru, zaškrtni svoji postavu, případně „Spouštět při startu Windows“'}</li><li>${en ? 'Save. Done, it uploads after every game save.' : 'Ulož. Hotovo, nahrává po každém uložení hry.'}</li></ol>
-        <a class="sitebtn" href="/download/ValheimWarriorsSync.exe" download>${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· ${en ? 'v0.1.1 · 30 MB' : 'v0.1.1 · 30 MB'}</small></a>
+        <a class="sitebtn" href="/download/ValheimWarriorsSync.exe" download>${en ? 'Download for Windows' : 'Stáhnout pro Windows'} <small>· v0.1.2 · 30 MB</small></a>
+        <div class="sha">SHA-256 <code>55615f68265f090b110f6e33529a35112070594101da11c6276342455d217bcd</code> <span>${en ? '(compare with the file you downloaded: PowerShell Get-FileHash ValheimWarriorsSync.exe)' : '(porovnej se staženým souborem: PowerShell Get-FileHash ValheimWarriorsSync.exe)'}</span></div>
         <div class="priv" style="margin-top:8px">${en ? 'Open source Python (PyInstaller). Reads only .fch files in the folders you choose and sends the same statistics as the web page. Config lives in %APPDATA%\ValheimWarriors.' : 'Otevřený Python (PyInstaller). Čte jen soubory .fch ve zvolených složkách a posílá ty samé statistiky jako web. Nastavení je v %APPDATA%\ValheimWarriors.'}</div>
       </div>
     </div>
@@ -196,7 +199,7 @@ async function server(){
   const isNew = location.hash === '#new'; if(isNew) history.replaceState(null, '', location.pathname + location.search);
   ADMIN = LS.get('vw-admin-' + slug);
   let srv, rows;
-  try{ [srv, rows] = await Promise.all([get('servers_public?slug=eq.' + encodeURIComponent(slug)), get('characters_public?slug=eq.' + encodeURIComponent(slug) + '&order=name')]); }
+  try{ [srv, rows] = await Promise.all([rpc('vw_get_server', {p_slug: slug}), rpc('vw_get_characters', {p_slug: slug})]); }
   catch(e){ notFound(e.message); return; }
   if(!srv.length){ notFound(); return; }
   SERVER = srv[0];

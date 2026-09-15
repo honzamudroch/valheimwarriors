@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://sfaxumbeilroctogyzri.supabase.co; base-uri 'none'; form-action 'self'">
 <title>Valheim Warriors</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,400;0,700;1,400&family=Metamorphous&display=swap">
 <style>
@@ -1174,7 +1175,7 @@ function sheet(D){
       ${kvTable([[T('Výrob'),S.Crafts],[T('Vylepšení'),S.Upgrades],[T('Stromů'),S.TreeChops],[T('Kamenů vytěženo'),S.Mines],[T('Zkroceno'),S.CreatureTamed],[T('Receptů'),P.recipes],[T('Materiálů'),P.materials]])}
       <div><div class="eyebrow split" style="margin:0 0 3px"><span>${T('postaveno nejvíc')}</span><b>${fmt(Object.values(L.built||{}).reduce((x,y)=>x+y,0))}</b></div>${listTable(L.built,8)}</div>
     </div>
-    <div class="trivia" style="margin-top:6px">${Object.entries(P.stations||{}).map(([k,v])=>`${LANG==='en' ? (STATION_EN[k]||humanize(k)) : (STATION_CZ[k]||k)} <b>${v}</b>`).join(' · ')}</div>
+    <div class="trivia" style="margin-top:6px">${Object.entries(P.stations||{}).map(([k,v])=>`${esc(LANG==='en' ? (STATION_EN[k]||humanize(k)) : (STATION_CZ[k]||k))} <b>${esc(v)}</b>`).join(' · ')}</div>
     </section>
     <section class="blk b-handled">
     <h2>${T('Nejvíc v rukou')}</h2>
@@ -1194,7 +1195,7 @@ function sheet(D){
     ${trivia.length?`<h2>${T('Drobnosti')}</h2><div class="trivia">${trivia.map(t=>`<p>${t}</p>`).join('')}</div>`:''}
     </section>
     <section class="blk b-foot">
-    <div class="foot">${esc(D.name.toLowerCase())}.fch · ${LANG==='en'?'format':'formát'} v${D.version} · ${D.meta&&D.meta.date?D.meta.date:''}${D.meta&&D.meta.uploaded?`<span class="rmlink" data-rm="${esc(D.name)}">✕ ${LANG==='en'?'remove':'odebrat'}</span>`:''}</div>
+    <div class="foot">${esc(D.name.toLowerCase())}.fch · ${LANG==='en'?'format':'formát'} v${esc(D.version)} · ${D.meta&&D.meta.date?esc(D.meta.date):''}${D.meta&&D.meta.uploaded?`<span class="rmlink" data-rm="${esc(D.name)}">✕ ${LANG==='en'?'remove':'odebrat'}</span>`:''}</div>
     </section>
   </article>`;
 }
@@ -1402,7 +1403,8 @@ function render(){
   renderWho();
   const shown = chars.filter(c=>visible.has(c.name));
   const dropEl0=document.getElementById('drop'); if(dropEl0){ const sheetsEl=document.getElementById('sheets'); if(chars.length){ if(dropEl0.compareDocumentPosition(sheetsEl)&Node.DOCUMENT_POSITION_FOLLOWING) sheetsEl.after(dropEl0); dropEl0.classList.add('bottom'); } else { if(dropEl0.compareDocumentPosition(sheetsEl)&Node.DOCUMENT_POSITION_PRECEDING) sheetsEl.before(dropEl0); dropEl0.classList.remove('bottom'); } }
-  document.getElementById('sheets').innerHTML = shown.length ? shown.map(sheet).join('') : `<div class="empty">${LANG==='en'?'No character yet. Drop a .fch file here.':'Zatím žádná postava. Přetáhni sem soubor .fch.'}</div>`;
+  const safeSheet = c => { try{ return sheet(c); }catch(e){ console.error(e); return `<article class="sheet"><section class="blk b-head"><h3 class="name">${esc(c.name||'?')}</h3><div class="eyebrow">${LANG==='en'?'This character file could not be displayed.':'Tuhle postavu nejde zobrazit (poškozená data).'}</div></section></article>`; } };
+  document.getElementById('sheets').innerHTML = shown.length ? shown.map(safeSheet).join('') : `<div class="empty">${LANG==='en'?'No character yet. Drop a .fch file here.':'Zatím žádná postava. Přetáhni sem soubor .fch.'}</div>`;
   if(document.getElementById('dropT')) document.getElementById('dropT').textContent = LANG==='en' ? 'Drop a character file (.fch) here' : 'Přetáhni sem soubor postavy (.fch)';
   if(document.getElementById('dropL')) document.getElementById('dropL').firstChild.textContent = LANG==='en' ? 'Choose file' : 'Vybrat soubor';
   if(document.getElementById('dropS')) document.getElementById('dropS').innerHTML = LANG==='en' ? 'Processed only in your browser, nothing is uploaded. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zpracuje se jen u tebe v prohlížeči, nikam se neposílá. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
