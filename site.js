@@ -85,6 +85,7 @@ style.textContent = `
 .land .steps{margin-top:6px}
 .secttl{font-family:"Metamorphous",serif;font-weight:400;font-size:16px;color:var(--gold);margin:18px 0 0}
 .land .step code{font-size:11px;color:var(--ink)}
+.land .step a{color:var(--gold)}
 .land .mine ul{margin:0;padding-left:18px}
 .appbox{display:grid;grid-template-columns:64px 1fr;gap:14px;margin-top:14px;border:1px solid var(--line);background:var(--panel);padding:16px 18px}
 .appbox .appicon{width:64px;height:64px;background:var(--bar);border:1px solid var(--bar-line);display:grid;place-items:center}
@@ -242,7 +243,7 @@ async function landing(){
     <div class="steps">
       <div class="step"><b>1 · ${en ? 'One of you creates a Valhalla' : 'Jeden z party založí Valhalu'}</b>${en ? 'Takes ten seconds, no account. They get a link and send it to the rest of you.' : 'Deset sekund, bez účtu. Dostane odkaz a pošle ho ostatním.'}</div>
       <div class="step"><b>2 · ${en ? 'Everyone drops in their character' : 'Každý nahraje svoji postavu'}</b>${en ? 'Open the link, drag your .fch file onto the page. It is in' : 'Otevři odkaz a přetáhni na stránku svůj soubor .fch. Najdeš ho v'} <code>Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters</code></div>
-      <div class="step"><b>3 · ${en ? 'Keep it fresh' : 'Udržuj aktuální'}</b>${en ? 'Drop the file again after a session, or run the Sync app once and forget about it. Only you (or the admin) can replace your character.' : 'Po hraní soubor přetáhni znovu, nebo si jednou pusť Sync appku a už na to nemysli. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
+      <div class="step"><b>3 · ${en ? 'Keep it fresh' : 'Udržuj aktuální'}</b>${en ? 'Run the <a href="#app">Sync app</a> once: it uploads your character by itself after every game save. No app? Then drop the file again after each session. Only you (or the admin) can replace your character.' : 'Pusť si jednou <a href="#app">Sync appku</a>: po každém uložení hry nahraje postavu sama. Bez appky musíš po každém hraní soubor přetáhnout znovu. Tvoji postavu může přepsat jen ty (nebo admin).'}</div>
     </div>
     <div class="appbox" id="app">
       <div class="appicon"><svg viewBox="0 0 64 64" width="44" height="44"><polygon points="32,4 58,14 54,40 32,60 10,40 6,14" fill="#1f1912" stroke="#d9a441" stroke-width="3"/><polygon points="32,14 48,22 45,38 32,50 19,38 16,22" fill="#d9a441"/></svg></div>
