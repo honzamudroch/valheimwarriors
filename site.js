@@ -70,11 +70,11 @@ style.textContent = `
 .land .hero-txt p{font-size:15px;max-width:52ch}
 .land .alt{font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
 .land .alt a{color:var(--gold);text-decoration:none;font-weight:700}
-.hero-demo{position:relative;align-self:start;padding-bottom:22px}
+.hero-demo{position:relative;align-self:start;padding-bottom:18px}
 .sheets.demo .blk:not(.b-head):not(.b-portrait):not(.b-attrs){display:none}
 .sheets.demo .gear .row:nth-child(n+8){display:none}
 .demo-cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2px 0 8px}
-.sheets.demo{display:block;overflow:visible;padding:0;transform:scale(.8);transform-origin:top left;width:125%}
+.sheets.demo{display:block;overflow:visible;padding:0;zoom:.8}
 .sheets.demo .sheet{display:block}
 .demo-fade{display:none}
 .hero2 .feats{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 24px;padding-top:18px;border-top:1px solid var(--line-2);position:relative}
@@ -204,7 +204,8 @@ style.textContent = `
 .cta5{display:grid;grid-template-columns:1fr;gap:6px;margin:14px 0 4px;max-width:460px}
 .cta5 .cta{flex-direction:row;align-items:baseline;gap:10px;padding:9px 12px}
 .cta5 .cta b{font-size:15px;min-width:150px}
-.cta5 .cta span{font-size:12px}
+.cta5 .cta span{font-size:12px;flex:1}
+.cta5 .cta .beta{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ember);border:1px solid var(--ember);padding:1px 5px;margin-left:auto}
 .land .mine{border:1px solid var(--line);background:var(--panel);padding:14px 18px 12px;margin-top:14px}
 .land .mine h3{font-size:16px;display:flex;align-items:center;gap:8px;margin:0 0 8px}
 .land .mine li{font-size:15px;margin:5px 0}
@@ -243,11 +244,11 @@ async function landing(){
         <h2>${en ? 'See your whole crew side by side. Straight from the save file.' : 'Celá parta vedle sebe. Přímo ze save souboru.'}</h2>
         <p>${en ? 'Everyone drops in their character file once, the page turns it into a sheet and your whole party sits side by side. The Sync app keeps it fresh after every game save.' : 'Každý jednou nahraje soubor své postavy, stránka z něj udělá list a celá parta je vedle sebe. Sync appka to pak drží aktuální po každém uložení hry.'}</p>
         <div class="cta5">
+          <a class="cta" href="#" data-modal="demo"><b>${en ? 'Example' : 'Ukázka'}</b><span>${en ? 'a full character sheet' : 'celý list jedné postavy'}</span></a>
+          <a class="cta" href="#" data-modal="own"><b>${en ? 'Try your own' : 'Nahrát vlastní'}</b><span>${en ? 'just for you, nothing is sent' : 'jen pro tebe, nic se neposílá'}</span></a>
           <a class="cta main" href="#" data-modal="create"><b>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</b><span>${en ? 'a shared page for your party, one link' : 'společná stránka pro partu, jeden odkaz'}</span></a>
           <a class="cta" href="#" data-modal="join"><b>${en ? 'Join' : 'Připojit se'}</b><span>${en ? 'your party already has a Valhalla' : 'parta už Valhalu má'}</span></a>
-          <a class="cta" href="#" data-modal="app"><b>${en ? 'Sync app' : 'Sync appka'}</b><span>${en ? 'your sheet updates itself after every game save' : 'list se aktualizuje sám po každém uložení hry'}</span></a>
-          <a class="cta" href="#" data-modal="own"><b>${en ? 'Try your own' : 'Nahrát vlastní'}</b><span>${en ? 'just for you, nothing is sent' : 'jen pro tebe, nic se neposílá'}</span></a>
-          <a class="cta" href="#" data-modal="demo"><b>${en ? 'Example' : 'Ukázka'}</b><span>${en ? 'a full character sheet' : 'celý list jedné postavy'}</span></a>
+          <a class="cta" href="#" data-modal="app"><b>${en ? 'Sync app' : 'Sync appka'}</b><span>${en ? 'your sheet updates itself after every game save' : 'list se aktualizuje sám po každém uložení hry'}</span><em class="beta">beta</em></a>
         </div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
@@ -270,9 +271,9 @@ async function landing(){
       </div>
     </div>
 
-    <div class="help" id="help">${helpHTML(en)}</div>
     ${(my.length || lc.length) ? `<div class="mine two"><div><h3><svg viewBox="0 0 64 64" width="20" height="20"><polygon points="32,4 58,14 54,40 32,60 10,40 6,14" fill="#1f1912" stroke="#d9a441" stroke-width="4"/><polygon points="32,14 48,22 45,38 32,50 19,38 16,22" fill="#d9a441"/></svg> ${en ? 'My Valhallas' : 'Moje Valhaly'}</h3>${my.length ? `<ul>${my.map(sv => `<li><span class="av">⚔</span><a href="${LINK(sv.slug)}">${esc(sv.name)}</a>${sv.admin ? `<small>admin</small>` : ''}<button class="mini" data-forget="${esc(sv.slug)}" title="${en ? 'Remove from this list (the Valhalla itself stays)' : 'Odebrat ze seznamu (Valhala sama zůstane)'}">×</button></li>`).join('')}</ul>` : `<p class="note">${en ? 'None yet.' : 'Zatím žádná.'}</p>`}</div>
       <div><h3><span class="av big">☺</span> ${en ? 'My characters' : 'Moje postavy'} <small>${en ? 'previews saved in this browser' : 'náhledy uložené v tomto prohlížeči'}</small></h3>${lc.length ? `<ul>${lc.map(c => `<li><span class="av">${esc((c.name || '?').slice(0, 1).toUpperCase())}</span><a href="#" data-showchar="${esc(String(c.player_id))}">${esc(c.name)}</a><small>${c.meta && c.meta.saved ? new Date(c.meta.saved).toLocaleDateString(en ? 'en-GB' : 'cs-CZ') : ''}</small><button class="mini" data-delchar="${esc(String(c.player_id))}" title="${en ? 'Delete this preview' : 'Smazat náhled'}">×</button></li>`).join('')}</ul>` : `<p class="note">${en ? 'None yet. Use Try your own above.' : 'Zatím žádná. Použij Nahrát vlastní nahoře.'}</p>`}</div></div>` : ''}
+    <div class="help" id="help">${helpHTML(en)}</div>
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
     <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
   </section>`;
