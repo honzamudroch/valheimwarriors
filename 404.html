@@ -1009,7 +1009,8 @@ function portrait(P){
     const hand = (it,cls) => it && ASSETS.icons[it.name] ? `<img class="hand ${cls}" src="${ASSETS.icons[it.name]}" alt="" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(P.name||'')}">` : '';
     const body = ASSETS.sets['Rags'];
     const part = (it,cls) => it && ASSETS.icons[it.name] ? `<img class="part ${cls}" src="${ASSETS.icons[it.name]}" alt="" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(P.name||'')}">` : '';
-    if(body) return `<div class="fig paper"><img class="body dim" src="${body}" alt="">${part(helmet,'head')}${part(chest,'chest')}${part(legs,'legs')}${hand(shd,'l')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
+    // sada bez renderu: postava "v hadrech" bez pripnutych ikon (co nevime, jak vypada, na postave neukazujeme), zbrane v rukou zustavaji
+    if(body) return `<div class="fig paper"><img class="body" src="${body}" alt="">${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
     return `<div class="fig icons"><div class="stack">${ic(helmet)}${ic(chest)}${ic(legs)}</div>${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
   }
   const full = [chest,legs,helmet].filter(Boolean).every(i=>setFamily(i.name)===fam) && chest && legs;
