@@ -277,7 +277,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="fch.js"></script>
+<script src="/fch.js"></script>
 <script>
 const DATA = {"chars": [], "lang": "en", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1425,7 +1425,7 @@ async function loadAssets(){
   try{
     st.textContent = LANG==='en' ? 'Loading library…' : 'Načítám knihovnu…';
     const [names, icons, sets, stats, attacks, creatures, ach, desc] = await Promise.all([
-      get('assets/item-names.json'), get('assets/valheim-icons.json'), get('assets/sets_front.json'), get('assets/valheim-stats.json'), get('assets/valheim-attacks.json'), get('assets/valheim-creatures.json'), get('assets/valheim-achievements.json').catch(()=>null), get('assets/valheim-desc.json').catch(()=>null)
+      get('/assets/item-names.json'), get('/assets/valheim-icons.json'), get('/assets/sets_front.json'), get('/assets/valheim-stats.json'), get('/assets/valheim-attacks.json'), get('/assets/valheim-creatures.json'), get('/assets/valheim-achievements.json').catch(()=>null), get('/assets/valheim-desc.json').catch(()=>null)
     ]);
     ITEM_NAMES = names;
     ASSETS = { icons: icons.icons, sets, stats: Object.fromEntries(Object.entries(stats.items).filter(([,v])=>v.levels&&v.levels.length).map(([k,v])=>[k,{levels:v.levels, source:v.source}])), attacks: attacks.items, creatures: creatures.items, achievements: ach? {players: ach.players, icons: ach.icons} : null, desc: desc? desc.items : {} };
@@ -1456,4 +1456,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="site.js"></script>
+<script src="/site.js"></script>
