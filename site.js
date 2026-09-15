@@ -245,10 +245,10 @@ async function landing(){
         <p>${en ? 'Everyone drops in their character file once, the page turns it into a sheet and your whole party sits side by side. The Sync app keeps it fresh after every game save.' : 'Každý jednou nahraje soubor své postavy, stránka z něj udělá list a celá parta je vedle sebe. Sync appka to pak drží aktuální po každém uložení hry.'}</p>
         <div class="cta5">
           <a class="cta" href="#" data-modal="demo"><b>${en ? 'Example' : 'Ukázka'}</b><span>${en ? 'a full character sheet' : 'celý list jedné postavy'}</span></a>
-          <a class="cta" href="#" data-modal="own"><b>${en ? 'Try your own' : 'Nahrát vlastní'}</b><span>${en ? 'just for you, nothing is sent' : 'jen pro tebe, nic se neposílá'}</span></a>
-          <a class="cta main" href="#" data-modal="create"><b>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</b><span>${en ? 'a shared page for your party, one link' : 'společná stránka pro partu, jeden odkaz'}</span></a>
+          <a class="cta" href="#" data-modal="own"><b>${en ? 'Try your own' : 'Nahrát vlastní'}</b><span>${en ? 'see your own character sheet, nothing is sent' : 'zobraz si list své postavy, nic se neposílá'}</span></a>
+          <a class="cta main" href="#" data-modal="create"><b>${en ? 'Create a Valhalla' : 'Založit Valhalu'}</b><span>${en ? 'a shared page for your party: share and compare your journeys' : 'společná stránka pro partu: sdílejte a porovnávejte své cesty'}</span></a>
           <a class="cta" href="#" data-modal="join"><b>${en ? 'Join' : 'Připojit se'}</b><span>${en ? 'your party already has a Valhalla' : 'parta už Valhalu má'}</span></a>
-          <a class="cta" href="#" data-modal="app"><b>${en ? 'Sync app' : 'Sync appka'}</b><span>${en ? 'your sheet updates itself after every game save' : 'list se aktualizuje sám po každém uložení hry'}</span><em class="beta">beta</em></a>
+          <a class="cta" href="#" data-modal="app"><b>${en ? 'Sync app' : 'Sync appka'}</b><span>${en ? 'your data updates itself after every game save' : 'data se aktualizují sama po každém uložení hry'}</span><em class="beta">beta</em></a>
         </div>
       </div>
       <div class="hero-demo"><div class="demo-cap">${en ? 'A real character, rendered live' : 'Skutečná postava, vykreslená živě'}</div><div class="sheets demo" id="demo"></div><div class="demo-fade"></div></div>
