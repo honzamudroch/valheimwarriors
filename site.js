@@ -71,8 +71,7 @@ style.textContent = `
 .land .alt{font-size:13px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
 .land .alt a{color:var(--gold);text-decoration:none;font-weight:700}
 .hero-demo{position:relative;align-self:start;padding-bottom:22px}
-.sheets.demo .blk:not(.b-head):not(.b-portrait):not(.b-attrs):not(.b-big){display:none}
-.sheets.demo .b-big h2{margin-top:14px}
+.sheets.demo .blk:not(.b-head):not(.b-portrait):not(.b-attrs){display:none}
 .demo-cap{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:2px 0 8px}
 .sheets.demo{display:block;overflow:visible;padding:0;transform:scale(.9);transform-origin:top left;width:111%}
 .sheets.demo .sheet{display:block}
@@ -200,7 +199,7 @@ function rememberServer(s, name, admin){ const l = mine().filter(x => x.slug !==
 /* ---------- uvodni stranka ---------- */
 const FEAT = [
   ['SwordIron', 'Výbava a poškození', 'Gear and damage', 'Co má na sobě, celková zbroj, útok zbraně přepočtený na skill: za hit i DPS.', 'What they wear, total armor, weapon damage adjusted for skill: per hit and DPS.'],
-  ['TrophyTheElder', 'Trofeje a velké kusy', 'Trophies and big game', 'Trolly, medvědi, zrůdy, bossové. Kdo kolik zabil a co z toho padá.', 'Trolls, bears, abominations, bosses. Who killed how many and what they drop.'],
+  ['TrophyTheElder', 'Trofeje a velké kusy', 'Trophies and big prey', 'Trolly, medvědi, zrůdy, bossové. Kdo kolik zabil a co z toho padá.', 'Trolls, bears, abominations, bosses. Who killed how many and what they drop.'],
   ['ArrowFire', 'Boj a smrti', 'Combat and deaths', 'Rozdané a přijaté hity, šípy, smrti podle příčiny, hroby a jak se do nich vešel.', 'Hits dealt and taken, arrows, deaths by cause, tombstones and whether it all fit.'],
   ['Hammer', 'Cesta a práce', 'Travel and work', 'Kilometry pěšky, během, lodí. Postaveno, vytěženo, sebráno, snědeno, prozkoumaná mapa.', 'Kilometres walked, run and sailed. Built, mined, picked, eaten, explored map.']
 ];
