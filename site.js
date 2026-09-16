@@ -499,8 +499,9 @@ window.SITE_RENDER = () => {
   document.getElementById('h1').textContent = SERVER.name; document.title = SERVER.name + ' · Valheim Warriors';
   let bar = document.getElementById('sitebar');
   if(!bar){ bar = document.createElement('div'); bar.id = 'sitebar'; bar.className = 'sitebar'; document.querySelector('.top > div').prepend(bar); }
-  bar.innerHTML = `<button type="button" class="sitebtn" id="addchar">${en ? '+ Add my character' : '+ Přidat svou postavu'}</button><button type="button" class="sitebtn ghost" id="invite">${en ? 'Invite' : 'Pozvat'}</button>${ADMIN ? `<span class="adm">admin</span>` : ''}`;
+  bar.innerHTML = `<button type="button" class="sitebtn" id="addchar">${en ? '+ Add my character' : '+ Přidat svou postavu'}</button><button type="button" class="sitebtn ghost" id="invite">${en ? 'Invite' : 'Pozvat'}</button><button type="button" class="sitebtn ghost" id="getapp" title="${en ? 'Windows app that uploads your character after every game save' : 'Aplikace pro Windows, která nahrává postavu po každém uložení hry'}">⟳ ${en ? 'Sync app' : 'Sync appka'}</button>${ADMIN ? `<span class="adm">admin</span>` : ''}`;
   document.getElementById('addchar').onclick = () => openModal('add');
+  document.getElementById('getapp').onclick = () => openModal('app');
   document.getElementById('invite').onclick = () => showInvite(true);
   let crumb = document.getElementById('crumb');
   if(!crumb){ crumb = document.createElement('div'); crumb.id = 'crumb'; crumb.className = 'crumb'; document.querySelector('.top').after(crumb); }
