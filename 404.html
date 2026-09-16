@@ -55,7 +55,9 @@ body{margin:0;background:var(--bg);background-image:radial-gradient(ellipse at 5
 .gear .row:last-child{border-bottom:0}
 .gear b{font-weight:700;color:var(--ink)}
 .gear .slot{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-right:5px}
-.pips{display:inline-flex;gap:3px;vertical-align:middle;margin-left:6px}
+.pips{display:inline-flex;gap:3px;vertical-align:middle;margin-left:4px}
+.gear .sl{display:flex;align-items:center;gap:2px;line-height:1.1}
+.gear .txt b{display:block;line-height:1.2}
 .pips i{width:6px;height:6px;background:var(--gold);display:inline-block;transform:rotate(45deg)}
 .pips i.off{background:var(--line-2)}
 .gear .dur{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -289,7 +291,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609161535"></script>
+<script src="/fch.js?v=202609161536"></script>
 <script>
 const DATA = {"chars": [], "lang": "en", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1091,11 +1093,11 @@ function sheet(D){
   const gear = SLOTS.map(([re,slot,anywhere])=>{
     let it = eq.find(i=>re.test(i.name)); let inPack=false;
     if(!it && anywhere){ it = bestOf(P.inventory.filter(i=>re.test(i.name))); inPack = !!it; }
-    if(!it) return `<div class="row"><div class="ico" style="opacity:.35"></div><div class="txt"><span class="slot">${T(slot)}</span><span style="color:var(--muted)">${T('nic')}</span></div><div></div></div>`;
+    if(!it) return `<div class="row"><div class="ico" style="opacity:.35"></div><div class="txt"><div class="sl"><span class="slot">${T(slot)}</span></div><span style="color:var(--muted)">${T('nic')}</span></div><div></div></div>`;
     const mx = Math.max(MAXDUR[it.name]||100, it.dur), pct=Math.min(1,it.dur/mx);
     const pips = it.q>1?`<span class="pips">${[1,2,3,4].map(k=>`<i class="${k<=it.q?'':'off'}"></i>`).join('')}</span>`:'';
     const showDur = !/^(Belt|Trinket|Wishbone|Megingjord)/.test(it.name);
-    return `<div class="row" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(D.name)}">${ICON(it.name)||'<div class="ico"></div>'}<div class="txt"><span class="slot">${T(slot)}</span><b>${esc(cz(it.name))}</b>${pips}</div><div class="dur${pct<0.25?' low':''}">${showDur?`${Math.round(pct*100)} %`:''}</div></div>`;
+    return `<div class="row" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(D.name)}">${ICON(it.name)||'<div class="ico"></div>'}<div class="txt"><div class="sl"><span class="slot">${T(slot)}</span>${pips}</div><b>${esc(cz(it.name))}</b></div><div class="dur${pct<0.25?' low':''}">${showDur?`${Math.round(pct*100)} %`:''}</div></div>`;
   }).join('');
   const killsAll = Object.entries(L.kills||{}).sort((a,b)=>b[1]-a[1]);
   const big = killsAll.filter(([k])=>BIG_RE.test(k)), kills = killsAll.filter(([k])=>!BIG_RE.test(k));
@@ -1481,4 +1483,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609161535"></script>
+<script src="/site.js?v=202609161536"></script>
