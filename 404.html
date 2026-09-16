@@ -287,7 +287,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609161100"></script>
+<script src="/fch.js?v=202609161234"></script>
 <script>
 const DATA = {"chars": [], "lang": "en", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1178,7 +1178,6 @@ function sheet(D){
       ${kvTable([[T('Výrob'),S.Crafts],[T('Vylepšení'),S.Upgrades],[T('Stromů'),S.TreeChops],[T('Kamenů vytěženo'),S.Mines],[T('Zkroceno'),S.CreatureTamed],[T('Receptů'),P.recipes],[T('Materiálů'),P.materials]])}
       <div><div class="eyebrow split" style="margin:0 0 3px"><span>${T('postaveno nejvíc')}</span><b>${fmt(Object.values(L.built||{}).reduce((x,y)=>x+y,0))}</b></div>${listTable(L.built,8)}</div>
     </div>
-    <div class="trivia" style="margin-top:6px">${Object.entries(P.stations||{}).map(([k,v])=>`${esc(LANG==='en' ? (STATION_EN[k]||humanize(k)) : (STATION_CZ[k]||k))} <b>${esc(v)}</b>`).join(' · ')}</div>
     </section>
     <section class="blk b-handled">
     <h2>${T('Nejvíc v rukou')}</h2>
@@ -1480,4 +1479,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609161100"></script>
+<script src="/site.js?v=202609161234"></script>
