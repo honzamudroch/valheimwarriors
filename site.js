@@ -26,10 +26,10 @@ let SERVER = null, ADMIN = null;
 
 const style = document.createElement('style');
 style.textContent = `
-body{position:relative;background:#0a1220 url(/bg.webp?v=1) center top / cover no-repeat fixed!important}
-body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,18,.35),rgba(6,10,18,.15) 30%,rgba(6,10,18,.25) 70%,rgba(6,10,18,.7))}
+body{position:relative;background:#0a1220 url(/bg.webp?v=2) center top / cover no-repeat fixed!important}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,18,.4),rgba(6,10,18,.2) 30%,rgba(6,10,18,.3) 70%,rgba(6,10,18,.7))}
 body::after{content:none}
-@media (max-width:700px){body{background-image:url(/bg-m.webp?v=1)!important;background-attachment:scroll!important}}
+@media (max-width:700px){body{background-image:url(/bg-m.webp?v=2)!important;background-attachment:scroll!important}}
 .wrap{position:relative;z-index:1}
 .brand{display:inline-flex;align-items:center;gap:12px}
 .brand img{width:46px;height:46px;filter:drop-shadow(0 0 10px rgba(217,164,65,.45)) drop-shadow(0 2px 2px rgba(0,0,0,.8))}
