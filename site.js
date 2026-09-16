@@ -63,6 +63,8 @@ body::after{content:none}
 .sitebar .adm{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .crumb{font-size:12.5px;color:var(--muted);margin:-8px 0 10px}
 .crumb a{color:var(--gold);text-decoration:none}
+.crumb .hint{margin-left:12px;color:var(--muted);opacity:.85}
+@media (max-width:760px){.crumb .hint{display:none}}
 .crumb a.bug{float:right;color:var(--muted);border:1px solid var(--line-2);padding:0 6px;font-size:11.5px}
 .crumb a.bug:hover{color:var(--gold);border-color:var(--gold)}
 .foot2 a{color:var(--gold)}
@@ -502,7 +504,7 @@ window.SITE_RENDER = () => {
   document.getElementById('invite').onclick = () => showInvite(true);
   let crumb = document.getElementById('crumb');
   if(!crumb){ crumb = document.createElement('div'); crumb.id = 'crumb'; crumb.className = 'crumb'; document.querySelector('.top').after(crumb); }
-  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')} <a class="bug" href="#" data-report="1">${en ? 'report a bug' : 'nahlásit chybu'}</a><a class="bug" href="#" data-modal="help">${en ? 'help' : 'nápověda'}</a>`;
+  crumb.innerHTML = `<a href="${HOME}">Valheim Warriors</a> › ${esc(SERVER.name)} · ${chars.length} ${en ? (chars.length === 1 ? 'character' : 'characters') : (chars.length === 1 ? 'postava' : chars.length < 5 ? 'postavy' : 'postav')}${chars.length > 1 ? `<span class="hint">${en ? 'Drag the names above to reorder columns, click a name to hide or show it.' : 'Tažením jmen nahoře přeskládáš sloupce, klikem na jméno ho skryješ nebo ukážeš.'}</span>` : ''} <a class="bug" href="#" data-report="1">${en ? 'report a bug' : 'nahlásit chybu'}</a><a class="bug" href="#" data-modal="help">${en ? 'help' : 'nápověda'}</a>`;
   const dt = document.getElementById('dropT'), ds = document.getElementById('dropS');
   if(dt) dt.textContent = en ? 'Drop your character file (.fch) here, it shows up for the whole party' : 'Přetáhni sem svou postavu (.fch), objeví se celé partě';
   if(ds) ds.innerHTML = en ? 'Parsed in your browser, only statistics are stored. Upload again after playing to refresh. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters' : 'Zpracuje se u tebe v prohlížeči, ukládají se jen statistiky. Po hraní nahraj znovu a list se obnoví. Steam: Program Files (x86)\\Steam\\userdata\\&lt;id&gt;\\892970\\remote\\characters';
