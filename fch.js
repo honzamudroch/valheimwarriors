@@ -45,6 +45,7 @@
       let q = 1, stack = 1, cr = null;
       if (fl & 0x04) { q = r.u8(); r.u8(); }
       if (fl & 0x08) stack = r.u16();
+      if (fl & 0x10) r.i32();   // varianta (barva stitu apod.)
       if (fl & 0x20) { r.i64(); cr = r.str(); }
       const h = (fl & 0x40) ? r.u32() : null;
       r.u8();
