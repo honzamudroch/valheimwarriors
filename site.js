@@ -26,19 +26,14 @@ let SERVER = null, ADMIN = null;
 
 const style = document.createElement('style');
 style.textContent = `
-body{position:relative;background:#0b1424!important;background-image:
-  radial-gradient(ellipse 60% 40% at 8% 6%,rgba(255,214,150,.42),transparent 60%),
-  radial-gradient(ellipse 45% 35% at 50% 100%,rgba(240,140,50,.42),rgba(120,50,20,.12) 45%,transparent 70%),
-  linear-gradient(180deg,#0a1526 0%,#163552 30%,#1d4a58 48%,#12271f 68%,#080c09 100%)!important;background-attachment:fixed!important}
-body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:url(/bg_wolf.webp?v=3) no-repeat right 5vw bottom 70px / min(18vw,260px) auto, url(/bg_troll.webp?v=3) no-repeat left -60px bottom 30px / min(40vw,560px) auto, url(/forest.svg?v=3) no-repeat center bottom / 100% min(36vh,360px);opacity:.92}
-body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 50% 30% at 50% 96%,rgba(255,170,70,.28),transparent 70%),linear-gradient(180deg,rgba(0,0,0,.25),transparent 30%,transparent 70%,rgba(0,0,0,.35)),
-  radial-gradient(1.5px 1.5px at 12% 18%,rgba(255,255,255,.55),transparent 60%),radial-gradient(1.5px 1.5px at 33% 9%,rgba(255,255,255,.45),transparent 60%),radial-gradient(1px 1px at 58% 22%,rgba(255,255,255,.5),transparent 60%),radial-gradient(1.5px 1.5px at 76% 14%,rgba(255,255,255,.4),transparent 60%),radial-gradient(1px 1px at 88% 30%,rgba(255,255,255,.45),transparent 60%),radial-gradient(1px 1px at 45% 38%,rgba(255,255,255,.35),transparent 60%),radial-gradient(1.5px 1.5px at 22% 44%,rgba(255,255,255,.3),transparent 60%)}
+body{position:relative;background:#0a1220 url(/bg.webp?v=1) center top / cover no-repeat fixed!important}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,18,.35),rgba(6,10,18,.15) 30%,rgba(6,10,18,.25) 70%,rgba(6,10,18,.7))}
+body::after{content:none}
+@media (max-width:700px){body{background-image:url(/bg-m.webp?v=1)!important;background-attachment:scroll!important}}
 .wrap{position:relative;z-index:1}
 .brand{display:inline-flex;align-items:center;gap:12px}
 .brand img{width:46px;height:46px;filter:drop-shadow(0 0 10px rgba(217,164,65,.45)) drop-shadow(0 2px 2px rgba(0,0,0,.8))}
-@media (max-width:700px){body::before{opacity:.8;background-size:34vw auto, 62vw auto, 100% 26vh}}
+
 
 .land{max-width:720px;margin:10px auto 30px}
 .land .hero{border:2px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel));box-shadow:inset 0 0 0 1px var(--panel-3),inset 0 0 0 3px var(--line-2),0 6px 18px var(--shadow);padding:26px 28px 24px;position:relative}
