@@ -252,7 +252,7 @@ const FEAT = [
 async function landing(){
   const land = document.getElementById('landing'); land.hidden = false;
   document.getElementById('drop').hidden = false; document.getElementById('sheets').hidden = true;
-  document.getElementById('h1').innerHTML = '<span class="brand"><img src="/brand_trophy.png" alt="">Valheim Warriors</span>'; document.title = 'Valheim Warriors';
+  document.getElementById('h1').textContent = 'Valheim Warriors'; document.title = 'Valheim Warriors';
   const en = EN(); const my = mine(); const lc = localChars(); landingLang = LANG;
   const dropEl = document.getElementById('drop'); if(dropEl) setTimeout(() => { const anchor = land.querySelector('.foot2'); if(anchor) anchor.before(dropEl); }, 0);
   land.innerHTML = `<section class="land wide">
