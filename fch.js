@@ -102,9 +102,11 @@
     const rr = new R(body, e); const pid = rr.i64(); rr.str(); rr.u8(); const created = rr.i64();
     const nm_off = e - L - 1;
     const worlds = [];
-    for (let q2 = nm_off - 4; q2 > 20000; q2--) {
-      if (bdv.getInt32(q2, true) === nm_off - (q2 + 4) && body[q2 + 4] === 0x1f && body[q2 + 5] === 0x8b) {
-        const gl = nm_off - (q2 + 4);
+    // svety jdou za sebou, kazdy konci gzip mapou; hledame od jmena zpet, dokud bloky navazuji (hrac mohl navstivit vic svetu)
+    let wend = nm_off;
+    for (let q2 = wend - 4; q2 > 20000; q2--) {
+      if (bdv.getInt32(q2, true) === wend - (q2 + 4) && body[q2 + 4] === 0x1f && body[q2 + 5] === 0x8b) {
+        const gl = wend - (q2 + 4);
         const wr = new R(body, q2 - 68);
         const uid = wr.i64(); const hs = wr.u8(); const sp = [wr.f32(), wr.f32(), wr.f32()]; const hl = wr.u8(); const lo = [wr.f32(), wr.f32(), wr.f32()];
         const hd = wr.u8(); const de = [wr.f32(), wr.f32(), wr.f32()]; const hp = [wr.f32(), wr.f32(), wr.f32()]; wr.u8(); wr.i32(); wr.i32(); wr.i32();
@@ -127,9 +129,11 @@
         let exc = 0, othc = 0; for (let i = 0; i < ex.length; i++) { if (ex[i] === 1) exc++; if (oth[i] === 1) othc++; }
         const px = Math.pow(20000 / ts, 2) / 1e6;
         worlds.push({ uid, spawn: hs ? sp : null, logout: hl ? lo : null, death: hd ? de : null, home: hp, explored_km2: Math.round(exc * px * 100) / 100, others_km2: Math.round(othc * px * 100) / 100, grid, pins });
-        break;
+        wend = q2 - 68; q2 = wend - 3;
+        if (worlds.length >= 12) break;
       }
     }
+    worlds.sort((x, y) => (y.explored_km2 + y.others_km2) - (x.explored_km2 + x.others_km2));   // hlavni svet = nejvic prozkoumany
     const p = new R(body, pdstart);
     p.i32(); const maxhp = p.f32(); p.f32(); const maxst = p.f32(); const tsd = p.f32(); const gp = p.str(); p.f32();
     const inv = parseInv(p, nameOf);
