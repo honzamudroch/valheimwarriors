@@ -176,7 +176,8 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .stamp i{width:8px;height:8px;border-radius:50%;display:inline-block;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
 .stamp.fresh i{background:var(--moss)}.stamp.ok i{background:var(--gold)}.stamp.old i{background:var(--rust)}
 .stamp.old{color:var(--rust)}
-.stamp .syncb{margin-left:auto;font-size:11px;color:var(--moss);border:1px solid rgba(122,154,63,.5);padding:1px 6px;white-space:nowrap}
+.stamp.synced{color:#9fbf5a}.stamp.synced b{color:#c9e28a}.stamp.synced i{background:var(--moss)!important}
+.stamp small{margin-left:auto;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--moss);opacity:.85}
 .tip .desc{font-size:12px;color:var(--ink-2);line-height:1.35;margin:2px 0 6px}
 .tip .desc i{color:var(--ink);display:block;margin-bottom:2px}
 .rk{display:inline-block;font-size:9.5px;line-height:1;padding:2px 4px;margin-left:5px;vertical-align:middle;border:1px solid var(--line-2);color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.02em;background:var(--bar)}
@@ -288,7 +289,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609161531"></script>
+<script src="/fch.js?v=202609161532"></script>
 <script>
 const DATA = {"chars": [], "lang": "en", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1218,9 +1219,9 @@ function stamp(D){
   const rel = EN ? (days<=0?'today':days===1?'yesterday':`${days} days ago`) : (days<=0?'dnes':days===1?'včera':days<5?`před ${days} dny`:`před ${days} dny`);
   const pad=x=>String(x).padStart(2,'0');
   const when = `${d.getDate()}. ${d.getMonth()+1}. ${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-  let sync='';
-  if(D.meta.app && D.meta.uploaded_at){ const u=new Date(D.meta.uploaded_at); if(!isNaN(u)) sync=`<span class="syncb" title="${EN?'Uploaded automatically by the Sync app':'Nahráno automaticky Sync appkou'}">⟳ ${EN?'Sync app':'Sync appka'} · ${EN?'uploaded':'nahráno'} ${u.getDate()}. ${u.getMonth()+1}. ${pad(u.getHours())}:${pad(u.getMinutes())}</span>`; }
-  return `<div class="stamp ${cls}" title="${EN?'Time the .fch file was saved':'Čas uložení souboru .fch'}"><i></i>${EN?'Data as of':'Stav k'} <b>${when}</b> · ${rel}${sync}</div>`;
+  let synced=false, tip=EN?'Time the .fch file was saved':'Čas uložení souboru .fch';
+  if(D.meta.app && D.meta.uploaded_at){ const u=new Date(D.meta.uploaded_at); if(!isNaN(u)){ synced=true; tip=(EN?'Synced automatically by the Sync app, last upload ':'Synchronizováno automaticky Sync appkou, poslední nahrání ')+`${u.getDate()}. ${u.getMonth()+1}. ${pad(u.getHours())}:${pad(u.getMinutes())}`; } }
+  return `<div class="stamp ${cls}${synced?' synced':''}" title="${tip}"><i></i>${synced?'⟳ ':''}${EN?'Data as of':'Stav k'} <b>${when}</b> · ${rel}${synced?`<small>${EN?'Sync app':'Sync appka'}</small>`:''}</div>`;
 }
 function tipHTML(name, q, dur, who){
   const EN=LANG==='en'; const D=CHARS_BY_NAME[who]; const P=D?D.player:null; const L=D?D.global_lists:null;
@@ -1480,4 +1481,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609161531"></script>
+<script src="/site.js?v=202609161532"></script>
