@@ -145,7 +145,6 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .portrait .fig.paper img.part.head{top:6px}.portrait .fig.paper img.part.chest{top:64px}.portrait .fig.paper img.part.legs{top:122px}
 .portrait .fig img.body{max-width:142px;max-height:200px;display:block;filter:drop-shadow(0 4px 6px rgba(0,0,0,.6))}
 .portrait .fig img.hand{position:absolute;width:44px;height:44px;pointer-events:auto;filter:drop-shadow(0 2px 3px rgba(0,0,0,.8))}
-.portrait .fig img.pin{position:absolute;left:2px;width:36px;height:36px;pointer-events:auto;filter:drop-shadow(0 2px 3px rgba(0,0,0,.8));outline:1px solid var(--line-2);outline-offset:-1px;background:rgba(0,0,0,.35)}
 .portrait .fig img.hand.l{left:2px;bottom:78px}.portrait .fig img.hand.r{right:2px;bottom:78px}.portrait .fig img.hand.b{right:2px;top:4px;width:36px;height:36px}
 .portrait .fig .cap{position:absolute;left:0;right:0;bottom:0;font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:linear-gradient(transparent,rgba(0,0,0,.55));padding:10px 4px 3px;text-align:center}
 .ico{width:28px;height:28px;display:inline-block;vertical-align:middle;image-rendering:auto;background:var(--bar);border:1px solid var(--bar-line);padding:2px;box-sizing:content-box}
@@ -292,7 +291,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609170125"></script>
+<script src="/fch.js?v=202609171011"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1020,17 +1019,10 @@ function portrait(P){
     if(body) return `<div class="fig paper"><img class="body" src="${body}" alt="">${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
     return `<div class="fig icons"><div class="stack">${ic(helmet)}${ic(chest)}${ic(legs)}</div>${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}</div></div>`;
   }
-  const cape = pick(/^Cape/);
-  // render je cela sada; co ma hrac jinak (prilba, nohy, plast), vypiseme do popisku, aby obrazek nemátl
-  const diffItems = [[helmet,'head','hlava'],[legs,'legs','nohy'],[cape,'cape','plášť']].filter(([it])=>it && setFamily(it.name)!==fam);
-  const diff = diffItems.map(([,en,cz])=>LANG==='en'?en:cz);
-  // odlisne kusy pripneme jako ikony k levemu okraji renderu (render je vzdy cela sada)
-  const pins = diffItems.map(([it,cls],k)=>ASSETS.icons[it.name] ? `<img class="pin ${cls}" style="top:${4+k*40}px" src="${ASSETS.icons[it.name]}" alt="" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(P.name||'')}">` : '').join('');
-  const full = [chest,legs,helmet].filter(Boolean).every(i=>setFamily(i.name)===fam) && chest && legs && !diff.length;
-  const capNote = full ? '' : (LANG==='en' ? ` (by chest${diff.length?`, ${diff.join(' + ')} differ`:''})` : ` (podle hrudi${diff.length?`, ${diff.join(' + ')} jinak`:''})`);
+  const full = [chest,legs,helmet].filter(Boolean).every(i=>setFamily(i.name)===fam) && chest && legs;
   const wpn = eq.find(i=>MELEE_RE.test(i.name)) || bestOf(P.inventory.filter(i=>MELEE_RE.test(i.name))), shd = eq.find(i=>/^Shield/.test(i.name)) || bestOf(P.inventory.filter(i=>/^Shield/.test(i.name))), bow = eq.find(i=>/^(Bow|Crossbow)/.test(i.name)) || bestOf(P.inventory.filter(i=>/^(Bow|Crossbow)/.test(i.name)));
   const hand = (it,cls) => it && ASSETS.icons[it.name] ? `<img class="hand ${cls}" src="${ASSETS.icons[it.name]}" alt="" data-item="${esc(it.name)}" data-q="${it.q}" data-dur="${it.dur}" data-who="${esc(P.name||'')}">` : '';
-  return `<div class="fig"><img class="body" src="${src}" alt="Postava v sadě ${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}">${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}${pins}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}${capNote}</div></div>`;
+  return `<div class="fig"><img class="body" src="${src}" alt="Postava v sadě ${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}">${hand(shd,'l')}${hand(wpn,'r')}${hand(bow,'b')}<div class="cap">${esc(LANG==='en' ? (SET_EN[fam]||fam) : (SET_CZ[fam]||fam))}${full?'':(LANG==='en'?' (by chest)':' (podle hrudi)')}</div></div>`;
 }
 
 
@@ -1491,4 +1483,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609170125"></script>
+<script src="/site.js?v=202609171011"></script>
