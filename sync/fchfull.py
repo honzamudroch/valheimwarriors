@@ -136,7 +136,7 @@ def load(path):
                         c += ex[base:base + f:4].count(1)
                         c2 += oth[base:base + f:4].count(1)
                     row.append(2 if c else (1 if c2 else 0))
-                grid.append(row)
+                grid.append(''.join(str(v) for v in row))   # radek jako text '0120…', 3x mensi nez pole cisel
             px = (20000 / ts) ** 2 / 1e6
             worlds.append(dict(uid=uid, spawn=sp if hs else None, logout=lo if hl else None, death=de if hd else None, home=hp,
                                explored_km2=round(ex.count(1) * px, 2), others_km2=round(oth.count(1) * px, 2), grid=grid, pins=pins))

@@ -124,7 +124,7 @@
             for (let yy = gy * f; yy < gy * f + f; yy += 4) { const base = yy * ts + gx * f; for (let xx = 0; xx < f; xx += 4) { if (ex[base + xx] === 1) c++; if (oth[base + xx] === 1) c2++; } }
             row[gx] = c ? 2 : (c2 ? 1 : 0);
           }
-          grid.push(row);
+          grid.push(row.join(''));   // radek jako text '0120…', 3x mensi nez pole cisel
         }
         let exc = 0, othc = 0; for (let i = 0; i < ex.length; i++) { if (ex[i] === 1) exc++; if (oth[i] === 1) othc++; }
         const px = Math.pow(20000 / ts, 2) / 1e6;

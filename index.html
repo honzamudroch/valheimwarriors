@@ -291,7 +291,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609171220"></script>
+<script src="/fch.js?v=202609171221"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1108,7 +1108,7 @@ function sheet(D){
   let map='';
   if(W.grid){
     let s=`<circle cx="64" cy="64" r="63.5" fill="var(--grid)" stroke="var(--line)" stroke-width="1"/>`;
-    W.grid.forEach((row,yy)=>{ const y=127-yy; let x=0; while(x<128){ if(row[x]!==2){x++;continue;} let x2=x; while(x2<128&&row[x2]===2) x2++; s+=`<rect x="${x}" y="${y}" width="${x2-x}" height="1" fill="var(--gold)"/>`; x=x2; } });
+    W.grid.forEach((row0,yy)=>{ const row = typeof row0==='string' ? row0 : row0.join(''); const y=127-yy; let x=0; while(x<128){ if(row[x]!=='2'){x++;continue;} let x2=x; while(x2<128&&row[x2]==='2') x2++; s+=`<rect x="${x}" y="${y}" width="${x2-x}" height="1" fill="var(--gold)"/>`; x=x2; } });
     s+=`<rect x="63.5" y="63.5" width="1" height="1" fill="var(--bone)"/>`;
     const own=W.explored_km2||0, oth=W.others_km2||0;
     map = `<div class="mapbig"><svg viewBox="0 0 128 128" shape-rendering="crispEdges">${s}</svg></div><div class="two" style="margin-top:8px">${kvTable([[T('Odkryl sám'),f1(own)+' km²'],[T('Podíl světa'),(100*own/(Math.PI*100)).toFixed(1)+' %']])}${kvTable([[T('Biomů'),(P.biomes||[]).length],[T('Od spoluhráčů (neukázáno)'),f1(oth)+' km²']])}</div>`;
@@ -1483,4 +1483,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609171220"></script>
+<script src="/site.js?v=202609171221"></script>
