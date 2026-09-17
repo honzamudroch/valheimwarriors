@@ -2,16 +2,17 @@
 (function(){
 const S = DATA.site; if(!S) return;
 const API = S.url.replace(/\/$/,'') + '/rest/v1/';
-const H = {apikey: S.key, Authorization: 'Bearer ' + S.key, 'Content-Type': 'application/json'};
+const H = () => ({apikey: S.key, Authorization: 'Bearer ' + (SESSION ? SESSION.access_token : S.key), 'Content-Type': 'application/json'});
 const EN = () => LANG === 'en';
 const LS = { get: k => { try { return localStorage.getItem(k); } catch(e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch(e) {} }, del: k => { try { localStorage.removeItem(k); } catch(e) {} } };
 const rpc = async (fn, args) => {
-  const r = await fetch(API + 'rpc/' + fn, {method: 'POST', headers: H, body: JSON.stringify(args)});
+  await ensureSession();
+  const r = await fetch(API + 'rpc/' + fn, {method: 'POST', headers: H(), body: JSON.stringify(args)});
   const t = await r.text();
   if(!r.ok){ let m = t; try { m = JSON.parse(t).message || t; } catch(e) {} throw new Error(m); }
   return t ? JSON.parse(t) : null;
 };
-const get = async (path) => { const r = await fetch(API + path, {headers: H}); if(!r.ok) throw new Error(path + ' ' + r.status); return r.json(); };
+const get = async (path) => { const r = await fetch(API + path, {headers: H()}); if(!r.ok) throw new Error(path + ' ' + r.status); return r.json(); };
 
 // routing: /s/<slug> na hostingu, ?s=<slug> lokalne
 const pm = location.pathname.match(/^\/s\/([a-z0-9-]+)/);
@@ -23,6 +24,63 @@ const HOME = queryMode ? location.pathname : '/';
 const ABS = s => location.origin + LINK(s);
 const tokKey = pid => 'vw-tok-' + slug + '-' + pid;
 let SERVER = null, ADMIN = null;
+
+/* ---------- prihlaseni (volitelne): Supabase Auth, odkaz e-mailem, zadne heslo ---------- */
+const AUTH = S.url.replace(/\/$/,'') + '/auth/v1/';
+let SESSION = null;
+try { SESSION = JSON.parse(LS.get('vw-session') || 'null'); } catch(e) { SESSION = null; }
+function saveSession(x){ SESSION = x; if(x) LS.set('vw-session', JSON.stringify(x)); else LS.del('vw-session'); }
+async function ensureSession(){
+  if(!SESSION) return null;
+  if((SESSION.expires_at || 0) * 1000 - Date.now() > 60000) return SESSION;
+  try{
+    const r = await fetch(AUTH + 'token?grant_type=refresh_token', {method: 'POST', headers: {apikey: S.key, 'Content-Type': 'application/json'}, body: JSON.stringify({refresh_token: SESSION.refresh_token})});
+    if(!r.ok) throw new Error('refresh failed');
+    const j = await r.json();
+    saveSession({access_token: j.access_token, refresh_token: j.refresh_token, expires_at: Math.floor(Date.now() / 1000) + (j.expires_in || 3600), email: (j.user && j.user.email) || SESSION.email});
+  }catch(e){ saveSession(null); }
+  return SESSION;
+}
+async function sendMagicLink(email){
+  const r = await fetch(AUTH + 'otp?redirect_to=' + encodeURIComponent(location.origin + location.pathname), {method: 'POST', headers: {apikey: S.key, 'Content-Type': 'application/json'}, body: JSON.stringify({email, create_user: true})});
+  if(!r.ok){ let m = await r.text(); try { const j = JSON.parse(m); m = j.msg || j.error_description || j.message || m; } catch(e) {} throw new Error(m); }
+}
+async function logout(){
+  try{ if(SESSION) await fetch(AUTH + 'logout', {method: 'POST', headers: {apikey: S.key, Authorization: 'Bearer ' + SESSION.access_token}}); }catch(e){}
+  saveSession(null); renderAcct(); toast(EN() ? 'Signed out. Your Valhallas stay saved in this browser.' : 'Odhlášeno. Valhaly zůstávají uložené v tomto prohlížeči.');
+}
+// po prichodu z e-mailoveho odkazu: tokeny jsou v #hash
+async function pickupSession(){
+  const h = location.hash; if(!/access_token=/.test(h)) return false;
+  const q = new URLSearchParams(h.replace(/^#/, ''));
+  history.replaceState(null, '', location.pathname + location.search);
+  if(q.get('error_description')){ toast(q.get('error_description')); return false; }
+  const at = q.get('access_token'), rt = q.get('refresh_token'); if(!at || !rt) return false;
+  let email = '';
+  try{ const r = await fetch(AUTH + 'user', {headers: {apikey: S.key, Authorization: 'Bearer ' + at}}); if(r.ok) email = (await r.json()).email || ''; }catch(e){}
+  saveSession({access_token: at, refresh_token: rt, expires_at: +(q.get('expires_at') || (Math.floor(Date.now() / 1000) + +(q.get('expires_in') || 3600))), email});
+  await afterLogin(); return true;
+}
+// prihlaseny: co mam v prohlizeci (admin odkazy, klice postav) prevest na ucet a naopak stahnout, co uz ucet ma
+async function afterLogin(){
+  if(!SESSION) return;
+  try{
+    for(const sv of mine()){ const adm = LS.get('vw-admin-' + sv.slug); if(adm){ try{ await rpc('vw_claim_server', {p_slug: sv.slug, p_token: adm}); }catch(e){} } }
+    const keys = []; try{ for(let i = 0; i < localStorage.length; i++){ const k = localStorage.key(i); if(k && k.startsWith('vw-tok-')) keys.push(k); } }catch(e){}
+    for(const k of keys){ const m = k.match(/^vw-tok-([a-z0-9-]+)-(\d+)$/); if(m){ try{ await rpc('vw_claim_character', {p_slug: m[1], p_player_id: +m[2], p_token: LS.get(k)}); }catch(e){} } }
+    const my = await rpc('vw_my', {});
+    (my.servers || []).forEach(sv => { LS.set('vw-admin-' + sv.slug, sv.admin_token); rememberServer(sv.slug, sv.name, true); });
+    (my.characters || []).forEach(c => { LS.set('vw-tok-' + c.slug + '-' + c.player_id, c.upload_token); if(!mine().some(x => x.slug === c.slug)) rememberServer(c.slug, c.server_name, false); });
+    toast(EN() ? 'Signed in as ' + SESSION.email : 'Přihlášen jako ' + SESSION.email);
+  }catch(e){ toast(e.message); }
+}
+function renderAcct(){
+  const en = EN(); let el = document.getElementById('acct');
+  if(!el){ const host = document.querySelector('.top > div'); if(!host) return; el = document.createElement('div'); el.id = 'acct'; el.className = 'lang acct'; host.appendChild(el); }
+  el.innerHTML = SESSION ? `<span class="who" title="${esc(SESSION.email || '')}">${esc((SESSION.email || '').replace(/^(.{3}).+(@.*)$/, '$1…$2'))}</span><button type="button" id="logout">${en ? 'Sign out' : 'Odhlásit'}</button>` : `<button type="button" id="login">${en ? 'Sign in' : 'Přihlásit'}</button>`;
+  const li = el.querySelector('#login'); if(li) li.onclick = () => openModal('login');
+  const lo = el.querySelector('#logout'); if(lo) lo.onclick = logout;
+}
 
 const style = document.createElement('style');
 style.textContent = `
@@ -233,6 +291,11 @@ body::after{content:none}
 .land .mine .av{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--bar);border:1px solid var(--line);color:var(--gold);font-family:"Metamorphous",serif;font-size:13px;flex:none}
 .land .mine .av.big{width:20px;height:20px;font-size:12px}
 @media (max-width:640px){.cta5 .cta{flex-direction:column;gap:2px}.cta5 .cta b{min-width:0}}
+
+.acct .who{font-size:12px;color:var(--muted);padding:3px 8px;letter-spacing:0;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acctnote{font-size:12.5px;color:var(--muted);margin-top:18px}
+.acctnote a{color:var(--gold)}
+.vwmodal .mform button:disabled{opacity:.6;cursor:default}
 `;
 document.head.appendChild(style);
 
@@ -255,6 +318,7 @@ async function landing(){
   const land = document.getElementById('landing'); land.hidden = false;
   document.getElementById('drop').hidden = false; document.getElementById('sheets').hidden = true;
   document.getElementById('h1').textContent = 'Valheim Warriors'; document.title = 'Valheim Warriors';
+  renderAcct();
   const en = EN(); const my = mine(); const lc = localChars(); landingLang = LANG;
   const dropEl = document.getElementById('drop'); if(dropEl) setTimeout(() => { const anchor = land.querySelector('.foot2'); if(anchor) anchor.before(dropEl); }, 0);
   land.innerHTML = `<section class="land wide">
@@ -282,11 +346,12 @@ async function landing(){
     </div>
     </div>
 
+    ${(my.length || lc.length) && !SESSION ? `<div class="acctnote">${en ? 'Saved in this browser only. <a href="#" data-modal="login">Sign in</a> to have them on every device.' : 'Uloženo jen v tomto prohlížeči. <a href="#" data-modal="login">Přihlaš se</a> a budeš je mít na každém zařízení.'}</div>` : ''}
     ${(my.length || lc.length) ? `<div class="mine two"><div><h3><svg viewBox="0 0 64 64" width="20" height="20"><polygon points="32,4 58,14 54,40 32,60 10,40 6,14" fill="#1f1912" stroke="#d9a441" stroke-width="4"/><polygon points="32,14 48,22 45,38 32,50 19,38 16,22" fill="#d9a441"/></svg> ${en ? 'My Valhallas' : 'Moje Valhaly'}</h3>${my.length ? `<ul>${my.map(sv => `<li><span class="av">⚔</span><a href="${LINK(sv.slug)}">${esc(sv.name)}</a>${sv.admin ? `<small>admin</small>` : ''}<button class="mini" data-forget="${esc(sv.slug)}" title="${en ? 'Remove from this list (the Valhalla itself stays)' : 'Odebrat ze seznamu (Valhala sama zůstane)'}">×</button></li>`).join('')}</ul>` : `<p class="note">${en ? 'None yet.' : 'Zatím žádná.'}</p>`}</div>
       <div><h3><span class="av big">☺</span> ${en ? 'My characters' : 'Moje postavy'} <small>${en ? 'previews saved in this browser' : 'náhledy uložené v tomto prohlížeči'}</small></h3>${lc.length ? `<ul>${lc.map(c => `<li><span class="av">${esc((c.name || '?').slice(0, 1).toUpperCase())}</span><a href="#" data-showchar="${esc(String(c.player_id))}">${esc(c.name)}</a><small>${c.meta && c.meta.saved ? new Date(c.meta.saved).toLocaleDateString(en ? 'en-GB' : 'cs-CZ') : ''}</small><button class="mini" data-delchar="${esc(String(c.player_id))}" title="${en ? 'Delete this preview' : 'Smazat náhled'}">×</button></li>`).join('')}</ul>` : `<p class="note">${en ? 'None yet. Use Try your own above.' : 'Zatím žádná. Použij Nahrát vlastní nahoře.'}</p>`}</div></div>` : ''}
     <div class="help" id="help">${helpHTML(en)}</div>
     <div class="priv"><b>${en ? 'No spoilers, no positions.' : 'Bez spoilerů, bez pozic.'}</b> ${en ? 'The file is parsed in your browser and only statistics are stored: no map pins, no coordinates, no boss altars, nothing from biomes you have not reached. Locked achievements stay hidden.' : 'Soubor se zpracuje u tebe v prohlížeči a ukládají se jen statistiky: žádné pins, žádné souřadnice, žádné oltáře bossů, nic z biomů, kam jste ještě nedošli. Neodemčené achievementy zůstávají skryté.'}</div>
-    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a></div>
+    <div class="foot2">${en ? 'Fan project, not affiliated with Iron Gate AB. Valheim is a trademark of Iron Gate AB. Item data and icons via valheim.tools.' : 'Fanouškovský projekt, nesouvisí s Iron Gate AB. Valheim je ochranná známka Iron Gate AB. Data a ikony předmětů přes valheim.tools.'} · <a href="#" data-report="1">${en ? 'Report a bug or idea' : 'Nahlásit chybu nebo nápad'}</a> · <a href="#" data-modal="privacy">${en ? 'Privacy' : 'Ochrana údajů'}</a></div>
   </section>`;
   land.querySelectorAll('[data-modal]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); openModal(a.dataset.modal); }));
   land.addEventListener('click', ev => {
@@ -325,7 +390,7 @@ const helpHTML = en => `<h3>${en ? 'Help' : 'Nápověda'}</h3>
       <details><summary>${en ? 'Where is my character file (.fch)?' : 'Kde najdu soubor své postavy (.fch)?'}</summary><p>${en ? 'Steam: <code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;your Steam id&gt;\\892970\\remote\\characters\\&lt;name&gt;.fch</code>. Without Steam Cloud, or on Game Pass: <code>%USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local</code>. Ignore files with <code>_backup_</code> or <code>.old</code>. The game writes the file when you log out and every ~20 minutes while playing.' : 'Steam: <code>C:\\Program Files (x86)\\Steam\\userdata\\&lt;tvoje Steam id&gt;\\892970\\remote\\characters\\&lt;jméno&gt;.fch</code>. Bez Steam Cloudu nebo na Game Passu: <code>%USERPROFILE%\\AppData\\LocalLow\\IronGate\\Valheim\\characters_local</code>. Soubory s <code>_backup_</code> nebo <code>.old</code> ignoruj. Hra soubor zapisuje při odhlášení a zhruba každých 20 minut hraní.'}</p></details>
       <details><summary>${en ? 'Who can overwrite or remove a character?' : 'Kdo může postavu přepsat nebo odebrat?'}</summary><p>${en ? '<b>A newer game save always wins.</b> Whoever uploads a newer save of the character (web or Sync app) replaces the old one, so you never need to move anything between your browser and the app. The same or an older save can only be overwritten by the device that uploaded the last one (it holds the character key) or by the Valhalla admin. This stops anyone from pushing an old or fake sheet of you. Removing a character: × on the device that uploaded it, or the admin.' : '<b>Novější uložení hry vždy vyhrává.</b> Kdo nahraje novější save postavy (web nebo Sync appka), nahradí starý, takže mezi prohlížečem a appkou nic přenášet nemusíš. Stejné nebo starší uložení může přepsat jen zařízení, které nahrálo to poslední (má klíč postavy), nebo admin Valhaly. Nikdo ti tak nepodstrčí starý ani falešný list. Odebrání postavy: × na zařízení, které ji nahrálo, nebo admin.'}</p></details>
       <details><summary>${en ? 'What is the admin link?' : 'Co je admin odkaz?'}</summary><p>${en ? 'Whoever creates a Valhalla gets a second link ending with <code>#admin=…</code>. Opening it on any device makes that browser the Valhalla admin: it can remove any character and overwrite any upload. Keep it to yourself; the normal link is what you share with the party. You can copy both again via the <b>Invite</b> button on the Valhalla page (admin link shows only for the admin).' : 'Kdo Valhalu zakládá, dostane i druhý odkaz končící <code>#admin=…</code>. Otevřením na libovolném zařízení se ten prohlížeč stane adminem Valhaly: může odebrat jakoukoli postavu a přepsat jakékoli nahrání. Nech si ho pro sebe, partě posílej běžný odkaz. Oba odkazy znovu zkopíruješ tlačítkem <b>Pozvat</b> na stránce Valhaly (admin odkaz vidí jen admin).'}</p></details>
-      <details><summary>${en ? 'I lost the admin link' : 'Ztratil jsem admin odkaz'}</summary><p>${en ? 'There are no accounts, so it cannot be recovered automatically. Use <a href="#" data-report="1">Report a bug or idea</a>: write the Valhalla name, the names of characters in it and a contact. We verify it and send you a fresh admin link. Tip for next time: right after creating a Valhalla, save the admin link somewhere safe.' : 'Účty nemáme, takže automaticky obnovit nejde. Použij <a href="#" data-report="1">Nahlásit chybu nebo nápad</a>: napiš název Valhaly, jména postav v ní a kontakt. Ověříme to a pošleme nový admin odkaz. Tip na příště: hned po založení si admin odkaz někam ulož.'}</p></details>
+      <details><summary>${en ? 'I lost the admin link' : 'Ztratil jsem admin odkaz'}</summary><p>${en ? 'If you were signed in when you created it, just <a href="#" data-modal="login">sign in</a> on any device and the Valhalla is yours again. Otherwise use <a href="#" data-report="1">Report a bug or idea</a>: write the Valhalla name, the names of characters in it and a contact. We verify it and send you a fresh admin link. Tip: sign in once, then nothing can get lost.' : 'Pokud jsi byl při zakládání přihlášený, stačí se <a href="#" data-modal="login">přihlásit</a> na libovolném zařízení a Valhala je zase tvoje. Jinak použij <a href="#" data-report="1">Nahlásit chybu nebo nápad</a>: napiš název Valhaly, jména postav v ní a kontakt. Ověříme to a pošleme nový admin odkaz. Tip: přihlaš se jednou a nic se ztratit nemůže.'}</p></details>
       <details><summary>${en ? 'The Sync app says the server has a newer save' : 'Sync appka hlásí novější uložení na serveru'}</summary><p>${en ? 'Someone uploaded a newer save of this character from another device (or the browser). A newer save always wins. Just play: after the next game save (logout or ~20 minutes) the app uploads the newer file and takes the character over by itself. Nothing to configure.' : 'Někdo nahrál novější uložení této postavy z jiného zařízení (nebo z prohlížeče). Novější uložení vždy vyhrává. Stačí hrát: po dalším uložení hry (odhlášení nebo ~20 minut) appka nahraje novější soubor a postavu převezme sama. Nic nenastavuješ.'}</p></details>
       <details><summary>${en ? 'How current are the numbers?' : 'Jak aktuální jsou čísla?'}</summary><p>${en ? 'Each sheet shows <b>Data as of</b> the time the .fch file was saved by the game. Upload again after a session (or let the Sync app do it) and the sheet updates. Deaths, kills and similar counters are lifetime totals of the character across all worlds it visited.' : 'Každý list ukazuje <b>Stav k</b> času, kdy hra soubor uložila. Po hraní nahraj znovu (nebo to nech na Sync appce) a list se přepíše. Smrti, zabití a podobné počty jsou celoživotní součty postavy ze všech světů, kde byla.'}</p></details>
       <details><summary>${en ? 'What is sent to the server? Spoilers?' : 'Co se posílá na server? Spoilery?'}</summary><p>${en ? 'The file is parsed in your browser or in the app. Only statistics leave your PC: no map pins, no coordinates, no spawn, death or logout positions, no boss altars, no world data. Locked achievements are never shown. Sheets show only things the character already owns or killed, so nothing from biomes the party has not reached.' : 'Soubor se zpracuje v prohlížeči nebo v appce. Z počítače odejdou jen statistiky: žádné pins, souřadnice, pozice spawnu, smrti nebo odhlášení, žádné oltáře bossů, žádná data světa. Neodemčené achievementy se nikdy neukazují. Listy ukazují jen věci, které postava už má nebo zabila, tedy nic z biomů, kam parta ještě nedošla.'}</p></details>
@@ -372,6 +437,22 @@ function openModal(kind, data){
       <div class="mrow"><a class="sitebtn" href="/download/ValheimWarriorsSync.zip" download style="text-decoration:none">${en ? 'Download for Windows (ZIP)' : 'Stáhnout pro Windows (ZIP)'} <small>· v0.1.8 · 30 MB</small></a></div>
       <div class="mrow small"><details class="sha"><summary>${en ? 'Verify the download' : 'Ověření staženého souboru'}</summary>${en ? 'Unsigned apps cannot prove who made them, so here is the fingerprint of the file I published. In PowerShell run <code>Get-FileHash ValheimWarriorsSync.zip</code>; the result must be' : 'Nepodepsaná appka nemůže prokázat, kdo ji vydal, proto je tady otisk zveřejněného souboru. V PowerShellu spusť <code>Get-FileHash ValheimWarriorsSync.zip</code>; výsledek musí být'} <code>0b112b77ea4457227fdfa4262b5c222b9193ed319c145f0abb8c4d94e38ad461</code>. ${en ? 'If it differs, do not run the file.' : 'Když se liší, soubor nespouštěj.'}</details></div>
       <div class="note" style="margin-top:8px">${en ? 'Open source Python (PyInstaller). Reads only .fch files in the folders you choose and sends the same statistics as the web page. Config lives in %APPDATA%\ValheimWarriors.' : 'Otevřený Python (PyInstaller). Čte jen soubory .fch ve zvolených složkách a posílá ty samé statistiky jako web. Nastavení je v %APPDATA%\ValheimWarriors.'}</div>`;
+  } else if(kind === 'login'){
+    title = en ? 'Sign in (optional)' : 'Přihlásit se (nepovinné)';
+    body = `<p class="lead">${en ? 'Everything works without an account. Signing in only keeps your Valhallas and characters with you on every device and browser, so you never copy admin links or character keys again. We e-mail you a link, there is no password.' : 'Bez účtu funguje všechno. Přihlášení ti jen uloží Valhaly a postavy, abys je měl na každém zařízení a v každém prohlížeči a nemusel nikdy přenášet admin odkazy ani klíče postav. Pošleme ti e-mailem odkaz, žádné heslo.'}</p>
+      <form id="loginf" class="mform"><input id="loginmail" type="email" required placeholder="${en ? 'your e-mail' : 'tvůj e-mail'}" autocomplete="email"><button type="submit">${en ? 'Send link' : 'Poslat odkaz'}</button></form>
+      <div class="note" id="loginmsg" style="min-height:18px;margin-top:6px"></div>
+      <div class="note">${en ? 'The e-mail is used only for signing in and important notices about Valheim Warriors.' : 'E-mail použijeme jen pro přihlášení a důležité zprávy o Valheim Warriors.'} <a href="#" data-modal="privacy">${en ? 'Privacy' : 'Ochrana údajů'}</a></div>`;
+  } else if(kind === 'privacy'){
+    title = en ? 'Privacy' : 'Ochrana údajů';
+    body = `<div class="help inmodal">
+      <p>${en ? '<b>Character files.</b> Your .fch file is parsed in your browser (or by the Sync app on your PC). Only statistics are uploaded to a Valhalla: character name, skills, inventory, trophies, counters and a coarse coverage grid of the explored map. Map pins, coordinates, spawn, death and logout positions are removed before upload and again on the server. The file itself never leaves your computer.' : '<b>Soubory postav.</b> Soubor .fch se zpracuje u tebe v prohlížeči (nebo v Sync appce na tvém PC). Do Valhaly se nahrají jen statistiky: jméno postavy, skilly, inventář, trofeje, počítadla a hrubá mřížka prozkoumané mapy. Značky na mapě, souřadnice, pozice spawnu, smrti a odhlášení se odstraní před nahráním a ještě jednou na serveru. Samotný soubor tvůj počítač nikdy neopustí.'}</p>
+      <p>${en ? '<b>Who sees what.</b> Anyone with a Valhalla link sees its character sheets. Links are random and not listed anywhere.' : '<b>Kdo co vidí.</b> Kdo má odkaz na Valhalu, vidí její listy. Odkazy jsou náhodné a nikde se nezveřejňují.'}</p>
+      <p>${en ? '<b>Account (optional).</b> If you sign in, we store your e-mail address and link your Valhallas and characters to it. Nothing else, no password. Used only for signing in and important notices about the service.' : '<b>Účet (nepovinný).</b> Když se přihlásíš, uložíme tvou e-mailovou adresu a přivážeme k ní tvoje Valhaly a postavy. Nic jiného, žádné heslo. Slouží jen k přihlášení a k důležitým zprávám o službě.'}</p>
+      <p>${en ? '<b>Technical data.</b> IP addresses are kept for about a day only to limit abuse. Bug reports and automatic error reports contain what you write, the page and your browser type. No analytics, no advertising, no third-party cookies; settings live in your browser storage.' : '<b>Technické údaje.</b> IP adresy se drží zhruba den jen kvůli omezení zneužití. Hlášení chyb a automatická hlášení chyb obsahují, co napíšeš, stránku a typ prohlížeče. Žádná analytika, žádná reklama, žádné cookies třetích stran; nastavení je v úložišti prohlížeče.'}</p>
+      <p>${en ? '<b>Where.</b> Data is stored with Supabase in the EU (Frankfurt), the site is served by GitHub Pages.' : '<b>Kde.</b> Data leží u Supabase v EU (Frankfurt), web běží na GitHub Pages.'}</p>
+      <p>${en ? '<b>Deletion.</b> Remove a character with the × on its sheet (owner or Valhalla admin). To delete an account or a whole Valhalla, use <a href="#" data-report="1">Report a bug or idea</a> with your e-mail; we do it by hand.' : '<b>Smazání.</b> Postavu odebereš křížkem na jejím listu (vlastník nebo admin Valhaly). Smazání účtu nebo celé Valhaly vyřídíme ručně přes <a href="#" data-report="1">Nahlásit chybu nebo nápad</a>, napiš svůj e-mail.'}</p>
+      <p class="note">${en ? 'Fan project run by an individual, not affiliated with Iron Gate AB.' : 'Fanouškovský projekt jednotlivce, nesouvisí s Iron Gate AB.'}</p></div>`;
   } else if(kind === 'add'){
     title = en ? 'Add your character to this Valhalla' : 'Přidat svou postavu do této Valhaly';
     body = `<ol class="guide">
@@ -397,6 +478,9 @@ function openModal(kind, data){
   const inp = m.querySelector('input'); if(inp) setTimeout(() => inp.focus(), 50);
   if(kind === 'char' && data){ const el = m.querySelector('#demo-full'); CHARS_BY_NAME[data.name] = data; el.innerHTML = sheet(data); }
   if(kind === 'demo'){ const d = window.DEMO; const el = m.querySelector('#demo-full'); if(d && el){ CHARS_BY_NAME[d.name] = d; el.innerHTML = sheet(d); } else if(el) el.innerHTML = `<p class="note">${en ? 'Example not available, open a live Valhalla:' : 'Ukázka není k dispozici, otevři živou Valhalu:'} <a href="${LINK('valheim-2026')}">Valheim 2026</a></p>`; }
+  if(kind === 'login'){ m.querySelector('#loginf').addEventListener('submit', async ev => { ev.preventDefault(); const mail = m.querySelector('#loginmail').value.trim(); const msg = m.querySelector('#loginmsg'); const btn = m.querySelector('#loginf button'); btn.disabled = true; msg.textContent = en ? 'Sending…' : 'Posílám…';
+    try{ await sendMagicLink(mail); msg.innerHTML = `<b>${en ? 'The link is on its way.' : 'Odkaz je na cestě.'}</b> ${en ? 'Open it in this browser. Check spam if nothing arrives in a minute.' : 'Otevři ho v tomto prohlížeči. Když do minuty nic nepřijde, mrkni do spamu.'}`; }
+    catch(e){ msg.textContent = (en ? 'Could not send: ' : 'Nepodařilo se odeslat: ') + e.message; btn.disabled = false; } }); }
   if(kind === 'own' || kind === 'add'){ m.querySelector('#own-pick').addEventListener('click', () => { const fi = document.getElementById('file'); if(fi){ fi.click(); } }); }
 }
 window.addEventListener('vw-loaded', () => { closeModal(); const st = document.getElementById('dropStatus'); const nm = st && (st.textContent.match(/[:]\s*(.+)$/) || [])[1]; const sh = [...document.querySelectorAll('#sheets .sheet')].find(x => nm && x.querySelector('.name') && x.querySelector('.name').textContent === nm.trim()) || document.querySelector('#sheets .sheet'); if(sh) sh.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'}); });
@@ -495,7 +579,7 @@ window.SITE_REMOVE = async name => {
 };
 window.SITE_RENDER = () => {
   if(!SERVER){ if(window.SITE_RENDER_LANDING) window.SITE_RENDER_LANDING(); return; }
-  const en = EN();
+  const en = EN(); renderAcct();
   document.getElementById('h1').textContent = SERVER.name; document.title = SERVER.name + ' · Valheim Warriors';
   let bar = document.getElementById('sitebar');
   if(!bar){ bar = document.createElement('div'); bar.id = 'sitebar'; bar.className = 'sitebar'; document.querySelector('.top > div').prepend(bar); }
@@ -544,10 +628,11 @@ async function adminPage(){
   const reps = d.reports || []; const bugs = reps.filter(r => r.kind === 'bug'), errs = reps.filter(r => r.kind === 'error');
   const repRow = r => `<tr class="${r.done ? 'done' : ''}"><td>${fmtT(r.created_at)}</td><td>${esc(r.slug || '')}<br><small>${esc(r.page || '')}</small></td><td>${esc(r.text)}${r.contact ? `<br><small>${esc(r.contact)}</small>` : ''}${r.ua ? `<br><small class="ua">${esc(r.ua)}</small>` : ''}</td><td><label><input type="checkbox" data-done="${r.id}" ${r.done ? 'checked' : ''}> ${en ? 'done' : 'vyřešeno'}</label></td></tr>`;
   land.innerHTML = `<section class="land wide admin">
-    <div class="tot"><div><b>${d.totals.servers}</b><span>${en ? 'Valhallas' : 'Valhal'}</span></div><div><b>${d.totals.characters}</b><span>${en ? 'characters' : 'postav'}</span></div><div><b>${d.totals.uploads_24h}</b><span>${en ? 'uploads 24 h' : 'nahrání za 24 h'}</span></div><div><b>${d.totals.db_kb >= 1024 ? (d.totals.db_kb / 1024).toFixed(1) + ' MB' : d.totals.db_kb + ' kB'}</b><span>${en ? 'database' : 'databáze'}</span></div><div><b>${bugs.filter(r => !r.done).length}</b><span>${en ? 'open bugs' : 'otevřené bugy'}</span></div><div><b>${errs.filter(r => !r.done).length}</b><span>${en ? 'open errors' : 'otevřené chyby'}</span></div></div>
+    <div class="tot"><div><b>${d.totals.servers}</b><span>${en ? 'Valhallas' : 'Valhal'}</span></div><div><b>${d.totals.servers_multi}</b><span>${en ? 'with 2+ chars' : 'se 2+ postavami'}</span></div><div><b>${d.totals.servers_active_7d}</b><span>${en ? 'active 7 d' : 'aktivní 7 d'}</span></div><div><b>${d.totals.characters}</b><span>${en ? 'characters' : 'postav'}</span></div><div><b>${d.totals.active_7d} / ${d.totals.active_30d}</b><span>${en ? 'chars active 7 / 30 d' : 'postav aktivních 7 / 30 d'}</span></div><div><b>${d.totals.active_7d ? Math.round(100 * d.totals.app_chars_7d / d.totals.active_7d) : 0} %</b><span>${en ? 'via Sync app (7 d)' : 'přes Sync appku (7 d)'}</span></div><div><b>${d.totals.users}</b><span>${en ? 'accounts' : 'účtů'}</span></div><div><b>${d.totals.uploads_24h}</b><span>${en ? 'uploads 24 h' : 'nahrání za 24 h'}</span></div><div><b>${d.totals.db_kb >= 1024 ? (d.totals.db_kb / 1024).toFixed(1) + ' MB' : d.totals.db_kb + ' kB'}</b><span>${en ? 'database' : 'databáze'}</span></div><div><b>${bugs.filter(r => !r.done).length}</b><span>${en ? 'open bugs' : 'otevřené bugy'}</span></div><div><b>${errs.filter(r => !r.done).length}</b><span>${en ? 'open errors' : 'otevřené chyby'}</span></div></div>
+    ${(d.daily || []).length ? `<details class="daily"><summary>${en ? 'Daily counters (30 days)' : 'Denní počítadla (30 dní)'}</summary><div class="tw"><table class="adm"><tr><th>${en ? 'Day' : 'Den'}</th><th>${en ? 'web uploads' : 'nahrání web'}</th><th>${en ? 'app uploads' : 'nahrání appka'}</th><th>${en ? 'Valhallas created' : 'založené Valhaly'}</th></tr>${[...new Set(d.daily.map(x => x.day))].map(day => { const g = k => (d.daily.find(x => x.day === day && x.kind === k) || {}).n || 0; return `<tr><td>${esc(day)}</td><td>${g('upload_web')}</td><td>${g('upload_app')}</td><td>${g('server_create')}</td></tr>`; }).join('')}</table></div></details>` : ''}
     <h3>${en ? 'Valhallas' : 'Valhaly'} <small>${d.servers.length}</small></h3>
     <div class="tw"><table class="adm"><tr><th>${en ? 'Name' : 'Název'}</th><th>slug</th><th>${en ? 'Characters' : 'Postavy'}</th><th>${en ? 'Created' : 'Založen'}</th><th>${en ? 'Last activity' : 'Poslední aktivita'}</th><th></th></tr>
-    ${d.servers.map(sv => `<tr><td><a href="${LINK(sv.slug)}">${esc(sv.name)}</a></td><td><code>${esc(sv.slug)}</code></td><td>${sv.chars}<br><small>${esc(sv.names)}</small></td><td>${fmtT(sv.created_at)}</td><td>${fmtT(sv.last_activity)}</td><td><button class="sitebtn ghost" data-del="${esc(sv.slug)}">${en ? 'delete' : 'smazat'}</button></td></tr>`).join('')}</table></div>
+    ${d.servers.map(sv => `<tr><td><a href="${LINK(sv.slug)}">${esc(sv.name)}</a></td><td><code>${esc(sv.slug)}</code></td><td>${sv.chars}<br><small>${esc(sv.names)}</small></td><td>${fmtT(sv.created_at)}${sv.owned ? ' <small title="' + (en ? 'owner signed in' : 'má přihlášeného vlastníka') + '">👤</small>' : ''}</td><td>${fmtT(sv.last_activity)}</td><td><button class="sitebtn ghost" data-del="${esc(sv.slug)}">${en ? 'delete' : 'smazat'}</button></td></tr>`).join('')}</table></div>
     <h3>${en ? 'Bug reports' : 'Nahlášené bugy a nápady'} <small>${bugs.length}</small></h3>
     <div class="tw"><table class="adm"><tr><th>${en ? 'When' : 'Kdy'}</th><th>${en ? 'Where' : 'Kde'}</th><th>${en ? 'Text' : 'Text'}</th><th></th></tr>${bugs.map(repRow).join('') || `<tr><td colspan="4"><i>${en ? 'nothing yet' : 'zatím nic'}</i></td></tr>`}</table></div>
     <h3>${en ? 'Errors caught on the site' : 'Chyby zachycené na webu'} <small>${errs.length}</small></h3>
@@ -558,5 +643,5 @@ async function adminPage(){
   land.addEventListener('click', async ev => { const b = ev.target.closest('[data-del]'); if(!b) return; const sl = b.dataset.del; if(!confirm((en ? 'Delete Valhalla ' : 'Smazat Valhalu ') + sl + (en ? ' with all its characters?' : ' se všemi postavami?'))) return; try{ await rpc('vw_admin_delete_server', {p_key: key, p_slug: sl}); b.closest('tr').remove(); toast(en ? 'Deleted' : 'Smazáno'); }catch(e){ toast(e.message); } });
 }
 
-if(isAdminPage) adminPage(); else if(slug) server(); else landing();
+(async () => { await ensureSession(); await pickupSession(); if(isAdminPage) adminPage(); else if(slug) server(); else landing(); })();
 })();
