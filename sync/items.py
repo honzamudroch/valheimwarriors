@@ -1,0 +1,29 @@
+from zdo import sh, R
+import collections
+ITEM_NAMES = """Wood FineWood RoundLog Stone Flint Resin Feathers LeatherScraps DeerHide TrollHide BoneFragments Coal CopperOre TinOre Copper Tin Bronze Iron IronScrap Silver SilverOre BlackMetal BlackMetalScrap Chitin Guck Ooze Bloodbag Entrails WolfPelt LoxPelt Amber AmberPearl Ruby Coins Crystal Obsidian YmirRemains FreezeGland DragonTear Thunderstone HardAntler AncientSeed Chain Tar Barley Flax LinenThread Needle Root ElderBark Dandelion Thistle Mushroom MushroomYellow MushroomBlue Raspberry Blueberries Cloudberry Honey Carrot Turnip Onion CarrotSeeds TurnipSeeds OnionSeeds BeechSeeds FirCone PineCone Acorn BirchSeeds Sausages CookedMeat CookedDeerMeat CookedLoxMeat CookedWolfMeat NeckTailGrilled FishCooked RawMeat DeerMeat LoxMeat WolfMeat NeckTail FishRaw QueensJam Bread BreadDough CarrotSoup TurnipStew OnionSoup MinceMeatSauce BlackSoup SerpentStew SerpentMeat SerpentMeatCooked SerpentScale FishWraps LoxPie BloodPudding ShocklateSmoothie Eyescream WolfJerky BoarJerky DeerStew MeadBaseHealthMinor MeadBaseHealthMedium MeadBaseStaminaMinor MeadBaseStaminaMedium MeadBaseTasty MeadBasePoisonResist MeadBaseFrostResist MeadHealthMinor MeadHealthMedium MeadStaminaMinor MeadStaminaMedium MeadTasty MeadPoisonResist MeadFrostResist BarleyWine BarleyWineBase BarleyFlour
+TrophyDeer TrophyBoar TrophyNeck TrophyGreydwarf TrophyGreydwarfBrute TrophyGreydwarfShaman TrophyTroll TrophyEikthyr TrophyTheElder TrophySkeleton TrophySkeletonPoison TrophyDraugr TrophyDraugrElite TrophyBlob TrophyWraith TrophyLeech TrophySurtling TrophyBonemass TrophyWolf TrophyFenring TrophyHatchling TrophySGolem TrophyDragonQueen TrophyLox TrophyGoblin TrophyGoblinBrute TrophyGoblinShaman TrophyDeathsquito TrophyGoblinKing TrophyAbomination TrophyCultist TrophySerpent TrophyUlv TrophyFrostTroll TrophyHare TrophyTick TrophySeeker TrophySeekerBrute TrophyDvergr TrophyGjall TrophySeekerQueen
+AxeStone AxeFlint AxeBronze AxeIron AxeBlackMetal AxeJotunBane PickaxeAntler PickaxeBronze PickaxeIron PickaxeStone Hammer Hoe Cultivator FishingRod FishingBait Club Torch KnifeFlint KnifeCopper KnifeChitin KnifeSilver KnifeBlackMetal SpearFlint SpearBronze SpearElderbark SpearWolfFang SpearChitin SpearCarapace SwordBronze SwordIron SwordSilver SwordBlackmetal SwordIronFire SwordCheat MaceBronze MaceIron MaceSilver MaceNeedle SledgeStagbreaker SledgeIron SledgeCheat AtgeirBronze AtgeirIron AtgeirBlackmetal AtgeirHimminAfl Battleaxe BattleaxeCrystal Bow BowFineWood BowHuntsman BowDraugrFang BowSpineSnap CrossbowArbalest ArrowWood ArrowFlint ArrowFire ArrowBronze ArrowIron ArrowSilver ArrowPoison ArrowObsidian ArrowFrost ArrowNeedle ArrowCarapace BoltBone BoltIron BoltBlackmetal BoltCarapace ShieldWood ShieldWoodTower ShieldBronzeBuckler ShieldBanded ShieldBandedTower ShieldSilver ShieldSerpentscale ShieldIronSquare ShieldIronTower ShieldBlackmetal ShieldBlackmetalTower ShieldCarapace ShieldCarapaceBuckler ShieldKnight
+ArmorRagsChest ArmorRagsLegs ArmorLeatherChest ArmorLeatherLegs HelmetLeather CapeDeerHide CapeTrollHide ArmorTrollLeatherChest ArmorTrollLeatherLegs HelmetTrollLeather ArmorBronzeChest ArmorBronzeLegs HelmetBronze ArmorIronChest ArmorIronLegs HelmetIron ArmorRootChest ArmorRootLegs HelmetRoot ArmorWolfChest ArmorWolfLegs HelmetDrake CapeWolf ArmorFenringChest ArmorFenringLegs HelmetFenring ArmorPaddedCruiser ArmorPaddedGreaves HelmetPadded CapeLinen CapeLox ArmorCarapaceChest ArmorCarapaceLegs HelmetCarapace CapeFeather HelmetYule HelmetDverger HelmetMidsummerCrown BeltStrength Wishbone Megingjord HelmetOdin CapeOdin HelmetPointyHat
+SurtlingCore Tankard TankardOdin TankardAnniversary Bombs BombOoze BombBile Demister Lantern StaffShield StaffFireball StaffIceShards StaffSkeleton Eitr Sap Softtissue BlackMarble BlackCore Carapace Mandible Wisp YggdrasilWood JuteRed JuteBlue Bilebag DvergrNeedle DvergrKey DvergrKeyFragment MechanicalSpring RoyalJelly QueenBee Seed Sapling Torch TorchMist Iron_Chain Stonecutter
+Boar_piggy Hen ChickenEgg Chicken Feathers Vineberry VineberryCluster Fiddleheadfern MushroomJotunPuffs MushroomMagecap MagicallyStuffedShroom Cloudberry Jam Salad MeatPlatter Misthare HareMeat CookedHareMeat MushroomOmelette SeekerAspic YggdrasilPorridge HoneyGlazedChicken FishAndBread Egg CookedEgg Kvass MeadEitrMinor MeadStaminaLysting MeadStaminaMinor MeadTrollPheromones Pukeberries BugMeat CookedBugMeat BlackMarble MarbleFlour Anglerfish Fish5 Fish6 Fish7 Fish8 Fish9 Fish10 Fish11 Fish12 FishRaw
+GreydwarfEye SharpeningStone Hair Beard ShoulderVest PickaxeBlackMetal ScytheHandle BronzeNails IronNails WitheredBone CryptKey Barley Guck TrophyGreydwarfBrute TrophyGreydwarfShaman FlametalOre Flametal Cloudberry Lantern Bombs CookedBugMeat Turnip Onion TurnipStew SwordCheat Battleaxe MaceSilver ShieldBanded HelmetIron ArmorIronChest ArmorIronLegs PickaxeIron AxeIron SwordIron SledgeIron Hammer Hoe Torch FishingRod BombOoze Sap Wisp Eitr Cultivator CapeTrollHide
+"""
+TABLE={sh(n):n for n in ITEM_NAMES.split()}
+def iname(h): return TABLE.get(h, f"?{h:08x}")
+
+def parse_inv(b):
+    r=R(b); ver=r.i32(); n=r.u16(); items=[]
+    for _ in range(n):
+        dur=r.i32(); gx=r.u8(); gy=r.u8(); eq=r.u8(); fl=r.u8()
+        stack = r.u16() if fl&0x08 else 1
+        crafter=None
+        if fl&0x20:
+            cid=r.i64(); cn=r.str(); crafter=(cid,cn)
+        if fl&0x04: r.i64()
+        h = r.u32() if fl&0x40 else None
+        q = r.u8()  # kvalita / zbytek
+        if fl&0x80:
+            for _ in range(r.u8()): r.str(); r.str()
+        items.append({"name":iname(h) if h is not None else "?", "hash":h, "stack":stack, "dur":dur/100, "q":q, "crafter":crafter, "flags":fl, "eq":eq})
+    if r.o!=len(b): raise ValueError(f"nespotrebovano {len(b)-r.o} B (flags {[i['flags'] for i in items]})")
+    return items
