@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://sfaxumbeilroctogyzri.supabase.co; base-uri 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.steamstatic.com; connect-src 'self' https://sfaxumbeilroctogyzri.supabase.co; base-uri 'none'; form-action 'self'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Valheim Warriors</title>
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -291,7 +291,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609210058"></script>
+<script src="/fch.js?v=202609210112"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1299,8 +1299,9 @@ function achBadge(name){
 function achPopHTML(name){
   const A = ASSETS.achievements.players[name]; const EN=LANG==='en'; const IC = ASSETS.achievements.icons||{};
   if(A.private || A.unlocked==null) return `<h4>${esc(name)} <span>Steam</span></h4><div class="note">${EN?'Game details on this Steam profile are private, achievements are not visible.':'Herní detaily na Steam profilu jsou privátní, achievementy nejsou vidět.'}</div>`;
-  const list = [...(A.list||[])].sort((a,b)=>Date.parse('2026 '+a.t.replace('@',''))-Date.parse('2026 '+b.t.replace('@','')));
-  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${IC[a.img]?`<img src="${IC[a.img]}" alt="">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small><em>${esc(a.t)}</em></div></div>`).join('')}<div class="note" style="margin-top:8px">${EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.'}</div>`;
+  const list = [...(A.list||[])].sort((a,b)=>(a.ts!=null&&b.ts!=null)?a.ts-b.ts:Date.parse('2026 '+String(a.t).replace('@',''))-Date.parse('2026 '+String(b.t).replace('@','')));
+  const src = a => IC[a.img] || (/^https:\/\/[a-z0-9.-]*steamstatic\.com\//.test(a.img||'') ? a.img : '');
+  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${src(a)?`<img src="${esc(src(a))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small><em>${esc(a.t)}</em></div></div>`).join('')}<div class="note" style="margin-top:8px">${EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.'}</div>`;
 }
 document.addEventListener('click', ev=>{
   const rm = ev.target.closest('.rmlink[data-rm]');
@@ -1485,4 +1486,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609210058"></script>
+<script src="/site.js?v=202609210112"></script>

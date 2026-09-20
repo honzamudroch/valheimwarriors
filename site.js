@@ -511,10 +511,27 @@ async function server(){
   if(ADMIN){ try{ if(!(await rpc('vw_is_admin', {p_slug: slug, p_token: ADMIN}))){ ADMIN = null; LS.del('vw-admin-' + slug); } }catch(e){} }
   rememberServer(slug, SERVER.name, !!ADMIN);
   chars.length = 0;
-  rows.forEach(r => { const d = r.data; d.meta = Object.assign({}, d.meta || {}, {saved: r.saved_at, uploaded_at: r.uploaded_at, player_id: r.player_id, uploaded: !!(ADMIN || LS.get(tokKey(r.player_id)))}); chars.push(d); });
+  rows.forEach(r => { const d = r.data; d.meta = Object.assign({}, d.meta || {}, {saved: r.saved_at, uploaded_at: r.uploaded_at, player_id: r.player_id, steam_id: r.steam_id || null, uploaded: !!(ADMIN || LS.get(tokKey(r.player_id)))}); chars.push(d); });
   visible = new Set(chars.map(c => c.name));
   await window.ASSETS_READY; render();
+  loadSteamAch();
   if(isNew) showInvite(true);
+}
+/* ---------- Steam achievementy: postava s nastavenym Steam ID, jen verejne profily, jen odemcene ---------- */
+async function loadSteamAch(){
+  const withId = chars.filter(c => c.meta && c.meta.steam_id);
+  if(!withId.length) return;
+  const players = {};
+  await Promise.all(withId.map(async c => {
+    try{
+      const r = await fetch(S.url.replace(/\/$/,'') + '/functions/v1/steam-ach?id=' + encodeURIComponent(c.meta.steam_id), {headers: {apikey: S.key}});
+      if(!r.ok) return; const a = await r.json(); if(!a || a.error) return;
+      players[c.name] = {private: !!a.private, unlocked: a.unlocked, total: a.total, list: (a.list || []).map(x => ({n: x.n, d: x.d, t: x.t, ts: x.ts, img: x.img}))};
+    }catch(e){}
+  }));
+  if(!Object.keys(players).length) return;
+  ASSETS.achievements = {players, icons: {}};
+  render();
 }
 function notFound(msg){
   const land = document.getElementById('landing'); land.hidden = false; document.getElementById('drop').hidden = true; document.getElementById('sheets').hidden = true;
@@ -552,7 +569,12 @@ function reportBox(){
   });
 }
 document.addEventListener('click', ev => { const r = ev.target.closest('[data-report]'); if(r){ ev.preventDefault(); reportBox(); } const md = ev.target.closest('[data-modal]'); if(md && !md.closest('.land')){ ev.preventDefault(); openModal(md.dataset.modal); } });
-document.addEventListener('click', async ev => { const k = ev.target.closest('[data-key]'); if(k){ await copy(k.dataset.key); toast(EN() ? 'Key copied' : 'Klíč zkopírován'); } });
+document.addEventListener('click', async ev => { const k = ev.target.closest('[data-key]'); if(k){ await copy(k.dataset.key); toast(EN() ? 'Key copied' : 'Klíč zkopírován'); }
+  const st = ev.target.closest('[data-steam]'); if(st){ const en = EN(); const pid = st.dataset.steam; const c = chars.find(x => String(x.meta && x.meta.player_id) === pid); const cur = c && c.meta.steam_id || '';
+    const v = prompt(en ? 'Steam profile link or steamID64 (17 digits). Only unlocked achievements are shown, game details on the profile must be public. Leave empty to remove.' : 'Odkaz na Steam profil nebo steamID64 (17 číslic). Ukážou se jen odemčené achievementy, herní detaily na profilu musí být veřejné. Prázdné = odebrat.', cur);
+    if(v === null) return;
+    try{ await rpc('vw_set_steam', {p_slug: slug, p_player_id: +pid, p_token: LS.get(tokKey(pid)) || ADMIN || null, p_steam: v.trim()}); toast(en ? 'Saved, reloading…' : 'Uloženo, načítám…'); location.reload(); }
+    catch(e){ toast(e.message); } } });
 window.SITE_UPLOAD = async d => {
   if(!SERVER){   // uvodni stranka: jen lokalni nahled v okne, nic se neposila
     saveLocalChar(d); await landing(); openModal('char', d); return;
@@ -598,6 +620,7 @@ window.SITE_RENDER = () => {
     const name = sh.querySelector('.name')?.textContent; const c = CHARS_BY_NAME[name]; if(!c) return;
     const pid = c.meta.player_id || c.player_id; const tok = LS.get(tokKey(pid)); const foot = sh.querySelector('.foot');
     if(tok && foot && !foot.querySelector('[data-key]')) foot.insertAdjacentHTML('beforeend', `<span class="rmlink" data-key="${esc(tok)}" style="color:var(--gold)" title="${en ? 'Copy the key for the Sync app or another browser' : 'Zkopírovat klíč pro Sync appku nebo jiný prohlížeč'}">⚿ ${en ? 'Character key' : 'Klíč postavy'}</span>`);
+    if((tok || ADMIN) && foot && !foot.querySelector('[data-steam]')) foot.insertAdjacentHTML('beforeend', `<span class="rmlink" data-steam="${esc(String(pid))}" style="color:var(--gold)" title="${en ? 'Steam profile for the achievements badge (public game details needed)' : 'Steam profil pro odznak achievementů (herní detaily musí být veřejné)'}">${c.meta.steam_id ? '★ Steam ✓' : (en ? '★ Steam achievements' : '★ Steam achievementy')}</span>`);
   });
   const dz = document.getElementById('drop');
   if(dz && !document.getElementById('appnote')){ dz.insertAdjacentHTML('afterend', `<div class="appnote" id="appnote">${en ? 'Tired of dragging? <a href="#" data-modal="app">Sync app for Windows</a> uploads your character after every save.' : 'Nechceš přetahovat ručně? <a href="#" data-modal="app">Sync appka pro Windows</a> nahraje postavu po každém uložení sama.'}</div>`); }
