@@ -291,7 +291,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609210112"></script>
+<script src="/fch.js?v=202609210144"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1294,14 +1294,15 @@ function achBadge(name){
   const EN=LANG==='en';
   if(!A) return '';
   if(A.private || A.unlocked==null) return `<div class="ach priv" data-ach="${esc(name)}" title="${EN?'Steam profile private':'Steam profil privátní'}"><span class="medal"></span>${EN?'private':'privát'}</div>`;
-  return `<div class="ach" data-ach="${esc(name)}"><span class="medal"></span><b>${A.unlocked}</b> / ${A.total}</div>`;
+  const hint = A.unlocked===0 ? (EN?'0 unlocked, or Game details on the Steam profile are not public':'0 odemčených, nebo nejsou veřejné Podrobnosti o hře na Steam profilu') : (EN?'Steam achievements':'Steam achievementy');
+  return `<div class="ach" data-ach="${esc(name)}" title="${hint}"><span class="medal"></span><b>${A.unlocked}</b> / ${A.total}</div>`;
 }
 function achPopHTML(name){
   const A = ASSETS.achievements.players[name]; const EN=LANG==='en'; const IC = ASSETS.achievements.icons||{};
   if(A.private || A.unlocked==null) return `<h4>${esc(name)} <span>Steam</span></h4><div class="note">${EN?'Game details on this Steam profile are private, achievements are not visible.':'Herní detaily na Steam profilu jsou privátní, achievementy nejsou vidět.'}</div>`;
   const list = [...(A.list||[])].sort((a,b)=>(a.ts!=null&&b.ts!=null)?a.ts-b.ts:Date.parse('2026 '+String(a.t).replace('@',''))-Date.parse('2026 '+String(b.t).replace('@','')));
   const src = a => IC[a.img] || (/^https:\/\/[a-z0-9.-]*steamstatic\.com\//.test(a.img||'') ? a.img : '');
-  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${src(a)?`<img src="${esc(src(a))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small><em>${esc(a.t)}</em></div></div>`).join('')}<div class="note" style="margin-top:8px">${EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.'}</div>`;
+  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${src(a)?`<img src="${esc(src(a))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small><em>${esc(a.t)}</em></div></div>`).join('')}<div class="note" style="margin-top:8px">${A.unlocked===0 ? (EN?'Nothing visible. Either nothing is unlocked yet, or Game details on the Steam profile are set to Friends only: Steam → Edit profile → Privacy settings → Game details: Public.':'Nic není vidět. Buď zatím nic odemčeného, nebo jsou Podrobnosti o hře na Steam profilu jen pro přátele: Steam → Upravit profil → Nastavení soukromí → Podrobnosti o hře: Veřejné.') : (EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.')}</div>`;
 }
 document.addEventListener('click', ev=>{
   const rm = ev.target.closest('.rmlink[data-rm]');
@@ -1486,4 +1487,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609210112"></script>
+<script src="/site.js?v=202609210144"></script>
