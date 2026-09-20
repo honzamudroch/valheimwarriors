@@ -291,7 +291,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609181140"></script>
+<script src="/fch.js?v=202609210058"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -968,7 +968,7 @@ const WEAPON_RE = /^(Knife|Axe|Sword|Mace|Club|Spear|Atgeir|Sledge|Battleaxe|Bow
 function sprite(P){
   const eq = P.inventory.filter(i=>i.equipped);
   const has = re => eq.find(i=>re.test(i.name));
-  const helmet=has(/^Helmet/), chest=has(/Chest$/), legs=has(/Legs$/), cape=has(/^Cape/), shield=has(/^Shield/), belt=has(/^Belt|^Megingjord/), weapon=has(WEAPON_RE);
+  const helmet=has(/^Helmet/), chest=has(CHEST_RE), legs=has(LEGS_RE), cape=has(/^Cape/), shield=has(/^Shield/), belt=has(/^Belt|^Megingjord/), weapon=has(WEAPON_RE);
   const hairC = P.hair_color||[0.5,0.35,0.2], skinC = P.skin||[0.85,0.85,0.85];
   const CH = armorPal(chest&&chest.name,{a:'#7a6a55',b:'#54473a',c:'#95836b'}), LG = armorPal(legs&&legs.name,{a:'#5a4a3a',b:'#3c3026',c:'#6d5a48'});
   const HM = armorPal(helmet&&helmet.name,null), CP = capePal(cape&&cape.name), SH = shieldPal(shield&&shield.name);
@@ -999,13 +999,15 @@ function sprite(P){
 let ASSETS = DATA.assets || {icons:{}, sets:{}, stats:{}, attacks:{}, creatures:{}, achievements:null, desc:{}};
 if(!ASSETS.desc) ASSETS.desc={};
 const ICON = (name, cls='ico') => ASSETS.icons[name] ? `<img class="${cls}" src="${ASSETS.icons[name]}" alt="">` : '';
+// hrud a nohy: vetsina sad konci Chest/Legs, Padded ma Cuirass/Greaves, Ashlands a Deep North maji male 'legs'
+const CHEST_RE = /Chest$|Cuirass$|Cruiser$/i, LEGS_RE = /Legs$|Greaves$/i;
 const SET_FAMILIES = [[/Berserker|Bjorn/,'Berserker'],[/TrollLeather/,'TrollLeather'],[/Rags/,'Rags'],[/Leather/,'Leather'],[/Bronze/,'Bronze'],[/Root/,'Root'],[/Iron/,'Iron'],[/Fenring/,'Fenring'],[/Wolf|Drake/,'Wolf'],[/Padded|Linen/,'Padded'],[/Mage|Eitr/,'Mage'],[/Carapace/,'Carapace'],[/Ask/,'Ask'],[/Embla/,'Embla'],[/Flametal/,'Flametal'],[/Vilebone|Bone/,'Vilebone'],[/Lox/,'Lox']];
 const SET_CZ = {Berserker:'medvědí sada',TrollLeather:'trollí kůže',Rags:'hadry',Leather:'kožená sada',Bronze:'bronzová sada',Root:'kořenová sada',Iron:'železná sada',Fenring:'Fenris',Wolf:'vlčí sada',Padded:'vycpávaná sada',Mage:'eitrová sada',Carapace:'krunýřová sada',Ask:'Ask',Embla:'Embla',Flametal:'plamenný kov',Vilebone:'zlé kosti',Lox:'loxí kožich'};
 const setFamily = n => { if(!n) return null; for(const [re,k] of SET_FAMILIES) if(re.test(n)) return k; return null; };
 function portrait(P){
   const eq = P.inventory.filter(i=>i.equipped);
   const pick = re => eq.find(i=>re.test(i.name));
-  const chest=pick(/Chest$/), legs=pick(/Legs$/), helmet=pick(/^Helmet/);
+  const chest=pick(CHEST_RE), legs=pick(LEGS_RE), helmet=pick(/^Helmet/);
   const fam = setFamily(chest&&chest.name) || setFamily(legs&&legs.name) || setFamily(helmet&&helmet.name) || 'Rags';
   const src = ASSETS.sets[fam];
   if(!src){
@@ -1058,7 +1060,7 @@ function attackCalc(wpn, P){
 function gearStats(P){
   const eq=P.inventory.filter(i=>i.equipped);
   const pick=re=>eq.find(i=>re.test(i.name));
-  const pieces=[[pick(/^Helmet/),'Hlava'],[pick(/Chest$/),'Hruď'],[pick(/Legs$/),'Nohy'],[pick(/^Cape/),'Plášť']].filter(([it])=>it);
+  const pieces=[[pick(/^Helmet/),'Hlava'],[pick(CHEST_RE),'Hruď'],[pick(LEGS_RE),'Nohy'],[pick(/^Cape/),'Plášť']].filter(([it])=>it);
   const arm=pieces.map(([it,slot])=>{ const lv=lvlOf(it); return {slot, v: lv&&lv.armor!=null? lv.armor : null, it}; });
   const known=arm.filter(a=>a.v!=null); const armorTotal=known.reduce((a,b)=>a+b.v,0); const unknownArm=arm.filter(a=>a.v==null);
   const wpn = eq.find(i=>MELEE_RE.test(i.name)) || bestOf(P.inventory.filter(i=>MELEE_RE.test(i.name)));
@@ -1077,7 +1079,7 @@ function gearStats(P){
 const TIER = n => /Flametal|Ask|Embla/.test(n)?9:/Carapace|Mistwalker|Himmin|Krom|Jotun|Spine|Arbalest/.test(n)?8:/Blackmetal|BlackMetal|Needle|Porcupine/.test(n)?7:/Silver|Frostner|Fang|Draugr/.test(n)?6:/Iron|Serpent|Banded|Huntsman/.test(n)?5:/Chitin|Elderbark|Root|Bone/.test(n)?4:/Bronze|FineWood|Buckler/.test(n)?3:/Flint|Stagbreaker|Bjorn/.test(n)?2:/Stone|Wood/.test(n)?1:0;
 const bestOf = arr => arr.filter(i=>!/^(Hammer|Hoe|Cultivator|Pickaxe|Torch)/.test(i.name)).sort((a,b)=>(TIER(b.name)-TIER(a.name))||(b.q-a.q))[0];
 const MELEE_RE = /^(Knife|Axe|Sword|Mace|Club|Spear|Atgeir|Sledge|Battleaxe|Fistweapon|Pickaxe|Torch|Staff)/;
-const SLOTS = [[MELEE_RE,'Zbraň',true],[/^Shield/,'Štít',true],[/^(Bow|Crossbow)/,'Luk',true],[/^Helmet/,'Hlava'],[/Chest$/,'Hruď'],[/Legs$/,'Nohy'],[/^Cape/,'Plášť'],[/^Belt|^Megingjord/,'Opasek'],[/^Trinket|^Wishbone/,'Amulet']];
+const SLOTS = [[MELEE_RE,'Zbraň',true],[/^Shield/,'Štít',true],[/^(Bow|Crossbow)/,'Luk',true],[/^Helmet/,'Hlava'],[CHEST_RE,'Hruď'],[LEGS_RE,'Nohy'],[/^Cape/,'Plášť'],[/^Belt|^Megingjord/,'Opasek'],[/^Trinket|^Wishbone/,'Amulet']];
 const BIG_RE = /troll|bjorn|abomination|stonegolem|golem|lox|(?<!greydwarf)brute|elite|wraith|serpent|fenring|ulv|gjall|tick|dvergr|eikthyr|gdking|bonemass|dragon|goblinking|queen|fader|boss/i;
 const MAXDUR = {CapeTrollHide:600,CapeDeerHide:400,ArmorBerserkerChest:1400,ArmorBerserkerLegs:1400,HelmetBerserkerHood:1400,ShieldIronBuckler:250,KnifeChitin:250,ArmorTrollLeatherChest:1000,ArmorTrollLeatherLegs:1000,HelmetTrollLeather:1000,ArmorLeatherChest:400,ArmorLeatherLegs:400,HelmetLeather:400,ArmorBronzeChest:1000,ArmorBronzeLegs:1000,HelmetBronze:1000,ArmorIronChest:1000,ArmorIronLegs:1000,HelmetIron:1000};
 const topN = (o,n) => Object.entries(o||{}).sort((a,b)=>b[1]-a[1]).slice(0,n);
@@ -1483,4 +1485,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609181140"></script>
+<script src="/site.js?v=202609210058"></script>
