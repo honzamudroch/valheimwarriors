@@ -549,12 +549,14 @@ function startAutoRefresh(){
 async function loadSteamAch(){
   const withId = chars.filter(c => c.meta && c.meta.steam_id);
   if(!withId.length) return;
+  if(!window.ACH_CRIT){ try{ const r = await fetch('/assets/valheim-ach-criteria.json'); window.ACH_CRIT = r.ok ? (await r.json()).items : {}; }catch(e){ window.ACH_CRIT = {}; } }
+  const crit = n => { const k = Object.keys(window.ACH_CRIT).find(x => x.toLowerCase() === String(n).toLowerCase()); return k ? window.ACH_CRIT[k] : null; };
   const players = {};
   await Promise.all(withId.map(async c => {
     try{
       const r = await fetch(S.url.replace(/\/$/,'') + '/functions/v1/steam-ach?id=' + encodeURIComponent(c.meta.steam_id), {headers: {apikey: S.key}});
       if(!r.ok) return; const a = await r.json(); if(!a || a.error) return;
-      players[c.name] = {private: !!a.private, unlocked: a.unlocked, total: a.total, list: (a.list || []).map(x => ({n: x.n, d: x.d, t: x.t, ts: x.ts, img: x.img, pct: x.pct})), progress: (a.progress || []).map(x => ({n: x.n, d: x.d, img: x.img, cur: x.cur, max: x.max, pct: x.pct}))};
+      players[c.name] = {private: !!a.private, unlocked: a.unlocked, total: a.total, list: (a.list || []).map(x => ({n: x.n, d: x.d, t: x.t, ts: x.ts, img: x.img, pct: x.pct, c: crit(x.n)})), progress: (a.progress || []).map(x => ({n: x.n, d: x.d, img: x.img, cur: x.cur, max: x.max, pct: x.pct, c: crit(x.n)}))};
     }catch(e){}
   }));
   if(!Object.keys(players).length) return;

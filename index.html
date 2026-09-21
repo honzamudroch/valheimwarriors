@@ -226,6 +226,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .achpop h4 span{font-family:"Averia Serif Libre",serif;font-size:12px;color:var(--muted)}
 .achpop .a{display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line-2)}
 .achpop .a:last-child{border-bottom:0}
+.achpop .a small.crit{display:block;color:var(--gold);opacity:.85;font-size:11px;margin-top:2px}
 .achpop .a em .pct{font-style:normal;color:var(--muted);margin-left:8px;font-size:10.5px}
 .achpop h4.sub{margin:12px 0 4px;font-size:12px;color:var(--muted);border-top:1px solid var(--line-2);padding-top:8px}
 .achpop .a.prog img{opacity:.55;filter:grayscale(.6)}
@@ -296,7 +297,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609211638"></script>
+<script src="/fch.js?v=202609211646"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1307,9 +1308,10 @@ function achPopHTML(name){
   if(A.private || A.unlocked==null) return `<h4>${esc(name)} <span>Steam</span></h4><div class="note">${EN?'Game details on this Steam profile are private, achievements are not visible.':'Herní detaily na Steam profilu jsou privátní, achievementy nejsou vidět.'}</div>`;
   const list = [...(A.list||[])].sort((a,b)=>(a.ts!=null&&b.ts!=null)?a.ts-b.ts:Date.parse('2026 '+String(a.t).replace('@',''))-Date.parse('2026 '+String(b.t).replace('@','')));
   const src = a => IC[a.img] || (/^https:\/\/[a-z0-9.-]*steamstatic\.com\//.test(a.img||'') ? a.img : '');
+  const crit = a => { const c = a.c && (a.c[EN?'en':'cz'] || a.c.en); return c && c.toLowerCase() !== String(a.d||'').toLowerCase() ? `<small class="crit">${esc(c)}</small>` : ''; };
   const rare = a => a.pct==null ? '' : `<i class="pct" title="${EN?'share of all Valheim players who have it':'podíl všech hráčů Valheimu, kteří ho mají'}">${a.pct<1?a.pct.toFixed(1):Math.round(a.pct)} %</i>`;
-  const prog = (A.progress||[]).map(p=>`<div class="a prog">${src(p)?`<img src="${esc(src(p))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(p.n)}</b><small>${esc(p.d)}</small><span class="bar"><span style="width:${Math.min(100,Math.round(100*p.cur/p.max))}%"></span></span><em>${fmt(p.cur)} / ${fmt(p.max)}${rare(p)}</em></div></div>`).join('');
-  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${src(a)?`<img src="${esc(src(a))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small><em>${esc(a.t)}${rare(a)}</em></div></div>`).join('')}${prog?`<h4 class="sub"><span>${EN?'In progress':'Rozpracované'}</span></h4>${prog}`:''}<div class="note" style="margin-top:8px">${A.unlocked===0 ? (EN?'Nothing visible. Either nothing is unlocked yet, or Game details on the Steam profile are set to Friends only: Steam → Edit profile → Privacy settings → Game details: Public.':'Nic není vidět. Buď zatím nic odemčeného, nebo jsou Podrobnosti o hře na Steam profilu jen pro přátele: Steam → Upravit profil → Nastavení soukromí → Podrobnosti o hře: Veřejné.') : (EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.')}</div>`;
+  const prog = (A.progress||[]).map(p=>`<div class="a prog">${src(p)?`<img src="${esc(src(p))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(p.n)}</b><small>${esc(p.d)}</small>${crit(p)}<span class="bar"><span style="width:${Math.min(100,Math.round(100*p.cur/p.max))}%"></span></span><em>${fmt(p.cur)} / ${fmt(p.max)}${rare(p)}</em></div></div>`).join('');
+  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${src(a)?`<img src="${esc(src(a))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small>${crit(a)}<em>${esc(a.t)}${rare(a)}</em></div></div>`).join('')}${prog?`<h4 class="sub"><span>${EN?'In progress':'Rozpracované'}</span></h4>${prog}`:''}<div class="note" style="margin-top:8px">${A.unlocked===0 ? (EN?'Nothing visible. Either nothing is unlocked yet, or Game details on the Steam profile are set to Friends only: Steam → Edit profile → Privacy settings → Game details: Public.':'Nic není vidět. Buď zatím nic odemčeného, nebo jsou Podrobnosti o hře na Steam profilu jen pro přátele: Steam → Upravit profil → Nastavení soukromí → Podrobnosti o hře: Veřejné.') : (EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.')}</div>`;
 }
 document.addEventListener('click', ev=>{
   const rm = ev.target.closest('.rmlink[data-rm]');
@@ -1494,4 +1496,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609211638"></script>
+<script src="/site.js?v=202609211646"></script>
