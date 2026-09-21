@@ -510,12 +510,40 @@ async function server(){
   SERVER = srv[0];
   if(ADMIN){ try{ if(!(await rpc('vw_is_admin', {p_slug: slug, p_token: ADMIN}))){ ADMIN = null; LS.del('vw-admin-' + slug); } }catch(e){} }
   rememberServer(slug, SERVER.name, !!ADMIN);
-  chars.length = 0;
-  rows.forEach(r => { const d = r.data; d.meta = Object.assign({}, d.meta || {}, {saved: r.saved_at, uploaded_at: r.uploaded_at, player_id: r.player_id, steam_id: r.steam_id || null, uploaded: !!(ADMIN || LS.get(tokKey(r.player_id)))}); chars.push(d); });
+  applyRows(rows);
   visible = new Set(chars.map(c => c.name));
   await window.ASSETS_READY; render();
   loadSteamAch();
+  startAutoRefresh();
   if(isNew) showInvite(true);
+}
+function applyRows(rows){
+  chars.length = 0;
+  rows.forEach(r => { const d = r.data; d.meta = Object.assign({}, d.meta || {}, {saved: r.saved_at, uploaded_at: r.uploaded_at, player_id: r.player_id, steam_id: r.steam_id || null, uploaded: !!(ADMIN || LS.get(tokKey(r.player_id)))}); chars.push(d); });
+}
+// automaticke obnoveni: kazdych 20 minut (a pri navratu na zalozku po 5+ minutach) stahnout postavy znovu; prekresli se jen kdyz se neco zmenilo
+let lastRefresh = Date.now(), refreshing = false;
+async function refreshChars(){
+  if(refreshing || document.visibilityState === 'hidden' || document.getElementById('vwmodal')) return;
+  refreshing = true;
+  try{
+    const rows = await rpc('vw_get_characters', {p_slug: slug});
+    const sig = r => r.map(x => x.player_id + ':' + x.uploaded_at + ':' + (x.steam_id || '')).sort().join('|');
+    const cur = chars.map(c => ({player_id: c.meta.player_id, uploaded_at: c.meta.uploaded_at, steam_id: c.meta.steam_id}));
+    if(sig(rows) !== sig(cur)){
+      const shown = new Set(visible); const had = new Set(chars.map(c => c.name));
+      applyRows(rows);
+      visible = new Set(chars.map(c => c.name).filter(n => shown.has(n) || !had.has(n)));
+      render(); loadSteamAch();
+      toast(EN() ? 'Sheets refreshed' : 'Listy obnoveny');
+    }
+    lastRefresh = Date.now();
+  }catch(e){}
+  refreshing = false;
+}
+function startAutoRefresh(){
+  setInterval(refreshChars, 20 * 60 * 1000);
+  document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'visible' && Date.now() - lastRefresh > 5 * 60 * 1000) refreshChars(); });
 }
 /* ---------- Steam achievementy: postava s nastavenym Steam ID, jen verejne profily, jen odemcene ---------- */
 async function loadSteamAch(){
