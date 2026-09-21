@@ -554,7 +554,7 @@ async function loadSteamAch(){
     try{
       const r = await fetch(S.url.replace(/\/$/,'') + '/functions/v1/steam-ach?id=' + encodeURIComponent(c.meta.steam_id), {headers: {apikey: S.key}});
       if(!r.ok) return; const a = await r.json(); if(!a || a.error) return;
-      players[c.name] = {private: !!a.private, unlocked: a.unlocked, total: a.total, list: (a.list || []).map(x => ({n: x.n, d: x.d, t: x.t, ts: x.ts, img: x.img}))};
+      players[c.name] = {private: !!a.private, unlocked: a.unlocked, total: a.total, list: (a.list || []).map(x => ({n: x.n, d: x.d, t: x.t, ts: x.ts, img: x.img, pct: x.pct})), progress: (a.progress || []).map(x => ({n: x.n, d: x.d, img: x.img, cur: x.cur, max: x.max, pct: x.pct}))};
     }catch(e){}
   }));
   if(!Object.keys(players).length) return;
