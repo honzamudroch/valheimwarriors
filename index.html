@@ -297,7 +297,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202609211646"></script>
+<script src="/fch.js?v=202609260107"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1086,7 +1086,7 @@ const TIER = n => /Flametal|Ask|Embla/.test(n)?9:/Carapace|Mistwalker|Himmin|Kro
 const bestOf = arr => arr.filter(i=>!/^(Hammer|Hoe|Cultivator|Pickaxe|Torch)/.test(i.name)).sort((a,b)=>(TIER(b.name)-TIER(a.name))||(b.q-a.q))[0];
 const MELEE_RE = /^(Knife|Axe|Sword|Mace|Club|Spear|Atgeir|Sledge|Battleaxe|Fistweapon|Pickaxe|Torch|Staff)/;
 const SLOTS = [[MELEE_RE,'Zbraň',true],[/^Shield/,'Štít',true],[/^(Bow|Crossbow)/,'Luk',true],[/^Helmet/,'Hlava'],[CHEST_RE,'Hruď'],[LEGS_RE,'Nohy'],[/^Cape/,'Plášť'],[/^Belt|^Megingjord/,'Opasek'],[/^Trinket|^Wishbone/,'Amulet']];
-const BIG_RE = /troll|bjorn|abomination|stonegolem|golem|lox|(?<!greydwarf)brute|elite|wraith|serpent|fenring|ulv|gjall|tick|dvergr|eikthyr|gdking|bonemass|dragon|goblinking|queen|fader|boss/i;
+const BIG_RE = /troll|bjorn|abomination|stonegolem|golem|lox|(?<!greydwarf)brute|elite|wraith|writhan|serpent|fenring|ulv|gjall|dvergr|eikthyr|gdking|bonemass|dragon|goblinking|queen|fader|boss/i;   // klistata (tick) jsou drobna zver, Writhan patri mezi velke kusy
 const MAXDUR = {CapeTrollHide:600,CapeDeerHide:400,ArmorBerserkerChest:1400,ArmorBerserkerLegs:1400,HelmetBerserkerHood:1400,ShieldIronBuckler:250,KnifeChitin:250,ArmorTrollLeatherChest:1000,ArmorTrollLeatherLegs:1000,HelmetTrollLeather:1000,ArmorLeatherChest:400,ArmorLeatherLegs:400,HelmetLeather:400,ArmorBronzeChest:1000,ArmorBronzeLegs:1000,HelmetBronze:1000,ArmorIronChest:1000,ArmorIronLegs:1000,HelmetIron:1000};
 const topN = (o,n) => Object.entries(o||{}).sort((a,b)=>b[1]-a[1]).slice(0,n);
 const kvRows = rows => rows.map(([k,v,sub])=>`<tr${sub?' class="sub"':''}><td>${k}</td><td>${typeof v==='number'?fmt(v):v}</td></tr>`).join('');
@@ -1496,4 +1496,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202609211646"></script>
+<script src="/site.js?v=202609260107"></script>
