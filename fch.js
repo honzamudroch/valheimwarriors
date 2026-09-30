@@ -76,8 +76,8 @@
     const body = d.subarray(4, 4 + n);
     const r = new R(body);
     const ver = r.i32(), ns = r.i32(); r.i32();
-    const gstats = statblock(r, ns - 1);
-    dct(r); const worlds_time = dct(r);
+    const gstats = statblock(r, ns);   // statistik je presne ns; posledni byla dlouho 0, proto se cetla jako prazdny slovnik
+    const worlds_time = dct(r);
     const g = lists(r);
     const per = [];
     for (;;) {

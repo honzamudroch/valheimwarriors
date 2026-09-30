@@ -69,9 +69,8 @@ def load(path):
     n = r.i32()
     body = d[4:4 + n]
     ver = r.i32(); ns = r.i32(); hdr = r.i32()
-    gstats = statblock(r, ns - 1)
+    gstats = statblock(r, ns)   # statistik je presne ns; posledni byla dlouho 0, proto se cetla jako prazdny slovnik
     g = {}
-    g['_d0'] = dct(r)
     g['worlds_time'] = dct(r)
     g.update(lists(r))
     per = []

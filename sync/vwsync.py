@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 
 APP = 'Valheim Warriors Sync'
-VERSION = '0.1.8'
+VERSION = '0.1.9'
 SITE = 'https://valheimwarriors.com'
 DEFAULT_API = {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}
 CFG_DIR = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'ValheimWarriors')
