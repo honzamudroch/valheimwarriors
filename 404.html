@@ -305,7 +305,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202610101524"></script>
+<script src="/fch.js?v=202610101528"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1014,8 +1014,8 @@ let ASSETS = DATA.assets || {icons:{}, sets:{}, stats:{}, attacks:{}, creatures:
 if(!ASSETS.desc) ASSETS.desc={};
 const ICON = (name, cls='ico') => ASSETS.icons[name] ? `<img class="${cls}" src="${ASSETS.icons[name]}" alt="">` : '';
 // hrud a nohy: vetsina sad konci Chest/Legs, Padded ma Cuirass/Greaves, Ashlands a Deep North maji male 'legs'
-const CHEST_RE = /Chest$|Cuirass$|Cruiser$/i, LEGS_RE = /Legs$|Greaves$/i;
-const SET_FAMILIES = [[/AshlandsMedium/,'Ask'],[/Mage[_A-Za-z]*Ashlands|Ashlands[_A-Za-z]*Mage/,'Embla'],[/Flametal/,'Flametal'],[/Berserker|Bjorn/,'Berserker'],[/TrollLeather/,'TrollLeather'],[/Rags/,'Rags'],[/Leather/,'Leather'],[/Bronze/,'Bronze'],[/Root/,'Root'],[/Iron/,'Iron'],[/Fenring/,'Fenring'],[/Wolf|Drake/,'Wolf'],[/Padded|Linen/,'Padded'],[/Mage|Eitr/,'Mage'],[/Carapace/,'Carapace'],[/Vilebone/,'Vilebone'],[/Lox/,'Lox']];
+const CHEST_RE = /(Chest|Cuirass|Cruiser)(_[A-Za-z]+)?$/i, LEGS_RE = /(Legs|Greaves)(_[A-Za-z]+)?$/i;
+const SET_FAMILIES = [[/AshlandsMedium/,'Ask'],[/BerserkerUndead|Vilebone/,'Vilebone'],[/Mage[_A-Za-z]*Ashlands|Ashlands[_A-Za-z]*Mage/,'Embla'],[/Flametal/,'Flametal'],[/Berserker|Bjorn/,'Berserker'],[/TrollLeather/,'TrollLeather'],[/Rags/,'Rags'],[/Leather/,'Leather'],[/Bronze/,'Bronze'],[/Root/,'Root'],[/Iron/,'Iron'],[/Fenring/,'Fenring'],[/Wolf|Drake/,'Wolf'],[/Padded|Linen/,'Padded'],[/Mage|Eitr/,'Mage'],[/Carapace/,'Carapace'],[/Vilebone/,'Vilebone'],[/Lox/,'Lox']];
 const SET_CZ = {Berserker:'medvědí sada',TrollLeather:'trollí kůže',Rags:'hadry',Leather:'kožená sada',Bronze:'bronzová sada',Root:'kořenová sada',Iron:'železná sada',Fenring:'Fenris',Wolf:'vlčí sada',Padded:'vycpávaná sada',Mage:'eitrová sada',Carapace:'krunýřová sada',Ask:'Askova sada',Embla:'Emblina sada',Flametal:'plamenná sada',Vilebone:'zlé kosti',Lox:'loxí kožich'};
 const setFamily = n => { if(!n) return null; for(const [re,k] of SET_FAMILIES) if(re.test(n)) return k; return null; };
 function portrait(P){
@@ -1097,7 +1097,7 @@ const bestOf = arr => arr.filter(i=>!/^(Hammer|Hoe|Cultivator|Pickaxe|Torch)/.te
 const MELEE_RE = /^(Knife|Axe|Sword|Mace|Club|Spear|Atgeir|Sledge|Battleaxe|Fistweapon|Pickaxe|Torch|Staff)/;
 const SLOTS = [[MELEE_RE,'Zbraň',true],[/^Shield/,'Štít',true],[/^(Bow|Crossbow)/,'Luk',true],[/^Helmet/,'Hlava'],[CHEST_RE,'Hruď'],[LEGS_RE,'Nohy'],[/^Cape/,'Plášť'],[/^Belt|^Megingjord/,'Opasek'],[/^Trinket|^Wishbone/,'Amulet']];
 // velke kusy: velka zver, minibossove a bossove; klistata a humanoidi (goblin, charred, skeleton) patri mezi ostatni
-const BIG_RE = /troll|bjorn|abomination|stonegolem|golem|lox|(?<!greydwarf)brute|elite|wraith|writhan|serpent|fenring|ulv|gjall|dvergr|eikthyr|gdking|bonemass|dragon|goblinking|queen|fader|morgen|valkyrie|(?<!baby)seeker|boss/i;   // asksvin ne: chovaji se doma, zkreslilo by to velke kusy
+const BIG_RE = /troll|bjorn|abomination|stonegolem|golem|lox|(?<!greydwarf)brute|elite|wraith|writhan|serpent|fenring|ulv|gjall|dvergr|eikthyr|gdking|bonemass|dragon|goblinking|queen|fader|morgen|valkyrie|boss/i;   // seeker a asksvin ne (bezny vyskyt / chov doma), seekerbrute a queen padaji pod brute|queen
 const NOT_PREY_RE = /trainingdummy|^\$piece_/i;   // cvicny panak neni korist
 // hra zapisuje nektere potvory i bez prefixu ($enemy_writhan vs Writhan), slucujeme
 const enemyKey = k => /^\$/.test(k) ? k : '$enemy_' + String(k).toLowerCase();
@@ -1567,4 +1567,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202610101524"></script>
+<script src="/site.js?v=202610101528"></script>
