@@ -161,7 +161,8 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .chk .chn{font-size:10.5px;color:var(--muted);font-style:italic}
 .chk details{margin-top:4px}
 .chk summary{font-size:11.5px;color:var(--gold);cursor:pointer}
-.chk .miss{font-size:11.5px;color:var(--ink);opacity:.85;margin-top:3px;line-height:1.5}
+.chk .miss{font-size:11.5px;color:var(--ink);opacity:.85;margin-top:3px;line-height:1.55}
+.chk .miss b{display:inline-block;color:var(--gold);font-weight:400;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
 .chk .done{font-size:11.5px;color:#9fcf5a;margin-top:4px}
 @media (max-width:760px){.chks{grid-template-columns:1fr}}
 .trgrp{margin-bottom:8px}
@@ -318,7 +319,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202610131218"></script>
+<script src="/fch.js?v=202610131230"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -367,7 +368,7 @@ Wood:'Wood',Stone:'Stone',Dandelion:'Dandelion',Mushroom:'Mushroom',Raspberry:'R
 const ENEMY_EN = {'$enemy_barka':'Barka','$enemy_bjornundead':'Undead bjorn','$enemy_blob_frost':'Frost blob','$enemy_blob_morkhalla':'Morkhalla blob','$enemy_cultist':'Cultist','$enemy_deerwhite':'White deer','$enemy_draugrfem':'Draugr (female)','$enemy_elaking':'Elaking','$enemy_fader':'Fader','$enemy_foresttroll':'Forest troll','$enemy_frosttroll':'Frost troll','$enemy_growth':'Growth','$enemy_jotunwarrior':'Jotun warrior','$enemy_jotunwitch':'Jotun witch','$enemy_kvastur':'Kvastur','$enemy_mole':'Mole','$enemy_moose':'Moose','$enemy_seal':'Seal','$enemy_skeletonhildir':'Skeleton (Hildir)','$enemy_asksvin':'Asksvin','$enemy_babyseeker':'Baby seeker','$enemy_bloblava':'Lava blob','$enemy_boarpiggy':'Piggy','$enemy_bonemawserpent':'Bonemaw serpent','$enemy_charred_melee':'Charred warrior','$enemy_charred_archer':'Charred marksman','$enemy_charred_mage':'Charred warlock','$enemy_charred_twitcher':'Charred twitcher','$enemy_charred_twitcher_summoned':'Charred twitcher (summoned)','$enemy_chicken':'Chicken','$enemy_dvergr':'Dvergr','$enemy_dvergr_mage':'Dvergr mage','$enemy_fallenvalkyrie':'Fallen valkyrie','$enemy_fenringcultist_hildir':'Cultist (Hildir)','$enemy_gjall':'Gjall','$enemy_goblin_hildir':'Fuling (Hildir)','$enemy_goblinbrute_hildircombined':'Fuling berserker (Hildir)','$enemy_hare':'Misthare','$enemy_hen':'Hen','$enemy_mistile':'Mistile','$enemy_morgen':'Morgen','$enemy_root':'Root','$enemy_seeker':'Seeker','$enemy_seekerbrute':'Seeker soldier','$enemy_seekerqueen':'The Queen','$enemy_skeleton_summoned':'Skeleton (summoned)','$enemy_summonedtroll':'Troll (summoned)','$enemy_tick':'Tick','$enemy_volture':'Volture','$enemy_wolfcub':'Wolf cub','$enemy_writhan':'Writhan','$enemy_greyling':'Greyling','$enemy_skeleton':'Skeleton','$enemy_greydwarf':'Greydwarf','$enemy_neck':'Neck','$enemy_boar':'Boar','$enemy_deer':'Deer','$enemy_greydwarfbrute':'Greydwarf brute','$enemy_troll':'Troll','$enemy_bjorn':'Bjorn','$enemy_greydwarfshaman':'Greydwarf shaman','$enemy_ghost':'Ghost','$enemy_skeletonpoison':'Rancid remains','$enemy_eikthyr':'Eikthyr','$enemy_serpent':'Serpent','$enemy_deathsquito':'Deathsquito','Root':'Root','$enemy_gdking':'The Elder','$enemy_draugr':'Draugr','$enemy_leech':'Leech','$enemy_abomination':'Abomination','$enemy_blob':'Blob','$enemy_blobelite':'Oozer','$enemy_blobtar':'Growth','$enemy_wraith':'Wraith','$enemy_draugrelite':'Draugr elite','$enemy_lox':'Lox','$enemy_wolf':'Wolf','$enemy_surtling':'Surtling','$enemy_goblin':'Fuling','$enemy_goblinbrute':'Fuling berserker','$enemy_goblinshaman':'Fuling shaman','$enemy_bat':'Bat','$enemy_hatchling':'Drake','$enemy_drake':'Drake','$enemy_stonegolem':'Stone golem','$enemy_fenring':'Fenring','$enemy_fenringcultist':'Cultist','$enemy_ulv':'Ulv','$enemy_unbjorn':'Undead bjorn','$enemy_bonemass':'Bonemass','$enemy_dragon':'Moder','$enemy_goblinking':'Yagluth'};
 const STATION_EN = {'$piece_workbench':'Workbench','$piece_forge':'Forge','$piece_meadcauldron':'Mead ketill','$piece_cauldron':'Cauldron','$piece_stonecutter':'Stonecutter','$piece_preptable':'Prep table','$piece_artisanstation':'Artisan table','$piece_blackforge':'Black forge','$piece_magetable':'Galdr table'};
 const SET_EN = {Berserker:'Bear set',TrollLeather:'Troll leather set',Rags:'Rags',Leather:'Leather set',Bronze:'Bronze set',Root:'Root set',Iron:'Iron set',Fenring:'Fenris set',Wolf:'Wolf set',Padded:'Padded set',Mage:'Eitr-weave set',Carapace:'Carapace set',Ask:'Ask set',Embla:'Embla set',Flametal:'Flametal set',Vilebone:'Vilebone set',Lox:'Lox fur set'};
-const UI_EN = {"Listy vikingů": "Viking sheets", "Karta vikinga": "Viking sheet", "Zbraň": "Weapon", "Štít": "Shield", "Luk": "Bow", "Hlava": "Head", "Hruď": "Chest", "Nohy": "Legs", "Plášť": "Cape", "Opasek": "Belt", "Amulet": "Trinket", "nic": "none", "v batohu": "in backpack", "smrtí": "deaths", "od poslední": "since last", "zabití": "kills", "druhů": "kinds", "cesta": "travelled", "skoků": "jumps", "postaveno": "built", "výrob": "crafts", "ve světě": "in world", "venku": "outside", "sebráno": "picked up", "jídel": "meals", "Trofeje": "Trophies", "Co ti chybí": "Still missing", "Druhy potvor": "Creature kinds", "Snědená jídla": "Food eaten", "Uvařené pokrmy": "Dishes cooked", "Velké kusy": "Big prey", "Dovednosti": "Skills", "Boj": "Combat", "Kořist ostatní": "Other prey", "Cesta a čas": "Travel and time", "Práce": "Work", "Nejvíc v rukou": "Most handled", "Mapa": "Map", "Drobnosti": "Tidbits", "dalších": "more", "Rozdal hitů": "Hits dealt", "Dostal hitů": "Hits taken", "Šípů": "Arrows shot", "Poslední rány": "Last hits", "Bossů": "Boss fights", "z toho dorazil": "finished off", "Smrtí": "Killed by enemy", "Pád": "Fall", "Utopení": "Drowning", "Spoluhráč": "Teammate", "Hrobů vybráno": "Tombstones looted", "vešly se celé": "fit in one go", "Pěšky": "Walked", "Běh": "Ran", "Plavba": "Sailed", "Vzduchem": "Airborne", "Portálem": "Portal uses", "Do dungeonu": "Dungeons entered", "Doma": "At base", "Venku": "Away", "Spánků": "Sleeps", "Načtení": "World loads", "Dveří otevřel": "Doors opened", "Havran": "Raven visits", "Kusů postaveno": "Pieces built", "Výrob": "Crafts", "Vylepšení": "Upgrades", "Stromů": "Trees felled", "Kamenů vytěženo": "Rocks mined", "Zkroceno": "Tamed", "Receptů": "Recipes known", "Materiálů": "Materials known", "postaveno nejvíc": "most built", "zasazeno": "planted", "uvařeno": "cooked", "sebráno ze země": "picked up", "natrháno a vybráno": "harvested", "Med z úlů": "Honey from hives", "Hromádek": "Stacks placed", "snědeno": "eaten", "vyrobeno": "crafted", "Odkryl sám": "Explored", "Podíl světa": "Share of world", "Biomů": "Biomes", "Od spoluhráčů (neukázáno)": "From teammates (hidden)", "odkryl sám": "explored by me", "svět": "world", "ve hře": "played", "trofeje": "trophies", "kvalita": "quality"};
+const UI_EN = {"Listy vikingů": "Viking sheets", "Karta vikinga": "Viking sheet", "Zbraň": "Weapon", "Štít": "Shield", "Luk": "Bow", "Hlava": "Head", "Hruď": "Chest", "Nohy": "Legs", "Plášť": "Cape", "Opasek": "Belt", "Amulet": "Trinket", "nic": "none", "v batohu": "in backpack", "smrtí": "deaths", "od poslední": "since last", "zabití": "kills", "druhů": "kinds", "cesta": "travelled", "skoků": "jumps", "postaveno": "built", "výrob": "crafts", "ve světě": "in world", "venku": "outside", "sebráno": "picked up", "jídel": "meals", "Trofeje": "Trophies", "Co ti chybí": "Still missing", "Druhy potvor": "Creature kinds", "Snědená jídla": "Food eaten", "Uvařené pokrmy": "Dishes cooked", "Vyrobené věci": "Items crafted", "Stavební díly": "Build pieces", "Velké kusy": "Big prey", "Dovednosti": "Skills", "Boj": "Combat", "Kořist ostatní": "Other prey", "Cesta a čas": "Travel and time", "Práce": "Work", "Nejvíc v rukou": "Most handled", "Mapa": "Map", "Drobnosti": "Tidbits", "dalších": "more", "Rozdal hitů": "Hits dealt", "Dostal hitů": "Hits taken", "Šípů": "Arrows shot", "Poslední rány": "Last hits", "Bossů": "Boss fights", "z toho dorazil": "finished off", "Smrtí": "Killed by enemy", "Pád": "Fall", "Utopení": "Drowning", "Spoluhráč": "Teammate", "Hrobů vybráno": "Tombstones looted", "vešly se celé": "fit in one go", "Pěšky": "Walked", "Běh": "Ran", "Plavba": "Sailed", "Vzduchem": "Airborne", "Portálem": "Portal uses", "Do dungeonu": "Dungeons entered", "Doma": "At base", "Venku": "Away", "Spánků": "Sleeps", "Načtení": "World loads", "Dveří otevřel": "Doors opened", "Havran": "Raven visits", "Kusů postaveno": "Pieces built", "Výrob": "Crafts", "Vylepšení": "Upgrades", "Stromů": "Trees felled", "Kamenů vytěženo": "Rocks mined", "Zkroceno": "Tamed", "Receptů": "Recipes known", "Materiálů": "Materials known", "postaveno nejvíc": "most built", "zasazeno": "planted", "uvařeno": "cooked", "sebráno ze země": "picked up", "natrháno a vybráno": "harvested", "Med z úlů": "Honey from hives", "Hromádek": "Stacks placed", "snědeno": "eaten", "vyrobeno": "crafted", "Odkryl sám": "Explored", "Podíl světa": "Share of world", "Biomů": "Biomes", "Od spoluhráčů (neukázáno)": "From teammates (hidden)", "odkryl sám": "explored by me", "svět": "world", "ve hře": "played", "trofeje": "trophies", "kvalita": "quality"};
 const T = k => LANG==='en' ? (UI_EN[k] ?? k) : k;
 const humanize = k => k.replace(/^\$(item|piece|enemy|prop|tool|ship)_/,'').replace(/_/g,' ').replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^./,c=>c.toUpperCase());
 
@@ -1378,31 +1379,69 @@ function foodToken(tok){   // "$item_deer_meat_cooked" -> prefab podle seznamu, 
 function checklist(D){
   const C = ASSETS.checklists; if(!C) return '';
   const EN = LANG === 'en', L = D.global_lists || {}, P = D.player || {};
-  const keep = (kind, key) => biomeKeep(kind, key);
+  const CR = ASSETS.craftables || null;
+  const letters2 = s => String(s).toLowerCase().replace(/[^a-z]/g, '');
+  // index prefabu pro porovnani s klici ze souboru postavy ($item_sword_iron -> SwordIron)
+  const mkIndex = arr => { const ix = {}, sr = {};
+    for(const x of arr){ for(const k of new Set([letters2(x.prefab), letters2(String(x.prefab).replace(/^(Armor|Helmet|Cape|Shield|piece_)/, ''))])){ if(!ix[k]) ix[k] = x; const s2 = k.split('').sort().join(''); (sr[s2] = sr[s2] || []).push(x); } }
+    return {ix, sr}; };
+  const lookup = (idx, alias, tok, strip) => {
+    if(alias && alias[tok]) { const a = alias[tok]; return idx.ix[letters2(a)] || null; }
+    const b = letters2(String(tok).replace(strip, ''));
+    if(idx.ix[b]) return idx.ix[b];
+    const c = idx.sr[b.split('').sort().join('')] || [];
+    return c.length === 1 ? c[0] : null;
+  };
   const rows = [];
-  // trofeje
+  const byBiome = (names, kind) => {   // rozdelit chybejici podle biomu
+    const B = BIOMES(); if(!B) return [['', names]];
+    const g = {}; for(const [label, key] of names){ const bi = biomeOf(kind, key) || 'Other'; (g[bi] = g[bi] || []).push(label); }
+    return B.order.filter(bi => g[bi]).map(bi => [biomeName(bi), g[bi]]);
+  };
+  // trofeje a druhy potvor (s biomem)
   const haveT = new Set(P.trophies || []);
-  const allT = Object.keys(C.trophies).filter(t => keep('trophies', t));
-  rows.push(['Trofeje', 'The Trophy Collector', allT.filter(t => haveT.has(t)), allT.filter(t => !haveT.has(t)).map(t => cz(t))]);
-  // zabite druhy
+  const allT = Object.keys(C.trophies).filter(t => biomeKeep('trophies', t));
+  rows.push({label: 'Trofeje', ach: 'The Trophy Collector', have: allT.filter(t => haveT.has(t)).length, total: allT.length,
+             miss: byBiome(allT.filter(t => !haveT.has(t)).map(t => [cz(t), t]), 'trophies')});
   const killed = new Set(Object.keys(L.kills || {}).map(enemyKey));
-  const allC = Object.keys(C.creatures).filter(k => keep('creatures', k));
-  rows.push(['Druhy potvor', 'The Hunter', allC.filter(k => killed.has(k)), allC.filter(k => !killed.has(k)).map(k => czE(k))]);
-  // snedena jidla a uvarene pokrmy
-  const eaten = new Set(); for(const k of Object.keys(L.eaten || {})){ const n = foodToken(k); if(n) eaten.add(n); }
-  const cooked = new Set(); for(const k of Object.keys(L.crafted || {})){ const n = foodToken(k); if(n) cooked.add(n); }
-  const foods = Object.keys(C.foods), dishes = foods.filter(n => C.foods[n].cooked);
+  const allC = Object.keys(C.creatures).filter(k => biomeKeep('creatures', k));
+  rows.push({label: 'Druhy potvor', ach: 'The Hunter', have: allC.filter(k => killed.has(k)).length, total: allC.length,
+             miss: byBiome(allC.filter(k => !killed.has(k)).map(k => [czE(k), k]), 'creatures')});
+  // jidla a pokrmy (biom nemaji, jen seznam)
   if(!BIOME){
-    rows.push(['Snědená jídla', 'The Gourmet', foods.filter(n => eaten.has(n)), foods.filter(n => !eaten.has(n)).map(n => C.foods[n].n)]);
-    rows.push(['Uvařené pokrmy', 'The Master Chef', dishes.filter(n => cooked.has(n)), dishes.filter(n => !cooked.has(n)).map(n => C.foods[n].n)]);
+    const eaten = new Set(), cooked = new Set();
+    for(const k of Object.keys(L.eaten || {})){ const n = foodToken(k); if(n) eaten.add(n); }
+    for(const k of Object.keys(L.crafted || {})){ const n = foodToken(k); if(n) cooked.add(n); }
+    const foods = Object.keys(C.foods), dishes = foods.filter(n => C.foods[n].cooked);
+    rows.push({label: 'Snědená jídla', ach: 'The Gourmet', have: foods.filter(n => eaten.has(n)).length, total: foods.length,
+               miss: [['', foods.filter(n => !eaten.has(n)).map(n => C.foods[n].n)]]});
+    rows.push({label: 'Uvařené pokrmy', ach: 'The Master Chef', have: dishes.filter(n => cooked.has(n)).length, total: dishes.length,
+               miss: [['', dishes.filter(n => !cooked.has(n)).map(n => C.foods[n].n)]]});
+    if(CR && CR.craftables){   // recepty a stavebni dily, rozdelene podle stanice
+      const recipes = CR.craftables.filter(x => x.kind !== 'conversion');
+      const idxR = mkIndex(recipes);
+      const madeR = new Set();
+      for(const k of Object.keys(L.crafted || {})){ const x = lookup(idxR, C.craftAlias, k, /^\$item_/); if(x) madeR.add(x.prefab); }
+      const byStation = (arr, key) => { const g = {}; for(const x of arr){ const st = x[key] || (EN ? 'no station' : 'bez stanice'); (g[st] = g[st] || []).push(x.n); } return Object.keys(g).sort().map(st => [st, g[st]]); };
+      rows.push({label: 'Vyrobené věci', ach: 'The Artisan', have: recipes.filter(x => madeR.has(x.prefab)).length, total: recipes.length,
+                 miss: byStation(recipes.filter(x => !madeR.has(x.prefab)), 'station')});
+      const pieces = (CR.pieces || []).filter(x => x.flag !== 'seasonal-uncertain');
+      const idxP = mkIndex(pieces);
+      const builtP = new Set();
+      for(const k of Object.keys(L.built || {})){ const x = lookup(idxP, null, k, /^\$piece_|^\$item_|^\$prop_/); if(x) builtP.add(x.prefab); }
+      rows.push({label: 'Stavební díly', ach: 'The Carpenter', have: pieces.filter(x => builtP.has(x.prefab)).length, total: pieces.length,
+                 miss: byStation(pieces.filter(x => !builtP.has(x.prefab)), 'req')});
+    }
   }
-  const box = ([label, ach, have, miss]) => {
-    const tot = have.length + miss.length; if(!tot) return '';
-    const pct = Math.round(100 * have.length / tot);
-    return `<div class="chk"><div class="chh"><span>${T(label)}</span><b>${have.length} / ${tot}</b></div>
+  const box = r => {
+    if(!r.total) return '';
+    const pct = Math.round(100 * r.have / r.total);
+    const missCount = r.miss.reduce((a, [, l]) => a + l.length, 0);
+    const groups = r.miss.filter(([, l]) => l.length).map(([g, l]) => `${g ? `<b>${esc(g)}</b> ` : ''}${l.slice().sort().map(esc).join(', ')}`).join('<br>');
+    return `<div class="chk"><div class="chh"><span>${T(r.label)}</span><b>${r.have} / ${r.total}</b></div>
       <div class="bar"><i style="width:${pct}%"></i></div>
-      <div class="chn">${esc(ach)}</div>
-      ${miss.length ? `<details><summary>${EN ? 'missing ' : 'chybí '}${miss.length}</summary><div class="miss">${miss.map(m => esc(m)).sort().join(', ')}</div></details>` : `<div class="done">${EN ? 'complete' : 'kompletní'}</div>`}</div>`;
+      <div class="chn">${esc(r.ach)}</div>
+      ${missCount ? `<details><summary>${EN ? 'missing ' : 'chybí '}${missCount}</summary><div class="miss">${groups}</div></details>` : `<div class="done">${EN ? 'complete' : 'kompletní'}</div>`}</div>`;
   };
   const html = rows.map(box).join('');
   return html ? `<h2>${T('Co ti chybí')}</h2><div class="chks">${html}</div>` : '';
@@ -1596,11 +1635,11 @@ async function loadAssets(){
   const get = async (f) => { const r = await fetch(f, {cache:'force-cache'}); if(!r.ok) throw new Error(f+' '+r.status); return r.json(); };
   try{
     st.textContent = LANG==='en' ? 'Loading library…' : 'Načítám knihovnu…';
-    const [names, icons, sets, stats, attacks, creatures, ach, desc, biomes, checklists] = await Promise.all([
-      get('/assets/item-names.json'), get('/assets/valheim-icons.json'), get('/assets/sets_front.json'), get('/assets/valheim-stats.json'), get('/assets/valheim-attacks.json'), get('/assets/valheim-creatures.json'), get('/assets/valheim-achievements.json').catch(()=>null), get('/assets/valheim-desc.json').catch(()=>null), get('/assets/valheim-biomes.json').catch(()=>null), get('/assets/valheim-checklists.json').catch(()=>null)
+    const [names, icons, sets, stats, attacks, creatures, ach, desc, biomes, checklists, craftables] = await Promise.all([
+      get('/assets/item-names.json'), get('/assets/valheim-icons.json'), get('/assets/sets_front.json'), get('/assets/valheim-stats.json'), get('/assets/valheim-attacks.json'), get('/assets/valheim-creatures.json'), get('/assets/valheim-achievements.json').catch(()=>null), get('/assets/valheim-desc.json').catch(()=>null), get('/assets/valheim-biomes.json').catch(()=>null), get('/assets/valheim-checklists.json').catch(()=>null), get('/assets/valheim-craftables.json').catch(()=>null)
     ]);
     ITEM_NAMES = names;
-    ASSETS = { icons: icons.icons, sets, stats: Object.fromEntries(Object.entries(stats.items).filter(([,v])=>v.levels&&v.levels.length).map(([k,v])=>[k,{levels:v.levels, source:v.source}])), attacks: attacks.items, creatures: creatures.items, achievements: ach? {players: ach.players, icons: ach.icons} : null, biomes, checklists, desc: desc? desc.items : {} };
+    ASSETS = { icons: icons.icons, sets, stats: Object.fromEntries(Object.entries(stats.items).filter(([,v])=>v.levels&&v.levels.length).map(([k,v])=>[k,{levels:v.levels, source:v.source}])), attacks: attacks.items, creatures: creatures.items, achievements: ach? {players: ach.players, icons: ach.icons} : null, biomes, checklists, craftables, desc: desc? desc.items : {} };
     st.textContent = '';
   }catch(e){ st.textContent = (LANG==='en'?'Library failed to load: ':'Knihovna se nenačetla: ')+e.message; st.classList.add('err'); }
   render();
@@ -1628,4 +1667,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202610131218"></script>
+<script src="/site.js?v=202610131230"></script>

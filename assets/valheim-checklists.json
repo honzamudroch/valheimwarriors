@@ -648,5 +648,20 @@
   "$item_necktailgrilled": "NeckTailGrilled",
   "$item_blueberries": "Blueberries",
   "$item_fiddleheadfern": "Fiddleheadfern"
+ },
+ "craftAlias": {
+  "$item_chest_pcuirass": "ArmorPaddedCuirass",
+  "$item_legs_pgreaves": "ArmorPaddedGreaves",
+  "$item_helmet_berserker": "HelmetBerserkerHood",
+  "$item_helmet_berserker_undead": "HelmetBerserkerUndead",
+  "$item_helmet_medium_ashlands": "HelmetAshlandsMediumHood",
+  "$item_chest_medium_ashlands": "ArmorAshlandsMediumChest",
+  "$item_legs_medium_ashlands": "ArmorAshlandsMediumlegs",
+  "$item_fistweapon_bjorn": "FistBjornClaw",
+  "$item_fistweapon_bjorn_undead": "FistBjornUndeadClaw",
+  "$item_graplinghook": "GrapplingHook",
+  "$item_meadbaseeitr": "MeadBaseEitrMinor",
+  "$item_meadbasehealth": "MeadBaseHealthMinor",
+  "$item_meadbasestamina": "MeadBaseStaminaMinor"
  }
 }

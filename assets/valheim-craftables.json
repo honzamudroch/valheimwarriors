@@ -1,0 +1,5649 @@
+{
+ "source": "Compiled 2026-10-13. (1) physgun.com Valheim item database, https://physgun.com/tools/valheim/items/ and per-item pages (recipes, stations, prefab IDs; 'read from Valheim 1.0.15 game files'). (2) physgun.com Build Calculator catalog, https://physgun.com/tools/valheim-build-calculator/ (414 piece rows with prefab IDs, game files 1.0.15). (3) Valheim Wiki (weirdgloop) https://valheim.weirdgloop.org/ : Module:Recipe/Data.json (427 recipes, cross-check, 9 Feast recipes), Module:ID/Data.json, pages Fermenter / Cooking Station / Stone Oven / seasonal pieces. (4) https://www.gameserverkings.com/knowledge-base/valheim/valheim-item-ids/ (1.0.7 prefab IDs of new items, cross-check). Achievements: 'The Artisan' = AllItemCraft (Craft every kind of item), 'The Carpenter' = AllBuildPieces (Build everything), per wiki Module:Achievement/Data.json.",
+ "craftables": [
+  {
+   "n": "Barley Wine Base: Fire Resistance",
+   "prefab": "BarleyWineBase",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bloodgold Payload",
+   "prefab": "Catapult_Ammo_BloodGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Blue Fireworks",
+   "prefab": "FireworksRocket_Blue",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bread Dough",
+   "prefab": "BreadDough",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze",
+   "prefab": "Bronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze Nails",
+   "prefab": "BronzeNails",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Cast: Breastplate of the Protector",
+   "prefab": "ArmorGoldHeavyChestUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Chestpiece of the Vanguard",
+   "prefab": "ArmorGoldMediumChestUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Echo Spike",
+   "prefab": "StaffOrbofAhriUncooked",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Cast: Headdress of the Caller",
+   "prefab": "ArmorGoldMageHelmetUncooked",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Cast: Helmet of the Protector",
+   "prefab": "ArmorGoldHeavyHelmetUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Hood of the Vanguard",
+   "prefab": "ArmorGoldMediumHelmetUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Intricate Key",
+   "prefab": "KeysGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Lightning Strike",
+   "prefab": "StaffThunderbloodUncooked",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Cast: Nord Atgeir",
+   "prefab": "AtgeirGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Axe",
+   "prefab": "AxeGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Bow",
+   "prefab": "BowGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Buckler",
+   "prefab": "ShieldBucklerGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Crossbow",
+   "prefab": "CrossbowGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Dagger",
+   "prefab": "KnifeGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Greataxe",
+   "prefab": "BattleaxeGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Greatshield",
+   "prefab": "ShieldTowerGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Greatsword",
+   "prefab": "THSwordGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Knucklechains",
+   "prefab": "FistGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Mace",
+   "prefab": "MaceGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Shield",
+   "prefab": "ShieldRoundGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Sledge",
+   "prefab": "SledgeGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Spear",
+   "prefab": "SpearGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Nord Sword",
+   "prefab": "SwordGoldUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Northern Vengeance",
+   "prefab": "StaffFrostOrbsUncooked",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Cast: Robes of the Caller",
+   "prefab": "ArmorGoldMageChestUncooked",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Cast: Spirit Caller",
+   "prefab": "StaffSpiritCallerUncooked",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Cast: Trousers of the Caller",
+   "prefab": "ArmorGoldMageLegsUncooked",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Cast: Trousers of the Protector",
+   "prefab": "ArmorGoldHeavyLegsUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Cast: Trousers of the Vanguard",
+   "prefab": "ArmorGoldMediumLegsUncooked",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Ceramic Plate",
+   "prefab": "CeramicPlate",
+   "station": "Artisan Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Cyan Fireworks",
+   "prefab": "FireworksRocket_Cyan",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Explosive Payload",
+   "prefab": "BombSiege",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Grausten Payload",
+   "prefab": "Catapult_ammo",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Green Fireworks",
+   "prefab": "FireworksRocket_Green",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Iron Nails",
+   "prefab": "IronNails",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Animal Whispers",
+   "prefab": "MeadBaseTamer",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Anti-Sting",
+   "prefab": "MeadBaseBugRepellent",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead base: Berserkir",
+   "prefab": "MeadBaseBzerker",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Frost Resistance",
+   "prefab": "MeadBaseFrostResist",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Lightfoot",
+   "prefab": "MeadBaseLightFoot",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Lingering Eitr",
+   "prefab": "MeadBaseEitrLingering",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Lingering Health",
+   "prefab": "MeadBaseHealthLingering",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Lingering Stamina",
+   "prefab": "MeadBaseStaminaLingering",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Major Healing",
+   "prefab": "MeadBaseHealthMajor",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Medium Healing",
+   "prefab": "MeadBaseHealthMedium",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Medium Stamina",
+   "prefab": "MeadBaseStaminaMedium",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Minor Eitr",
+   "prefab": "MeadBaseEitrMinor",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Minor Healing",
+   "prefab": "MeadBaseHealthMinor",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Minor Stamina",
+   "prefab": "MeadBaseStaminaMinor",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Poison Resistance",
+   "prefab": "MeadBasePoisonResist",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead base: Ratatosk",
+   "prefab": "MeadBaseHasty",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Tasty",
+   "prefab": "MeadBaseTasty",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Troll Endurance",
+   "prefab": "MeadBaseStrength",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Base: Vananidir",
+   "prefab": "MeadBaseSwimmer",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mechanical Spring",
+   "prefab": "MechanicalSpring",
+   "station": "Artisan Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Oven Pancake Batter",
+   "prefab": "OvenPancakeUncooked",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Purple Fireworks",
+   "prefab": "FireworksRocket_Purple",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Raw Fish",
+   "prefab": "FishRaw",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Raw Kale Chips",
+   "prefab": "KaleChipsUncooked",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Red Fireworks",
+   "prefab": "FireworksRocket_Red",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Sharpening Stone",
+   "prefab": "SharpeningStone",
+   "station": "Stonecutter",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Shield Core",
+   "prefab": "ShieldCore",
+   "station": "Artisan Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Unbaked Lox Pie",
+   "prefab": "LoxPieUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Unbaked Poteitr",
+   "prefab": "BakedPoteitrUncooked",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 7
+  },
+  {
+   "n": "Unbaked Sweetbread",
+   "prefab": "VikingCupcakeUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Uncooked Fish 'n' Bread",
+   "prefab": "FishAndBreadUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Uncooked Honey Glazed Chicken",
+   "prefab": "HoneyGlazedChickenUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Uncooked Meat Platter",
+   "prefab": "MeatPlatterUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Uncooked Misthare Supreme",
+   "prefab": "MisthareSupremeUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Uncooked Piquant Pie",
+   "prefab": "PiquantPieUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Uncooked Roasted Crust Pie",
+   "prefab": "RoastedCrustPieUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Uncooked Stuffed Mushroom",
+   "prefab": "MagicallyStuffedShroomUncooked",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Yellow Fireworks",
+   "prefab": "FireworksRocket_Yellow",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Black Soup",
+   "prefab": "BlackSoup",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Blood Pudding",
+   "prefab": "BloodPudding",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Boar Jerky",
+   "prefab": "BoarJerky",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carrot Soup",
+   "prefab": "CarrotSoup",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Cooked Egg",
+   "prefab": "CookedEgg",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Deer Stew",
+   "prefab": "DeerStew",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Eyescream",
+   "prefab": "Eyescream",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Fiery Svinstew",
+   "prefab": "FierySvinstew",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 5
+  },
+  {
+   "n": "Fish Soup",
+   "prefab": "FishSoup",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 7
+  },
+  {
+   "n": "Fish Wraps",
+   "prefab": "FishWraps",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Lingonberry Juice",
+   "prefab": "Lingondricka",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Marinated Greens",
+   "prefab": "MarinatedGreens",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Mashed Meat",
+   "prefab": "MashedMeat",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Meat In Bread",
+   "prefab": "MooseKebab",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 7
+  },
+  {
+   "n": "Meatballs and Poteitr",
+   "prefab": "MeatballsMashedPoteitr",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 7
+  },
+  {
+   "n": "Minced Meat Sauce",
+   "prefab": "MinceMeatSauce",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Muckshake",
+   "prefab": "ShocklateSmoothie",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Mushroom Omelette",
+   "prefab": "MushroomOmelette",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 5
+  },
+  {
+   "n": "Oat Milk",
+   "prefab": "OatMilk",
+   "station": "Mead Ketill",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Oatmeal",
+   "prefab": "OatmealLingonberryJam",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Onion Soup",
+   "prefab": "OnionSoup",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Pancakes",
+   "prefab": "Pancakes",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Pulled Bear",
+   "prefab": "PulledBear",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Queen's Jam",
+   "prefab": "QueensJam",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Salad",
+   "prefab": "Salad",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 5
+  },
+  {
+   "n": "Sausages",
+   "prefab": "Sausages",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Scorching Medley",
+   "prefab": "ScorchingMedley",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Seal Meat Soup",
+   "prefab": "SealSoup",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 7
+  },
+  {
+   "n": "Seeker Aspic",
+   "prefab": "SeekerAspic",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 5
+  },
+  {
+   "n": "Serpent Stew",
+   "prefab": "SerpentStew",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Sizzling Berry Broth",
+   "prefab": "SizzlingBerryBroth",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 5
+  },
+  {
+   "n": "Smoked Fish",
+   "prefab": "SmokedFish",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 7
+  },
+  {
+   "n": "Smoked Moose Meat",
+   "prefab": "SmokedMooseMeat",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 7
+  },
+  {
+   "n": "Sparkling Shroomshake",
+   "prefab": "SparklingShroomshake",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 6
+  },
+  {
+   "n": "Spicy Marmalade",
+   "prefab": "SpicyMarmalade",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 5
+  },
+  {
+   "n": "Turnip Stew",
+   "prefab": "TurnipStew",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Wolf Jerky",
+   "prefab": "WolfJerky",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Wolf Skewer",
+   "prefab": "WolfMeatSkewer",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Yggdrasil Porridge",
+   "prefab": "YggdrasilPorridge",
+   "station": "Cauldron",
+   "kind": "recipe",
+   "lvl": 5
+  },
+  {
+   "n": "Abyssal Harpoon",
+   "prefab": "SpearChitin",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Abyssal Razor",
+   "prefab": "KnifeChitin",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Ancient Bark Spear",
+   "prefab": "SpearElderbark",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Basalt Bomb",
+   "prefab": "BombLava",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bile Bomb",
+   "prefab": "BombBile",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Black Metal Axe",
+   "prefab": "AxeBlackMetal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Black Metal Knife",
+   "prefab": "KnifeBlackMetal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Black Metal Sword",
+   "prefab": "SwordBlackmetal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Blob Bomb: Elite Poison",
+   "prefab": "BombBlob_PoisonElite",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Blob Bomb: Frost",
+   "prefab": "BombBlob_Frost",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Blob Bomb: Lava",
+   "prefab": "BombBlob_Lava",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Blob Bomb: Poison",
+   "prefab": "BombBlob_Poison",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Blob Bomb: Pulp",
+   "prefab": "BombBlob_Morkhalla",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Blob Bomb: Tar",
+   "prefab": "BombBlob_Tar",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bloodgeon",
+   "prefab": "MaceEldnerBlood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Bronze Axe",
+   "prefab": "AxeBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze Mace",
+   "prefab": "MaceBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze Spear",
+   "prefab": "SpearBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze Sword",
+   "prefab": "SwordBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Butcher Knife",
+   "prefab": "KnifeButcher",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Spear",
+   "prefab": "SpearCarapace",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Club",
+   "prefab": "Club",
+   "station": "Player crafting menu (no station)",
+   "kind": "recipe"
+  },
+  {
+   "n": "Copper Knife",
+   "prefab": "KnifeCopper",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Dyrnwyn",
+   "prefab": "SwordDyrnwyn",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Ember Charge",
+   "prefab": "BombDynamite",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Fang Spear",
+   "prefab": "SpearWolfFang",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Flametal Mace",
+   "prefab": "MaceEldner",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Flint Axe",
+   "prefab": "AxeFlint",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Flint Knife",
+   "prefab": "KnifeFlint",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Flint Spear",
+   "prefab": "SpearFlint",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Frostfire Axe",
+   "prefab": "AxeGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Dagger",
+   "prefab": "KnifeGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Mace",
+   "prefab": "MaceGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Spear",
+   "prefab": "SpearGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Sword",
+   "prefab": "SwordGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostner",
+   "prefab": "MaceSilver",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Horn of Celebration",
+   "prefab": "TankardAnniversary",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Iron Axe",
+   "prefab": "AxeIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Iron Mace",
+   "prefab": "MaceIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Iron Sword",
+   "prefab": "SwordIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Jotun Bane",
+   "prefab": "AxeJotunBane",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Klossen",
+   "prefab": "MaceEldnerNature",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Mistwalker",
+   "prefab": "SwordMistwalker",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Nidhögg",
+   "prefab": "SwordNiedhogg",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Nidhögg the Bleeding",
+   "prefab": "SwordNiedhoggBlood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nidhögg the Primal",
+   "prefab": "SwordNiedhoggNature",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nidhögg the Thundering",
+   "prefab": "SwordNiedhoggLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Axe",
+   "prefab": "AxeGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Dagger",
+   "prefab": "KnifeGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Mace",
+   "prefab": "MaceGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Spear",
+   "prefab": "SpearGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Sword",
+   "prefab": "SwordGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Ooze Bomb",
+   "prefab": "BombOoze",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Porcupine",
+   "prefab": "MaceNeedle",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Silver Knife",
+   "prefab": "KnifeSilver",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Silver Sword",
+   "prefab": "SwordSilver",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Smoke Bomb",
+   "prefab": "BombSmoke",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Snowball",
+   "prefab": "Snowball",
+   "station": "Player crafting menu (no station)",
+   "kind": "recipe"
+  },
+  {
+   "n": "Splitnir",
+   "prefab": "SpearSplitner",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Splitnir the Bleeding",
+   "prefab": "SpearSplitner_Blood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Splitnir the Primal",
+   "prefab": "SpearSplitner_Nature",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Splitnir the Storming",
+   "prefab": "SpearSplitner_Lightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Stone Axe",
+   "prefab": "AxeStone",
+   "station": "Player crafting menu (no station)",
+   "kind": "recipe"
+  },
+  {
+   "n": "Storm Star",
+   "prefab": "MaceEldnerLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Tankard",
+   "prefab": "Tankard",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Thunderblood Axe",
+   "prefab": "AxeGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Dagger",
+   "prefab": "KnifeGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Mace",
+   "prefab": "MaceGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Spear",
+   "prefab": "SpearGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Sword",
+   "prefab": "SwordGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Wooden Sword",
+   "prefab": "SwordWood",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Antler Pickaxe",
+   "prefab": "PickaxeAntler",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Battleaxe",
+   "prefab": "Battleaxe",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Berserkir Axes",
+   "prefab": "AxeBerzerkr",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Black Metal Atgeir",
+   "prefab": "AtgeirBlackmetal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Black Metal Battleaxe",
+   "prefab": "BattleaxeBlackmetal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Black Metal Pickaxe",
+   "prefab": "PickaxeBlackMetal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Bleeding Berserkir Axes",
+   "prefab": "AxeBerzerkrBlood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Bronze Atgeir",
+   "prefab": "AtgeirBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze Pickaxe",
+   "prefab": "PickaxeBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Brutal Slayer",
+   "prefab": "THSwordSlayerBlood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Crystal Battleaxe",
+   "prefab": "BattleaxeCrystal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Demolisher",
+   "prefab": "SledgeDemolisher",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Dundr",
+   "prefab": "StaffLightning",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Early Axes",
+   "prefab": "AxeEarly",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Echo Spike",
+   "prefab": "StaffOrbofAhri",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Flesh Rippers",
+   "prefab": "FistFenrirClaw",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Frostfire Atgeir",
+   "prefab": "AtgeirGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Greataxe",
+   "prefab": "BattleaxeGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Greatsword",
+   "prefab": "THSwordGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Knucklechains",
+   "prefab": "FistGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Sledge",
+   "prefab": "SledgeGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Himminafl",
+   "prefab": "AtgeirHimminAfl",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Iron Atgeir",
+   "prefab": "AtgeirIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Iron Pickaxe",
+   "prefab": "PickaxeIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Iron Sledge",
+   "prefab": "SledgeIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Krom",
+   "prefab": "THSwordKrom",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Lightning Strike",
+   "prefab": "StaffThunderBlood",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Nord Atgeir",
+   "prefab": "AtgeirGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Greataxe",
+   "prefab": "BattleaxeGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Greatsword",
+   "prefab": "THSwordGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Knucklechains",
+   "prefab": "FistGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Sledge",
+   "prefab": "SledgeGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Paws of the Bear",
+   "prefab": "FistBjornClaw",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Primal Berserkir Axes",
+   "prefab": "AxeBerzerkrNature",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Primal Slayer",
+   "prefab": "THSwordSlayerNature",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Scourging Slayer",
+   "prefab": "THSwordSlayerLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Scythe",
+   "prefab": "Scythe",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Skoll and Hati",
+   "prefab": "KnifeSkollAndHati",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Skull Splittur",
+   "prefab": "BattleaxeSkullSplittur",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Slayer",
+   "prefab": "THSwordSlayer",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Snow Shovel",
+   "prefab": "Shovel",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Staff of Embers",
+   "prefab": "StaffFireball",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Staff of Fracturing",
+   "prefab": "StaffClusterbomb",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Staff of Frost",
+   "prefab": "StaffIceShards",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Staff of Protection",
+   "prefab": "StaffShield",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Staff of the Wild",
+   "prefab": "StaffGreenRoots",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Stagbreaker",
+   "prefab": "SledgeStagbreaker",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Thunderblood Atgeir",
+   "prefab": "AtgeirGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Greataxe",
+   "prefab": "BattleaxeGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Greatsword",
+   "prefab": "THSwordGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Knucklechains",
+   "prefab": "FistGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Sledge",
+   "prefab": "SledgeGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thundering Berserkir Axes",
+   "prefab": "AxeBerzerkrLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Trollstav",
+   "prefab": "StaffRedTroll",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Vilebone Maulclaws",
+   "prefab": "FistBjornUndeadClaw",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Black Metal Bolt",
+   "prefab": "BoltBlackmetal",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Bloodgold Arrow",
+   "prefab": "ArrowBloodGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bloodgold Bolt",
+   "prefab": "BoltBloodGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bone Bolt",
+   "prefab": "BoltBone",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronzehead Arrow",
+   "prefab": "ArrowBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Arrow",
+   "prefab": "ArrowCarapace",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Bolt",
+   "prefab": "BoltCarapace",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Charred Arrow",
+   "prefab": "ArrowCharred",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Charred Bolt",
+   "prefab": "BoltCharred",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Cold Fishing Bait",
+   "prefab": "FishingBaitCave",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Fire Arrow",
+   "prefab": "ArrowFire",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Flinthead Arrow",
+   "prefab": "ArrowFlint",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Frost Arrow",
+   "prefab": "ArrowFrost",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frosty Fishing Bait",
+   "prefab": "FishingBaitDeepNorth",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Heavy Fishing Bait",
+   "prefab": "FishingBaitOcean",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Hot Fishing Bait",
+   "prefab": "FishingBaitAshlands",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Iron Bolt",
+   "prefab": "BoltIron",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Ironhead Arrow",
+   "prefab": "ArrowIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Misty Fishing Bait",
+   "prefab": "FishingBaitMistlands",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mossy Fishing Bait",
+   "prefab": "FishingBaitForest",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Needle Arrow",
+   "prefab": "ArrowNeedle",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Obsidian Arrow",
+   "prefab": "ArrowObsidian",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Poison Arrow",
+   "prefab": "ArrowPoison",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Silver Arrow",
+   "prefab": "ArrowSilver",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Sticky Fishing Bait",
+   "prefab": "FishingBaitSwamp",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Stingy Fishing Bait",
+   "prefab": "FishingBaitPlains",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Wood Arrow",
+   "prefab": "ArrowWood",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze Helmet",
+   "prefab": "HelmetBronze",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Helmet",
+   "prefab": "HelmetCarapace",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Celebratory Cap",
+   "prefab": "HelmetCelebration",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Crown of Valheim",
+   "prefab": "HelmetCrownofValheim",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Drake Helmet",
+   "prefab": "HelmetDrake",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Eitr-weave Hood",
+   "prefab": "HelmetMage",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Fenris Hood",
+   "prefab": "HelmetFenring",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Fishing Hat",
+   "prefab": "HelmetFishingHat",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Flametal Helmet",
+   "prefab": "HelmetFlametal",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Headdress of the Bear",
+   "prefab": "HelmetBerserkerHood",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Headdress of the Caller",
+   "prefab": "HelmetDNMage",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Helmet of the Protector",
+   "prefab": "HelmetDNHeavy",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Hood of Ask",
+   "prefab": "HelmetAshlandsMediumHood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Hood of Embla",
+   "prefab": "HelmetMage_Ashlands",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Hood of Oden",
+   "prefab": "HelmetOdin",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Hood of the Vanguard",
+   "prefab": "HelmetDNMediumHood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Iron Helmet",
+   "prefab": "HelmetIron",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Leather Helmet",
+   "prefab": "HelmetLeather",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Lox Fur Hood",
+   "prefab": "HelmetLox",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Padded Helmet",
+   "prefab": "HelmetPadded",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Root Mask",
+   "prefab": "HelmetRoot",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Troll Leather Hood",
+   "prefab": "HelmetTrollLeather",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Vilebone Visage",
+   "prefab": "HelmetBerserkerUndead",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Arbalest",
+   "prefab": "CrossbowArbalest",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Ash Fang",
+   "prefab": "BowAshlands",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Blood Fang",
+   "prefab": "BowAshlandsBlood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Crude Bow",
+   "prefab": "Bow",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Draugr Fang",
+   "prefab": "BowDraugrFang",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Finewood Bow",
+   "prefab": "BowFineWood",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Frostfire Bow",
+   "prefab": "BowGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Frostfire Crossbow",
+   "prefab": "CrossbowGold_FrostFire",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Grappling Hook",
+   "prefab": "GrapplingHook",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Huntsman Bow",
+   "prefab": "BowHuntsman",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Nord Bow",
+   "prefab": "BowGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Crossbow",
+   "prefab": "CrossbowGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Ripper",
+   "prefab": "CrossbowRipper",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Root Fang",
+   "prefab": "BowAshlandsRoot",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Root Ripper",
+   "prefab": "CrossbowRipperNature",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Spinesnap",
+   "prefab": "BowSpineSnap",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Storm Fang",
+   "prefab": "BowAshlandsStorm",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Storm Ripper",
+   "prefab": "CrossbowRipperLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Bow",
+   "prefab": "BowGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Thunderblood Crossbow",
+   "prefab": "CrossbowGold_BloodLightning",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Wound Ripper",
+   "prefab": "CrossbowRipperBlood",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Breastplate of Ask",
+   "prefab": "ArmorAshlandsMediumChest",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Breastplate of the Protector",
+   "prefab": "ArmorDeepNorthHeavyChest",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Bronze Plate Tunic",
+   "prefab": "ArmorBronzeChest",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Breastplate",
+   "prefab": "ArmorCarapaceChest",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Chestpiece of the Vanguard",
+   "prefab": "ArmorDeepNorthMediumChest",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Eitr-weave Robe",
+   "prefab": "ArmorMageChest",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Fenris Coat",
+   "prefab": "ArmorFenringChest",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Flametal Breastplate",
+   "prefab": "ArmorFlametalChest",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Iron Scale Mail",
+   "prefab": "ArmorIronChest",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Leather Tunic",
+   "prefab": "ArmorLeatherChest",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Lox Fur Jacket",
+   "prefab": "ArmorLoxChest",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Padded Cuirass",
+   "prefab": "ArmorPaddedCuirass",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Patterns of the Bear",
+   "prefab": "ArmorBerserkerChest",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Rag Tunic",
+   "prefab": "ArmorRagsChest",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Robes of Embla",
+   "prefab": "ArmorMageChest_Ashlands",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Robes of the Caller",
+   "prefab": "ArmorDeepNorthMageChest",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Root Harnesk",
+   "prefab": "ArmorRootChest",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Troll Leather Tunic",
+   "prefab": "ArmorTrollLeatherChest",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Vilebone Cage",
+   "prefab": "ArmorBerserkerUndeadChest",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Wolf Hide Chestpiece",
+   "prefab": "ArmorWolfChest",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Bronze Plate Leggings",
+   "prefab": "ArmorBronzeLegs",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Greaves",
+   "prefab": "ArmorCarapaceLegs",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Eitr-weave Trousers",
+   "prefab": "ArmorMageLegs",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Fenris Leggings",
+   "prefab": "ArmorFenringLegs",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Flametal Greaves",
+   "prefab": "ArmorFlametalLegs",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Iron Greaves",
+   "prefab": "ArmorIronLegs",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Leather Trousers",
+   "prefab": "ArmorLeatherLegs",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Loincloth of the Bear",
+   "prefab": "ArmorBerserkerLegs",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Lox Fur Trousers",
+   "prefab": "ArmorLoxLegs",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Padded Greaves",
+   "prefab": "ArmorPaddedGreaves",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Rag Trousers",
+   "prefab": "ArmorRagsLegs",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Root Leggings",
+   "prefab": "ArmorRootLegs",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Troll Leather Trousers",
+   "prefab": "ArmorTrollLeatherLegs",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Trousers of Ask",
+   "prefab": "ArmorAshlandsMediumlegs",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Trousers of Embla",
+   "prefab": "ArmorMageLegs_Ashlands",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Trousers of the Caller",
+   "prefab": "ArmorDeepNorthMagelegs",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Trousers of the Protector",
+   "prefab": "ArmorDeepNorthHeavylegs",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Trousers of the Vanguard",
+   "prefab": "ArmorDeepNorthMediumlegs",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Vilebone Drapes",
+   "prefab": "ArmorBerserkerUndeadLegs",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Wolf Hide Trousers",
+   "prefab": "ArmorWolfLegs",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Asksvin Saddle",
+   "prefab": "SaddleAsksvin",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Bell",
+   "prefab": "Bell",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Lox Saddle",
+   "prefab": "SaddleLox",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Moose Saddle",
+   "prefab": "SaddleMoose",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Sealbreaker",
+   "prefab": "DvergrKey",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Banded Shield",
+   "prefab": "ShieldBanded",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Black Metal Shield",
+   "prefab": "ShieldBlackmetal",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Black Metal Tower Shield",
+   "prefab": "ShieldBlackmetalTower",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Bone Tower Shield",
+   "prefab": "ShieldBoneTower",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Bronze Buckler",
+   "prefab": "ShieldBronzeBuckler",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Buckler",
+   "prefab": "ShieldCarapaceBuckler",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Carapace Shield",
+   "prefab": "ShieldCarapace",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Flametal Shield",
+   "prefab": "ShieldFlametal",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Flametal Tower Shield",
+   "prefab": "ShieldFlametalTower",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Iron Buckler",
+   "prefab": "ShieldIronBuckler",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Iron Tower Shield",
+   "prefab": "ShieldIronTower",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Nord Buckler",
+   "prefab": "ShieldGoldBuckler",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Greatshield",
+   "prefab": "ShieldGoldTower",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Nord Shield",
+   "prefab": "ShieldGold",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Serpent Scale Shield",
+   "prefab": "ShieldSerpentscale",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Shield of Roots",
+   "prefab": "ShieldRoots",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Silver Shield",
+   "prefab": "ShieldSilver",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Wood Shield",
+   "prefab": "ShieldWood",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Wood Tower Shield",
+   "prefab": "ShieldWoodTower",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bracelets of the Brave",
+   "prefab": "TrinketBlackDamageHealth",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Brimstone",
+   "prefab": "TrinketFlametalStaminaHealth",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bronze Pendant",
+   "prefab": "TrinketBronzeStamina",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Crystal Heart",
+   "prefab": "TrinketSilverResist",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Evasion Mantle",
+   "prefab": "TrinketBlackStamina",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Fins of Destiny",
+   "prefab": "TrinketChitinSwim",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Heart of the Forest",
+   "prefab": "TrinketBronzeHealth",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Iron Brooch",
+   "prefab": "TrinketIronHealth",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Jörmundling",
+   "prefab": "TrinketFlametalEitr",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Neckstabber",
+   "prefab": "TrinketBloodGoldHealth",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Nimble Anklet",
+   "prefab": "TrinketIronStamina",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Pulsating Earrings",
+   "prefab": "TrinketCarapaceEitr",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Resounding Shackle",
+   "prefab": "TrinketScaleStaminaDamage",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Witch Crown",
+   "prefab": "TrinketBloodGoldStamina",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Wolf Sight",
+   "prefab": "TrinketSilverDamage",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Ashen Cape",
+   "prefab": "CapeAsh",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Asksvin Cloak",
+   "prefab": "CapeAsksvin",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Cape of Oden",
+   "prefab": "CapeOdin",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Cape of the Caller",
+   "prefab": "CapeDeepNorthMage",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Deer Hide Cape",
+   "prefab": "CapeDeerHide",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Feather Cape",
+   "prefab": "CapeFeather",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Linen Cape",
+   "prefab": "CapeLinen",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Lox Cape",
+   "prefab": "CapeLox",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Moose Hide Cape",
+   "prefab": "CapeDeepNorth",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 4
+  },
+  {
+   "n": "Troll Hide Cape",
+   "prefab": "CapeTrollHide",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Wolf Fur Cape",
+   "prefab": "CapeWolf",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 2
+  },
+  {
+   "n": "Black Metal Missile",
+   "prefab": "TurretBolt",
+   "station": "Artisan Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Bloodgold Missile",
+   "prefab": "TurretBoltBloodgold",
+   "station": "Artisan Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Flametal Missile",
+   "prefab": "TurretBoltFlametal",
+   "station": "Artisan Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Wooden Missile",
+   "prefab": "TurretBoltWood",
+   "station": "Artisan Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Cultivator",
+   "prefab": "Cultivator",
+   "station": "Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Hammer",
+   "prefab": "Hammer",
+   "station": "Player crafting menu (no station)",
+   "kind": "recipe"
+  },
+  {
+   "n": "Hoe",
+   "prefab": "Hoe",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Dead Raiser",
+   "prefab": "StaffSkeleton",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Northern Vengeance",
+   "prefab": "StaffFrostOrbs",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Spirit Caller",
+   "prefab": "StaffSpiritCaller",
+   "station": "Galdr Table",
+   "kind": "recipe",
+   "lvl": 3
+  },
+  {
+   "n": "Dvergr Lantern",
+   "prefab": "Lantern",
+   "station": "Black Forge",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Torch",
+   "prefab": "Torch",
+   "station": "Player crafting menu (no station)",
+   "kind": "recipe"
+  },
+  {
+   "n": "Wisplight",
+   "prefab": "Demister",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mead Horn of Oden",
+   "prefab": "TankardOdin",
+   "station": "Workbench",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Ashlands Gourmet Bowl",
+   "prefab": "FeastAshlands",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Black Forest Buffet Platter",
+   "prefab": "FeastBlackforest",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Northern Morning Fare",
+   "prefab": "FeastDeepNorth",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Whole Roasted Meadow Boar",
+   "prefab": "FeastMeadows",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Mushrooms Galore á la Mistlands",
+   "prefab": "FeastMistlands",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Hearty Mountain Logger's Stew",
+   "prefab": "FeastMountains",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Sailor's Bounty",
+   "prefab": "FeastOceans",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Plains Pie Picnic",
+   "prefab": "FeastPlains",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Swamp Dweller's Delight",
+   "prefab": "FeastSwamps",
+   "station": "Food Preparation Table",
+   "kind": "recipe",
+   "lvl": 1
+  },
+  {
+   "n": "Grilled Neck Tail",
+   "prefab": "NeckTailGrilled",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Boar Meat",
+   "prefab": "CookedMeat",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Deer Meat",
+   "prefab": "CookedDeerMeat",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Bear Meat",
+   "prefab": "CookedBjornMeat",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Fish",
+   "prefab": "FishCooked",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Wolf Meat",
+   "prefab": "CookedWolfMeat",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Chicken Meat",
+   "prefab": "CookedChickenMeat",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Hare Meat",
+   "prefab": "CookedHareMeat",
+   "station": "Cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Lox Meat",
+   "prefab": "CookedLoxMeat",
+   "station": "Iron cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Serpent Meat",
+   "prefab": "SerpentMeatCooked",
+   "station": "Iron cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Seeker Meat",
+   "prefab": "CookedBugMeat",
+   "station": "Iron cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Bonemaw Meat",
+   "prefab": "CookedBoneMawSerpentMeat",
+   "station": "Iron cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Asksvin Tail",
+   "prefab": "CookedAsksvinMeat",
+   "station": "Iron cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Moose Meat",
+   "prefab": "CookedMooseMeat",
+   "station": "Iron cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Volture Meat",
+   "prefab": "CookedVoltureMeat",
+   "station": "Iron cooking station",
+   "kind": "conversion"
+  },
+  {
+   "n": "Bread",
+   "prefab": "Bread",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Lox Meat Pie",
+   "prefab": "LoxPie",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Honey Glazed Chicken",
+   "prefab": "HoneyGlazedChicken",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Fish 'n' Bread",
+   "prefab": "FishAndBread",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Stuffed Mushroom",
+   "prefab": "MagicallyStuffedShroom",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Meat Platter",
+   "prefab": "MeatPlatter",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Misthare Supreme",
+   "prefab": "MisthareSupreme",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Roasted Crust Pie",
+   "prefab": "RoastedCrustPie",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Piquant Pie",
+   "prefab": "PiquantPie",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Frosted Sweetbread",
+   "prefab": "VikingCupcake",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Cooked Seal Blubber",
+   "prefab": "CookedSealBlubber",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Kale Chips",
+   "prefab": "KaleChips",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Baked Poteitr",
+   "prefab": "BakedPoteitr",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Oven Pancake",
+   "prefab": "OvenPancake",
+   "station": "Stone oven",
+   "kind": "conversion"
+  },
+  {
+   "n": "Minor Healing Mead",
+   "prefab": "MeadHealthMinor",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Poison Resistance Mead",
+   "prefab": "MeadPoisonResist",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Tasty Mead",
+   "prefab": "MeadTasty",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Medium Healing Mead",
+   "prefab": "MeadHealthMedium",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Medium Stamina Mead",
+   "prefab": "MeadStaminaMedium",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Frost Resistance Mead",
+   "prefab": "MeadFrostResist",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Minor Stamina Mead",
+   "prefab": "MeadStaminaMinor",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Fire Resistance Barley Wine",
+   "prefab": "BarleyWine",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Minor Eitr Mead",
+   "prefab": "MeadEitrMinor",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Lingering Stamina Mead",
+   "prefab": "MeadStaminaLingering",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Major Healing Mead",
+   "prefab": "MeadHealthMajor",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Lingering Healing Mead",
+   "prefab": "MeadHealthLingering",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Lingering Eitr Mead",
+   "prefab": "MeadEitrLingering",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Berserkir Mead",
+   "prefab": "MeadBzerker",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Anti-Sting Concoction",
+   "prefab": "MeadBugRepellent",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Draught of Vananidir",
+   "prefab": "MeadSwimmer",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Tonic of Ratatosk",
+   "prefab": "MeadHasty",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Mead of Troll Endurance",
+   "prefab": "MeadStrength",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Brew of Animal Whispers",
+   "prefab": "MeadTamer",
+   "station": "Fermenter",
+   "kind": "conversion"
+  },
+  {
+   "n": "Lightfoot Mead",
+   "prefab": "MeadLightfoot",
+   "station": "Fermenter",
+   "kind": "conversion"
+  }
+ ],
+ "pieces": [
+  {
+   "n": "Wood Wall 1x1",
+   "prefab": "wood_wall_quarter",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall Half",
+   "prefab": "wood_wall_half",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall",
+   "prefab": "woodwall",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall 26°",
+   "prefab": "wood_wall_roof_a",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall 45°",
+   "prefab": "wood_wall_roof_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall 67°",
+   "prefab": "wood_wall_roof_67_a",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall 26° (Inverted)",
+   "prefab": "wood_wall_roof_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall 45° (Inverted)",
+   "prefab": "wood_wall_roof_45_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Wall 67° (Inverted)",
+   "prefab": "wood_wall_roof_67_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Floor 1x1",
+   "prefab": "wood_floor_1x1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Floor 2x2",
+   "prefab": "wood_floor",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Pole 1 m",
+   "prefab": "wood_pole",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Pole 2 m",
+   "prefab": "wood_pole2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Beam 1 m",
+   "prefab": "wood_beam_1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Beam 2 m",
+   "prefab": "wood_beam",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Beam 26°",
+   "prefab": "wood_beam_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Beam 45°",
+   "prefab": "wood_beam_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Beam 67°",
+   "prefab": "wood_beam_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Roof Cross 26°",
+   "prefab": "wood_wall_roof_top",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Roof Cross 45°",
+   "prefab": "wood_wall_roof_top_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Roof Cross 67°",
+   "prefab": "wood_wall_roof_top_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof 26°",
+   "prefab": "wood_roof",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof 45°",
+   "prefab": "wood_roof_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof 67°",
+   "prefab": "wood_roof_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Inner Corner 26°",
+   "prefab": "wood_roof_icorner",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Inner Corner 45°",
+   "prefab": "wood_roof_icorner_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Inner Corner 67°",
+   "prefab": "wood_roof_icorner_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Outer Corner 26°",
+   "prefab": "wood_roof_ocorner",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Outer Corner 45°",
+   "prefab": "wood_roof_ocorner_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Outer Corner 67°",
+   "prefab": "wood_roof_ocorner_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Ridge 26°",
+   "prefab": "wood_roof_top",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Ridge 45°",
+   "prefab": "wood_roof_top_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Thatch Roof Ridge 67°",
+   "prefab": "wood_roof_top_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Door",
+   "prefab": "wood_door",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Gate",
+   "prefab": "wood_gate",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Shutter",
+   "prefab": "wood_window",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Dragon Adornment",
+   "prefab": "wood_dragon1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Roundpole Fence",
+   "prefab": "wood_fence",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Roundpole Gate",
+   "prefab": "wood_fence_gate",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Stone Fence",
+   "prefab": "stone_fence",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Stairs",
+   "prefab": "wood_stair",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Ladder",
+   "prefab": "wood_stepladder",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Stakewall",
+   "prefab": "stake_wall",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Sharp Stakes",
+   "prefab": "piece_sharpstakes",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Log Pole 2 m",
+   "prefab": "wood_pole_log",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Log Pole 4 m",
+   "prefab": "wood_pole_log_4",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Log Beam 2 m",
+   "prefab": "wood_wall_log",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Log Beam 4 m",
+   "prefab": "wood_wall_log_4x0.5",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Log Beam 26°",
+   "prefab": "wood_log_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Log Beam 45°",
+   "prefab": "wood_log_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Log Beam 67°",
+   "prefab": "wood_log_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Stone Wall 1x1",
+   "prefab": "stone_wall_1x1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Stone Wall 2x1",
+   "prefab": "stone_wall_2x1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Stone Wall 4x2",
+   "prefab": "stone_wall_4x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Stone Floor 2x2",
+   "prefab": "stone_floor_2x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Stone Pillar",
+   "prefab": "stone_pillar",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Stone Arch",
+   "prefab": "stone_arch",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Stone Stair",
+   "prefab": "stone_stair",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Wood Iron Pole",
+   "prefab": "woodiron_pole",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Wood Iron Beam",
+   "prefab": "woodiron_beam",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Wood Iron Beam 26°",
+   "prefab": "woodiron_beam_26",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Wood Iron Beam 45°",
+   "prefab": "woodiron_beam_45",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Wood Iron Beam 67°",
+   "prefab": "woodiron_beam_67",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Cage Floor 1x1",
+   "prefab": "iron_floor_1x1_v2",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Cage Floor 2x2",
+   "prefab": "iron_floor_2x2",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Cage Wall 1x1",
+   "prefab": "iron_wall_1x1",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Cage Wall 2x2",
+   "prefab": "iron_wall_2x2",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Iron Gate",
+   "prefab": "iron_grate",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Carved Darkwood Divider",
+   "prefab": "darkwood_decowall",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Pole 2m",
+   "prefab": "darkwood_pole",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Pole 4m",
+   "prefab": "darkwood_pole4",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Beam 2 m",
+   "prefab": "darkwood_beam",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Beam 4 m",
+   "prefab": "darkwood_beam4x4",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Beam 26°",
+   "prefab": "darkwood_beam_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Beam 45°",
+   "prefab": "darkwood_beam_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Arch",
+   "prefab": "darkwood_arch",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof 26°",
+   "prefab": "darkwood_roof",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof 45°",
+   "prefab": "darkwood_roof_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof 67°",
+   "prefab": "darkwood_roof_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Inner Corner 26°",
+   "prefab": "darkwood_roof_icorner",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Inner Corner 45°",
+   "prefab": "darkwood_roof_icorner_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Inner Corner 67°",
+   "prefab": "darkwood_roof_icorner_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Outer Corner 26°",
+   "prefab": "darkwood_roof_ocorner",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Outer Corner 45°",
+   "prefab": "darkwood_roof_ocorner_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Outer Corner 67°",
+   "prefab": "darkwood_roof_ocorner_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Ridge 26°",
+   "prefab": "darkwood_roof_top",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Ridge 45°",
+   "prefab": "darkwood_roof_top_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Shingle Roof Ridge 67°",
+   "prefab": "darkwood_roof_top_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Gate",
+   "prefab": "darkwood_gate",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Raven Adornment",
+   "prefab": "darkwood_raven",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wolf Adornment",
+   "prefab": "darkwood_wolf",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Black Marble 1x1x1",
+   "prefab": "blackmarble_1x1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble 2x1x1",
+   "prefab": "blackmarble_2x1x1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble 2x2x2",
+   "prefab": "blackmarble_2x2x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Floor",
+   "prefab": "blackmarble_floor",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Floor Triangle",
+   "prefab": "blackmarble_floor_triangle",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Plinth",
+   "prefab": "blackmarble_base_1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Plinth Corner",
+   "prefab": "blackmarble_basecorner",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Quarter Spire",
+   "prefab": "blackmarble_tip",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Cornice",
+   "prefab": "blackmarble_out_1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Cornice Corner",
+   "prefab": "blackmarble_outcorner",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Column Small",
+   "prefab": "blackmarble_column_1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Column Wide",
+   "prefab": "blackmarble_column_2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Arch",
+   "prefab": "blackmarble_arch",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Stair",
+   "prefab": "blackmarble_stair",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Crystal Wall 1x1",
+   "prefab": "crystal_wall_1x1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Dvergr Metal Wall",
+   "prefab": "piece_dvergr_metal_wall_2x2",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Dvergr Stakewall",
+   "prefab": "piece_dvergr_stake_wall",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Dvergr Sharp Stakes",
+   "prefab": "piece_dvergr_sharpstakes",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Hexagonal Gate",
+   "prefab": "piece_hexagonal_door",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Dvergr Spiral Staircase Left",
+   "prefab": "piece_dvergr_spiralstair",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Dvergr Spiral Staircase Right",
+   "prefab": "piece_dvergr_spiralstair_right",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Ashwood Quarter Wall",
+   "prefab": "ashwood_quarterwall_1x1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Half Wall",
+   "prefab": "ashwood_halfwall_1x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Wall",
+   "prefab": "ashwood_wall_2x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Arched Wall",
+   "prefab": "ashwood_wall_arch",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Decorative Wall",
+   "prefab": "ashwood_decowall_2x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Divider",
+   "prefab": "ashwood_decowall_divider",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Decorative Window",
+   "prefab": "ashwood_decowall_tree",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Wall 26°",
+   "prefab": "ashwood_wall_roof_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Wall 26° (Inverted)",
+   "prefab": "ashwood_wall_roof_26_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Wall 45°",
+   "prefab": "ashwood_wall_roof_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Wall 45° (Inverted)",
+   "prefab": "ashwood_wall_roof_45_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Wall 67°",
+   "prefab": "ashwood_wall_roof_67_a",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Wall 67° (Inverted)",
+   "prefab": "ashwood_wall_roof_67_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Floor 1x1",
+   "prefab": "ashwood_floor_1x1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Floor 2x2",
+   "prefab": "ashwood_floor_2x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Decorative Floor",
+   "prefab": "ashwood_deco_floor",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Arch",
+   "prefab": "ashwood_arch_big",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Pole 1 m",
+   "prefab": "ashwood_pole_1m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Pole 2 m",
+   "prefab": "ashwood_pole_2m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Beam 1 m",
+   "prefab": "ashwood_beam_1m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Beam 2 m",
+   "prefab": "ashwood_beam_2m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Beam 26°",
+   "prefab": "ashwood_wall_beam_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Beam 45°",
+   "prefab": "ashwood_wall_beam_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Beam 67°",
+   "prefab": "ashwood_wall_beam_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Roof Cross 26°",
+   "prefab": "ashwood_wall_cross_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Roof Cross 45°",
+   "prefab": "ashwood_wall_cross_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Roof Cross 67°",
+   "prefab": "ashwood_wall_cross_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Door",
+   "prefab": "ashwood_door",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Stair",
+   "prefab": "ashwood_stair",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Stakewall",
+   "prefab": "piece_stakewall_blackwood",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Grausten Wall 1x2",
+   "prefab": "Piece_grausten_wall_1x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Wall 2x2",
+   "prefab": "Piece_grausten_wall_2x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Window 2x2",
+   "prefab": "Piece_grausten_window_2x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Wall 4x2",
+   "prefab": "Piece_grausten_wall_4x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Window 4x2",
+   "prefab": "Piece_grausten_window_4x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Wall Arch",
+   "prefab": "Piece_grausten_wall_arch",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Wall Arch (Inverted)",
+   "prefab": "Piece_grausten_wall_arch_inverted",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Floor 1x1",
+   "prefab": "Piece_grausten_floor_1x1",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Floor 2x2",
+   "prefab": "Piece_grausten_floor_2x2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Floor 4x4",
+   "prefab": "Piece_grausten_floor_4x4",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Small Pillar",
+   "prefab": "Piece_grausten_pillarbase_small",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Medium Pillar",
+   "prefab": "Piece_grausten_pillarbase_medium",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Small Beam",
+   "prefab": "Piece_grausten_pillarbeam_small",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Medium Beam",
+   "prefab": "Piece_grausten_pillarbeam_medium",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Tapered Pillar",
+   "prefab": "Piece_grausten_pillarbase_tapered",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Tapered Pillar (Inverted)",
+   "prefab": "Piece_grausten_pillarbase_tapered_inverted",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Small Arch",
+   "prefab": "Piece_grausten_pillar_arch_small",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Medium Arch",
+   "prefab": "Piece_grausten_pillar_arch",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Roof",
+   "prefab": "piece_grausten_roof_45",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Roof Corner",
+   "prefab": "piece_grausten_roof_45_corner",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Roof Corner (mirrored)",
+   "prefab": "piece_grausten_roof_45_corner2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Arched Roof",
+   "prefab": "piece_grausten_roof_45_arch",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Arched Roof Corner",
+   "prefab": "piece_grausten_roof_45_arch_corner",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Arched Roof Corner (mirrored)",
+   "prefab": "piece_grausten_roof_45_arch_corner2",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Stairs",
+   "prefab": "piece_grausten_stonestair",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Grausten Steep Stairs",
+   "prefab": "Piece_grausten_stone_ladder",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Flametal Pillar",
+   "prefab": "Piece_flametal_pillar",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Flametal Beam",
+   "prefab": "Piece_flametal_beam",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Flametal Gate",
+   "prefab": "flametal_gate",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Timber Wall",
+   "prefab": "stave_wall_2x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Pole 2m",
+   "prefab": "stave_pole_2m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Pole 4m",
+   "prefab": "stave_pole_4m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Beam 2m",
+   "prefab": "stave_beam_2m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Beam 4m",
+   "prefab": "stave_beam_4m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Beam 26°",
+   "prefab": "stave_beam_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Beam 45°",
+   "prefab": "stave_beam_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Beam 67°",
+   "prefab": "stave_beam_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Roof Cross 26°",
+   "prefab": "stave_wall_cross_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Roof Cross 45°",
+   "prefab": "stave_wall_cross_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timber Roof Cross 67°",
+   "prefab": "stave_wall_cross_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Lathed Timber Wall",
+   "prefab": "stave_deco_wall_2x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Decorated Timber Pole 2m",
+   "prefab": "stave_deco_pole_2m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Decorated Timber Beam 2m",
+   "prefab": "stave_deco_beam_2m",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Decorated Timber Beam 26°",
+   "prefab": "stave_deco_beam_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Decorated Timber Beam 45°",
+   "prefab": "stave_deco_beam_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Decorated Timber Beam 67°",
+   "prefab": "stave_deco_beam_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Quarter Wall",
+   "prefab": "scale_quarterwall_1x1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Half Wall",
+   "prefab": "scale_halfwall_1x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall",
+   "prefab": "scale_wall_2x2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 26° Left",
+   "prefab": "scale_wall_roof_26",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 26° Right",
+   "prefab": "scale_wall_roof_26_flipped",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 45° Left",
+   "prefab": "scale_wall_roof_45",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 45° Right",
+   "prefab": "scale_wall_roof_45_flipped",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 67° Left",
+   "prefab": "scale_wall_roof_67",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 67° Right",
+   "prefab": "scale_wall_roof_67_flipped",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 26° Right (Inverted)",
+   "prefab": "scale_wall_roof_26_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 26° Left (Inverted)",
+   "prefab": "scale_wall_roof_26_upsidedown_flipped",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 45° Right (Inverted)",
+   "prefab": "scale_wall_roof_45_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 45° Left (Inverted)",
+   "prefab": "scale_wall_roof_45_upsidedown_flipped",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 67° Right (Inverted)",
+   "prefab": "scale_wall_roof_67_upsidedown",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Scalewood Wall 67° Left (Inverted)",
+   "prefab": "scale_wall_roof_67_upsidedown_flipped",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Timberwood Gate",
+   "prefab": "stave_gate",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Timberwood Drawbridge",
+   "prefab": "piece_drawbridge",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Rustic Drawbridge",
+   "prefab": "piece_drawbridge_log",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ice Block",
+   "prefab": "piece_icecube",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Cooking Station",
+   "prefab": "piece_cookingstation",
+   "station": "Hammer"
+  },
+  {
+   "n": "Iron Cooking Station",
+   "prefab": "piece_cookingstation_iron",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Workbench",
+   "prefab": "piece_workbench",
+   "station": "Hammer"
+  },
+  {
+   "n": "Chopping Block",
+   "prefab": "piece_workbench_ext1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Tanning Rack",
+   "prefab": "piece_workbench_ext2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Adze",
+   "prefab": "piece_workbench_ext3",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Tool Shelf",
+   "prefab": "piece_workbench_ext4",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Cauldron",
+   "prefab": "piece_cauldron",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Spice Rack",
+   "prefab": "cauldron_ext1_spice",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Butcher's Table",
+   "prefab": "cauldron_ext3_butchertable",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Pots and Pans",
+   "prefab": "cauldron_ext4_pots",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Mortar and Pestle",
+   "prefab": "cauldron_ext5_mortarandpestle",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Rolling Pins and Cutting Boards",
+   "prefab": "cauldron_ext6_rollingpins",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Smoker",
+   "prefab": "cauldron_ext7_smoker",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Forge",
+   "prefab": "forge",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Forge Bellows",
+   "prefab": "forge_ext1",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Anvils",
+   "prefab": "forge_ext2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Grinding Wheel",
+   "prefab": "forge_ext3",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Smith's Anvil",
+   "prefab": "forge_ext4",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Forge Cooler",
+   "prefab": "forge_ext5",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Forge Tool Rack",
+   "prefab": "forge_ext6",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Artisan Table",
+   "prefab": "piece_artisanstation",
+   "station": "Hammer"
+  },
+  {
+   "n": "Artisan Press",
+   "prefab": "artisan_ext1",
+   "station": "Hammer",
+   "req": "Artisan Table"
+  },
+  {
+   "n": "Black Forge",
+   "prefab": "blackforge",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Black Forge Cooler",
+   "prefab": "blackforge_ext1",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Vice",
+   "prefab": "blackforge_ext2_vise",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Metal Cutter",
+   "prefab": "blackforge_ext3_metalcutter",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Gem Cutter",
+   "prefab": "blackforge_ext4_gemcutter",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Smith's Aprons",
+   "prefab": "blackforge_ext5_apron",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Galdr Table",
+   "prefab": "piece_magetable",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Rune Table",
+   "prefab": "piece_magetable_ext",
+   "station": "Hammer",
+   "req": "Galdr Table"
+  },
+  {
+   "n": "Unfading Candles",
+   "prefab": "piece_magetable_ext2",
+   "station": "Hammer",
+   "req": "Galdr Table"
+  },
+  {
+   "n": "Feathery Wreath",
+   "prefab": "piece_magetable_ext3",
+   "station": "Hammer",
+   "req": "Galdr Table"
+  },
+  {
+   "n": "Standing Loom",
+   "prefab": "piece_magetable_ext4",
+   "station": "Hammer",
+   "req": "Galdr Table"
+  },
+  {
+   "n": "Food Preparation Table",
+   "prefab": "piece_preptable",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Mead Ketill",
+   "prefab": "piece_MeadCauldron",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Fermenter",
+   "prefab": "fermenter",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Stone Oven",
+   "prefab": "piece_oven",
+   "station": "Hammer",
+   "req": "Artisan Table"
+  },
+  {
+   "n": "Windmill",
+   "prefab": "windmill",
+   "station": "Hammer",
+   "req": "Artisan Table"
+  },
+  {
+   "n": "Stonecutter",
+   "prefab": "piece_stonecutter",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Spinning Wheel",
+   "prefab": "piece_spinningwheel",
+   "station": "Hammer",
+   "req": "Artisan Table"
+  },
+  {
+   "n": "Frost Foundry",
+   "prefab": "piece_FrostFoundry",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Smelter",
+   "prefab": "smelter",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Charcoal Kiln",
+   "prefab": "charcoal_kiln",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Blast Furnace",
+   "prefab": "blastfurnace",
+   "station": "Hammer",
+   "req": "Artisan Table"
+  },
+  {
+   "n": "Eitr Refinery",
+   "prefab": "eitrrefinery",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Frigid Kiln",
+   "prefab": "piece_FrostKiln",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Sap Extractor",
+   "prefab": "piece_sapcollector",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Beehive",
+   "prefab": "piece_beehive",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Birds' Nest",
+   "prefab": "piece_birdnest",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wisp Fountain",
+   "prefab": "piece_wisplure",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Eternal Pyre",
+   "prefab": "piece_EternalPyre",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Obliterator",
+   "prefab": "incinerator",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Bed",
+   "prefab": "bed",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Dragon Bed",
+   "prefab": "piece_bed02",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ashwood Bed",
+   "prefab": "ashwood_bed",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Raven Throne",
+   "prefab": "piece_throne01",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Stone Throne",
+   "prefab": "piece_throne02",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Black Marble Throne",
+   "prefab": "piece_blackmarble_throne",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Bone Throne",
+   "prefab": "piece_bone_throne",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Antler Throne",
+   "prefab": "piece_moose_throne",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Stool",
+   "prefab": "piece_chair",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wood Chair",
+   "prefab": "piece_chair02",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Darkwood Chair",
+   "prefab": "piece_chair03",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Carved Chair",
+   "prefab": "piece_chair_runed",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Sitting Log",
+   "prefab": "piece_logbench01",
+   "station": "Hammer"
+  },
+  {
+   "n": "Wood Bench",
+   "prefab": "piece_bench01",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Black Marble Bench",
+   "prefab": "piece_blackmarble_bench",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Ashwood Bench",
+   "prefab": "piece_blackwood_bench01",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Carved Bench",
+   "prefab": "piece_bench_runed",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Table",
+   "prefab": "piece_table",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Long Heavy Table",
+   "prefab": "piece_table_oak",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Round Table",
+   "prefab": "piece_table_round",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Black Marble Table",
+   "prefab": "piece_blackmarble_table",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Long Carved Table",
+   "prefab": "piece_table_runed",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Square Carved Table",
+   "prefab": "piece_table_runed_small",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Chest",
+   "prefab": "piece_chest_wood",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Reinforced Chest",
+   "prefab": "piece_chest",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Personal Chest",
+   "prefab": "piece_chest_private",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Barrel",
+   "prefab": "piece_chest_barrel",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Treasure Chest",
+   "prefab": "piece_chest_treasure",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Black Metal Chest",
+   "prefab": "piece_chest_blackmetal",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Grausten Chest",
+   "prefab": "piece_chest_grausten",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Medium Green Pot",
+   "prefab": "piece_pot1",
+   "station": "Hammer"
+  },
+  {
+   "n": "Large Green Pot",
+   "prefab": "piece_pot2",
+   "station": "Hammer"
+  },
+  {
+   "n": "Small Green Pot",
+   "prefab": "piece_pot3",
+   "station": "Hammer"
+  },
+  {
+   "n": "Wardrobe",
+   "prefab": "piece_chest_warderobe",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Cart",
+   "prefab": "Cart",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Armour Stand",
+   "prefab": "ArmorStand",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Item Stand (vertical)",
+   "prefab": "itemstand",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Item Stand (horizontal)",
+   "prefab": "itemstandh",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Sign",
+   "prefab": "sign",
+   "station": "Hammer"
+  },
+  {
+   "n": "Campfire",
+   "prefab": "fire_pit",
+   "station": "Hammer"
+  },
+  {
+   "n": "Iron Fire Pit",
+   "prefab": "fire_pit_iron",
+   "station": "Hammer"
+  },
+  {
+   "n": "Hearth",
+   "prefab": "hearth",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Bonfire",
+   "prefab": "bonfire",
+   "station": "Hammer"
+  },
+  {
+   "n": "Standing Wood Torch",
+   "prefab": "piece_groundtorch_wood",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Standing Iron Torch",
+   "prefab": "piece_groundtorch",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Standing Blue-burning Iron Torch",
+   "prefab": "piece_groundtorch_blue",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Standing Green-burning Iron Torch",
+   "prefab": "piece_groundtorch_green",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Wisp Torch",
+   "prefab": "piece_groundtorch_mist",
+   "station": "Hammer"
+  },
+  {
+   "n": "Resin Candle",
+   "prefab": "Candle_resin",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Dvergr Wall Lantern",
+   "prefab": "piece_dvergr_lantern",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Dvergr Pole Lantern",
+   "prefab": "piece_dvergr_lantern_pole",
+   "station": "Hammer",
+   "req": "Black Forge"
+  },
+  {
+   "n": "Standing Brazier",
+   "prefab": "piece_brazierfloor01",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Blue Standing Brazier",
+   "prefab": "piece_brazierfloor02",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Hanging Brazier",
+   "prefab": "piece_brazierceiling01",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Lava Lantern",
+   "prefab": "piece_Lavalantern",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Hooded Lantern",
+   "prefab": "piece_hoodedlantern",
+   "station": "Hammer"
+  },
+  {
+   "n": "Snow Lantern",
+   "prefab": "piece_snowlantern",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Sconce",
+   "prefab": "piece_walltorch",
+   "station": "Hammer",
+   "req": "Forge"
+  },
+  {
+   "n": "Deer Rug",
+   "prefab": "rug_deer",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Bearskin Rug",
+   "prefab": "rug_Bjorn",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Wolf Rug",
+   "prefab": "rug_wolf",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Lox Rug",
+   "prefab": "rug_fur",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Straw",
+   "prefab": "rug_straw",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Hare Rug",
+   "prefab": "rug_hare",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Asksvin Rug",
+   "prefab": "rug_asksvin",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Sealskin Rug",
+   "prefab": "rug_seal",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Moose Hide Carpet",
+   "prefab": "rug_moose",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Red Jute Carpet",
+   "prefab": "jute_carpet",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Blue Jute Carpet",
+   "prefab": "jute_carpet_blue",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Red Jute Curtain",
+   "prefab": "piece_cloth_hanging_door",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Blue Jute Drapes",
+   "prefab": "piece_cloth_hanging_door_blue",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Blue Jute Curtain",
+   "prefab": "piece_cloth_hanging_door_blue2",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Black Banner",
+   "prefab": "piece_banner01",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Blue Banner",
+   "prefab": "piece_banner02",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "White and Red Striped Banner",
+   "prefab": "piece_banner03",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Red Banner",
+   "prefab": "piece_banner04",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Green Banner",
+   "prefab": "piece_banner05",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Blue, Red and White Banner",
+   "prefab": "piece_banner06",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "White and Blue Striped Banner",
+   "prefab": "piece_banner07",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Yellow Banner",
+   "prefab": "piece_banner08",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Purple Banner",
+   "prefab": "piece_banner09",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Orange Banner",
+   "prefab": "piece_banner10",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "White Banner",
+   "prefab": "piece_banner11",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Flower Garland",
+   "prefab": "piece_CelebrationGarland",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Fey Lights",
+   "prefab": "piece_FairylightGarland",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Mysterious Rock",
+   "prefab": "Placeable_HardRock",
+   "station": "Hammer"
+  },
+  {
+   "n": "Wood Stack",
+   "prefab": "wood_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Finewood Stack",
+   "prefab": "wood_fine_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Corewood Stack",
+   "prefab": "wood_core_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Yggdrasil Wood Stack",
+   "prefab": "wood_yggdrasil_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Ashwood Stack",
+   "prefab": "blackwood_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Timberwood Stack",
+   "prefab": "wood_frost_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Stone Pile",
+   "prefab": "stone_pile",
+   "station": "Hammer"
+  },
+  {
+   "n": "Flint Pile",
+   "prefab": "flint_pile",
+   "station": "Hammer"
+  },
+  {
+   "n": "Black Marble Pile",
+   "prefab": "blackmarble_pile",
+   "station": "Hammer"
+  },
+  {
+   "n": "Grausten Pile",
+   "prefab": "grausten_pile",
+   "station": "Hammer"
+  },
+  {
+   "n": "Tin Stack",
+   "prefab": "bar_tin_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Copper Stack",
+   "prefab": "bar_copper_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Bronze Stack",
+   "prefab": "bar_bronze_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Iron Stack",
+   "prefab": "bar_iron_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Silver Stack",
+   "prefab": "bar_silver_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Black Metal Stack",
+   "prefab": "bar_blackmetal_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Flametal Stack",
+   "prefab": "bar_flametal_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Bloodgold Stack",
+   "prefab": "bar_gold_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Coal Pile",
+   "prefab": "coal_pile",
+   "station": "Hammer"
+  },
+  {
+   "n": "Bone Stack",
+   "prefab": "bone_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Pile of Skulls",
+   "prefab": "skull_pile",
+   "station": "Hammer"
+  },
+  {
+   "n": "Coin Stack",
+   "prefab": "treasure_stack",
+   "station": "Hammer"
+  },
+  {
+   "n": "Coin Pile",
+   "prefab": "treasure_pile",
+   "station": "Hammer"
+  },
+  {
+   "n": "Asksvin Skeleton",
+   "prefab": "piece_asksvinskeleton",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Portal",
+   "prefab": "portal_wood",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Portal (Stone)",
+   "prefab": "portal_stone",
+   "station": "Hammer",
+   "req": "Stonecutter"
+  },
+  {
+   "n": "Raft",
+   "prefab": "Raft",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Karve",
+   "prefab": "Karve",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Longship",
+   "prefab": "VikingShip",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Drakkar",
+   "prefab": "VikingShip_Ashlands",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Hot Tub",
+   "prefab": "piece_bathtub",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Barber Station",
+   "prefab": "piece_barber",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Cartography Table",
+   "prefab": "piece_cartographytable",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "T.W.I.G.",
+   "prefab": "piece_TrainingDummy",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Archery Target",
+   "prefab": "piece_ArcheryTarget",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ward",
+   "prefab": "guard_stone",
+   "station": "Hammer"
+  },
+  {
+   "n": "Shield Generator",
+   "prefab": "piece_shieldgenerator",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Trap",
+   "prefab": "piece_trap_troll",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Ballista",
+   "prefab": "piece_turret",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Battering Ram",
+   "prefab": "BatteringRam",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Catapult",
+   "prefab": "Catapult",
+   "station": "Hammer",
+   "req": "Workbench"
+  },
+  {
+   "n": "Yule Tree",
+   "prefab": "piece_xmastree",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Yule (1 Dec-6 Jan)"
+  },
+  {
+   "n": "Yule Garland",
+   "prefab": "piece_xmasgarland",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Yule (1 Dec-6 Jan)"
+  },
+  {
+   "n": "Yule Wreath",
+   "prefab": "piece_xmascrown",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Yule (1 Dec-6 Jan)"
+  },
+  {
+   "n": "Mistletoe",
+   "prefab": "piece_mistletoe",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Yule (1 Dec-6 Jan)"
+  },
+  {
+   "n": "Yuleklapp (small)",
+   "prefab": "piece_gift1",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Yule (1 Dec-6 Jan)"
+  },
+  {
+   "n": "Yuleklapp (medium)",
+   "prefab": "piece_gift2",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Yule (1 Dec-6 Jan)"
+  },
+  {
+   "n": "Yuleklapp (large)",
+   "prefab": "piece_gift3",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Yule (1 Dec-6 Jan)"
+  },
+  {
+   "n": "Maypole",
+   "prefab": "piece_maypole",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Midsummer (1 Jun-6 Jul)"
+  },
+  {
+   "n": "Jack-O-Turnip",
+   "prefab": "piece_jackoturnip",
+   "station": "Hammer",
+   "req": "Workbench",
+   "flag": "seasonal-uncertain",
+   "season": "Halloween"
+  }
+ ],
+ "notes": "CRAFTABLES: kind=recipe (428) = real recipes selectable at a station (Workbench, Forge, Black Forge, Galdr Table, Cauldron, Food Preparation Table, Mead Ketill, Artisan Table, Stonecutter, player crafting menu), 1.0.15 game data; cross-checked with the wiki recipe module (427 recipes): names and stations agree; physgun adds Raw Fish, the wiki adds the 9 Feast dishes and Mead Horn of Oden (all merged). 'lvl' = minimum station level. kind=conversion (49) = items made by processing stations (Cooking station, Iron cooking station, Stone oven, Fermenter), NOT recipes; whether they count for The Artisan is NOT verified, filter by 'kind' if not wanted. Not included: outputs of smelter/kiln/blast furnace/windmill/spinning wheel/Eitr refinery (bars, charcoal, flour, thread), Forge of Potential upgrades, quality upgrades. Moulds ('Mould: ...') are loot, not craftable. Fermenter has 20 outputs; MeadTrollPheromones exists as a prefab but is not a fermenter product (omitted). Cooked Seal Blubber under Stone oven follows the wiki oven list. Cooked Egg is a Cauldron recipe (listed as recipe). Uncertain: 'Early Axes' (AxeEarly) is a Workbench recipe in the game data, taken as is. Names come from physgun (game localization) and may differ in capitalisation from the wiki. PIECES: 387 hammer pieces from the physgun catalog (414 rows) after removing 22 Cultivator plantings (sapling_*, *_Sapling, VineAsh_sapling, VineGreen_sapling) and 5 Hoe entries (raise_v2, paved_road_v2, Placeable_Stone, placeable_bigrock_01, placeable_bigrock_02; wiki version history confirms 'Hoe: 2 placeable boulders', the other three are assumed Hoe). 'req' = station that must be nearby to place the piece. Plus 9 SEASONAL pieces (flag=seasonal-uncertain) taken from the wiki: only buildable in event windows and absent from the physgun catalog; unclear whether The Carpenter requires them, filter on 'flag' if unwanted. Other uncertain: Eternal Pyre is piece_EternalPyre in the catalog (wiki lists id piece_FaderEmbers); obsidian_pile is on the wiki but not in the 1.0.15 hammer catalog (omitted); Trailership is console-only (omitted); Ancient Metal Stack is removed. Hammer tab per piece is not included. Battle/Protection Idols are loot items, not pieces. Not accessible: valheim.fandom.com, valheim.wiki.gg, valheim.tools (HTTP 402/403); game8 and gamecore not needed. Everything is a third-party reading of game files 1.0.15 (the live patch may be newer) - verify in game if exactness matters."
+}
