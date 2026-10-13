@@ -235,7 +235,8 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .achpop .a:last-child{border-bottom:0}
 .achpop .a small.crit{display:block;color:var(--gold);opacity:.85;font-size:11px;margin-top:2px}
 .achpop .a em .pct{font-style:normal;color:var(--muted);margin-left:8px;font-size:10.5px}
-.achpop h4.sub{margin:12px 0 4px;font-size:12px;color:var(--muted);border-top:1px solid var(--line-2);padding-top:8px}
+.achpop h4.sub{margin:12px 0 4px;font-size:12px;color:var(--muted);border-top:1px solid var(--line-2);padding-top:8px;display:flex;justify-content:space-between;align-items:baseline}
+.achpop h4.sub small{font-family:"Averia Serif Libre",serif;color:var(--muted);font-size:11px}
 .achpop .a.prog img{opacity:.55;filter:grayscale(.6)}
 .achpop .a .bar{display:block;height:4px;background:var(--bar);border:1px solid var(--line-2);margin:4px 0 2px}
 .achpop .a .bar span{display:block;height:100%;background:var(--gold)}
@@ -305,7 +306,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202610101647"></script>
+<script src="/fch.js?v=202610131159"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1365,8 +1366,9 @@ function achPopHTML(name){
   const src = a => IC[a.img] || (/^https:\/\/[a-z0-9.-]*steamstatic\.com\//.test(a.img||'') ? a.img : '');
   const crit = a => { const c = a.c && (a.c[EN?'en':'cz'] || a.c.en); return c && c.toLowerCase() !== String(a.d||'').toLowerCase() ? `<small class="crit">${esc(c)}</small>` : ''; };
   const rare = a => a.pct==null ? '' : `<i class="pct" title="${EN?'share of all Valheim players who have it':'podíl všech hráčů Valheimu, kteří ho mají'}">${a.pct<1?a.pct.toFixed(1):Math.round(a.pct)} %</i>`;
-  const prog = (A.progress||[]).map(p=>`<div class="a prog">${src(p)?`<img src="${esc(src(p))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(p.n)}</b><small>${esc(p.d)}</small>${crit(p)}<span class="bar"><span style="width:${Math.min(100,Math.round(100*p.cur/p.max))}%"></span></span><em>${fmt(p.cur)} / ${fmt(p.max)}${rare(p)}</em></div></div>`).join('');
-  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${src(a)?`<img src="${esc(src(a))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small>${crit(a)}<em>${esc(a.t)}${rare(a)}</em></div></div>`).join('')}${prog?`<h4 class="sub"><span>${EN?'In progress':'Rozpracované'}</span></h4>${prog}`:''}<div class="note" style="margin-top:8px">${A.unlocked===0 ? (EN?'Nothing visible. Either nothing is unlocked yet, or Game details on the Steam profile are set to Friends only: Steam → Edit profile → Privacy settings → Game details: Public.':'Nic není vidět. Buď zatím nic odemčeného, nebo jsou Podrobnosti o hře na Steam profilu jen pro přátele: Steam → Upravit profil → Nastavení soukromí → Podrobnosti o hře: Veřejné.') : (EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.')}</div>`;
+  const left = A.locked || A.progress || [];
+  const prog = left.map(p=>`<div class="a prog">${src(p)?`<img src="${esc(src(p))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(p.n)}</b><small>${esc(p.d)}</small>${crit(p)}${p.max?`<span class="bar"><span style="width:${Math.min(100,Math.round(100*p.cur/p.max))}%"></span></span>`:''}<em>${p.max?`${fmt(p.cur)} / ${fmt(p.max)} · ${Math.round(100*p.cur/p.max)} %`:(EN?'not started':'zatím nic')}${rare(p)}</em></div></div>`).join('');
+  return `<h4>${esc(name)} <span>${A.unlocked} / ${A.total} ${EN?'achievements':'achievementů'}</span></h4>${list.map(a=>`<div class="a">${src(a)?`<img src="${esc(src(a))}" alt="" loading="lazy">`:'<span></span>'}<div><b>${esc(a.n)}</b><small>${esc(a.d)}</small>${crit(a)}<em>${esc(a.t)}${rare(a)}</em></div></div>`).join('')}${prog?`<h4 class="sub"><span>${EN?'Still to do':'Co ti zbývá'}</span><small>${left.length}${A.total?' / '+A.total:''}</small></h4>${prog}<div class="note" style="margin-top:6px">${EN?'Hidden achievements are not listed by Steam, so they are missing here too.':'Skryté achievementy Steam nevypisuje, takže tu nejsou ani u nás.'}</div>`:''}<div class="note" style="margin-top:8px"${prog?' hidden':''}>${A.unlocked===0 ? (EN?'Nothing visible. Either nothing is unlocked yet, or Game details on the Steam profile are set to Friends only: Steam → Edit profile → Privacy settings → Game details: Public.':'Nic není vidět. Buď zatím nic odemčeného, nebo jsou Podrobnosti o hře na Steam profilu jen pro přátele: Steam → Upravit profil → Nastavení soukromí → Podrobnosti o hře: Veřejné.') : (EN?'Locked ones are hidden on purpose, no spoilers.':'Neodemčené záměrně neukazuju, žádné spoilery.')}</div>`;
 }
 document.addEventListener('click', ev=>{
   const rm = ev.target.closest('.rmlink[data-rm]');
@@ -1567,4 +1569,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202610101647"></script>
+<script src="/site.js?v=202610131159"></script>
