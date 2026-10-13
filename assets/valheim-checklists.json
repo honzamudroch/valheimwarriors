@@ -1,0 +1,652 @@
+{
+ "source": "valheim-desc.json (Food Health) + rucni aliasy, 2026-10-13",
+ "foods": {
+  "BakedPoteitr": {
+   "n": "Baked Poteitr",
+   "cooked": true
+  },
+  "CookedSealBlubber": {
+   "n": "Cooked Seal Blubber",
+   "cooked": true
+  },
+  "CookedMooseMeat": {
+   "n": "Cooked Moose Meat",
+   "cooked": true
+  },
+  "FishSoup": {
+   "n": "Fish Soup",
+   "cooked": true
+  },
+  "Kale": {
+   "n": "Kale",
+   "cooked": true
+  },
+  "KaleChips": {
+   "n": "Kale Chips",
+   "cooked": true
+  },
+  "Lingonberry": {
+   "n": "Lingonberries",
+   "cooked": false
+  },
+  "GlowWorm": {
+   "n": "Luminous Larva",
+   "cooked": true
+  },
+  "Lingondricka": {
+   "n": "Lingonberry Juice",
+   "cooked": true
+  },
+  "MooseKebab": {
+   "n": "Meat In Bread",
+   "cooked": true
+  },
+  "MooseMeat": {
+   "n": "Moose Meat",
+   "cooked": true
+  },
+  "MeatballsMashedPoteitr": {
+   "n": "Meatballs and Poteitr",
+   "cooked": true
+  },
+  "OatMilk": {
+   "n": "Oat Milk",
+   "cooked": false
+  },
+  "OatmealLingonberryJam": {
+   "n": "Oatmeal",
+   "cooked": true
+  },
+  "FeastDeepNorth": {
+   "n": "Northern Morning Fare",
+   "cooked": true
+  },
+  "Poteitr": {
+   "n": "Poteitr",
+   "cooked": true
+  },
+  "PulledBear": {
+   "n": "Pulled Bear",
+   "cooked": true
+  },
+  "Oat": {
+   "n": "Oats",
+   "cooked": false
+  },
+  "OvenPancake": {
+   "n": "Oven Pancake",
+   "cooked": true
+  },
+  "Pancakes": {
+   "n": "Pancakes",
+   "cooked": true
+  },
+  "SealBlubber": {
+   "n": "Seal Blubber",
+   "cooked": true
+  },
+  "SealSoup": {
+   "n": "Seal Meat Soup",
+   "cooked": true
+  },
+  "SmokedFish": {
+   "n": "Smoked Fish",
+   "cooked": true
+  },
+  "SmokedMooseMeat": {
+   "n": "Smoked Moose Meat",
+   "cooked": true
+  },
+  "AsksvinEgg": {
+   "n": "Asksvin Egg",
+   "cooked": false
+  },
+  "FeastAshlands": {
+   "n": "Ashlands Gourmet Bowl",
+   "cooked": false
+  },
+  "AsksvinMeat": {
+   "n": "Asksvin Tail",
+   "cooked": true
+  },
+  "BjornMeat": {
+   "n": "Bear Meat",
+   "cooked": true
+  },
+  "FeastBlackforest": {
+   "n": "Black Forest Buffet Platter 2",
+   "cooked": true
+  },
+  "BlackSoup": {
+   "n": "Black Soup",
+   "cooked": true
+  },
+  "BloodPudding": {
+   "n": "Blood Pudding",
+   "cooked": true
+  },
+  "MushroomBlue": {
+   "n": "Blue Mushroom",
+   "cooked": false
+  },
+  "Blueberries": {
+   "n": "Blueberries",
+   "cooked": false
+  },
+  "BoarJerky": {
+   "n": "Boar Jerky",
+   "cooked": true
+  },
+  "RawMeat": {
+   "n": "Boar Meat",
+   "cooked": true
+  },
+  "Bread": {
+   "n": "Bread",
+   "cooked": true
+  },
+  "Carrot": {
+   "n": "Carrot",
+   "cooked": false
+  },
+  "CarrotSoup": {
+   "n": "Carrot Soup",
+   "cooked": true
+  },
+  "ChickenMeat": {
+   "n": "Chicken Meat",
+   "cooked": true
+  },
+  "Cloudberry": {
+   "n": "Cloudberries",
+   "cooked": false
+  },
+  "CookedAsksvinMeat": {
+   "n": "Cooked Asksvin Tail",
+   "cooked": true
+  },
+  "CookedBjornMeat": {
+   "n": "Cooked Bear Meat",
+   "cooked": true
+  },
+  "CookedMeat": {
+   "n": "Cooked Boar Meat",
+   "cooked": true
+  },
+  "CookedBoneMawSerpentMeat": {
+   "n": "Cooked Bonemaw Meat",
+   "cooked": true
+  },
+  "CookedChickenMeat": {
+   "n": "Cooked Chicken Meat",
+   "cooked": true
+  },
+  "CookedDeerMeat": {
+   "n": "Cooked Deer Meat",
+   "cooked": true
+  },
+  "CookedEgg": {
+   "n": "Cooked Egg",
+   "cooked": true
+  },
+  "FishCooked": {
+   "n": "Cooked Fish",
+   "cooked": true
+  },
+  "CookedHareMeat": {
+   "n": "Cooked Hare Meat",
+   "cooked": true
+  },
+  "CookedLoxMeat": {
+   "n": "Cooked Lox Meat",
+   "cooked": true
+  },
+  "CookedBugMeat": {
+   "n": "Cooked Seeker Meat",
+   "cooked": true
+  },
+  "SerpentMeatCooked": {
+   "n": "Cooked Serpent Meat",
+   "cooked": true
+  },
+  "CookedVoltureMeat": {
+   "n": "Cooked Volture Meat",
+   "cooked": true
+  },
+  "CookedWolfMeat": {
+   "n": "Cooked Wolf Meat",
+   "cooked": true
+  },
+  "DeerMeat": {
+   "n": "Deer Meat",
+   "cooked": true
+  },
+  "DeerStew": {
+   "n": "Deer Stew",
+   "cooked": true
+  },
+  "ChickenEgg": {
+   "n": "Egg",
+   "cooked": true
+  },
+  "Eyescream": {
+   "n": "Eyescream",
+   "cooked": true
+  },
+  "Fiddleheadfern": {
+   "n": "Fiddlehead",
+   "cooked": true
+  },
+  "FierySvinstew": {
+   "n": "Fiery Svinstew",
+   "cooked": true
+  },
+  "FishAndBread": {
+   "n": "Fish N Bread",
+   "cooked": true
+  },
+  "FishWraps": {
+   "n": "Fish Wraps",
+   "cooked": true
+  },
+  "VikingCupcake": {
+   "n": "Frosted Sweetbread",
+   "cooked": true
+  },
+  "NeckTailGrilled": {
+   "n": "Grilled Neck Tail",
+   "cooked": true
+  },
+  "HareMeat": {
+   "n": "Hare Meat",
+   "cooked": true
+  },
+  "FeastMountains": {
+   "n": "Hearty Mountain Loggers Stew 2",
+   "cooked": true
+  },
+  "Honey": {
+   "n": "Honey",
+   "cooked": false
+  },
+  "HoneyGlazedChicken": {
+   "n": "Honey Glazed Chicken",
+   "cooked": true
+  },
+  "MushroomJotunPuffs": {
+   "n": "Jotun Puffs",
+   "cooked": false
+  },
+  "Larva": {
+   "n": "Larva",
+   "cooked": false
+  },
+  "LoxMeat": {
+   "n": "Lox Meat",
+   "cooked": true
+  },
+  "LoxPie": {
+   "n": "Lox Meat Pie",
+   "cooked": true
+  },
+  "MushroomMagecap": {
+   "n": "Magecap",
+   "cooked": false
+  },
+  "MarinatedGreens": {
+   "n": "Marinated Greens",
+   "cooked": true
+  },
+  "MashedMeat": {
+   "n": "Mashed Meat",
+   "cooked": true
+  },
+  "MeatPlatter": {
+   "n": "Meat Platter",
+   "cooked": true
+  },
+  "MinceMeatSauce": {
+   "n": "Minced Meat Sauce",
+   "cooked": true
+  },
+  "MisthareSupreme": {
+   "n": "Misthare Supreme",
+   "cooked": true
+  },
+  "ShocklateSmoothie": {
+   "n": "Muckshake",
+   "cooked": true
+  },
+  "Mushroom": {
+   "n": "Mushroom",
+   "cooked": false
+  },
+  "MushroomOmelette": {
+   "n": "Mushroom Omelette",
+   "cooked": true
+  },
+  "FeastMistlands": {
+   "n": "Mushrooms Galore La Mistlands 2",
+   "cooked": false
+  },
+  "Onion": {
+   "n": "Onion",
+   "cooked": true
+  },
+  "OnionSoup": {
+   "n": "Onion Soup",
+   "cooked": true
+  },
+  "FeastPlains": {
+   "n": "Plains Pie Picnic",
+   "cooked": false
+  },
+  "PiquantPie": {
+   "n": "Piquant Pie",
+   "cooked": true
+  },
+  "QueensJam": {
+   "n": "Queen's Jam",
+   "cooked": true
+  },
+  "Raspberry": {
+   "n": "Raspberries",
+   "cooked": true
+  },
+  "FishRaw": {
+   "n": "Raw Fish",
+   "cooked": true
+  },
+  "FishAnglerRaw": {
+   "n": "Raw Fish 2",
+   "cooked": false
+  },
+  "RoastedCrustPie": {
+   "n": "Roasted Crust Pie",
+   "cooked": true
+  },
+  "RoyalJelly": {
+   "n": "Royal Jelly",
+   "cooked": false
+  },
+  "FeastOceans": {
+   "n": "Sailors Bounty 2",
+   "cooked": false
+  },
+  "Salad": {
+   "n": "Salad",
+   "cooked": true
+  },
+  "Sausages": {
+   "n": "Sausages",
+   "cooked": true
+  },
+  "ScorchingMedley": {
+   "n": "Scorching Medley",
+   "cooked": true
+  },
+  "SeekerAspic": {
+   "n": "Seeker Aspic",
+   "cooked": true
+  },
+  "BugMeat": {
+   "n": "Seeker Meat",
+   "cooked": true
+  },
+  "SerpentStew": {
+   "n": "Serpent Stew",
+   "cooked": true
+  },
+  "MushroomSmokePuff": {
+   "n": "Smoke Puff",
+   "cooked": true
+  },
+  "SparklingShroomshake": {
+   "n": "Sparkling Shroomshake",
+   "cooked": true
+  },
+  "SpicyMarmalade": {
+   "n": "Spicy Marmalade",
+   "cooked": true
+  },
+  "SizzlingBerryBroth": {
+   "n": "Sizzling Berry Broth",
+   "cooked": true
+  },
+  "MagicallyStuffedShroom": {
+   "n": "Stuffed Mushroom",
+   "cooked": true
+  },
+  "FeastSwamps": {
+   "n": "Swamp Dwellers Delight 2",
+   "cooked": false
+  },
+  "TurnipStew": {
+   "n": "Turnip Stew",
+   "cooked": true
+  },
+  "Vineberry": {
+   "n": "Vineberry Cluster",
+   "cooked": false
+  },
+  "VoltureEgg": {
+   "n": "Volture Egg",
+   "cooked": false
+  },
+  "VoltureMeat": {
+   "n": "Volture Meat",
+   "cooked": true
+  },
+  "FeastMeadows": {
+   "n": "Whole Roasted Meadow Boar 2",
+   "cooked": false
+  },
+  "WolfJerky": {
+   "n": "Wolf Jerky",
+   "cooked": true
+  },
+  "WolfMeat": {
+   "n": "Wolf Meat",
+   "cooked": true
+  },
+  "WolfMeatSkewer": {
+   "n": "Wolf Skewer",
+   "cooked": true
+  },
+  "MushroomYellow": {
+   "n": "Yellow Mushroom",
+   "cooked": false
+  },
+  "YggdrasilPorridge": {
+   "n": "Yggdrasil Porridge",
+   "cooked": true
+  }
+ },
+ "creatures": {
+  "$enemy_boar": "Meadows",
+  "$enemy_deer": "Meadows",
+  "$enemy_neck": "Meadows",
+  "$enemy_eikthyr": "Meadows",
+  "$enemy_deerwhite": "Meadows",
+  "$enemy_greyling": "BlackForest",
+  "$enemy_greydwarf": "BlackForest",
+  "$enemy_greydwarfbrute": "BlackForest",
+  "$enemy_greydwarfshaman": "BlackForest",
+  "$enemy_skeleton": "BlackForest",
+  "$enemy_skeletonhildir": "BlackForest",
+  "$enemy_ghost": "BlackForest",
+  "$enemy_troll": "BlackForest",
+  "$enemy_foresttroll": "BlackForest",
+  "$enemy_gdking": "BlackForest",
+  "$enemy_root": "BlackForest",
+  "$enemy_blob": "Swamp",
+  "$enemy_blobelite": "Swamp",
+  "$enemy_blobtar": "Plains",
+  "$enemy_draugr": "Swamp",
+  "$enemy_draugrelite": "Swamp",
+  "$enemy_draugrfem": "Swamp",
+  "$enemy_leech": "Swamp",
+  "$enemy_surtling": "Swamp",
+  "$enemy_wraith": "Swamp",
+  "$enemy_abomination": "Swamp",
+  "$enemy_bonemass": "Swamp",
+  "$enemy_skeletonpoison": "Swamp",
+  "$enemy_wolf": "Mountain",
+  "$enemy_fenring": "Mountain",
+  "$enemy_fenringcultist": "Mountain",
+  "$enemy_drake": "Mountain",
+  "$enemy_hatchling": "Mountain",
+  "$enemy_stonegolem": "Mountain",
+  "$enemy_dragon": "Mountain",
+  "$enemy_bat": "Mountain",
+  "$enemy_blob_frost": "Mountain",
+  "$enemy_ulv": "Mountain",
+  "$enemy_cultist": "Mountain",
+  "$enemy_moose": "Mountain",
+  "$enemy_goblin": "Plains",
+  "$enemy_goblinbrute": "Plains",
+  "$enemy_goblinshaman": "Plains",
+  "$enemy_goblinking": "Plains",
+  "$enemy_deathsquito": "Plains",
+  "$enemy_lox": "Plains",
+  "$enemy_growth": "Plains",
+  "$enemy_bjorn": "Plains",
+  "$enemy_unbjorn": "Plains",
+  "$enemy_seeker": "Mistlands",
+  "$enemy_babyseeker": "Mistlands",
+  "$enemy_seekerbrute": "Mistlands",
+  "$enemy_seekerqueen": "Mistlands",
+  "$enemy_gjall": "Mistlands",
+  "$enemy_dvergr": "Mistlands",
+  "$enemy_dvergr_mage": "Mistlands",
+  "$enemy_tick": "Mistlands",
+  "$enemy_hare": "Mistlands",
+  "$enemy_mistile": "Mistlands",
+  "$enemy_charred_melee": "Ashlands",
+  "$enemy_charred_archer": "Ashlands",
+  "$enemy_charred_mage": "Ashlands",
+  "$enemy_charred_twitcher": "Ashlands",
+  "$enemy_morgen": "Ashlands",
+  "$enemy_asksvin": "Ashlands",
+  "$enemy_volture": "Ashlands",
+  "$enemy_fallenvalkyrie": "Ashlands",
+  "$enemy_bloblava": "Ashlands",
+  "$enemy_fader": "Ashlands",
+  "$enemy_bonemawserpent": "Ashlands",
+  "$enemy_writhan": "DeepNorth",
+  "$enemy_barka": "DeepNorth",
+  "$enemy_kvastur": "DeepNorth",
+  "$enemy_elaking": "DeepNorth",
+  "$enemy_jotunwarrior": "DeepNorth",
+  "$enemy_jotunwitch": "DeepNorth",
+  "$enemy_bjornundead": "DeepNorth",
+  "$enemy_blob_morkhalla": "DeepNorth",
+  "$enemy_mole": "DeepNorth",
+  "$enemy_frosttroll": "DeepNorth",
+  "$enemy_serpent": "Ocean",
+  "$enemy_seal": "Ocean"
+ },
+ "trophies": {
+  "TrophyBoar": "Meadows",
+  "TrophyDeer": "Meadows",
+  "TrophyNeck": "Meadows",
+  "TrophyEikthyr": "Meadows",
+  "TrophyDeerWhite": "Meadows",
+  "TrophyGreydwarf": "BlackForest",
+  "TrophyGreydwarfBrute": "BlackForest",
+  "TrophyGreydwarfShaman": "BlackForest",
+  "TrophySkeleton": "BlackForest",
+  "TrophySkeletonHildir": "BlackForest",
+  "TrophyGhost": "BlackForest",
+  "TrophyForestTroll": "BlackForest",
+  "TrophyTheElder": "BlackForest",
+  "TrophyBlob": "Swamp",
+  "TrophyDraugr": "Swamp",
+  "TrophyDraugrElite": "Swamp",
+  "TrophyDraugrFem": "Swamp",
+  "TrophyLeech": "Swamp",
+  "TrophySurtling": "Swamp",
+  "TrophyWraith": "Swamp",
+  "TrophyAbomination": "Swamp",
+  "TrophyBonemass": "Swamp",
+  "TrophySkeletonPoison": "Swamp",
+  "TrophyWolf": "Mountain",
+  "TrophyFenring": "Mountain",
+  "TrophyCultist": "Mountain",
+  "TrophyCultist_Hildir": "Mountain",
+  "TrophyHatchling": "Mountain",
+  "TrophySGolem": "Mountain",
+  "TrophyDragonQueen": "Mountain",
+  "TrophyFrostTroll": "Mountain",
+  "TrophyUlv": "Mountain",
+  "TrophyBlob_Frost": "Mountain",
+  "TrophyMoose": "Mountain",
+  "TrophyGoblin": "Plains",
+  "TrophyGoblinBrute": "Plains",
+  "TrophyGoblinBruteBrosBrute": "Plains",
+  "TrophyGoblinBruteBrosShaman": "Plains",
+  "TrophyGoblinShaman": "Plains",
+  "TrophyGoblinKing": "Plains",
+  "TrophyDeathsquito": "Plains",
+  "TrophyLox": "Plains",
+  "TrophyGrowth": "Plains",
+  "TrophyBjorn": "Plains",
+  "TrophySeeker": "Mistlands",
+  "TrophySeekerBrute": "Mistlands",
+  "TrophySeekerQueen": "Mistlands",
+  "TrophyGjall": "Mistlands",
+  "TrophyDvergr": "Mistlands",
+  "TrophyTick": "Mistlands",
+  "TrophyHare": "Mistlands",
+  "TrophyCharredMelee": "Ashlands",
+  "TrophyCharredArcher": "Ashlands",
+  "TrophyCharredMage": "Ashlands",
+  "TrophyMorgen": "Ashlands",
+  "TrophyAsksvin": "Ashlands",
+  "TrophyVolture": "Ashlands",
+  "TrophyFallenValkyrie": "Ashlands",
+  "TrophyBlob_Lava": "Ashlands",
+  "TrophyFader": "Ashlands",
+  "TrophyBonemawSerpent": "Ashlands",
+  "TrophyWrithan": "DeepNorth",
+  "TrophyBarka": "DeepNorth",
+  "TrophyKvastur": "DeepNorth",
+  "TrophyElaking": "DeepNorth",
+  "TrophyJotunWarrior": "DeepNorth",
+  "TrophyJotunWitch": "DeepNorth",
+  "TrophyBjornUndead": "DeepNorth",
+  "TrophyBlob_Morkhalla": "DeepNorth",
+  "TrophyMole": "DeepNorth",
+  "TrophySerpent": "Ocean",
+  "TrophySeal": "Ocean"
+ },
+ "alias": {
+  "$item_boar_meat_cooked": "CookedMeat",
+  "$item_deer_meat_cooked": "CookedDeerMeat",
+  "$item_wolf_meat_cooked": "CookedWolfMeat",
+  "$item_lox_meat_cooked": "CookedLoxMeat",
+  "$item_loxmeat_cooked": "CookedLoxMeat",
+  "$item_hare_meat_cooked": "CookedHareMeat",
+  "$item_bjorn_meat_cooked": "CookedBjornMeat",
+  "$item_chicken_meat_cooked": "CookedChickenMeat",
+  "$item_asksvin_meat_cooked": "CookedAsksvinMeat",
+  "$item_volture_meat_cooked": "CookedVoltureMeat",
+  "$item_bug_meat_cooked": "CookedBugMeat",
+  "$item_bonemawmeat_cooked": "CookedBoneMawSerpentMeat",
+  "$item_fish_cooked": "FishCooked",
+  "$item_serpentmeatcooked": "SerpentMeatCooked",
+  "$item_cloudberries": "Cloudberry",
+  "$item_raspberries": "Raspberry",
+  "$item_jotunpuffs": "MushroomJotunPuffs",
+  "$item_magecap": "MushroomMagecap",
+  "$item_smokepuff": "MushroomSmokePuff",
+  "$item_mushroomcommon": "Mushroom",
+  "$item_mushroomyellow": "MushroomYellow",
+  "$item_mushroomblue": "MushroomBlue",
+  "$item_magicallystuffedmushroom": "MagicallyStuffedShroom",
+  "$item_wolf_skewer": "WolfMeatSkewer",
+  "$item_necktailgrilled": "NeckTailGrilled",
+  "$item_blueberries": "Blueberries",
+  "$item_fiddleheadfern": "Fiddleheadfern"
+ }
+}
