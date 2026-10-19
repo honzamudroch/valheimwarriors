@@ -165,6 +165,29 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .chk .miss b{display:inline-block;color:var(--gold);font-weight:400;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
 .chk .done{font-size:11.5px;color:#9fcf5a;margin-top:4px}
 @media (max-width:760px){.chks{grid-template-columns:1fr}}
+.agwrap{margin-top:4px}
+.agwrap>summary{font-family:"Metamorphous",serif;font-size:13px;color:var(--gold);cursor:pointer;padding:6px 9px;border:1px solid var(--line-2);background:var(--panel-2)}
+.agwrap>summary::marker{color:var(--muted)}
+.aglist{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin-top:8px}
+.ag{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:start;border:1px solid var(--line-2);background:var(--panel-2);padding:6px 8px}
+.ag img{width:34px;height:34px;object-fit:contain;image-rendering:auto}
+.ag>span{width:34px;height:34px;background:var(--bar);border:1px solid var(--line-2)}
+.ag b{display:block;font-family:"Metamorphous",serif;font-weight:400;font-size:12.5px;color:var(--ink)}
+.ag small{display:block;font-size:11px;color:var(--muted);line-height:1.5;margin-top:1px}
+.ag small.note{font-style:italic;opacity:.8;margin-top:2px}
+.ag .bar{display:block;height:4px;background:var(--bar);border:1px solid var(--line-2);margin:4px 0 3px}
+.ag .bar span{display:block;height:100%;background:var(--gold)}
+.ag em{display:block;font-style:normal;font-size:11px;color:var(--gold);margin-top:2px}
+.ag em.ok{color:#9fcf5a}
+.ag em.na{color:var(--muted);font-style:italic}
+.ag em.odd{color:#d8a24a;font-style:italic}
+.ag details{margin-top:3px}
+.ag summary{font-size:11px;color:var(--gold);cursor:pointer}
+.ag .miss{font-size:11px;color:var(--ink);opacity:.85;margin-top:3px;line-height:1.55}
+.ag .miss b{display:inline-block;color:var(--gold);font-weight:400;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.agdone{opacity:.55}
+.agwrap .note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.55}
+@media (max-width:760px){.aglist{grid-template-columns:1fr}}
 .trgrp{margin-bottom:8px}
 .trgrp .trb{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--line-2);padding-bottom:2px;margin-bottom:2px}
 .trgrp .trb b{color:var(--gold);font-family:"Metamorphous",serif;font-weight:400;font-size:12px}
@@ -319,7 +342,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202610191053"></script>
+<script src="/fch.js?v=202610191309"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1277,6 +1300,9 @@ function sheet(D){
     <section class="blk b-checklist">
     ${checklist(D)}
     </section>
+    <section class="blk b-achguide">
+    ${achGuide(D)}
+    </section>
     <section class="blk b-trivia">
     ${trivia.length?`<h2>${T('Drobnosti')}</h2><div class="trivia">${trivia.map(t=>`<p>${t}</p>`).join('')}</div>`:''}
     </section>
@@ -1376,9 +1402,12 @@ function foodToken(tok){   // "$item_deer_meat_cooked" -> prefab podle seznamu, 
   const cand = Object.keys(C.foods).filter(n => letters(n).split('').sort().join('') === sorted);
   return cand.length === 1 ? cand[0] : null;
 }
-function checklist(D){
-  const C = ASSETS.checklists; if(!C) return '';
+/* ---------- co chybi do kompletu: spolecny vypocet pro dlazdice i pro prehled achievementu ---------- */
+function chkRows(D, ignoreBiome){
+  const C = ASSETS.checklists; if(!C) return null;
   const EN = LANG === 'en', L = D.global_lists || {}, P = D.player || {};
+  const keep = (kind, key) => ignoreBiome ? true : biomeKeep(kind, key);
+  const grouped = ignoreBiome ? false : !BIOME;
   const CR = ASSETS.craftables || null;
   const letters2 = s => String(s).toLowerCase().replace(/[^a-z]/g, '');
   // index prefabu pro porovnani s klici ze souboru postavy ($item_sword_iron -> SwordIron)
@@ -1400,15 +1429,15 @@ function checklist(D){
   };
   // trofeje a druhy potvor (s biomem)
   const haveT = new Set(P.trophies || []);
-  const allT = Object.keys(C.trophies).filter(t => biomeKeep('trophies', t));
+  const allT = Object.keys(C.trophies).filter(t => keep('trophies', t));
   rows.push({label: 'Trofeje', ach: 'The Trophy Collector', have: allT.filter(t => haveT.has(t)).length, total: allT.length,
              miss: byBiome(allT.filter(t => !haveT.has(t)).map(t => [cz(t), t]), 'trophies')});
   const killed = new Set(Object.keys(L.kills || {}).map(enemyKey));
-  const allC = Object.keys(C.creatures).filter(k => biomeKeep('creatures', k));
+  const allC = Object.keys(C.creatures).filter(k => keep('creatures', k));
   rows.push({label: 'Druhy potvor', ach: 'The Hunter', have: allC.filter(k => killed.has(k)).length, total: allC.length,
              miss: byBiome(allC.filter(k => !killed.has(k)).map(k => [czE(k), k]), 'creatures')});
   // jidla a pokrmy (biom nemaji, jen seznam)
-  if(!BIOME){
+  if(ignoreBiome || !BIOME){
     const eaten = new Set(), cooked = new Set();
     for(const k of Object.keys(L.eaten || {})){ const n = foodToken(k); if(n) eaten.add(n); }
     for(const k of Object.keys(L.crafted || {})){ const n = foodToken(k); if(n) cooked.add(n); }
@@ -1433,6 +1462,11 @@ function checklist(D){
                  miss: byStation(pieces.filter(x => !builtP.has(x.prefab)), 'req')});
     }
   }
+  return rows;
+}
+function checklist(D){
+  const EN = LANG === 'en';
+  const rows = chkRows(D, false); if(!rows) return '';
   const box = r => {
     if(!r.total) return '';
     const pct = Math.round(100 * r.have / r.total);
@@ -1445,6 +1479,92 @@ function checklist(D){
   };
   const html = rows.map(box).join('');
   return html ? `<h2>${T('Co ti chybí')}</h2><div class="chks">${html}</div>` : '';
+}
+
+/* ---------- podrobny prehled achievementu: Steam stav + co presne chybi z dat postavy ---------- */
+const ACH_SRC_LABEL = {creatures:['Druhy potvor','Creature kinds'], trophies:['Trofeje','Trophies'], foods:['Snědená jídla','Foods eaten'], dishes:['Uvařené pokrmy','Dishes cooked'], recipes:['Vyrobené věci','Items crafted'], pieces:['Stavební díly','Build pieces']};
+const ACH_SRC_ACH = {creatures:'The Hunter', trophies:'The Trophy Collector', foods:'The Gourmet', dishes:'The Master Chef', recipes:'The Artisan', pieces:'The Carpenter'};
+function achProgress(D, chk, rowsAll){
+  // vrati {have, total, unit, miss:[[skupina,[polozky]]]} nebo null, kdyz se to z dat zmerit neda
+  if(!chk) return null;
+  const EN = LANG === 'en', S = D.global_stats || {}, L = D.global_lists || {};
+  const CRIT = ASSETS.achcrit || {};
+  if(chk.t === 'stat'){
+    const have = +S[chk.k] || 0;
+    return {have: Math.min(have, chk.goal), total: chk.goal, unit: chk.unit || '', miss: []};
+  }
+  if(chk.t === 'deaths'){
+    const D2 = CRIT.deaths || {};
+    const keys = Object.keys(D2);
+    const missing = keys.filter(k => !(+S[k] > 0));
+    return {have: keys.length - missing.length, total: keys.length, unit: '',
+            miss: [[EN ? 'still to die by' : 'ještě ti chybí zemřít', missing.map(k => (EN ? D2[k].en : D2[k].cz))]]};
+  }
+  if(chk.t === 'boss'){
+    const n = +(L.kills || {})[chk.k] || 0;
+    return {have: n > 0 ? 1 : 0, total: 1, unit: '', miss: [], kills: n};
+  }
+  if(chk.t === 'bosses'){
+    const B = {'$enemy_eikthyr':'Eikthyr', '$enemy_gdking':'The Elder', '$enemy_bonemass':'Bonemass', '$enemy_dragon':'Moder', '$enemy_goblinking':'Yagluth', '$enemy_seekerqueen':'The Seeker Queen', '$enemy_fader':'Fader', '$enemy_kall':'Kall Fimbulbringer'};
+    const ks = Object.keys(B), missing = ks.filter(k => !(+(L.kills || {})[k] > 0));
+    return {have: ks.length - missing.length, total: ks.length, unit: '',
+            miss: [[EN ? 'not beaten' : 'ještě neporažení', missing.map(k => B[k])]]};
+  }
+  if(chk.t === 'list'){
+    const want = ACH_SRC_ACH[chk.src];
+    const r = (rowsAll || []).find(x => x.ach === want);
+    return r ? {have: r.have, total: r.total, unit: '', miss: r.miss} : null;
+  }
+  return null;
+}
+function achGuide(D){
+  const EN = LANG === 'en';
+  const CRIT = ASSETS.achcrit; if(!CRIT || !CRIT.items) return '';
+  const A = ASSETS.achievements && ASSETS.achievements.players && ASSETS.achievements.players[D.name];
+  const IC = (ASSETS.achievements && ASSETS.achievements.icons) || {};
+  const rowsAll = chkRows(D, true) || [];
+  const doneBy = {}, iconBy = {}, descBy = {};
+  if(A && !A.private){
+    for(const a of (A.list || [])){ doneBy[a.n.toLowerCase()] = a.t || true; iconBy[a.n.toLowerCase()] = a.img; descBy[a.n.toLowerCase()] = a.d; }
+    for(const a of (A.locked || [])){ iconBy[a.n.toLowerCase()] = a.img; descBy[a.n.toLowerCase()] = a.d; }
+  }
+  const items = Object.keys(CRIT.items).map(n => {
+    const c = CRIT.items[n], key = n.toLowerCase();
+    const p = achProgress(D, c.check, rowsAll);
+    const done = doneBy[key];
+    const pct = done ? 100 : (p && p.total ? Math.round(100 * p.have / p.total) : null);
+    return {n, crit: (EN ? c.en : c.cz) || c.en, desc: descBy[key] || '', img: iconBy[key] || '', done, p, pct, note: (c.check && c.check.note) || ''};
+  });
+  // nehotove napred, serazene podle toho, jak blizko jsou; hotove na konec
+  // poradi: rozdelane podle toho jak blizko jsou, pak rozpory se Steamem, pak nezmeritelne, hotove az na konec
+  const rank = x => x.done ? 0 : (x.pct == null ? 200 : (x.pct >= 100 ? 150 : 100 - x.pct));
+  items.sort((a, b) => (a.done ? 1 : 0) - (b.done ? 1 : 0) || rank(a) - rank(b) || a.n.localeCompare(b.n));
+  const srcImg = im => IC[im] || (/^https:\/\/[a-z0-9.-]*steamstatic\.com\//.test(im || '') ? im : '');
+  const fmtn = (v, unit) => unit === 'm' ? fmt(Math.round(v)) + ' m' : fmt(v);
+  const row = x => {
+    const p = x.p;
+    const missCount = p ? p.miss.reduce((a, [, l]) => a + l.length, 0) : 0;
+    const groups = p ? p.miss.filter(([, l]) => l.length).map(([g, l]) => `${g ? `<b>${esc(g)}</b> ` : ''}${l.slice().sort().map(esc).join(', ')}`).join('<br>') : '';
+    const state = x.done
+      ? `<em class="ok">${EN ? 'done' : 'hotovo'}${typeof x.done === 'string' ? ' · ' + esc(x.done) : ''}</em>`
+      : p ? (x.pct >= 100
+            ? `<em class="odd">${EN ? 'done by the save, Steam has not counted it' : 'podle savu splněno, Steam to nezapočítal'}</em>`
+            : `<em>${fmtn(p.have, p.unit)} / ${fmtn(p.total, p.unit)} · ${x.pct} %</em>`)
+          : `<em class="na">${EN ? 'cannot be read from the save' : 'ze savu se nedá vyčíst'}</em>`;
+    return `<div class="ag${x.done ? ' agdone' : ''}">
+      ${srcImg(x.img) ? `<img src="${esc(srcImg(x.img))}" alt="" loading="lazy">` : '<span></span>'}
+      <div><b>${esc(x.n)}</b><small>${esc(x.crit)}</small>
+      ${!x.done && p && p.total > 1 ? `<span class="bar"><span style="width:${x.pct}%"></span></span>` : ''}
+      ${state}
+      ${!x.done && missCount ? `<details><summary>${EN ? 'missing ' : 'chybí '}${missCount}</summary><div class="miss">${groups}</div></details>` : ''}
+      ${x.note ? `<small class="note">${esc(x.note)}</small>` : ''}</div></div>`;
+  };
+  const left = items.filter(x => !x.done).length;
+  return `<h2>${T('Achievementy')}</h2>
+    <details class="agwrap"><summary>${EN ? `Full guide · ${left} of ${items.length} still to do` : `Podrobný návod · zbývá ${left} z ${items.length}`}</summary>
+    <div class="aglist">${items.map(row).join('')}</div>
+    <div class="note">${EN ? 'Progress is computed from your save, not from Steam, so it can run ahead of the badge. Entries that cannot be read from the save show the criteria only.' : 'Postup počítám z tvého savu, ne ze Steamu, takže může být napřed proti odznaku. U čeho se to ze savu vyčíst nedá, ukazuju jen kritérium.'}</div>
+    </details>`;
 }
 
 /* ---------- achievementy ---------- */
@@ -1636,7 +1756,7 @@ async function loadAssets(){
   try{
     st.textContent = LANG==='en' ? 'Loading library…' : 'Načítám knihovnu…';
     const [names, icons, sets, stats, attacks, creatures, ach, desc, biomes, checklists, craftables] = await Promise.all([
-      get('/assets/item-names.json?v=202610191053'), get('/assets/valheim-icons.json?v=202610191053'), get('/assets/sets_front.json?v=202610191053'), get('/assets/valheim-stats.json?v=202610191053'), get('/assets/valheim-attacks.json?v=202610191053'), get('/assets/valheim-creatures.json?v=202610191053'), get('/assets/valheim-achievements.json?v=202610191053').catch(()=>null), get('/assets/valheim-desc.json?v=202610191053').catch(()=>null), get('/assets/valheim-biomes.json?v=202610191053').catch(()=>null), get('/assets/valheim-checklists.json?v=202610191053').catch(()=>null), get('/assets/valheim-craftables.json?v=202610191053').catch(()=>null)
+      get('/assets/item-names.json?v=202610191309'), get('/assets/valheim-icons.json?v=202610191309'), get('/assets/sets_front.json?v=202610191309'), get('/assets/valheim-stats.json?v=202610191309'), get('/assets/valheim-attacks.json?v=202610191309'), get('/assets/valheim-creatures.json?v=202610191309'), get('/assets/valheim-achievements.json?v=202610191309').catch(()=>null), get('/assets/valheim-desc.json?v=202610191309').catch(()=>null), get('/assets/valheim-biomes.json?v=202610191309').catch(()=>null), get('/assets/valheim-checklists.json?v=202610191309').catch(()=>null), get('/assets/valheim-craftables.json?v=202610191309').catch(()=>null)
     ]);
     ITEM_NAMES = names;
     ASSETS = { icons: icons.icons, sets, stats: Object.fromEntries(Object.entries(stats.items).filter(([,v])=>v.levels&&v.levels.length).map(([k,v])=>[k,{levels:v.levels, source:v.source}])), attacks: attacks.items, creatures: creatures.items, achievements: ach? {players: ach.players, icons: ach.icons} : null, biomes, checklists, craftables, desc: desc? desc.items : {} };
@@ -1667,4 +1787,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202610191053"></script>
+<script src="/site.js?v=202610191309"></script>

@@ -546,10 +546,15 @@ function startAutoRefresh(){
   document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'visible' && Date.now() - lastRefresh > 5 * 60 * 1000) refreshChars(); });
 }
 /* ---------- Steam achievementy: postava s nastavenym Steam ID, jen verejne profily, jen odemcene ---------- */
+async function loadAchCrit(){
+  if(!window.ACH_CRIT){ try{ const r = await fetch('/assets/valheim-ach-criteria.json'); const j = r.ok ? await r.json() : {}; window.ACH_ALL = j; window.ACH_CRIT = j.items || {}; }catch(e){ window.ACH_CRIT = {}; window.ACH_ALL = {}; } }
+  ASSETS.achcrit = window.ACH_ALL || {};
+  if(ASSETS.achcrit.items) render();
+}
 async function loadSteamAch(){
   const withId = chars.filter(c => c.meta && c.meta.steam_id);
+  await loadAchCrit();
   if(!withId.length) return;
-  if(!window.ACH_CRIT){ try{ const r = await fetch('/assets/valheim-ach-criteria.json'); window.ACH_CRIT = r.ok ? (await r.json()).items : {}; }catch(e){ window.ACH_CRIT = {}; } }
   const crit = n => { const k = Object.keys(window.ACH_CRIT).find(x => x.toLowerCase() === String(n).toLowerCase()); return k ? window.ACH_CRIT[k] : null; };
   const players = {};
   await Promise.all(withId.map(async c => {
