@@ -527,7 +527,6 @@
   "$enemy_volture": "Ashlands",
   "$enemy_fallenvalkyrie": "Ashlands",
   "$enemy_bloblava": "Ashlands",
-  "$enemy_fader": "Ashlands",
   "$enemy_bonemawserpent": "Ashlands",
   "$enemy_serpent": "Ocean",
   "$enemy_seal": "DeepNorth",
@@ -546,8 +545,7 @@
   "$enemy_skeleton_deepnorth": "DeepNorth",
   "$enemy_kall": "DeepNorth",
   "$enemy_kvastur": "Swamp",
-  "$enemy_writhan": "Swamp",
-  "$enemy_charred_melee_fader": "Ashlands"
+  "$enemy_writhan": "Swamp"
  },
  "trophies": {
   "TrophyBoar": "Meadows",
