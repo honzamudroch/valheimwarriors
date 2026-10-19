@@ -536,8 +536,6 @@
   "$enemy_elakingmole": "DeepNorth",
   "$enemy_trollfrost": "DeepNorth",
   "$enemy_unbjorn": "Plains",
-  "$enemy_jotunwarrior": "DeepNorth",
-  "$enemy_jotunwitch": "DeepNorth",
   "$enemy_blobmork": "DeepNorth",
   "$enemy_shadowperson": "DeepNorth",
   "$enemy_greydwarf_frozen": "DeepNorth",
@@ -545,7 +543,10 @@
   "$enemy_skeleton_deepnorth": "DeepNorth",
   "$enemy_kall": "DeepNorth",
   "$enemy_kvastur": "Swamp",
-  "$enemy_writhan": "Swamp"
+  "$enemy_writhan": "Swamp",
+  "$enemy_jotun_warrior": "DeepNorth",
+  "$enemy_jotun_witch": "DeepNorth",
+  "$enemy_goblin_deepnorth": "DeepNorth"
  },
  "trophies": {
   "TrophyBoar": "Meadows",

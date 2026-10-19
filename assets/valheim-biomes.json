@@ -57,7 +57,7 @@
   "$enemy_foresttroll": "BlackForest",
   "$enemy_summonedtroll": "BlackForest",
   "$enemy_gdking": "BlackForest",
-  "$enemy_root": "BlackForest",
+  "$enemy_root": "Swamp",
   "$enemy_blob": "Swamp",
   "$enemy_blobelite": "Swamp",
   "$enemy_blobtar": "Plains",
@@ -126,9 +126,6 @@
   "$enemy_elakingmole": "DeepNorth",
   "$enemy_trollfrost": "DeepNorth",
   "$enemy_unbjorn": "Plains",
-  "$enemy_jotunwarrior": "DeepNorth",
-  "$enemy_jotunwarriordualwield": "DeepNorth",
-  "$enemy_jotunwitch": "DeepNorth",
   "$enemy_blobmork": "DeepNorth",
   "$enemy_blobmorkmini": "DeepNorth",
   "$enemy_shadowperson": "DeepNorth",
@@ -139,7 +136,10 @@
   "$enemy_kvastur": "Swamp",
   "$enemy_writhan": "Swamp",
   "$enemy_asksvin_hatchling": "Ashlands",
-  "$enemy_charred_melee_fader": "Ashlands"
+  "$enemy_charred_melee_fader": "Ashlands",
+  "$enemy_jotun_warrior": "DeepNorth",
+  "$enemy_jotun_witch": "DeepNorth",
+  "$enemy_goblin_deepnorth": "DeepNorth"
  },
  "trophies": {
   "TrophyBoar": "Meadows",
