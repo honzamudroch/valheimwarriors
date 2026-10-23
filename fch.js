@@ -35,6 +35,7 @@
   }
 
   const dct = r => { const k = r.i32(); if (k < 0 || k > 100000) throw new RangeError('dict'); const o = {}; for (let i = 0; i < k; i++) { const key = r.str(); o[key] = r.f32(); } return o; };
+  const DIFFS = ['RawStats', 'Any', 'Hammer', 'Casual', 'VeryEasy', 'Easy', 'Normal', 'Hard', 'VeryHard', 'Hardcore'];
   const statblock = (r, n) => { const o = {}; for (let i = 0; i < n; i++) o[i < STATS.length ? STATS[i] : 'unk' + i] = r.f32(); return o; };
   const lists = r => { const out = {}; out.mods = dct(r); out.cmds = dct(r); const x = r.i32(); if (x < 0 || x > 50) throw new RangeError('subs'); const subs = []; for (let i = 0; i < x; i++) subs.push(dct(r)); out.kills = subs[0] || {}; out.picked = dct(r); out.crafted = dct(r); out.gathered = dct(r); out.eaten = dct(r); out.built = dct(r); return out; };
 
@@ -75,21 +76,21 @@
     const r0 = new R(d); const n = r0.i32();
     const body = d.subarray(4, 4 + n);
     const r = new R(body);
-    const ver = r.i32(), ns = r.i32(); r.i32();
-    const gstats = statblock(r, ns);   // statistik je presne ns; posledni byla dlouho 0, proto se cetla jako prazdny slovnik
+    const ver = r.i32(), ns = r.i32(), nsets = r.i32();
+    // soubor nese nsets sad statistik, jednu na obtiznost (poradi dle herniho DifficultyRequirement).
+    // Sada 0 je surova a ukazujeme ji; achievementy hra pocita ze sady podle sve obtiznosti.
+    const gstats = statblock(r, ns);
     const worlds_time = dct(r);
     const g = lists(r);
     const per = [];
-    for (;;) {
-      const save = r.o;
-      try {
-        const st = statblock(r, ns - 1);
-        if (Object.values(st).some(v => Math.abs(v) > 1e9 || Number.isNaN(v))) throw new RangeError('stats');
-        r.i32(); r.i32();
-        const L = lists(r);
-        r.i32(); r.i32(); r.i32();
-        if (Object.values(st).some(v => v)) per.push(Object.assign({ stats: st }, L));
-      } catch (e) { r.o = save; break; }
+    for (let i = 1; i < Math.max(nsets, 1); i++) {
+      const st = statblock(r, ns);
+      const wt = dct(r);
+      const L = lists(r);
+      // dal posilame jen to, co achievementy potrebuji (statistiky a zabiti dane obtiznosti);
+      // cele slovniky z kazde sady by JSON zbytecne nafoukly
+      if (Object.values(st).some(v => v) || (L.kills && Object.keys(L.kills).length))
+        per.push({ diff: DIFFS[i] || String(i), stats: st, kills: L.kills || {} });
     }
     const end = body.length; const bdv = new DataView(body.buffer, body.byteOffset, body.byteLength);
     let q;

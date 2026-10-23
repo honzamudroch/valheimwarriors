@@ -24,6 +24,9 @@ def statblock(r, n):
     return dict(zip(names, [r.f32() for _ in range(n)]))
 
 
+DIFFS = ['RawStats', 'Any', 'Hammer', 'Casual', 'VeryEasy', 'Easy', 'Normal', 'Hard', 'VeryHard', 'Hardcore']
+
+
 def lists(r):
     out = {}
     out['mods'] = dct(r)
@@ -68,28 +71,23 @@ def load(path):
     r = R(d)
     n = r.i32()
     body = d[4:4 + n]
-    ver = r.i32(); ns = r.i32(); hdr = r.i32()
-    gstats = statblock(r, ns)   # statistik je presne ns; posledni byla dlouho 0, proto se cetla jako prazdny slovnik
+    ver = r.i32(); ns = r.i32(); nsets = r.i32()
+    # soubor nese nsets sad statistik, jednu na obtiznost (poradi dle herniho DifficultyRequirement).
+    # Sada 0 je surova a ukazujeme ji; achievementy hra pocita ze sady podle sve obtiznosti.
     g = {}
+    gstats = statblock(r, ns)
     g['worlds_time'] = dct(r)
     g.update(lists(r))
     per = []
     end = len(body)
-    # bloky per-svet: cteme, dokud to vypada jako blok (statistiky + slovniky); prazdne sablony zahodime
-    while True:
-        save = r.o
-        try:
-            st = statblock(r, ns - 1)
-            if any(abs(v) > 1e9 for v in st.values()):
-                raise ValueError
-            r.i32(); r.i32()
-            L = lists(r)
-            r.i32(); r.i32(); r.i32()
-        except Exception:
-            r.o = save
-            break
-        if any(st.values()):
-            per.append(dict(stats=st, **L))
+    for i in range(1, max(nsets, 1)):
+        st = statblock(r, ns)
+        wt = dct(r)
+        L = lists(r)
+        # dal posilame jen to, co achievementy potrebuji (statistiky a zabiti dane obtiznosti);
+        # cele slovniky z kazde sady by JSON zbytecne nafoukly
+        if any(st.values()) or L.get('kills'):
+            per.append(dict(diff=DIFFS[i] if i < len(DIFFS) else str(i), stats=st, kills=L.get('kills') or {}))
     for q in range(end - 8, 0, -1):
         if struct.unpack_from('<i', body, q)[0] == end - q - 4 and body[q - 1] == 1 and body[q - 10] == 0 and body[q - 11] == 0:
             break
