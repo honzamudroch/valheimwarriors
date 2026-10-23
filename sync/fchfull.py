@@ -158,6 +158,21 @@ def load(path):
     for _ in range(sc):
         k = p.i32(); lv = p.f32(); acc = p.f32()
         skills[SK.get(k, str(k))] = dict(level=round(lv, 2), progress=round(acc, 3))
+    # za dovednostmi jeste: vlastni data, stamina/eitr, stav stavebniho menu, pseudo-pocitadla
+    # a nakonec seedy vylepsovani (player data v34+), ze kterych jde predpovedet Forge of Potential
+    seeds = {}
+    try:
+        for _ in range(p.i32()):
+            p.str(); p.str()
+        p.f32(); p.f32(); p.f32()
+        p.o += p.i32()
+        p.o += p.i32() * 8
+        n_seed = p.i32()
+        if 0 <= n_seed < 100000:
+            for _ in range(n_seed):
+                k = p.i32(); seeds[str(k)] = p.i32()
+    except Exception:
+        seeds = {}
     created_iso = datetime.datetime.fromtimestamp(created, datetime.timezone.utc).isoformat() if 10 ** 9 < created < 10 ** 10 else None
     saved_iso = datetime.datetime.fromtimestamp(os.path.getmtime(path)).astimezone().isoformat(timespec='minutes')
     return dict(file=path, saved=saved_iso, version=ver, name=name, player_id=pid, created=created_iso,
@@ -167,7 +182,7 @@ def load(path):
                 player=dict(max_hp=maxhp, max_stamina=maxst, time_since_death=tsd, guardian_power=gp, inventory=inv,
                             recipes=len(recipes), stations=stations, materials=len(materials), tutorials=len(tutorials),
                             uniques=uniques, trophies=trophies, biomes=biomes, texts=len(texts), beard=beard, hair=hair,
-                            skin=skin, hair_color=haircol, model=model, foods=foods, skills=skills))
+                            skin=skin, hair_color=haircol, model=model, foods=foods, skills=skills, upgrade_seeds=seeds))
 
 
 if __name__ == '__main__':

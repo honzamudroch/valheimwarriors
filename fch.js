@@ -147,13 +147,24 @@
     const foods = []; { const k = p.i32(); for (let i = 0; i < k; i++) foods.push([p.str(), p.f32()]); }
     p.i32(); const sc = p.i32(); const skills = {};
     for (let i = 0; i < sc; i++) { const k = p.i32(); const lv = p.f32(); const acc = p.f32(); skills[SK[k] || String(k)] = { level: Math.round(lv * 100) / 100, progress: Math.round(acc * 1000) / 1000 }; }
+    // za dovednostmi: vlastni data, stamina/eitr, stav stavebniho menu, pseudo-pocitadla
+    // a nakonec seedy vylepsovani (player data v34+), ze kterych jde predpovedet Forge of Potential
+    const upgrade_seeds = {};
+    try {
+      { const k = p.i32(); for (let i = 0; i < k; i++) { p.str(); p.str(); } }
+      p.f32(); p.f32(); p.f32();
+      p.o += p.i32();
+      p.o += p.i32() * 8;
+      const ns = p.i32();
+      if (ns >= 0 && ns < 100000) for (let i = 0; i < ns; i++) { const k = p.i32(); upgrade_seeds[String(k)] = p.i32(); }
+    } catch (e) { /* starsi save bez seedu */ }
     const created_iso = (created > 1e9 && created < 1e10) ? new Date(created * 1000).toISOString() : null;
     return {
       version: ver, name, player_id: pid, created: created_iso,
       global_stats: gstats, worlds_time,
       global_lists: { mods: g.mods, cmds: g.cmds, kills: g.kills, picked: g.picked, crafted: g.crafted, gathered: g.gathered, eaten: g.eaten, built: g.built },
       world_blocks: per, worlds,
-      player: { max_hp: maxhp, max_stamina: maxst, time_since_death: tsd, guardian_power: gp, inventory: inv, recipes: recipes.length, stations, materials: materials.length, tutorials: tutorials.length, uniques, trophies, biomes, texts: Object.keys(texts).length, beard, hair, skin, hair_color: haircol, model, foods, skills }
+      player: { max_hp: maxhp, max_stamina: maxst, time_since_death: tsd, guardian_power: gp, inventory: inv, recipes: recipes.length, stations, materials: materials.length, tutorials: tutorials.length, uniques, trophies, biomes, texts: Object.keys(texts).length, beard, hair, skin, hair_color: haircol, model, foods, skills, upgrade_seeds }
     };
   }
 

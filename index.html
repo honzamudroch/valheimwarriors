@@ -188,6 +188,21 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 .agdone{opacity:.55}
 .agwrap .note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.55}
 @media (max-width:760px){.aglist{grid-template-columns:1fr}}
+.ugwrap{margin-top:4px}
+.ugwrap>summary{font-family:"Metamorphous",serif;font-size:13px;color:var(--gold);cursor:pointer;padding:6px 9px;border:1px solid var(--line-2);background:var(--panel-2)}
+.uglist{display:grid;gap:4px;margin-top:8px}
+.ug{display:grid;grid-template-columns:1fr auto 44px;gap:10px;align-items:center;border:1px solid var(--line-2);background:var(--panel-2);padding:5px 9px}
+.ug b{font-family:"Metamorphous",serif;font-weight:400;font-size:12.5px;color:var(--ink)}
+.ug small{display:block;font-size:11px;color:var(--muted);margin-top:1px}
+.ug .dots{display:flex;gap:3px}
+.ug .dots i{width:9px;height:9px;border:1px solid var(--line-2);display:block}
+.ug .dots i.ok{background:#9fcf5a}
+.ug .dots i.fail{background:#d8a24a}
+.ug .dots i.broke{background:#c2503a}
+.ug em{font-style:normal;text-align:right;font-family:"Metamorphous",serif;font-size:14px}
+.ug em.ok{color:#9fcf5a}
+.ug em.zero{color:var(--muted)}
+.ugwrap .note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.55}
 .trgrp{margin-bottom:8px}
 .trgrp .trb{display:flex;justify-content:space-between;align-items:baseline;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--line-2);padding-bottom:2px;margin-bottom:2px}
 .trgrp .trb b{color:var(--gold);font-family:"Metamorphous",serif;font-weight:400;font-size:12px}
@@ -342,7 +357,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202610220220"></script>
+<script src="/fch.js?v=202610231722"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1303,6 +1318,9 @@ function sheet(D){
     <section class="blk b-achguide">
     ${achGuide(D)}
     </section>
+    <section class="blk b-upgrade">
+    ${upgradeBox(D)}
+    </section>
     <section class="blk b-trivia">
     ${trivia.length?`<h2>${T('Drobnosti')}</h2><div class="trivia">${trivia.map(t=>`<p>${t}</p>`).join('')}</div>`:''}
     </section>
@@ -1479,6 +1497,71 @@ function checklist(D){
   };
   const html = rows.map(box).join('');
   return html ? `<h2>${T('Co ti chybí')}</h2><div class="chks">${html}</div>` : '';
+}
+
+/* ---------- Forge of Potential: predpoved vylepseni ----------
+   Hra kazdy pokus urcuje jednim rolem: klic = hash prefabu + cilova uroven, seed = ulozeny v postave,
+   a kdyz pro klic jeste zadny neni, hash jmena postavy + klic. Uspech pri 0.65 >= roll, jinak se vec znici.
+   Rolly tedy zavisi jen na jmenu postavy a na seedech v savu, takze je lze prehrat dopredu. */
+const UPG_CHANCE = 0.65;
+const M32 = 0xFFFFFFFF;
+const VALUE_SCALE = (() => { const b = new DataView(new ArrayBuffer(4)); b.setUint8(0, 0x01); b.setUint8(1, 0); b.setUint8(2, 0); b.setUint8(3, 0x34); return b.getFloat32(0, true); })();
+const s32 = x => { x = x >>> 0; return x >= 0x80000000 ? x - 0x100000000 : x; };
+function stableHash(t){
+  let a = 5381, b = 5381;
+  for(let i = 0; i < t.length; i += 2){
+    a = s32(((a << 5) + a) ^ t.charCodeAt(i));
+    if(i === t.length - 1) break;
+    b = s32(((b << 5) + b) ^ t.charCodeAt(i + 1));
+  }
+  return s32(a + Math.imul(b, 1566083941));
+}
+function unityRoll(seed){
+  const s = [seed >>> 0, 0, 0, 0];
+  for(let i = 1; i < 4; i++) s[i] = (Math.imul(s[i - 1], 0x6C078965) + 1) >>> 0;
+  const next = () => { const t = (s[0] ^ (s[0] << 11)) >>> 0; const n = (t ^ s[3] ^ (t >>> 8) ^ (s[3] >>> 19)) >>> 0; s[0] = s[1]; s[1] = s[2]; s[2] = s[3]; s[3] = n; return n; };
+  const v = Math.fround(Math.fround(next() & 0x7FFFFF) * VALUE_SCALE);
+  return [v, next() % 99999999];
+}
+function predictUpgrade(prefab, quality, charName, seeds){
+  const base = stableHash(prefab), nameHash = stableHash(charName);
+  const sd = Object.assign({}, seeds || {});
+  let level = quality || 1; const steps = [];
+  for(let i = 0; i < 60; i++){
+    const target = level + 1, key = s32(base + target);
+    const saved = Object.prototype.hasOwnProperty.call(sd, String(key));
+    const [v, nextSeed] = unityRoll(saved ? sd[String(key)] : s32(nameHash + key));
+    sd[String(key)] = nextSeed;
+    let outcome;
+    if(UPG_CHANCE >= v){ outcome = 'ok'; level = target; }
+    else if(1.0 >= Math.fround(1.0 - v)){ outcome = 'broke'; }
+    else { outcome = 'fail'; level = target - 2; }
+    steps.push({to: target, outcome, saved});
+    if(outcome === 'broke') break;
+  }
+  const last = steps[steps.length - 1];
+  return {ups: steps.filter(x => x.outcome === 'ok').length, breaksAt: last && last.outcome === 'broke' ? last.to : null, steps};
+}
+const UPGRADABLE_RE = /^(Sword|THSword|Axe|Battleaxe|Mace|Club|Sledge|Atgeir|Knife|Spear|Bow|Crossbow|Shield|Staff|Armor|Helmet|Cape|Tankard|Fist)/i;
+function upgradeBox(D){
+  const EN = LANG === 'en';
+  const P = D.player || {}; const seeds = P.upgrade_seeds || null;
+  if(!seeds) return '';   // starsi save bez seedu: nemame co prehravat
+  const items = (P.inventory || []).filter(i => UPGRADABLE_RE.test(i.name) && (i.q || 0) >= 1);
+  if(!items.length) return '';
+  const rows = items.map(i => Object.assign({it: i}, predictUpgrade(i.name, i.q, D.name, seeds)))
+                    .sort((a, b) => b.ups - a.ups || a.it.name.localeCompare(b.it.name));
+  const dots = r => r.steps.map(s => `<i class="${s.outcome}" title="${EN ? 'to level' : 'na úroveň'} ${s.to}"></i>`).join('');
+  const row = r => `<div class="ug">
+    <div><b>${esc(cz(r.it.name))}</b><small>${EN ? 'now' : 'teď'} ★${r.it.q}${r.breaksAt ? ` · ${EN ? 'breaks going to' : 'rozbije se na'} ★${r.breaksAt}` : ''}</small></div>
+    <div class="dots">${dots(r)}</div>
+    <em class="${r.ups ? 'ok' : 'zero'}">${r.ups ? `+${r.ups}` : '0'}</em></div>`;
+  const total = rows.reduce((a, r) => a + r.ups, 0);
+  return `<h2>${T('Vylepšení')}</h2>
+    <details class="ugwrap"><summary>${EN ? `Forge of Potential · ${total} upgrades waiting for you` : `Výheň možností · čeká na tebe ${total} vylepšení`}</summary>
+    <div class="uglist">${rows.map(row).join('')}</div>
+    <div class="note">${EN ? 'Each attempt is a fixed roll from your character name and the seeds in your save, so this is what the forge will actually do. A failed attempt destroys the item. The prediction shifts once you upgrade anything, because the game stores a new seed.' : 'Každý pokus je pevný hod daný jménem postavy a seedy v savu, takže tohle výheň opravdu udělá. Neúspěšný pokus věc zničí. Jakmile něco vylepšíš, předpověď se posune, protože hra uloží nový seed.'}</div>
+    </details>`;
 }
 
 /* ---------- podrobny prehled achievementu: Steam stav + co presne chybi z dat postavy ---------- */
@@ -1756,7 +1839,7 @@ async function loadAssets(){
   try{
     st.textContent = LANG==='en' ? 'Loading library…' : 'Načítám knihovnu…';
     const [names, icons, sets, stats, attacks, creatures, ach, desc, biomes, checklists, craftables] = await Promise.all([
-      get('/assets/item-names.json?v=202610220220'), get('/assets/valheim-icons.json?v=202610220220'), get('/assets/sets_front.json?v=202610220220'), get('/assets/valheim-stats.json?v=202610220220'), get('/assets/valheim-attacks.json?v=202610220220'), get('/assets/valheim-creatures.json?v=202610220220'), get('/assets/valheim-achievements.json?v=202610220220').catch(()=>null), get('/assets/valheim-desc.json?v=202610220220').catch(()=>null), get('/assets/valheim-biomes.json?v=202610220220').catch(()=>null), get('/assets/valheim-checklists.json?v=202610220220').catch(()=>null), get('/assets/valheim-craftables.json?v=202610220220').catch(()=>null)
+      get('/assets/item-names.json?v=202610231722'), get('/assets/valheim-icons.json?v=202610231722'), get('/assets/sets_front.json?v=202610231722'), get('/assets/valheim-stats.json?v=202610231722'), get('/assets/valheim-attacks.json?v=202610231722'), get('/assets/valheim-creatures.json?v=202610231722'), get('/assets/valheim-achievements.json?v=202610231722').catch(()=>null), get('/assets/valheim-desc.json?v=202610231722').catch(()=>null), get('/assets/valheim-biomes.json?v=202610231722').catch(()=>null), get('/assets/valheim-checklists.json?v=202610231722').catch(()=>null), get('/assets/valheim-craftables.json?v=202610231722').catch(()=>null)
     ]);
     ITEM_NAMES = names;
     ASSETS = { icons: icons.icons, sets, stats: Object.fromEntries(Object.entries(stats.items).filter(([,v])=>v.levels&&v.levels.length).map(([k,v])=>[k,{levels:v.levels, source:v.source}])), attacks: attacks.items, creatures: creatures.items, achievements: ach? {players: ach.players, icons: ach.icons} : null, biomes, checklists, craftables, desc: desc? desc.items : {} };
@@ -1787,4 +1870,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202610220220"></script>
+<script src="/site.js?v=202610231722"></script>
