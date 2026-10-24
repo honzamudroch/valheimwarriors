@@ -357,7 +357,7 @@ footer{color:var(--muted);font-size:12.5px;margin-top:22px}
 <div class="floatbar" id="floatbar" aria-hidden="true"></div>
 </div>
 
-<script src="/fch.js?v=202610242033"></script>
+<script src="/fch.js?v=202610242035"></script>
 <script>
 const DATA = {"chars": [], "lang": "cz", "site": {"url": "https://sfaxumbeilroctogyzri.supabase.co", "key": "sb_publishable_jaO8rRYg_IN0xpzJ37CMHQ_EhwmQJ56"}};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1162,7 +1162,7 @@ function itemBiomeMap(){
 }
 const biomeOf = (kind, key) => {
   const b = BIOMES(); if(!b || !key) return null;
-  if(kind === 'creatures') return b.creatures[enemyKey(key)] || null;
+  if(kind === 'creatures') { const k2 = enemyKey(key); return b.creatures[k2] || (b.bosses || {})[k2] || null; }
   if(kind === 'trophies') return b.trophies[key] || null;
   const m = itemBiomeMap();
   return m[/^\$/.test(key) ? key : '$item_' + String(key).toLowerCase()] || b.items[key] || null;
@@ -1454,6 +1454,9 @@ function chkRows(D, ignoreBiome){
   const allC = Object.keys(C.creatures).filter(k => keep('creatures', k));
   rows.push({label: 'Druhy potvor', ach: 'The Hunter', have: allC.filter(k => killed.has(k)).length, total: allC.length,
              miss: byBiome(allC.filter(k => !killed.has(k)).map(k => [czE(k), k]), 'creatures')});
+  const allB = Object.keys(C.bosses || {}).filter(k => keep('creatures', k));
+  if(allB.length) rows.push({label: 'Bossové', ach: 'The Viking', have: allB.filter(k => killed.has(k)).length, total: allB.length,
+             miss: byBiome(allB.filter(k => !killed.has(k)).map(k => [czE(k), k]), 'creatures')});
   // jidla a pokrmy (biom nemaji, jen seznam)
   if(ignoreBiome || !BIOME){
     const eaten = new Set(), cooked = new Set();
@@ -1839,7 +1842,7 @@ async function loadAssets(){
   try{
     st.textContent = LANG==='en' ? 'Loading library…' : 'Načítám knihovnu…';
     const [names, icons, sets, stats, attacks, creatures, ach, desc, biomes, checklists, craftables] = await Promise.all([
-      get('/assets/item-names.json?v=202610242033'), get('/assets/valheim-icons.json?v=202610242033'), get('/assets/sets_front.json?v=202610242033'), get('/assets/valheim-stats.json?v=202610242033'), get('/assets/valheim-attacks.json?v=202610242033'), get('/assets/valheim-creatures.json?v=202610242033'), get('/assets/valheim-achievements.json?v=202610242033').catch(()=>null), get('/assets/valheim-desc.json?v=202610242033').catch(()=>null), get('/assets/valheim-biomes.json?v=202610242033').catch(()=>null), get('/assets/valheim-checklists.json?v=202610242033').catch(()=>null), get('/assets/valheim-craftables.json?v=202610242033').catch(()=>null)
+      get('/assets/item-names.json?v=202610242035'), get('/assets/valheim-icons.json?v=202610242035'), get('/assets/sets_front.json?v=202610242035'), get('/assets/valheim-stats.json?v=202610242035'), get('/assets/valheim-attacks.json?v=202610242035'), get('/assets/valheim-creatures.json?v=202610242035'), get('/assets/valheim-achievements.json?v=202610242035').catch(()=>null), get('/assets/valheim-desc.json?v=202610242035').catch(()=>null), get('/assets/valheim-biomes.json?v=202610242035').catch(()=>null), get('/assets/valheim-checklists.json?v=202610242035').catch(()=>null), get('/assets/valheim-craftables.json?v=202610242035').catch(()=>null)
     ]);
     ITEM_NAMES = names;
     ASSETS = { icons: icons.icons, sets, stats: Object.fromEntries(Object.entries(stats.items).filter(([,v])=>v.levels&&v.levels.length).map(([k,v])=>[k,{levels:v.levels, source:v.source}])), attacks: attacks.items, creatures: creatures.items, achievements: ach? {players: ach.players, icons: ach.icons} : null, biomes, checklists, craftables, desc: desc? desc.items : {} };
@@ -1870,4 +1873,4 @@ document.getElementById('file').addEventListener('change', ev=>{ handleFiles([..
 document.addEventListener('drop', ev=>{ ev.preventDefault(); dropEl.classList.remove('over'); const files=[...(ev.dataTransfer?.files||[])]; if(files.length) handleFiles(files); });
 if(DATA.assets){ document.getElementById('drop').remove(); render(); } else { window.ASSETS_READY = loadAssets(); }
 </script>
-<script src="/site.js?v=202610242033"></script>
+<script src="/site.js?v=202610242035"></script>
